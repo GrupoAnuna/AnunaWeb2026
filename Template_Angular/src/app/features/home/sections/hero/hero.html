@@ -1,0 +1,168 @@
+<section class="relative overflow-hidden" aria-labelledby="hero-title">
+  <div class="mx-auto grid max-w-content items-center gap-12 px-5 pb-20 pt-12 sm:px-8 md:pt-16 lg:grid-cols-[1.05fr_1fr] lg:gap-8 lg:pb-28 lg:pt-20">
+
+    <!-- Texto -->
+    <div class="max-w-xl">
+      <p class="hero-in mb-6 inline-flex items-center gap-2 rounded-full border border-anuna-line bg-white/70 px-3.5 py-1.5 text-sm font-medium text-anuna-slate" style="--d:0ms">
+        <span class="relative flex h-2 w-2" aria-hidden="true">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-anuna-orange opacity-60 motion-reduce:hidden"></span>
+          <span class="relative inline-flex h-2 w-2 rounded-full bg-anuna-orange"></span>
+        </span>
+        Tecnología con trato cercano
+      </p>
+
+      <!-- Titular: cada palabra emerge desde una máscara -->
+      <h1 id="hero-title" [attr.aria-label]="headline"
+        class="text-[2.5rem] font-bold leading-[1.08] tracking-[-0.02em] text-anuna-slate sm:text-5xl lg:text-[3.5rem]">
+        @for (w of words; track $index) {
+          <span class="word" aria-hidden="true"><span [style.--i]="$index">{{ w }}</span></span>{{ ' ' }}
+        }
+      </h1>
+
+      <p class="hero-in mt-6 max-w-[34rem] text-lg leading-relaxed text-anuna-gray" style="--d:700ms">
+        Diseñamos, implementamos y acompañamos soluciones digitales a la medida de tu operación. Un solo equipo, de la idea al soporte diario.
+      </p>
+
+      <div class="hero-in mt-9 flex flex-col gap-3 sm:flex-row sm:items-center" style="--d:850ms">
+        <a routerLink="/" fragment="contacto" appRipple
+          class="ripple-host shine inline-flex items-center justify-center gap-2 rounded-full bg-anuna-orange px-7 py-4 text-base font-bold text-anuna-ink shadow-anuna-sm transition duration-200 hover:-translate-y-0.5 hover:bg-anuna-orange-hover hover:shadow-anuna-cta active:translate-y-0 active:bg-anuna-orange-active active:shadow-anuna-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2 focus-visible:ring-offset-anuna-cream">
+          Agenda una asesoría gratuita
+        </a>
+        <a routerLink="/" fragment="soluciones"
+          class="inline-flex items-center justify-center rounded-full border-2 border-anuna-slate/25 px-7 py-[14px] text-base font-bold text-anuna-slate transition-colors duration-200 hover:border-anuna-slate hover:bg-white active:bg-anuna-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2 focus-visible:ring-offset-anuna-cream">
+          Ver soluciones
+        </a>
+      </div>
+
+      <!-- Cifras con contador animado -->
+      <dl class="hero-in mt-12 grid max-w-md grid-cols-3 gap-6 border-t border-anuna-line pt-6" style="--d:1000ms">
+        @for (s of stats; track s.label; let i = $index) {
+          <div>
+            <dt class="text-sm text-anuna-gray">{{ s.label }}</dt>
+            <dd class="mt-1 text-2xl font-bold tabular-nums text-anuna-slate">{{ s.prefix ?? '' }}{{ shown()[i] }}{{ s.suffix ?? '' }}</dd>
+          </div>
+        }
+      </dl>
+    </div>
+
+    <!-- Ilustración: circuitos que convergen en la A, en capas con parallax -->
+    <div class="relative mx-auto w-full max-w-[520px]">
+      <svg viewBox="0 0 520 520" class="h-auto w-full overflow-visible" role="img" aria-labelledby="hero-ilus-title">
+        <title id="hero-ilus-title">Líneas de circuito por las que viajan datos desde varios lados hasta unirse en la letra A de Anuna</title>
+
+        <defs>
+          <radialGradient id="hero-halo" cx="50%" cy="52%" r="50%">
+            <stop offset="0%" stop-color="#FFD97D" stop-opacity=".45" />
+            <stop offset="100%" stop-color="#FFD97D" stop-opacity="0" />
+          </radialGradient>
+          <filter id="hero-glow" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="3" result="b" />
+            <feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge>
+          </filter>
+        </defs>
+
+        <!-- Capa 0: halo que respira -->
+        <g class="layer" data-depth="4">
+          <circle cx="260" cy="270" r="230" fill="url(#hero-halo)">
+            <animate class="flow" attributeName="r" values="220;238;220" dur="6s" begin="2s" repeatCount="indefinite" />
+          </circle>
+        </g>
+
+        <!-- Capa 1: circuitos -->
+        <g class="layer" data-depth="10">
+          <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5">
+            <path id="hero-t1" class="trace" style="animation-delay:.05s" pathLength="1" stroke="#4A6670" d="M0 252 H78 L108 222 H146" />
+            <path class="trace" style="animation-delay:.10s" pathLength="1" stroke="#4A6670" d="M0 262 H82 L112 232 H146" opacity=".55" />
+            <path class="trace" style="animation-delay:.15s" pathLength="1" stroke="#4A6670" d="M0 272 H86 L116 242 H146" opacity=".3" />
+            <path id="hero-t2" class="trace" style="animation-delay:.20s" pathLength="1" stroke="#FF6B35" d="M0 400 H62 L96 366 H146" />
+            <path id="hero-t3" class="trace" style="animation-delay:.30s" pathLength="1" stroke="#4A6670" d="M262 0 V42 L238 66 V104" />
+            <path class="trace" style="animation-delay:.35s" pathLength="1" stroke="#4A6670" d="M320 0 V30 L352 62 V92" opacity=".45" />
+            <path id="hero-t4" class="trace" style="animation-delay:.25s" pathLength="1" stroke="#4A6670" d="M520 190 H448 L416 222 H374" />
+            <path id="hero-t5" class="trace" style="animation-delay:.40s" pathLength="1" stroke="#FF6B35" d="M520 330 H470 L440 360 H374" />
+            <path class="trace" style="animation-delay:.45s" pathLength="1" stroke="#4A6670" d="M520 342 H476 L446 372 H374" opacity=".4" />
+            <path id="hero-t6" class="trace" style="animation-delay:.50s" pathLength="1" stroke="#4A6670" d="M196 520 V474 L216 454 V420" />
+            <path class="trace" style="animation-delay:.55s" pathLength="1" stroke="#4A6670" d="M330 520 V470 L308 448 V420" opacity=".55" />
+            <path class="trace" style="animation-delay:.60s" pathLength="1" stroke="#4A6670" d="M40 252 V200 L60 180" opacity=".35" />
+            <path class="trace" style="animation-delay:.65s" pathLength="1" stroke="#4A6670" d="M480 190 V140 L460 120" opacity=".35" />
+            <path class="trace" style="animation-delay:.70s" pathLength="1" stroke="#FF6B35" d="M60 400 V450 L80 470" opacity=".6" />
+          </g>
+
+          <!-- Nodos -->
+          <g stroke-width="2.5">
+            <circle class="node" style="animation-delay:.9s"  cx="146" cy="222" r="6" fill="#FDF6EC" stroke="#4A6670" />
+            <circle class="node" style="animation-delay:.95s" cx="146" cy="366" r="6" fill="#FF6B35" stroke="#FF6B35" />
+            <circle class="node" style="animation-delay:1.0s" cx="238" cy="104" r="6" fill="#FDF6EC" stroke="#4A6670" />
+            <circle class="node" style="animation-delay:1.0s" cx="352" cy="92"  r="4" fill="#4A6670" stroke="#4A6670" />
+            <circle class="node" style="animation-delay:.95s" cx="374" cy="222" r="6" fill="#FFD97D" stroke="#4A6670" />
+            <circle class="node" style="animation-delay:1.05s" cx="374" cy="360" r="6" fill="#FF6B35" stroke="#FF6B35" />
+            <circle class="node" style="animation-delay:1.05s" cx="216" cy="420" r="6" fill="#FDF6EC" stroke="#4A6670" />
+            <circle class="node" style="animation-delay:1.1s" cx="308" cy="420" r="4" fill="#4A6670" stroke="#4A6670" />
+            <circle class="node" style="animation-delay:1.1s" cx="60"  cy="180" r="5" fill="none" stroke="#4A6670" opacity=".5" />
+            <circle class="node" style="animation-delay:1.1s" cx="460" cy="120" r="5" fill="none" stroke="#4A6670" opacity=".5" />
+            <circle class="node" style="animation-delay:1.1s" cx="80"  cy="470" r="5" fill="none" stroke="#FF6B35" />
+          </g>
+
+          <!-- Ondas en los nodos de llegada -->
+          <g class="flow" fill="none" stroke-width="2">
+            <circle cx="146" cy="366" r="6" stroke="#FF6B35" opacity="0">
+              <animate attributeName="r" values="6;20" dur="2.8s" begin="2.9s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values=".7;0" dur="2.8s" begin="2.9s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="374" cy="222" r="6" stroke="#4A6670" opacity="0">
+              <animate attributeName="r" values="6;20" dur="3.2s" begin="3.6s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values=".6;0" dur="3.2s" begin="3.6s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="238" cy="104" r="6" stroke="#4A6670" opacity="0">
+              <animate attributeName="r" values="6;20" dur="3.6s" begin="4.2s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values=".6;0" dur="3.6s" begin="4.2s" repeatCount="indefinite" />
+            </circle>
+          </g>
+
+          <!-- Pulsos de datos que viajan hacia la A -->
+          <g class="flow" filter="url(#hero-glow)">
+            <circle r="4" fill="#FF6B35" opacity="0">
+              <animateMotion dur="2.4s" begin="2.2s" repeatCount="indefinite"><mpath href="#hero-t1" /></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.4s" begin="2.2s" repeatCount="indefinite" />
+            </circle>
+            <circle r="4" fill="#FFD97D" opacity="0">
+              <animateMotion dur="2.8s" begin="2.6s" repeatCount="indefinite"><mpath href="#hero-t2" /></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.8s" begin="2.6s" repeatCount="indefinite" />
+            </circle>
+            <circle r="3.5" fill="#FF6B35" opacity="0">
+              <animateMotion dur="2s" begin="3.1s" repeatCount="indefinite"><mpath href="#hero-t3" /></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2s" begin="3.1s" repeatCount="indefinite" />
+            </circle>
+            <circle r="4" fill="#FF6B35" opacity="0">
+              <animateMotion dur="2.6s" begin="2.4s" repeatCount="indefinite"><mpath href="#hero-t4" /></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.6s" begin="2.4s" repeatCount="indefinite" />
+            </circle>
+            <circle r="4" fill="#FFD97D" opacity="0">
+              <animateMotion dur="3s" begin="3.4s" repeatCount="indefinite"><mpath href="#hero-t5" /></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="3s" begin="3.4s" repeatCount="indefinite" />
+            </circle>
+            <circle r="3.5" fill="#FF6B35" opacity="0">
+              <animateMotion dur="2.2s" begin="3.8s" repeatCount="indefinite"><mpath href="#hero-t6" /></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.2s" begin="3.8s" repeatCount="indefinite" />
+            </circle>
+          </g>
+        </g>
+
+        <!-- Capa 2: isotipo (sustituir por el SVG oficial) -->
+        <g class="layer" data-depth="18">
+          <circle class="flow" cx="260" cy="280" r="130" fill="none" stroke="#FF6B35" stroke-width="1.5" opacity="0">
+            <animate attributeName="r" values="130;240" dur="4s" begin="2.6s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values=".35;0" dur="4s" begin="2.6s" repeatCount="indefinite" />
+          </circle>
+          <g transform="translate(170 130) scale(1.8)">
+            <path class="iso-arch" d="M14 130 V50 A36 36 0 0 1 86 50 V130" fill="none" stroke="#4A6670" stroke-width="28" />
+            <path class="iso-band" d="M28 68 C58 70 84 94 100 130 H73 C63 104 47 90 28 91 Z" fill="#FF6B35" />
+          </g>
+        </g>
+      </svg>
+
+      <p class="note-in absolute bottom-2 left-0 max-w-[15rem] rounded-2xl border border-anuna-line bg-white px-4 py-3 text-sm leading-snug text-anuna-gray shadow-anuna-md sm:bottom-6 sm:left-2">
+        <span class="font-bold text-anuna-slate">aunar</span> <span class="italic">(verbo)</span>: unir esfuerzos para un mismo fin. De ahí nace nuestro nombre.
+      </p>
+    </div>
+  </div>
+</section>

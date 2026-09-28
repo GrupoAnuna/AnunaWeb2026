@@ -17,11 +17,11 @@ export interface HeaderConfig {
 
 export const HEADER_CONFIG: HeaderConfig = {
   nav: [
-    { label: 'Desarrollo web', route: '/', fragment: 'soluciones' },
-    { label: 'Desarrollo apps', route: '/', fragment: 'soluciones' },
-    { label: 'Consultoría', route: '/', fragment: 'soluciones' },
-    { label: 'Cloud', route: '/', fragment: 'soluciones' },
-    { label: 'Ciberseguridad', route: '/', fragment: 'soluciones' },
+    { label: 'Desarrollo web', route: '/', fragment: 'desarrollo-web' },
+    { label: 'Desarrollo apps', route: '/', fragment: 'desarrollo-apps' },
+    { label: 'Consultoría', route: '/', fragment: 'consultoria' },
+    { label: 'Cloud', route: '/', fragment: 'cloud' },
+    { label: 'Ciberseguridad', route: '/', fragment: 'ciberseguridad' },
     { label: 'Casos de éxito', route: '/', fragment: 'casos' },
     { label: 'Nosotros', route: '/', fragment: 'nosotros' },
   ],
