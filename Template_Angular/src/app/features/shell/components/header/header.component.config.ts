@@ -25,6 +25,6 @@ export const HEADER_CONFIG: HeaderConfig = {
     { label: 'Casos de éxito', route: '/', fragment: 'casos' },
     { label: 'Nosotros', route: '/', fragment: 'nosotros' },
   ],
-  cta: { label: 'Contáctanos', route: '/', fragment: 'contacto' },
-  mobileCta: { label: 'Agenda una asesoría', route: '/', fragment: 'contacto' },
+  cta: { label: 'Contáctanos', route: '/contacto', fragment: 'contacto' },
+  mobileCta: { label: 'Agenda una asesoría', route: '/contacto', fragment: 'contacto' },
 };

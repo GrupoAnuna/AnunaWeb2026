@@ -43,14 +43,14 @@ export interface FooterConfig {
 export const FOOTER_CONFIG: FooterConfig = {
   headline: 'Unimos esfuerzos para que tu negocio crezca.',
   tagline: 'Impulsamos la digitalización de pymes con tecnología clara y accesible.',
-  cta: { label: 'Agenda una consulta', route: '/', fragment: 'contacto' },
+  cta: { label: 'Agenda una consulta', route: '/contacto', fragment: 'contacto' },
 
   // Ajusta los fragments a los ids reales de las secciones de tu home
   nav: [
     { label: 'Servicios', route: '/', fragment: 'soluciones' },
     { label: 'Casos de éxito', route: '/', fragment: 'casos' },
     { label: 'Sobre nosotros', route: '/', fragment: 'nosotros' },
-    { label: 'Contacto', route: '/', fragment: 'contacto' },
+    { label: 'Contacto', route: '/contacto', fragment: 'contacto' },
   ],
 
   email: 'info@grupoanuna.com',

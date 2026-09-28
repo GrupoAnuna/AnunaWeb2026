@@ -5,11 +5,10 @@ import { HeaderComponent } from '@features/shell/components/header/header.compon
 import { Hero} from './sections/hero/hero';
 import { Services } from './sections/services/services';
 
-
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, HeaderComponent,Footer, Hero, Services],  templateUrl: './home.component.html',
+  imports: [CommonModule, HeaderComponent,Footer, Hero, Services,],  templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {

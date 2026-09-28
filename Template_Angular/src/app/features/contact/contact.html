@@ -1,0 +1,226 @@
+<app-header></app-header>
+
+<section id="contacto" class="relative overflow-hidden bg-white py-16 lg:py-16" aria-labelledby="contacto-title">
+  <!-- Circuito decorativo: se dibuja al entrar en pantalla -->
+  <svg appReveal class="reveal pointer-events-none absolute -left-16 top-10 hidden h-[420px] w-[420px] opacity-50 lg:block"
+    viewBox="0 0 400 400" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path class="trace-io" pathLength="1" style="--d:100ms" stroke="#EADFCC" d="M0 120 H90 L130 160 V400" />
+    <path class="trace-io" pathLength="1" style="--d:200ms" stroke="#EADFCC" d="M0 132 H86 L118 164 V400" />
+    <path class="trace-io" pathLength="1" style="--d:300ms" stroke="#EADFCC" d="M0 260 H40 L70 290 V400" />
+    <circle class="node-io" cx="130" cy="160" r="5" fill="#fff" stroke="#EADFCC" style="--d:1.4s" />
+  </svg>
+
+  <div class="relative mx-auto grid max-w-content gap-12 px-5 sm:px-8 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
+
+    <!-- ========== Columna izquierda: mensaje y canales directos ========== -->
+    <div class="lg:pt-4">
+      <p appReveal class="reveal mb-5 inline-flex items-center gap-2 rounded-full border border-anuna-line bg-anuna-cream px-3.5 py-1.5 text-sm font-medium text-anuna-slate">
+        <span class="relative flex h-2 w-2" aria-hidden="true">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-anuna-orange opacity-60 motion-reduce:hidden"></span>
+          <span class="relative inline-flex h-2 w-2 rounded-full bg-anuna-orange"></span>
+        </span>
+        Te respondemos hoy
+      </p>
+
+      <h2 id="contacto-title" appReveal style="--d:80ms"
+        class="reveal max-w-md text-3xl font-bold leading-tight tracking-[-0.015em] text-anuna-slate sm:text-4xl lg:text-[2.75rem]">
+        ¿Tienes un proyecto en mente?
+      </h2>
+      <p appReveal class="reveal mt-5 max-w-md text-lg leading-relaxed text-anuna-gray" style="--d:160ms">
+        El mundo digital sigue evolucionando, transfórmate ahora. Agenda una reunión sin costo y cuéntanos qué necesita tu negocio.
+      </p>
+
+      <!-- Qué pasa después: los pasos se encienden uno tras otro -->
+      <ol appReveal class="reveal steps mt-10 space-y-5" style="--d:240ms" aria-label="Qué pasa después de escribirnos">
+        <li class="flex gap-4">
+          <span class="step-badge flex h-9 w-8 shrink-0 items-end justify-center rounded-arch bg-anuna-slate-100 pb-1.5 text-sm font-bold text-anuna-slate" style="--s:400ms">1</span>
+          <p class="pt-1.5 text-[15px] leading-relaxed"><span class="font-bold text-anuna-slate">Nos cuentas tu idea</span> por el formulario o WhatsApp.</p>
+        </li>
+        <li class="flex gap-4">
+          <span class="step-badge flex h-9 w-8 shrink-0 items-end justify-center rounded-arch bg-anuna-slate-100 pb-1.5 text-sm font-bold text-anuna-slate" style="--s:750ms">2</span>
+          <p class="pt-1.5 text-[15px] leading-relaxed"><span class="font-bold text-anuna-slate">En menos de 12 h</span> te contactamos para agendar una llamada.</p>
+        </li>
+        <li class="flex gap-4">
+          <span class="step-badge flex h-9 w-8 shrink-0 items-end justify-center rounded-arch bg-anuna-slate-100 pb-1.5 text-sm font-bold text-anuna-slate" style="--s:1100ms">3</span>
+          <p class="pt-1.5 text-[15px] leading-relaxed"><span class="font-bold text-anuna-slate">Recibes una propuesta clara</span>, con alcance y costos visibles.</p>
+        </li>
+      </ol>
+
+      <!-- WhatsApp por zona -->
+      <div appReveal class="reveal mt-10" style="--d:320ms">
+        <p class="text-[15px] font-bold text-anuna-slate">¿Prefieres escribir ahora? Elige tu zona:</p>
+        <div class="mt-4 grid gap-3 sm:grid-cols-2">
+          @for (z of zones; track z.name) {
+            <a [href]="z.wa" target="_blank" rel="noopener"
+              class="zone flex items-center gap-3 rounded-2xl border border-anuna-line bg-anuna-cream/60 px-4 py-3.5 transition duration-200 hover:border-anuna-slate/30 hover:bg-white hover:shadow-anuna-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate">
+              <span class="text-2xl" aria-hidden="true">{{ z.flag }}</span>
+              <span class="flex-1">
+                <span class="block text-[15px] font-bold text-anuna-slate">{{ z.name }}</span>
+                <span class="block text-sm text-anuna-gray">{{ z.phone }}</span>
+              </span>
+              <svg class="zone-arrow h-5 w-5 text-anuna-orange-700" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+              <span class="sr-only">(abre WhatsApp en una pestaña nueva)</span>
+            </a>
+          }
+        </div>
+        <p class="mt-4 text-[15px]">O por correo:
+          <a href="mailto:info@grupoanuna.com" class="link-grow font-bold text-anuna-orange-700">info&#64;grupoanuna.com</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- ========== Columna derecha: formulario ========== -->
+    <div appReveal class="reveal" style="--d:150ms">
+      <div #card class="relative overflow-hidden rounded-[28px] border border-anuna-line bg-anuna-cream p-6 shadow-anuna-md sm:p-9"
+        [class.success]="status() === 'success'">
+
+        @if (status() !== 'success') {
+          <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate aria-labelledby="form-title">
+            <h3 id="form-title" class="text-2xl font-bold text-anuna-slate">Agenda una consulta</h3>
+            <p class="mt-2 text-[15px] text-anuna-gray">Los campos con <span class="font-bold text-anuna-orange-700" aria-hidden="true">*</span> son obligatorios.</p>
+
+            <div class="mt-7 grid gap-5 sm:grid-cols-2">
+
+              <!-- Nombre -->
+              <div class="field sm:col-span-2" [class.invalid]="showError('nombre')">
+                <label for="contact-nombre" class="mb-2 flex items-center gap-2 text-[15px] font-bold text-anuna-slate">
+                  <span class="dot h-2 w-2 rounded-full bg-anuna-orange" aria-hidden="true"></span>
+                  Nombre completo <span class="text-anuna-orange-700" aria-hidden="true">*</span>
+                </label>
+                <input id="contact-nombre" type="text" formControlName="nombre" autocomplete="name"
+                  [attr.aria-invalid]="showError('nombre')" aria-describedby="contact-nombre-err"
+                  class="w-full rounded-xl border border-anuna-line bg-white/80 px-4 py-3 text-base text-anuna-ink placeholder:text-anuna-gray/60"
+                  placeholder="Ej. Laura Martínez" />
+                @if (showError('nombre')) {
+                  <p id="contact-nombre-err" class="err mt-2 text-sm font-medium text-anuna-error">Escribe tu nombre para saber cómo llamarte.</p>
+                }
+              </div>
+
+              <!-- Email -->
+              <div class="field" [class.invalid]="showError('email')">
+                <label for="contact-email" class="mb-2 flex items-center gap-2 text-[15px] font-bold text-anuna-slate">
+                  <span class="dot h-2 w-2 rounded-full bg-anuna-orange" aria-hidden="true"></span>
+                  Email <span class="text-anuna-orange-700" aria-hidden="true">*</span>
+                </label>
+                <input id="contact-email" type="email" formControlName="email" autocomplete="email"
+                  [attr.aria-invalid]="showError('email')" aria-describedby="contact-email-err"
+                  class="w-full rounded-xl border border-anuna-line bg-white/80 px-4 py-3 text-base text-anuna-ink placeholder:text-anuna-gray/60"
+                  placeholder="tu@empresa.com" />
+                @if (showError('email')) {
+                  <p id="contact-email-err" class="err mt-2 text-sm font-medium text-anuna-error">Revisa el correo, parece incompleto.</p>
+                }
+              </div>
+
+              <!-- Teléfono -->
+              <div class="field">
+                <label for="contact-telefono" class="mb-2 flex items-center gap-2 text-[15px] font-bold text-anuna-slate">
+                  <span class="dot h-2 w-2 rounded-full bg-anuna-orange" aria-hidden="true"></span>
+                  Teléfono / WhatsApp
+                </label>
+                <input id="contact-telefono" type="tel" formControlName="telefono" autocomplete="tel"
+                  class="w-full rounded-xl border border-anuna-line bg-white/80 px-4 py-3 text-base text-anuna-ink placeholder:text-anuna-gray/60"
+                  placeholder="+52 55 0000 0000" />
+              </div>
+
+              <!-- Intereses (opcional) -->
+              <fieldset class="sm:col-span-2">
+                <legend class="mb-3 text-[15px] font-bold text-anuna-slate">¿Qué te interesa? <span class="font-normal text-anuna-gray">(opcional)</span></legend>
+                <div class="flex flex-wrap gap-2">
+                  @for (opt of interestOptions; track opt.value) {
+                    <label class="chip cursor-pointer">
+                      <input type="checkbox" class="sr-only" [value]="opt.value"
+                        [checked]="interests().includes(opt.value)"
+                        (change)="toggleInterest(opt.value, $any($event.target).checked)" />
+                      <span class="inline-flex items-center rounded-full border border-anuna-line bg-white px-4 py-2 text-sm font-medium text-anuna-slate transition-colors hover:border-anuna-slate/40">
+                        <svg class="tick h-3.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>
+                        {{ opt.label }}
+                      </span>
+                    </label>
+                  }
+                </div>
+              </fieldset>
+
+              <!-- Mensaje -->
+              <div class="field sm:col-span-2" [class.invalid]="showError('mensaje')">
+                <label for="contact-mensaje" class="mb-2 flex items-center gap-2 text-[15px] font-bold text-anuna-slate">
+                  <span class="dot h-2 w-2 rounded-full bg-anuna-orange" aria-hidden="true"></span>
+                  Mensaje <span class="text-anuna-orange-700" aria-hidden="true">*</span>
+                </label>
+                <textarea id="contact-mensaje" rows="4" formControlName="mensaje"
+                  [attr.aria-invalid]="showError('mensaje')" aria-describedby="contact-mensaje-err"
+                  class="w-full resize-y rounded-xl border border-anuna-line bg-white/80 px-4 py-3 text-base text-anuna-ink placeholder:text-anuna-gray/60"
+                  placeholder="Cuéntanos brevemente sobre tu negocio y qué te gustaría mejorar."></textarea>
+                @if (showError('mensaje')) {
+                  <p id="contact-mensaje-err" class="err mt-2 text-sm font-medium text-anuna-error">Cuéntanos un poco sobre tu proyecto.</p>
+                }
+              </div>
+
+              <!-- Privacidad -->
+              <div class="field sm:col-span-2" [class.invalid]="showError('privacidad')">
+                <label class="check flex cursor-pointer items-start gap-3 text-sm leading-relaxed text-anuna-gray">
+                  <input id="contact-privacidad" type="checkbox" formControlName="privacidad" class="sr-only"
+                    [attr.aria-invalid]="showError('privacidad')" aria-describedby="contact-privacidad-err" />
+                  <span class="box mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md border-2 border-anuna-slate/40 bg-white transition-colors">
+                    <svg class="h-3.5 w-3.5 text-anuna-cream" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>
+                  </span>
+                  <span>He leído y acepto la
+                    <a [href]="privacyUrl" target="_blank" rel="noopener" class="font-bold text-anuna-orange-700 underline underline-offset-2">política de privacidad</a>
+                    y autorizo el tratamiento de mis datos para gestionar mi solicitud.</span>
+                </label>
+                @if (showError('privacidad')) {
+                  <p id="contact-privacidad-err" class="err mt-2 pl-8 text-sm font-medium text-anuna-error">Necesitamos tu autorización para responderte.</p>
+                }
+              </div>
+            </div>
+
+            @if (status() === 'error') {
+              <p class="mt-6 rounded-xl border border-anuna-error/30 bg-white px-4 py-3 text-sm font-medium text-anuna-error">
+                No pudimos enviar tu mensaje. Inténtalo de nuevo o escríbenos por WhatsApp.
+              </p>
+            }
+
+            <button type="submit" [disabled]="status() === 'sending'" [class.sending]="status() === 'sending'"
+              class="shine mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-anuna-orange px-7 py-4 text-base font-bold text-anuna-ink shadow-anuna-sm transition duration-200 hover:-translate-y-0.5 hover:bg-anuna-orange-hover hover:shadow-anuna-cta active:translate-y-0 active:bg-anuna-orange-active focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2 focus-visible:ring-offset-anuna-cream disabled:cursor-wait sm:w-auto">
+              @if (status() === 'sending') {
+                <span class="inline-flex items-center gap-2">Enviando
+                  <span class="flex gap-1" aria-hidden="true">
+                    <span class="busy-dot h-1.5 w-1.5 rounded-full bg-anuna-ink"></span>
+                    <span class="busy-dot h-1.5 w-1.5 rounded-full bg-anuna-ink"></span>
+                    <span class="busy-dot h-1.5 w-1.5 rounded-full bg-anuna-ink"></span>
+                  </span>
+                </span>
+              } @else {
+                Enviar solicitud
+              }
+            </button>
+          </form>
+        } @else {
+          <!-- Éxito: los circuitos convergen en el arco con un check -->
+          <div #success class="flex flex-col items-center py-10 text-center outline-none" tabindex="-1">
+            <svg viewBox="0 0 200 150" class="h-36 w-auto" aria-hidden="true">
+              <g fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path class="trace-ok" pathLength="1" stroke="#4A6670" d="M0 90 H40 L55 75 H72" />
+                <path class="trace-ok" pathLength="1" stroke="#FF6B35" d="M200 60 H160 L145 75 H128" />
+                <path class="trace-ok" pathLength="1" stroke="#4A6670" d="M100 150 V132" />
+              </g>
+              <g class="ok-arch">
+                <path d="M72 132 V58 A28 28 0 0 1 128 58 V132 Z" fill="#4A6670" />
+                <path class="ok-check" pathLength="1" d="M86 92 L96 102 L115 80" fill="none" stroke="#FFD97D" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+              </g>
+            </svg>
+            <h3 class="mt-6 text-2xl font-bold text-anuna-slate">¡Listo, recibimos tu mensaje!</h3>
+            <p class="mt-3 max-w-sm text-base leading-relaxed text-anuna-gray">Te escribiremos en menos de 12 horas para agendar tu consulta sin costo.</p>
+            <button type="button" (click)="reset()"
+              class="link-grow mt-7 text-[15px] font-bold text-anuna-orange-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2">
+              Enviar otro mensaje
+            </button>
+          </div>
+        }
+
+        <p class="sr-only" role="status" aria-live="polite">{{ announcement() }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-footer></app-footer>
