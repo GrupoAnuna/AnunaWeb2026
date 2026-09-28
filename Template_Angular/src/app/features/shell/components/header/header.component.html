@@ -1,1 +1,82 @@
-<p>header works!</p>
+<!-- Accesibilidad: salta directo al contenido con el teclado -->
+<a href="#contenido" (click)="skipToContent($event)"
+  class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-anuna-slate focus:px-4 focus:py-2 focus:text-anuna-cream">
+  Saltar al contenido
+</a>
+
+<header #headerEl class="header relative border-b border-anuna-line/70 bg-anuna-cream/90 backdrop-blur"
+  [class.is-scrolled]="scrolled()">
+
+  <nav class="mx-auto flex max-w-content items-center justify-between px-5 py-4 sm:px-8" aria-label="Principal">
+
+    <!-- Logo: la banda naranja gira levemente en hover (sustituir por el SVG oficial) -->
+    <a routerLink="/" (click)="closeMenu()" aria-label="Grupo Anuna, inicio"
+      class="nav-in group flex items-center gap-2.5 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-4 focus-visible:ring-offset-anuna-cream"
+      style="--i:0">
+      <svg viewBox="0 0 100 130" class="h-8 w-auto overflow-visible" aria-hidden="true">
+        <path d="M14 130 V50 A36 36 0 0 1 86 50 V130" fill="none" stroke="#4A6670" stroke-width="28" />
+        <path class="logo-band" d="M28 68 C58 70 84 94 100 130 H73 C63 104 47 90 28 91 Z" fill="#FF6B35" />
+      </svg>
+      <span class="text-2xl font-bold lowercase tracking-tight text-anuna-slate">anuna</span>
+    </a>
+
+    <!-- Menú de escritorio -->
+    <ul class="hidden items-center gap-7 text-[15px] font-medium text-anuna-slate xl:flex">
+      @for (item of config().nav; track item.label; let i = $index) {
+        <li class="nav-in" [style.--i]="i + 1">
+          <a [routerLink]="item.route" [fragment]="item.fragment"
+            class="link-grow rounded transition-colors hover:text-anuna-orange-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate">
+            {{ item.label }}
+          </a>
+        </li>
+      }
+    </ul>
+
+    <div class="flex items-center gap-3">
+      <a [routerLink]="config().cta.route" [fragment]="config().cta.fragment"
+        class="nav-in hidden rounded-full border-2 border-anuna-slate px-5 py-2 text-[15px] font-bold text-anuna-slate transition-colors hover:bg-anuna-slate hover:text-anuna-cream focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2 focus-visible:ring-offset-anuna-cream sm:inline-flex"
+        [style.--i]="config().nav.length + 1">
+        {{ config().cta.label }}
+      </a>
+
+      <!-- Botón hamburguesa: las líneas se transforman en una X -->
+      <button type="button" (click)="toggleMenu()"
+        [class.is-open]="menuOpen()"
+        [attr.aria-expanded]="menuOpen()"
+        [attr.aria-label]="menuOpen() ? 'Cerrar menú' : 'Abrir menú'"
+        aria-controls="menu-movil"
+        class="inline-flex h-11 w-11 items-center justify-center rounded-full text-anuna-slate transition-colors hover:bg-anuna-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate xl:hidden">
+        <span class="burger" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Menú móvil: se despliega con altura animada y entrada escalonada -->
+  <div id="menu-movil" class="mobile-menu xl:hidden" [class.open]="menuOpen()" [attr.inert]="menuOpen() ? null : ''">
+    <div class="mobile-menu-inner">
+      <ul class="flex flex-col border-t border-anuna-line px-5 pb-6 pt-2 text-lg font-medium text-anuna-slate sm:px-8">
+        @for (item of config().nav; track item.label; let i = $index) {
+          <li class="m-item" [style.--i]="i">
+            <a [routerLink]="item.route" [fragment]="item.fragment" (click)="closeMenu()"
+              class="flex items-center gap-3 py-3 transition-colors hover:text-anuna-orange-700">
+              <span class="m-dot" aria-hidden="true"></span>{{ item.label }}
+            </a>
+          </li>
+        }
+        <li class="m-item pt-3" [style.--i]="config().nav.length">
+          <a [routerLink]="config().mobileCta.route" [fragment]="config().mobileCta.fragment" (click)="closeMenu()"
+            class="inline-flex w-full justify-center rounded-full bg-anuna-orange px-6 py-3.5 font-bold text-anuna-ink transition-colors hover:bg-anuna-orange-hover active:bg-anuna-orange-active">
+            {{ config().mobileCta.label }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Progreso de lectura: trazo naranja con nodo en la punta -->
+  <div class="pointer-events-none absolute inset-x-0 -bottom-px h-[3px]" aria-hidden="true">
+    <div #progress class="progress-bar relative h-full bg-anuna-orange">
+      <span class="absolute -right-1 top-1/2 h-2 w-2 -translate-y-1/2 rounded-full bg-anuna-orange"></span>
+    </div>
+  </div>
+</header>

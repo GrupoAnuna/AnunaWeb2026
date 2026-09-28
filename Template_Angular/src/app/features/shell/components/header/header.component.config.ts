@@ -1,0 +1,30 @@
+// ============================================================
+// Datos del header. Edita aquí los enlaces: el menú de
+// escritorio y el menú móvil usan la misma lista.
+// ============================================================
+
+export interface HeaderLink {
+  label: string;
+  route: string;      // ruta de Angular, ej. '/'
+  fragment?: string;  // ancla dentro de la ruta, ej. 'soluciones'
+}
+
+export interface HeaderConfig {
+  nav: HeaderLink[];
+  cta: HeaderLink;        // botón de escritorio
+  mobileCta: HeaderLink;  // botón principal del menú móvil
+}
+
+export const HEADER_CONFIG: HeaderConfig = {
+  nav: [
+    { label: 'Desarrollo web', route: '/', fragment: 'soluciones' },
+    { label: 'Desarrollo apps', route: '/', fragment: 'soluciones' },
+    { label: 'Consultoría', route: '/', fragment: 'soluciones' },
+    { label: 'Cloud', route: '/', fragment: 'soluciones' },
+    { label: 'Ciberseguridad', route: '/', fragment: 'soluciones' },
+    { label: 'Casos de éxito', route: '/', fragment: 'casos' },
+    { label: 'Nosotros', route: '/', fragment: 'nosotros' },
+  ],
+  cta: { label: 'Contáctanos', route: '/', fragment: 'contacto' },
+  mobileCta: { label: 'Agenda una asesoría', route: '/', fragment: 'contacto' },
+};
