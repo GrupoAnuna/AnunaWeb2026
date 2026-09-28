@@ -49,7 +49,7 @@ export const FOOTER_CONFIG: FooterConfig = {
   nav: [
     { label: 'Servicios', route: '/', fragment: 'soluciones' },
     { label: 'Casos de éxito', route: '/', fragment: 'casos' },
-    { label: 'Sobre nosotros', route: '/', fragment: 'nosotros' },
+    { label: 'Sobre nosotros', route: '/nosotros', fragment: 'nosotros' },
     { label: 'Contacto', route: '/contacto', fragment: 'contacto' },
   ],
 

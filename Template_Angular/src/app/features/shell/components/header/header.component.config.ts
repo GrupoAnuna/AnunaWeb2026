@@ -23,7 +23,7 @@ export const HEADER_CONFIG: HeaderConfig = {
     { label: 'Cloud', route: '/', fragment: 'cloud' },
     { label: 'Ciberseguridad', route: '/', fragment: 'ciberseguridad' },
     { label: 'Casos de éxito', route: '/', fragment: 'casos' },
-    { label: 'Nosotros', route: '/', fragment: 'nosotros' },
+    { label: 'Nosotros', route: '/nosotros', fragment: 'nosotros' },
   ],
   cta: { label: 'Contáctanos', route: '/contacto', fragment: 'contacto' },
   mobileCta: { label: 'Agenda una asesoría', route: '/contacto', fragment: 'contacto' },

@@ -1,0 +1,131 @@
+/* ============================================================
+   Nosotros — animaciones de la sección.
+   Los estados ocultos solo aplican con html.anim; sin ella
+   (SSR sin JS o movimiento reducido) todo se ve en su estado final.
+   ============================================================ */
+
+:host {
+  display: block;
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+  --ease-io: cubic-bezier(.65, 0, .35, 1);
+}
+
+/* =========================================================
+   Parte 1 · Circuito de Propósito / Misión / Visión
+   ========================================================= */
+.pillars-line { transform-origin: 0 0; }
+:host-context(html.anim) .pillars-line { transform: scaleY(0); transition: transform 1.8s var(--ease-io) .2s; }
+@media (min-width: 1024px) {
+  :host-context(html.anim) .pillars-line { transform: scaleX(0); }
+}
+:host-context(html.anim) .pillars.in .pillars-line { transform: none; }
+
+.pillar-node { background: #FF6B35; border-color: #FF6B35; }
+:host-context(html.anim) .pillar-node {
+  background: #FDF6EC;
+  border-color: #4A6670;
+  transition: background-color .4s ease, border-color .4s ease, box-shadow .4s ease;
+}
+:host-context(html.anim) .pillars.in .pillar-node {
+  background: #FF6B35;
+  border-color: #FF6B35;
+  box-shadow: 0 0 0 6px rgba(255, 107, 53, .18);
+  transition-delay: var(--d);
+}
+
+:host-context(html.anim) .pillar-body { opacity: 0; transform: translateY(16px); transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); }
+:host-context(html.anim) .pillars.in .pillar-body { opacity: 1; transform: none; transition-delay: var(--d); }
+
+.pillars-pulse { opacity: 0; }
+:host-context(html.anim) .pillars.in .pillars-pulse { animation: pulseY 3.2s var(--ease-io) 2.2s infinite; }
+@keyframes pulseY { 0% { top: 0; opacity: 0; } 10%, 90% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
+@media (min-width: 1024px) {
+  :host-context(html.anim) .pillars.in .pillars-pulse { animation-name: pulseX; }
+}
+@keyframes pulseX { 0% { left: 0; opacity: 0; } 10%, 90% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
+
+/* =========================================================
+   Parte 2 · Equipo
+   ========================================================= */
+
+/* Textura de puntos que se desvanece hacia abajo */
+.team-block::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(253, 246, 236, .09) 1px, transparent 1px);
+  background-size: 22px 22px;
+  -webkit-mask-image: linear-gradient(to bottom, #000, transparent 75%);
+  mask-image: linear-gradient(to bottom, #000, transparent 75%);
+  pointer-events: none;
+}
+
+/* Isotipo del fondo */
+.watermark { opacity: .08; }
+
+/* Circuito que une a los integrantes */
+.team-line-fill { transform-origin: 0 50%; }
+:host-context(html.anim) .team-line-fill { transform: scaleX(0); transition: transform 1.6s var(--ease-io) .5s; }
+:host-context(html.anim) .team-line.in .team-line-fill { transform: none; }
+.team-pulse { opacity: 0; box-shadow: 0 0 12px 3px rgba(255, 217, 125, .7); }
+:host-context(html.anim) .team-line.in .team-pulse { animation: pulseX 3.4s var(--ease-io) 2.2s infinite; }
+
+/* ---------- Foto: se abre como un iris ---------- */
+.photo {
+  transition: transform .45s var(--ease-out);
+}
+:host-context(html.anim) .photo {
+  clip-path: circle(0% at 50% 50%);
+  transition: clip-path 1s var(--ease-out), transform .45s var(--ease-out);
+  transition-delay: calc(var(--d, 0ms) + 250ms), 0s;
+}
+:host-context(html.anim) .member.in .photo { clip-path: circle(50% at 50% 50%); }
+
+/* ---------- Órbita alrededor de la foto ---------- */
+.orbit-ring { stroke: rgba(253, 246, 236, .35); transition: stroke .35s ease; }
+.orbit-spin {
+  transform-origin: 100px 100px;
+  animation: spin 16s linear infinite;
+  animation-delay: calc(var(--i, 0) * -5s); /* cada nodo arranca en otro ángulo */
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.orbit { transition: opacity .8s var(--ease-out), transform .8s var(--ease-out); }
+:host-context(html.anim) .orbit {
+  opacity: 0;
+  transform: scale(.8) rotate(-40deg);
+  transition-delay: calc(var(--d, 0ms) + 500ms);
+}
+:host-context(html.anim) .member.in .orbit { opacity: 1; transform: none; }
+
+/* ---------- Botón de LinkedIn: aparece con rebote ---------- */
+:host-context(html.anim) .linkedin {
+  opacity: 0;
+  transform: scale(.4);
+  transition: opacity .3s ease, transform .5s cubic-bezier(.3, 1.6, .5, 1), background-color .3s, color .3s;
+  transition-delay: calc(var(--d, 0ms) + 900ms), calc(var(--d, 0ms) + 900ms), 0s, 0s;
+}
+:host-context(html.anim) .member.in .linkedin { opacity: 1; transform: none; }
+/* Tras aparecer, el hover responde sin retraso */
+:host-context(html.anim) .member.in .linkedin:hover { transition-delay: 0s; transform: translateY(-2px); }
+
+/* ---------- Habilidades: entran una tras otra ---------- */
+:host-context(html.anim) .skill {
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity .5s var(--ease-out), transform .5s var(--ease-out);
+  transition-delay: calc(var(--d, 0ms) + 650ms + var(--k, 0) * 90ms);
+}
+:host-context(html.anim) .member.in .skill { opacity: 1; transform: none; }
+
+/* ---------- Hover sobre un integrante ---------- */
+.member:hover .photo { transform: scale(1.04); }
+.member:hover .orbit-ring { stroke: #FFD97D; }
+.chev { transition: transform .3s var(--ease-out); }
+.member:hover .chev { transform: translateX(2px); }
+
+/* ---------- Movimiento reducido ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .orbit-spin, .pillars-pulse, .team-pulse { animation: none !important; }
+  .pillars-pulse, .team-pulse { display: none; }
+}
