@@ -1,0 +1,225 @@
+/* ============================================================
+   Footer Grupo Anuna — estilos encapsulados del componente.
+   Los estados iniciales (ocultos) solo aplican con :host(.anim),
+   que el componente añade en el navegador si el usuario no pidió
+   "reducir movimiento". Sin JS o con SSR, todo es visible.
+   ============================================================ */
+
+:host {
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+  --ease-io: cubic-bezier(.65, 0, .35, 1);
+}
+
+.footer {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ---------- Aparición al hacer scroll ---------- */
+:host(.anim) .reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .8s var(--ease-out), transform .8s var(--ease-out);
+  transition-delay: var(--d, 0ms);
+}
+:host(.anim) .reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- Circuitos de la banda ---------- */
+.trace-io {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+:host(.anim) .trace-io {
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1.6s var(--ease-io);
+  transition-delay: var(--d, 200ms);
+}
+:host(.anim) .in .trace-io {
+  stroke-dashoffset: 0;
+}
+
+:host(.anim) .node-io {
+  opacity: 0;
+  transition: opacity .5s ease;
+  transition-delay: var(--d, 1s);
+}
+:host(.anim) .in .node-io {
+  opacity: 1;
+}
+
+/* Isotipo: el arco sube y luego entra la banda naranja */
+:host(.anim) .ft-a-arch {
+  opacity: 0;
+  transform: translateY(14px);
+  transform-box: fill-box;
+  transition: opacity .8s var(--ease-out) 1.1s, transform .8s var(--ease-out) 1.1s;
+}
+:host(.anim) .ft-a-band {
+  opacity: 0;
+  transform: scale(.85);
+  transform-box: fill-box;
+  transform-origin: 0 0;
+  transition: opacity .6s var(--ease-out) 1.6s, transform .6s var(--ease-out) 1.6s;
+}
+:host(.anim) .in .ft-a-arch,
+:host(.anim) .in .ft-a-band {
+  opacity: 1;
+  transform: none;
+}
+
+/* Capas con parallax */
+.layer {
+  transition: transform .7s var(--ease-out);
+}
+
+/* ---------- Titular palabra por palabra ---------- */
+.word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: .1em;
+  margin-bottom: -.1em;
+}
+.word > span {
+  display: inline-block;
+}
+:host(.anim) .split .word > span {
+  transform: translateY(105%);
+  transition: transform .9s var(--ease-out);
+  transition-delay: calc(var(--i) * 55ms + 100ms);
+}
+:host(.anim) .in .split .word > span {
+  transform: none;
+}
+
+/* ---------- Enlaces: trazo + nodo que crece ---------- */
+.ft-link {
+  display: inline-flex;
+  align-items: center;
+}
+.ft-trace {
+  position: relative;
+  display: inline-block;
+  width: 0;
+  height: 2px;
+  margin-right: 0;
+  background: #FFD97D;
+  border-radius: 2px;
+  transition: width .35s var(--ease-io), margin .35s var(--ease-io);
+}
+.ft-trace::after {
+  content: "";
+  position: absolute;
+  right: -3px;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  margin-top: -3px;
+  border-radius: 999px;
+  background: #FFD97D;
+  transform: scale(0);
+  transition: transform .25s var(--ease-out) .15s;
+}
+.ft-link:hover .ft-trace,
+.ft-link:focus-visible .ft-trace {
+  width: 14px;
+  margin-right: 10px;
+}
+.ft-link:hover .ft-trace::after,
+.ft-link:focus-visible .ft-trace::after {
+  transform: scale(1);
+}
+
+.link-grow {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1.5px no-repeat;
+  padding-bottom: 2px;
+  transition: background-size .35s var(--ease-out), color .2s;
+}
+.link-grow:hover,
+.link-grow:focus-visible {
+  background-size: 100% 1.5px;
+}
+
+/* ---------- Redes: arco que se llena desde abajo ---------- */
+.soc {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.soc::before {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 0;
+  background: #FFD97D;
+  z-index: -1;
+  transition: height .4s var(--ease-out);
+}
+.soc:hover::before,
+.soc:focus-visible::before {
+  height: 100%;
+}
+
+/* ---------- CTA con destello ---------- */
+.shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, .45) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform .8s var(--ease-out);
+  z-index: -1;
+}
+.shine:hover::after {
+  transform: translateX(120%);
+}
+
+/* ---------- Relojes ---------- */
+:host(.anim) .blink {
+  animation: blink 2s steps(1) infinite;
+}
+@keyframes blink {
+  50% { opacity: .25; }
+}
+
+/* ---------- Volver arriba ---------- */
+.top-arch {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+/* ---------- Marca de agua ---------- */
+.wm-text {
+  font-size: clamp(5.5rem, 24vw, 19rem);
+  line-height: .78;
+  letter-spacing: -0.04em;
+  margin-bottom: -.14em;
+}
+.wm-letter {
+  display: inline-block;
+}
+:host(.anim) .wm .wm-letter {
+  transform: translateY(60%);
+  opacity: 0;
+  transition: transform 1.1s var(--ease-out), opacity 1.1s var(--ease-out);
+  transition-delay: calc(var(--i) * 90ms);
+}
+:host(.anim) .wm.in .wm-letter {
+  transform: none;
+  opacity: 1;
+}
+
+/* ---------- Movimiento reducido ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

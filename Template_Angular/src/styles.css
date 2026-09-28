@@ -1,1 +1,104 @@
 /* You can add global styles to this file, and also import other style files */
+/* * ============================================================
+   ESTILOS GLOBALES — Grupo Anuna
+   1. Tailwind v4
+   2. Tokens de marca (@theme): generan clases como bg-anuna-slate
+   3. Utilidades de animación compartidas por todos los componentes
+   ============================================================ */ 
+ 
+@import "tailwindcss";
+ 
+/* ---------- 2. Tokens de marca ---------- */
+@theme {
+  --font-sans: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+ 
+  /* Paleta oficial del Manual de Identidad */
+  --color-anuna-slate: #4A6670;
+  --color-anuna-orange: #FF6B35;
+  --color-anuna-cream: #FDF6EC;
+  --color-anuna-gray: #5C5C5C;
+  --color-anuna-yellow: #FFD97D;
+ 
+  /* Derivados funcionales (accesibilidad WCAG AA) */
+  --color-anuna-slate-900: #2E434A;
+  --color-anuna-slate-950: #253840;
+  --color-anuna-slate-100: #E3EAEC;
+  --color-anuna-orange-700: #B8431A;
+  --color-anuna-orange-hover: #FF804F;
+  --color-anuna-orange-active: #F25A22;
+  --color-anuna-ink: #1E2B30;
+  --color-anuna-line: #EADFCC;
+  --color-anuna-error: #B42318;
+ 
+  /* Sombras tintadas con el color principal */
+  --shadow-anuna-sm: 0 1px 2px rgba(46,67,74,.06), 0 2px 6px -2px rgba(46,67,74,.08);
+  --shadow-anuna-md: 0 2px 4px rgba(46,67,74,.05), 0 12px 28px -12px rgba(46,67,74,.22);
+  --shadow-anuna-lg: 0 4px 8px rgba(46,67,74,.05), 0 24px 48px -20px rgba(46,67,74,.30);
+  --shadow-anuna-cta: 0 6px 18px -6px rgba(255,107,53,.55);
+ 
+  /* Forma de arco del isotipo → clase rounded-arch */
+  --radius-arch: 999px 999px 14px 14px;
+ 
+  /* Ancho máximo del contenido → clase max-w-content */
+  --container-content: 76rem;
+ 
+  /* Curvas de animación de la marca */
+  --ease-anuna-out: cubic-bezier(.2, .8, .2, 1);
+  --ease-anuna-io: cubic-bezier(.65, 0, .35, 1);
+}
+ 
+html { scroll-behavior: smooth; }
+body { -webkit-font-smoothing: antialiased; }
+ 
+/* ---------- 3. Utilidades de animación compartidas ----------
+   Los estados ocultos solo aplican con html.anim, que se añade
+   en index.html si el usuario no pidió "reducir movimiento".   */
+@layer components {
+  /* Aparición al hacer scroll (usar con la directiva appReveal) */
+  html.anim .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .8s var(--ease-anuna-out), transform .8s var(--ease-anuna-out);
+    transition-delay: var(--d, 0ms);
+  }
+  html.anim .reveal.in { opacity: 1; transform: none; }
+ 
+  /* Trazos SVG que se dibujan (añadir pathLength="1" al <path>) */
+  html.anim .trace-io {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    transition: stroke-dashoffset 1.6s var(--ease-anuna-io);
+    transition-delay: var(--d, 200ms);
+  }
+  html.anim .in .trace-io { stroke-dashoffset: 0; }
+ 
+  html.anim .node-io { opacity: 0; transition: opacity .5s ease; transition-delay: var(--d, 1s); }
+  html.anim .in .node-io { opacity: 1; }
+ 
+  /* Subrayado que crece */
+  .link-grow {
+    background: linear-gradient(currentColor, currentColor) 0 100% / 0 1.5px no-repeat;
+    padding-bottom: 2px;
+    transition: background-size .35s var(--ease-anuna-out), color .2s;
+  }
+  .link-grow:hover, .link-grow:focus-visible { background-size: 100% 1.5px; }
+ 
+  /* Destello en botones CTA */
+  .shine { position: relative; overflow: hidden; isolation: isolate; }
+  .shine::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.45) 50%, transparent 70%);
+    transform: translateX(-120%);
+    transition: transform .8s var(--ease-anuna-out);
+    z-index: -1;
+  }
+  .shine:hover::after { transform: translateX(120%); }
+}
+ 
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+ 

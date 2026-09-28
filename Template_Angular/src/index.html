@@ -1,13 +1,26 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="utf-8">
-  <title>TemplateAngular</title>
+  <title>Grupo Anuna</title>
   <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <!-- Activa las animaciones antes del primer pintado (evita parpadeos).
+       Si el usuario pidió "reducir movimiento", no se activa. -->
+  <script>
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('anim');
+    }
+  </script>
+
+  <!-- Tipografía oficial: DM Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="bg-anuna-cream font-sans text-anuna-gray">
   <app-root></app-root>
 </body>
 </html>

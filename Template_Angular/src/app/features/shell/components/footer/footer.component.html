@@ -1,1 +1,199 @@
-<p>footer works!</p>
+<footer class="footer relative overflow-hidden bg-anuna-slate-900 text-anuna-cream">
+
+  <!-- Banda superior: circuitos que convergen en la A -->
+  @if (showBand()) {
+    <div class="reveal ft-band relative h-36 w-full sm:h-44" aria-hidden="true">
+      <svg class="absolute inset-0 h-full w-full" viewBox="0 0 1200 176" preserveAspectRatio="xMidYMid slice"
+        fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <g class="layer" data-depth="8">
+          <g stroke-width="2">
+            <path id="ft-l1" class="trace-io" pathLength="1" style="--d:0ms" stroke="#FDF6EC" opacity=".35" d="M0 60 H330 L370 100 H548" />
+            <path class="trace-io" pathLength="1" style="--d:70ms" stroke="#FDF6EC" opacity=".2" d="M0 70 H326 L366 110 H548" />
+            <path class="trace-io" pathLength="1" style="--d:140ms" stroke="#FDF6EC" opacity=".12" d="M0 80 H322 L362 120 H548" />
+            <path id="ft-l2" class="trace-io" pathLength="1" style="--d:200ms" stroke="#FF6B35" opacity=".8" d="M0 150 H220 L250 130 H460 L480 150 H548" />
+            <path class="trace-io" pathLength="1" style="--d:260ms" stroke="#FDF6EC" opacity=".2" d="M120 60 V20 L140 0" />
+            <path id="ft-r1" class="trace-io" pathLength="1" style="--d:100ms" stroke="#FDF6EC" opacity=".35" d="M1200 60 H870 L830 100 H652" />
+            <path class="trace-io" pathLength="1" style="--d:170ms" stroke="#FDF6EC" opacity=".2" d="M1200 70 H874 L834 110 H652" />
+            <path class="trace-io" pathLength="1" style="--d:240ms" stroke="#FDF6EC" opacity=".12" d="M1200 80 H878 L838 120 H652" />
+            <path id="ft-r2" class="trace-io" pathLength="1" style="--d:300ms" stroke="#FFD97D" opacity=".7" d="M1200 150 H980 L950 130 H740 L720 150 H652" />
+            <path class="trace-io" pathLength="1" style="--d:360ms" stroke="#FDF6EC" opacity=".2" d="M1080 60 V20 L1060 0" />
+          </g>
+          <g stroke-width="2">
+            <circle class="node-io" style="--d:1.2s" cx="548" cy="100" r="5" fill="#2E434A" stroke="#FDF6EC" />
+            <circle class="node-io" style="--d:1.25s" cx="548" cy="150" r="5" fill="#FF6B35" stroke="#FF6B35" />
+            <circle class="node-io" style="--d:1.3s" cx="652" cy="100" r="5" fill="#2E434A" stroke="#FDF6EC" />
+            <circle class="node-io" style="--d:1.35s" cx="652" cy="150" r="5" fill="#FFD97D" stroke="#FFD97D" />
+            <circle class="node-io" style="--d:1.4s" cx="140" cy="0" r="4" fill="none" stroke="#FDF6EC" opacity=".4" />
+            <circle class="node-io" style="--d:1.4s" cx="1060" cy="0" r="4" fill="none" stroke="#FDF6EC" opacity=".4" />
+          </g>
+          <!-- Pulsos: se activan desde el componente al entrar en pantalla -->
+          <g>
+            <circle r="3.5" fill="#FF6B35" opacity="0">
+              <animateMotion class="ft-smil" dur="3.2s" begin="indefinite" repeatCount="indefinite"><mpath href="#ft-l1" /></animateMotion>
+              <animate class="ft-smil" attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.88;1" dur="3.2s" begin="indefinite" repeatCount="indefinite" />
+            </circle>
+            <circle r="3.5" fill="#FFD97D" opacity="0">
+              <animateMotion class="ft-smil" dur="3.8s" begin="indefinite" repeatCount="indefinite"><mpath href="#ft-l2" /></animateMotion>
+              <animate class="ft-smil" attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.88;1" dur="3.8s" begin="indefinite" repeatCount="indefinite" />
+            </circle>
+            <circle r="3.5" fill="#FFD97D" opacity="0">
+              <animateMotion class="ft-smil" dur="3.5s" begin="indefinite" repeatCount="indefinite"><mpath href="#ft-r1" /></animateMotion>
+              <animate class="ft-smil" attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.88;1" dur="3.5s" begin="indefinite" repeatCount="indefinite" />
+            </circle>
+            <circle r="3.5" fill="#FF6B35" opacity="0">
+              <animateMotion class="ft-smil" dur="4s" begin="indefinite" repeatCount="indefinite"><mpath href="#ft-r2" /></animateMotion>
+              <animate class="ft-smil" attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.88;1" dur="4s" begin="indefinite" repeatCount="indefinite" />
+            </circle>
+          </g>
+        </g>
+        <!-- Isotipo central (sustituir por el SVG oficial en negativo) -->
+        <g class="layer" data-depth="16">
+          <circle cx="600" cy="100" r="60" fill="none" stroke="#FF6B35" stroke-width="1.5" opacity="0">
+            <animate class="ft-smil" attributeName="r" values="60;150" dur="4s" begin="indefinite" repeatCount="indefinite" />
+            <animate class="ft-smil" attributeName="opacity" values=".35;0" dur="4s" begin="indefinite" repeatCount="indefinite" />
+          </circle>
+          <g transform="translate(564 50) scale(.72)">
+            <path class="ft-a-arch" d="M14 130 V50 A36 36 0 0 1 86 50 V130" fill="none" stroke="#FDF6EC" stroke-width="28" />
+            <path class="ft-a-band" d="M28 68 C58 70 84 94 100 130 H73 C63 104 47 90 28 91 Z" fill="#FF6B35" />
+          </g>
+        </g>
+      </svg>
+    </div>
+  }
+
+  <div class="relative mx-auto max-w-content px-5 sm:px-8" [class.pt-16]="!showBand()">
+
+    <div class="grid gap-12 pt-6 md:grid-cols-2 lg:grid-cols-[1.4fr_.8fr_1fr_1fr] lg:gap-10">
+
+      <!-- Marca -->
+      <div class="reveal">
+        <p class="split text-2xl font-bold leading-snug text-white sm:text-[1.75rem]" [attr.aria-label]="config().headline">
+          @for (w of words(); track $index) {
+            <span class="word" aria-hidden="true"><span [style.--i]="$index">{{ w }}</span></span>{{ ' ' }}
+          }
+        </p>
+        <p class="mt-4 max-w-xs text-base leading-relaxed text-anuna-cream/80">{{ config().tagline }}</p>
+        <a [routerLink]="config().cta.route" [fragment]="config().cta.fragment"
+          class="shine mt-7 inline-flex items-center justify-center rounded-full bg-anuna-orange px-6 py-3 text-[15px] font-bold text-anuna-ink transition duration-200 hover:-translate-y-0.5 hover:bg-anuna-orange-hover hover:shadow-anuna-cta focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-anuna-slate-900">
+          {{ config().cta.label }}
+        </a>
+      </div>
+
+      <!-- Navegación -->
+      <nav class="reveal" style="--d:80ms" aria-labelledby="ft-nav-title">
+        <h2 id="ft-nav-title" class="text-base font-bold text-white">Navegación</h2>
+        <ul class="mt-5 space-y-3 text-[15px]">
+          @for (item of config().nav; track item.label) {
+            <li>
+              <a [routerLink]="item.route" [fragment]="item.fragment"
+                class="ft-link text-anuna-cream/80 transition-colors hover:text-anuna-yellow focus:outline-none focus-visible:text-anuna-yellow">
+                <span class="ft-trace" aria-hidden="true"></span>{{ item.label }}
+              </a>
+            </li>
+          }
+        </ul>
+      </nav>
+
+      <!-- Contacto -->
+      <div class="reveal" style="--d:160ms">
+        <h2 class="text-base font-bold text-white">Contacto</h2>
+        <ul class="mt-5 space-y-3 text-[15px]">
+          <li>
+            <a [href]="'mailto:' + config().email"
+              class="ft-link text-anuna-cream/80 transition-colors hover:text-anuna-yellow focus:outline-none focus-visible:text-anuna-yellow">
+              <span class="ft-trace" aria-hidden="true"></span>{{ config().email }}
+            </a>
+          </li>
+          @for (p of config().phones; track p.tel) {
+            <li class="flex flex-col">
+              <span class="text-xs font-bold text-anuna-cream/70">{{ p.country }}</span>
+              <a [href]="'tel:' + p.tel"
+                class="ft-link w-fit text-anuna-cream/80 transition-colors hover:text-anuna-yellow focus:outline-none focus-visible:text-anuna-yellow">
+                <span class="ft-trace" aria-hidden="true"></span>{{ p.display }}
+              </a>
+            </li>
+          }
+        </ul>
+      </div>
+
+      <!-- Redes -->
+      <div class="reveal" style="--d:240ms">
+        <h2 class="text-base font-bold text-white">Síguenos</h2>
+        <div class="mt-5 flex gap-3">
+          @for (s of config().socials; track s.url) {
+            <a [href]="s.url" target="_blank" rel="noopener"
+              [attr.aria-label]="s.label + ' de Grupo Anuna (abre en pestaña nueva)'"
+              class="soc flex h-14 w-12 items-end justify-center rounded-arch border border-anuna-cream/25 pb-3 text-anuna-cream transition-colors duration-300 hover:border-anuna-yellow hover:text-anuna-slate-900 focus:outline-none focus-visible:border-anuna-yellow focus-visible:text-anuna-slate-900">
+              @switch (s.name) {
+                @case ('instagram') {
+                  <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/></svg>
+                }
+                @case ('linkedin') {
+                  <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.1c0-1.22-.02-2.78-1.7-2.78-1.7 0-1.95 1.33-1.95 2.7V21h-4z"/></svg>
+                }
+              }
+            </a>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Relojes en vivo -->
+    @if (showClocks()) {
+      <div class="reveal mt-14" style="--d:120ms">
+        <h2 class="text-sm font-bold text-anuna-cream/70">Ahora mismo en nuestros equipos</h2>
+        <ul class="mt-4 grid gap-3 sm:grid-cols-3">
+          @for (c of config().clocks; track c.tz) {
+            <li class="flex items-center justify-between rounded-2xl border border-anuna-cream/15 bg-anuna-slate-950/40 px-5 py-4">
+              <div>
+                <p class="text-[15px] font-bold text-white">{{ c.country }}</p>
+                <p class="mt-0.5 flex items-center gap-2 text-sm text-anuna-cream/70">
+                  <span class="relative flex h-2 w-2" aria-hidden="true">
+                    @if (clocks()[c.tz]?.open) {
+                      <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-anuna-yellow opacity-70 motion-reduce:hidden"></span>
+                      <span class="relative inline-flex h-2 w-2 rounded-full bg-anuna-yellow"></span>
+                    } @else {
+                      <span class="relative inline-flex h-2 w-2 rounded-full bg-anuna-cream/40"></span>
+                    }
+                  </span>
+                  {{ clocks()[c.tz]?.open ? 'En horario de atención' : (clocks()[c.tz] ? 'Fuera de horario' : '—') }}
+                </p>
+              </div>
+              <p class="text-2xl font-bold tabular-nums text-anuna-cream">
+                {{ clocks()[c.tz]?.hh ?? '--' }}<span class="blink">:</span>{{ clocks()[c.tz]?.mm ?? '--' }}
+              </p>
+            </li>
+          }
+        </ul>
+      </div>
+    }
+
+    <!-- Línea inferior -->
+    <div class="mt-12 flex flex-col gap-4 border-t border-anuna-cream/15 pt-6 text-sm text-anuna-cream/70 sm:flex-row sm:items-center sm:justify-between">
+      <p>© {{ year }} Grupo Anuna. Todos los derechos reservados.</p>
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-3">
+        <a [href]="config().privacyUrl" target="_blank" rel="noopener" class="link-grow hover:text-anuna-yellow">Aviso de privacidad</a>
+        <button type="button" (click)="scrollToTop()"
+          class="group inline-flex items-center gap-3 rounded-full font-bold text-anuna-cream hover:text-anuna-yellow focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-yellow focus-visible:ring-offset-4 focus-visible:ring-offset-anuna-slate-900">
+          Volver arriba
+          <span class="relative flex h-10 w-9 items-center justify-center transition-transform duration-300 group-hover:-translate-y-1" aria-hidden="true">
+            <svg class="absolute inset-0 h-full w-full overflow-visible" viewBox="0 0 36 40" fill="none">
+              <path d="M3 38 V18 A15 15 0 0 1 33 18 V38 Z" stroke="currentColor" stroke-opacity=".25" stroke-width="2" stroke-linejoin="round" />
+              <path class="top-arch" d="M3 38 V18 A15 15 0 0 1 33 18 V38" pathLength="1" stroke="#FFD97D" stroke-width="2.5" stroke-linecap="round" />
+            </svg>
+            <svg class="relative mt-1 h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Marca de agua -->
+  <div class="reveal wm pointer-events-none relative mt-6 select-none overflow-hidden" aria-hidden="true">
+    <p class="wm-text mx-auto max-w-content px-5 text-center font-bold lowercase text-anuna-cream/[.06] sm:px-8">
+      @for (l of wmLetters; track $index) {
+        <span class="wm-letter" [style.--i]="$index">{{ l }}</span>
+      }
+    </p>
+  </div>
+</footer>
