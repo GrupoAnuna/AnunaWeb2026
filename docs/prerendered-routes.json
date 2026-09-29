@@ -1,0 +1,11 @@
+{
+  "routes": {
+    "/": {},
+    "/casos": {},
+    "/consultoria": {},
+    "/contacto": {},
+    "/desarrollo-apps": {},
+    "/desarrollo-web": {},
+    "/nosotros": {}
+  }
+}

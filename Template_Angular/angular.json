@@ -83,6 +83,13 @@
               "src/styles.css"
             ]
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+          "name": "JesusOmardev",
+          "email": "jesusomar.dev@gmail.com"
+  }
         }
       }
     }
