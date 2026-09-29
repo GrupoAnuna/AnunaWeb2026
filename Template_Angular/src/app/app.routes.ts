@@ -15,5 +15,10 @@ export const routes: Routes = [
     title: 'Desarrollo web y aplicaciones web | Grupo Anuna',
   },
 
-
+  {
+    path: 'desarrollo-apps',
+    loadComponent: () =>
+      import('./features/desarrollo-apps/app-development').then((m) => m.AppDevelopment),
+    title: 'Desarrollo de apps | Grupo Anuna',
+  },
 ];

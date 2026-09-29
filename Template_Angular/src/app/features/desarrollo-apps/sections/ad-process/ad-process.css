@@ -1,0 +1,51 @@
+:host {
+  display: block;
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+}
+
+/* Línea: su altura sigue el progreso del scroll (--p de 0 a 1) */
+.line-fill {
+  transform-origin: top;
+  transform: scaleY(var(--p, 1));
+  box-shadow: 0 0 12px rgba(255, 107, 53, .45);
+}
+
+/* ---------- Nodo y tarjeta: apagados → encendidos ---------- */
+.node {
+  background: #FDF6EC;
+  border-color: #EADFCC;
+  color: rgba(74, 102, 112, .5);
+  transition: background-color .4s, border-color .4s, color .4s, box-shadow .4s, transform .5s cubic-bezier(.3, 1.6, .5, 1);
+}
+.card {
+  background: rgb(255 255 255 / .5);
+  border-color: #EADFCC;
+  opacity: .55;
+  transform: translateX(10px);
+  transition: opacity .5s var(--ease-out), transform .5s var(--ease-out), background-color .4s, box-shadow .4s;
+}
+
+.step.on .node {
+  background: #FF6B35;
+  border-color: #FF6B35;
+  color: #1E2B30;
+  box-shadow: 0 0 0 7px rgba(255, 107, 53, .18);
+  transform: scale(1.06);
+}
+.step.on .card {
+  opacity: 1;
+  transform: none;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(46,67,74,.05), 0 12px 28px -14px rgba(46,67,74,.22);
+}
+
+/* Sin JS todo se ve encendido (el componente añade .on en el navegador) */
+:host-context(html:not(.anim)) .card { opacity: 1; transform: none; }
+
+/* Indicador del paso actual */
+.now-num, .now-title { display: inline-block; animation: swap .45s var(--ease-out); }
+@keyframes swap { from { opacity: 0; transform: translateY(10px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .card, .node { transition: none; }
+}

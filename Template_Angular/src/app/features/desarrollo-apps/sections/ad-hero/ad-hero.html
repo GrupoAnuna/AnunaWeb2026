@@ -1,0 +1,133 @@
+<section class="relative overflow-clip" aria-labelledby="ad-title">
+  <div class="mx-auto grid max-w-content items-center gap-14 px-5 pb-20 pt-12 sm:px-8 md:pt-16 lg:grid-cols-[1fr_1fr] lg:gap-10 lg:pb-28 lg:pt-20">
+
+    <!-- Texto -->
+    <div class="max-w-xl">
+      <p class="hero-in mb-6 inline-flex items-center gap-2 rounded-full border border-anuna-line bg-white/70 px-3.5 py-1.5 text-sm font-medium text-anuna-slate" style="--d:0ms">
+        <app-icon name="phone" class="h-4 w-4 text-anuna-orange-700" />
+        Desarrollo de apps
+      </p>
+
+      <h1 id="ad-title" [attr.aria-label]="headline"
+        class="text-[2.5rem] font-bold leading-[1.08] tracking-[-0.02em] text-anuna-slate sm:text-5xl lg:text-[3.5rem]">
+        @for (w of words; track $index) {
+          <span class="word" aria-hidden="true"><span [style.--i]="$index">{{ w }}</span></span>{{ ' ' }}
+        }
+      </h1>
+
+      <p class="hero-in mt-6 max-w-[34rem] text-lg leading-relaxed text-anuna-gray" style="--d:650ms">
+        Diseñamos y desarrollamos aplicaciones para iOS, Android y la web: desde la idea hasta su publicación en las tiendas, con un solo equipo.
+      </p>
+
+      <div class="hero-in mt-9 flex flex-col gap-3 sm:flex-row sm:items-center" style="--d:800ms">
+        <a [routerLink]="[]" fragment="arma-tu-app" appRipple
+          class="ripple-host shine inline-flex items-center justify-center gap-2 rounded-full bg-anuna-orange px-7 py-4 text-base font-bold text-anuna-ink shadow-anuna-sm transition duration-200 hover:-translate-y-0.5 hover:bg-anuna-orange-hover hover:shadow-anuna-cta active:translate-y-0 active:bg-anuna-orange-active focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2 focus-visible:ring-offset-anuna-cream">
+          Arma tu app
+          <app-icon name="sparkles" class="h-5 w-5" />
+        </a>
+        <a [routerLink]="[]" fragment="tipos-app"
+          class="inline-flex items-center justify-center rounded-full border-2 border-anuna-slate/25 px-7 py-[14px] text-base font-bold text-anuna-slate transition-colors duration-200 hover:border-anuna-slate hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2 focus-visible:ring-offset-anuna-cream">
+          Ver tipos de app
+        </a>
+      </div>
+
+      <ul class="hero-in mt-10 flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-anuna-slate" style="--d:950ms">
+        @for (t of ['Diseño UX/UI', 'Desarrollo', 'Publicación en tiendas', 'Soporte']; track t) {
+          <li class="flex items-center gap-2">
+            <span class="flex h-5 w-5 items-center justify-center rounded-full bg-anuna-yellow text-anuna-slate-900"><app-icon name="check" class="h-3 w-3" /></span>
+            {{ t }}
+          </li>
+        }
+      </ul>
+    </div>
+
+    <!-- Ilustración: teléfono con pantallas que cambian -->
+    <div class="stage relative mx-auto flex h-[560px] w-full max-w-[520px] items-center justify-center" aria-hidden="true">
+
+      <!-- Halo y órbita con plataformas -->
+      <div class="halo absolute h-[440px] w-[440px] rounded-full"></div>
+      <div class="orbit absolute h-[420px] w-[420px] rounded-full border-2 border-dashed border-anuna-slate/20">
+        <span class="orbit-item absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2"><span class="orbit-chip">iOS</span></span>
+        <span class="orbit-item absolute bottom-[12%] left-[3%]"><span class="orbit-chip">Android</span></span>
+        <span class="orbit-item absolute bottom-[12%] right-[3%]"><span class="orbit-chip">Web</span></span>
+      </div>
+
+      <!-- Teléfono -->
+      <div class="phone relative z-10 h-[500px] w-[246px] rounded-[42px] border-[9px] border-anuna-slate-950 bg-anuna-slate-950 shadow-anuna-lg">
+        <div class="relative h-full w-full overflow-hidden rounded-[33px] bg-anuna-cream">
+          <!-- Isla / notch -->
+          <span class="absolute left-1/2 top-2 z-30 h-5 w-20 -translate-x-1/2 rounded-full bg-anuna-slate-950"></span>
+
+          <!-- Pantalla 1 · Inicio -->
+          <div class="screen screen-1 absolute inset-0 flex flex-col px-4 pb-4 pt-10" style="--s:0">
+            <p class="text-[11px] font-medium text-anuna-gray">Buenos días</p>
+            <p class="text-lg font-bold text-anuna-slate">Hola, Laura</p>
+            <div class="mt-4 rounded-2xl bg-anuna-slate p-4 text-anuna-cream">
+              <p class="text-[10px] font-medium text-anuna-cream/70">Tus puntos</p>
+              <p class="mt-1 text-2xl font-bold">1,250</p>
+              <span class="mt-3 block h-1.5 w-full rounded-full bg-white/15"><span class="fill-bar block h-full w-2/3 rounded-full bg-anuna-yellow"></span></span>
+            </div>
+            <p class="mt-5 text-xs font-bold text-anuna-slate">Para ti</p>
+            <div class="mt-2 grid grid-cols-2 gap-2">
+              <span class="h-20 rounded-xl bg-anuna-yellow/70"></span>
+              <span class="h-20 rounded-xl bg-anuna-slate-100"></span>
+            </div>
+            <div class="mt-3 space-y-2">
+              <span class="flex items-center gap-2 rounded-xl bg-white p-2"><span class="h-7 w-7 rounded-lg bg-anuna-orange/80"></span><span class="h-2 flex-1 rounded-full bg-anuna-slate/20"></span></span>
+              <span class="flex items-center gap-2 rounded-xl bg-white p-2"><span class="h-7 w-7 rounded-lg bg-anuna-slate/60"></span><span class="h-2 w-2/3 rounded-full bg-anuna-slate/20"></span></span>
+            </div>
+          </div>
+
+          <!-- Pantalla 2 · Pedido en camino -->
+          <div class="screen screen-2 absolute inset-0 flex flex-col px-4 pb-4 pt-10" style="--s:1">
+            <p class="text-lg font-bold text-anuna-slate">Tu pedido</p>
+            <div class="map relative mt-3 h-44 overflow-hidden rounded-2xl bg-anuna-slate-100">
+              <svg class="absolute inset-0 h-full w-full" viewBox="0 0 200 170" fill="none">
+                <path d="M0 40 H200 M0 110 H200 M60 0 V170 M150 0 V170" stroke="#fff" stroke-width="10" />
+                <path class="route" pathLength="1" d="M30 150 V110 H150 V40 H180" stroke="#FF6B35" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                <circle cx="30" cy="150" r="7" fill="#4A6670" />
+                <circle class="pin-pulse" cx="180" cy="40" r="7" fill="#FF6B35" />
+              </svg>
+            </div>
+            <p class="mt-4 text-sm font-bold text-anuna-slate">Va en camino</p>
+            <p class="text-[11px] text-anuna-gray">Llega en aproximadamente 12 min</p>
+            <span class="mt-3 block h-2 w-full rounded-full bg-anuna-slate-100"><span class="progress block h-full rounded-full bg-anuna-orange"></span></span>
+            <div class="mt-4 flex items-center gap-3 rounded-2xl bg-white p-3">
+              <span class="h-9 w-9 rounded-full bg-anuna-yellow"></span>
+              <span class="flex-1 space-y-1.5"><span class="block h-2 w-2/3 rounded-full bg-anuna-slate/30"></span><span class="block h-2 w-1/3 rounded-full bg-anuna-slate/15"></span></span>
+            </div>
+          </div>
+
+          <!-- Pantalla 3 · Pago confirmado -->
+          <div class="screen screen-3 absolute inset-0 flex flex-col items-center px-4 pb-4 pt-16 text-center" style="--s:2">
+            <span class="check-circle flex h-20 w-20 items-center justify-center rounded-full bg-anuna-orange text-anuna-ink">
+              <app-icon name="check" class="h-10 w-10" />
+            </span>
+            <p class="mt-5 text-lg font-bold text-anuna-slate">Pago confirmado</p>
+            <p class="mt-1 text-[11px] text-anuna-gray">Te enviamos el recibo por correo</p>
+            <p class="mt-6 text-3xl font-bold text-anuna-slate">$480.00</p>
+            <span class="mt-auto w-full rounded-full bg-anuna-slate py-3 text-xs font-bold text-anuna-cream">Ver recibo</span>
+          </div>
+
+          <!-- Barra inferior -->
+          <div class="absolute inset-x-0 bottom-0 z-20 flex justify-around border-t border-anuna-line bg-white/90 py-2.5 backdrop-blur">
+            <span class="tab-dot h-1.5 w-6 rounded-full bg-anuna-orange"></span>
+            <span class="h-1.5 w-6 rounded-full bg-anuna-slate/20"></span>
+            <span class="h-1.5 w-6 rounded-full bg-anuna-slate/20"></span>
+            <span class="h-1.5 w-6 rounded-full bg-anuna-slate/20"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notificaciones -->
+      <div class="toast toast-a absolute left-0 top-[18%] z-20 flex w-52 items-center gap-3 rounded-2xl bg-white p-3 shadow-anuna-lg sm:-left-4">
+        <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-anuna-yellow text-anuna-slate-900"><app-icon name="bell" class="h-4 w-4" /></span>
+        <span class="text-left"><span class="block text-xs font-bold text-anuna-slate">Pedido en camino</span><span class="block text-[11px] text-anuna-gray">Llega en 12 min</span></span>
+      </div>
+      <div class="toast toast-b absolute bottom-[16%] right-0 z-20 flex w-52 items-center gap-3 rounded-2xl bg-anuna-slate-900 p-3 shadow-anuna-lg sm:-right-4">
+        <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-anuna-orange text-anuna-ink"><app-icon name="card" class="h-4 w-4" /></span>
+        <span class="text-left"><span class="block text-xs font-bold text-white">Pago recibido</span><span class="block text-[11px] text-anuna-cream/70">Todo listo</span></span>
+      </div>
+    </div>
+  </div>
+</section>

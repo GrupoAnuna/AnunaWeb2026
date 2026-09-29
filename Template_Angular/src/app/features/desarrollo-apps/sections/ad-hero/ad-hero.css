@@ -1,0 +1,121 @@
+/* ============================================================
+   Hero de Desarrollo de apps: el teléfono cambia de pantalla
+   solo, aparecen notificaciones y las plataformas orbitan.
+   Estados ocultos solo con html.anim.
+   ============================================================ */
+
+:host {
+  display: block;
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+  --cycle: 10.5s;   /* duración del ciclo completo de 3 pantallas */
+  --start: 1.6s;    /* cuándo empieza a cambiar tras la entrada */
+}
+
+/* Titular palabra por palabra */
+.word { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .1em; margin-bottom: -.1em; }
+.word > span { display: inline-block; }
+:host-context(html.anim) .word > span {
+  transform: translateY(105%);
+  animation: up .9s var(--ease-out) forwards;
+  animation-delay: calc(var(--i) * 60ms + 150ms);
+}
+@keyframes up { to { transform: none; } }
+
+:host-context(html.anim) .hero-in {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: fadeUp .8s var(--ease-out) forwards;
+  animation-delay: var(--d, 0ms);
+}
+@keyframes fadeUp { to { opacity: 1; transform: none; } }
+
+/* ---------- Escenario ---------- */
+.halo { background: radial-gradient(closest-side, rgba(255, 217, 125, .5), transparent); }
+@media (max-width: 480px) {
+  .stage { transform: scale(.82); height: 480px; }
+}
+
+:host-context(html.anim) .phone {
+  opacity: 0;
+  transform: translateY(40px) rotate(-6deg);
+  animation: phoneIn 1s var(--ease-out) .3s forwards;
+}
+@keyframes phoneIn { to { opacity: 1; transform: rotate(-3deg); } }
+.phone { transform: rotate(-3deg); }
+
+/* Órbita: gira el anillo y cada etiqueta gira al revés para quedar derecha */
+.orbit { animation: spin 40s linear infinite; }
+.orbit-chip {
+  display: inline-block;
+  border-radius: 999px;
+  background: #fff;
+  padding: .4rem .85rem;
+  font-size: .75rem;
+  font-weight: 700;
+  color: #4A6670;
+  box-shadow: 0 6px 18px -8px rgba(46, 67, 74, .35);
+  animation: spin 40s linear infinite reverse;
+}
+.orbit-item:first-child .orbit-chip { background: #4A6670; color: #FDF6EC; }
+@keyframes spin { to { transform: rotate(360deg); } }
+:host-context(html.anim) .orbit { opacity: 0; animation: orbitIn 1s var(--ease-out) .8s forwards, spin 40s linear 1.8s infinite; }
+/* Las etiquetas arrancan a la vez que el anillo, para mantenerse siempre derechas */
+:host-context(html.anim) .orbit-chip { animation-delay: 1.8s; }
+/* Solo opacidad: el giro (transform) lo controla la animación "spin" */
+@keyframes orbitIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ---------- Pantallas en ciclo ---------- */
+.screen { opacity: 0; }
+.screen-1 { opacity: 1; }
+:host-context(html.anim) .screen {
+  animation: cycle var(--cycle) var(--ease-out) infinite both;
+  /* Cada pantalla entra un tercio de ciclo después de la anterior */
+  animation-delay: calc(var(--start) + var(--s) * var(--cycle) / 3);
+}
+/* La primera pantalla ya está visible desde el principio */
+:host-context(html.anim) .screen-1 { animation-name: cycleFirst; }
+@keyframes cycle {
+  0%   { opacity: 0; transform: translateX(24px); }
+  4%   { opacity: 1; transform: none; }
+  30%  { opacity: 1; transform: none; }
+  34%  { opacity: 0; transform: translateX(-24px); }
+  100% { opacity: 0; transform: translateX(-24px); }
+}
+@keyframes cycleFirst {
+  0%   { opacity: 1; transform: none; }
+  30%  { opacity: 1; transform: none; }
+  34%  { opacity: 0; transform: translateX(-24px); }
+  96%  { opacity: 0; transform: translateX(24px); }
+  100% { opacity: 1; transform: none; }
+}
+
+/* Detalles vivos dentro de cada pantalla */
+.route { stroke-dasharray: 1; }
+:host-context(html.anim) .route { animation: route var(--cycle) ease-in-out infinite; animation-delay: var(--start); }
+@keyframes route { 0%, 33% { stroke-dashoffset: 1; } 45%, 66% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 0; } }
+.pin-pulse { animation: pinPulse 1.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes pinPulse { 50% { transform: scale(1.35); } }
+.progress { width: 70%; }
+:host-context(html.anim) .progress { animation: grow var(--cycle) ease-in-out infinite; animation-delay: var(--start); }
+@keyframes grow { 0%, 33% { width: 10%; } 60% { width: 70%; } 100% { width: 70%; } }
+:host-context(html.anim) .check-circle { animation: checkPop var(--cycle) cubic-bezier(.3, 1.6, .5, 1) infinite; animation-delay: var(--start); }
+@keyframes checkPop { 0%, 66% { transform: scale(.4); } 72%, 100% { transform: none; } }
+
+/* ---------- Notificaciones ---------- */
+.toast { opacity: 0; }
+.toast-a { opacity: 1; }
+:host-context(html.anim) .toast { animation: toast var(--cycle) var(--ease-out) infinite both; }
+:host-context(html.anim) .toast-a { animation-delay: calc(var(--start) + var(--cycle) / 3); }
+:host-context(html.anim) .toast-b { animation-delay: calc(var(--start) + var(--cycle) * 2 / 3); }
+@keyframes toast {
+  0%   { opacity: 0; transform: translateY(12px) scale(.9); }
+  5%   { opacity: 1; transform: none; }
+  28%  { opacity: 1; transform: none; }
+  33%  { opacity: 0; transform: translateY(-8px) scale(.96); }
+  100% { opacity: 0; transform: translateY(-8px) scale(.96); }
+}
+
+/* ---------- Movimiento reducido ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .orbit, .orbit-chip, .pin-pulse { animation: none !important; }
+}

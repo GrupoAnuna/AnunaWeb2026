@@ -1,0 +1,75 @@
+:host {
+  display: block;
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+}
+
+.dots {
+  background-image: radial-gradient(rgba(253, 246, 236, .08) 1px, transparent 1px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(ellipse at 20% 20%, #000, transparent 70%);
+  mask-image: radial-gradient(ellipse at 20% 20%, #000, transparent 70%);
+}
+
+/* ---------- Microanimaciones de cada tarjeta (hover) ---------- */
+.feat-icon { transition: transform .4s var(--ease-out), background-color .3s; }
+.feat:hover .feat-icon { background: #FFD97D; }
+
+.feat[data-anim="ring"]:hover .icon { animation: ring .7s ease-in-out; transform-origin: 50% 10%; }
+@keyframes ring { 20% { transform: rotate(16deg); } 40% { transform: rotate(-14deg); } 60% { transform: rotate(9deg); } 80% { transform: rotate(-5deg); } }
+
+.feat[data-anim="pulse"]:hover .icon { animation: pulse .9s ease-in-out infinite; }
+@keyframes pulse { 50% { transform: scale(1.18); } }
+
+.feat[data-anim="swipe"]:hover .icon { animation: swipe .8s var(--ease-out); }
+@keyframes swipe { 40% { transform: translateX(6px) rotate(-8deg); } }
+
+.feat[data-anim="lift"]:hover .icon { animation: lift .8s var(--ease-out); }
+@keyframes lift { 40% { transform: translateY(-6px); } }
+
+.feat[data-anim="spin"]:hover .icon { animation: spin .9s var(--ease-out); }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Diseño UX/UI: los bloques se reacomodan */
+.ui-demo span { transition: flex-grow .6s var(--ease-out), background-color .4s; }
+.feat:hover .ui-a { flex-grow: 1; }
+.feat:hover .ui-b { flex-grow: 2; background: rgba(255, 217, 125, .8); }
+.feat:hover .ui-c { flex-grow: 1; }
+
+/* Versiones: la nueva "salta" en hover */
+.v-new { transition: transform .4s cubic-bezier(.3, 1.6, .5, 1), box-shadow .4s; }
+.feat:hover .v-new { transform: scale(1.12); box-shadow: 0 0 0 5px rgba(255, 217, 125, .2); }
+
+/* ---------- Cinta infinita ---------- */
+.marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.track {
+  display: flex;
+  width: max-content;
+  gap: .75rem;
+  animation: marquee 38s linear infinite;
+}
+.track.reverse { animation-direction: reverse; animation-duration: 44s; }
+.marquee:hover .track { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(calc(-50% - .375rem)); } }
+
+.pill {
+  flex-shrink: 0;
+  border-radius: 999px;
+  border: 1px solid rgba(253, 246, 236, .15);
+  padding: .7rem 1.25rem;
+  font-size: .95rem;
+  font-weight: 700;
+  color: #FDF6EC;
+  white-space: nowrap;
+}
+.pill::before { content: "●"; margin-right: .6rem; color: #FF6B35; font-size: .6rem; vertical-align: 2px; }
+.pill-alt { background: rgba(253, 246, 236, .06); }
+.pill-alt::before { color: #FFD97D; }
+
+@media (prefers-reduced-motion: reduce) {
+  .track { animation: none; flex-wrap: wrap; width: auto; padding: 0 1.25rem; }
+  .track > .pill:nth-child(n + 7) { display: none; } /* oculta la copia usada para el bucle */
+}

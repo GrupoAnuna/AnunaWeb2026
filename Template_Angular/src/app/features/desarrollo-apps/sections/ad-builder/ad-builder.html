@@ -1,0 +1,210 @@
+<section id="arma-tu-app" class="relative overflow-clip bg-white py-20 lg:py-28" aria-labelledby="adb-section-title">
+  <div class="glow pointer-events-none absolute -left-40 bottom-0 h-[520px] w-[520px]" aria-hidden="true"></div>
+
+  <div class="relative mx-auto max-w-content px-5 sm:px-8">
+    <div class="max-w-2xl">
+      <p appReveal class="reveal mb-5 inline-flex items-center gap-2 rounded-full border border-anuna-line bg-anuna-cream px-3.5 py-1.5 text-sm font-medium text-anuna-slate">
+        <span class="relative flex h-2 w-2" aria-hidden="true">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-anuna-orange opacity-60 motion-reduce:hidden"></span>
+          <span class="relative inline-flex h-2 w-2 rounded-full bg-anuna-orange"></span>
+        </span>
+        Cotiza en un minuto
+      </p>
+      <h2 id="adb-section-title" appReveal style="--d:80ms"
+        class="reveal text-3xl font-bold leading-tight tracking-[-0.015em] text-anuna-slate sm:text-4xl lg:text-[2.75rem]">
+        Arma tu app y te enviamos una propuesta
+      </h2>
+      <p appReveal style="--d:160ms" class="reveal mt-5 text-lg leading-relaxed text-anuna-gray">
+        Elige las plataformas y las funciones que imaginas. Mira cómo toma forma y recibe una propuesta clara, sin compromiso.
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-10 lg:grid-cols-[1.15fr_.85fr] lg:gap-14">
+
+      <!-- ===== Controles / formulario ===== -->
+      <div appReveal class="reveal order-2 lg:order-1" style="--d:120ms">
+        <div class="panel rounded-[28px] border border-anuna-line bg-anuna-cream p-6 shadow-anuna-md sm:p-9">
+
+          @switch (stage()) {
+            @case ('build') {
+              <div class="stage-in">
+                <h3 id="adb-title" tabindex="-1" class="text-xl font-bold text-anuna-slate outline-none">1. ¿Dónde estará tu app?</h3>
+                <div class="mt-4 flex flex-wrap gap-2" role="group" aria-label="Plataformas">
+                  @for (p of platforms; track p.value) {
+                    <button type="button" (click)="togglePlatform(p.value)" [attr.aria-pressed]="isPlatform(p.value)"
+                      class="plat inline-flex items-center gap-2 rounded-full border-2 px-5 py-2.5 text-sm font-bold transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2"
+                      [class.on]="isPlatform(p.value)">
+                      <span class="tick flex h-4 w-4 items-center justify-center rounded-full"><app-icon name="check" class="h-2.5 w-2.5" /></span>
+                      {{ p.label }}
+                    </button>
+                  }
+                </div>
+
+                <h3 class="mt-9 text-xl font-bold text-anuna-slate">2. ¿Qué debe hacer?</h3>
+                <p class="mt-1 text-sm text-anuna-gray">Marca todas las que necesites. Puedes ajustarlas después con nosotros.</p>
+                <div class="mt-4 grid grid-cols-2 gap-2.5 sm:grid-cols-4" role="group" aria-label="Funciones">
+                  @for (o of options; track o.value; let k = $index) {
+                    <button type="button" (click)="toggleFeature(o.value)" [attr.aria-pressed]="isFeature(o.value)"
+                      class="feat flex flex-col items-center gap-2 rounded-2xl border-2 bg-white px-2 py-4 text-center text-[13px] font-bold text-anuna-slate transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2"
+                      [class.on]="isFeature(o.value)" [style.--k]="k">
+                      <span class="feat-icon flex h-11 w-10 items-end justify-center rounded-arch pb-2">
+                        <app-icon [name]="o.icon" class="relative h-5 w-5" />
+                      </span>
+                      {{ o.label }}
+                    </button>
+                  }
+                </div>
+
+                <div class="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                  <p class="text-sm text-anuna-gray" aria-live="polite">
+                    <span class="font-bold text-anuna-slate">{{ tiles().length }}</span> {{ tiles().length === 1 ? 'función elegida' : 'funciones elegidas' }}
+                  </p>
+                  <button type="button" (click)="goToContact()"
+                    class="shine inline-flex items-center justify-center gap-2 rounded-full bg-anuna-orange px-7 py-4 text-base font-bold text-anuna-ink shadow-anuna-sm transition duration-200 hover:-translate-y-0.5 hover:bg-anuna-orange-hover hover:shadow-anuna-cta active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2">
+                    Continuar <app-icon name="arrow-right" class="h-5 w-5" />
+                  </button>
+                </div>
+              </div>
+            }
+
+            @case ('contact') {
+              <div class="stage-in">
+                <h3 id="adb-title" tabindex="-1" class="text-2xl font-bold text-anuna-slate outline-none">¿A dónde te enviamos la propuesta?</h3>
+                <ul class="mt-4 flex flex-wrap gap-2" aria-label="Resumen de tu app">
+                  @for (l of platformLabels(); track l) { <li class="rounded-full bg-anuna-slate px-3 py-1 text-xs font-bold text-anuna-cream">{{ l }}</li> }
+                  @for (t of tiles(); track t.value) { <li class="rounded-full bg-white px-3 py-1 text-xs font-bold text-anuna-slate ring-1 ring-anuna-line">{{ t.label }}</li> }
+                  @if (!tiles().length && !platformLabels().length) { <li class="text-sm text-anuna-gray">Lo definimos juntos en la llamada.</li> }
+                </ul>
+
+                <form [formGroup]="form" (ngSubmit)="submit()" novalidate class="mt-6 grid gap-4 sm:grid-cols-2">
+                  <div class="field sm:col-span-2">
+                    <label for="adb-nombre" class="mb-1.5 block text-[15px] font-bold text-anuna-slate">Nombre <span class="text-anuna-orange-700" aria-hidden="true">*</span></label>
+                    <input id="adb-nombre" formControlName="nombre" autocomplete="name" [attr.aria-invalid]="showError('nombre')" [class.invalid]="showError('nombre')"
+                      class="w-full rounded-xl border border-anuna-line bg-white/80 px-4 py-3 text-base text-anuna-ink" />
+                    @if (showError('nombre')) { <p class="err mt-1.5 text-sm font-medium text-anuna-error">Escribe tu nombre.</p> }
+                  </div>
+                  <div class="field">
+                    <label for="adb-email" class="mb-1.5 block text-[15px] font-bold text-anuna-slate">Email <span class="text-anuna-orange-700" aria-hidden="true">*</span></label>
+                    <input id="adb-email" type="email" formControlName="email" autocomplete="email" [attr.aria-invalid]="showError('email')" [class.invalid]="showError('email')"
+                      class="w-full rounded-xl border border-anuna-line bg-white/80 px-4 py-3 text-base text-anuna-ink" />
+                    @if (showError('email')) { <p class="err mt-1.5 text-sm font-medium text-anuna-error">Revisa el correo.</p> }
+                  </div>
+                  <div class="field">
+                    <label for="adb-telefono" class="mb-1.5 block text-[15px] font-bold text-anuna-slate">WhatsApp <span class="font-normal text-anuna-gray">(opcional)</span></label>
+                    <input id="adb-telefono" type="tel" formControlName="telefono" autocomplete="tel"
+                      class="w-full rounded-xl border border-anuna-line bg-white/80 px-4 py-3 text-base text-anuna-ink" />
+                  </div>
+                  <div class="field sm:col-span-2">
+                    <label for="adb-mensaje" class="mb-1.5 block text-[15px] font-bold text-anuna-slate">Cuéntanos tu idea <span class="font-normal text-anuna-gray">(opcional)</span></label>
+                    <textarea id="adb-mensaje" rows="3" formControlName="mensaje" placeholder="Ej. Una app para que mis clientes reserven y paguen sus citas."
+                      class="w-full resize-y rounded-xl border border-anuna-line bg-white/80 px-4 py-3 text-base text-anuna-ink"></textarea>
+                  </div>
+                  <div class="sm:col-span-2">
+                    <label class="flex cursor-pointer items-start gap-3 text-sm leading-relaxed text-anuna-gray">
+                      <input id="adb-privacidad" type="checkbox" formControlName="privacidad" class="mt-0.5 h-5 w-5 shrink-0 accent-anuna-slate" [attr.aria-invalid]="showError('privacidad')" />
+                      <span>Acepto la <a href="https://grupoanuna.com/assets/Pol%C3%ADticas/Aviso%20de%20Privacidad%20%E2%80%93%20Formulario%20de%20Agenda.pdf" target="_blank" rel="noopener" class="font-bold text-anuna-orange-700 underline underline-offset-2">política de privacidad</a> y el tratamiento de mis datos.</span>
+                    </label>
+                    @if (showError('privacidad')) { <p class="err mt-1.5 pl-8 text-sm font-medium text-anuna-error">Necesitamos tu autorización para responderte.</p> }
+                  </div>
+
+                  @if (error()) {
+                    <p class="rounded-xl border border-anuna-error/30 bg-white px-4 py-3 text-sm font-medium text-anuna-error sm:col-span-2">No pudimos enviar tu solicitud. Inténtalo de nuevo o escríbenos por WhatsApp.</p>
+                  }
+
+                  <div class="mt-2 flex flex-col-reverse gap-3 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
+                    <button type="button" (click)="backToBuild()" class="inline-flex items-center justify-center gap-2 rounded-full px-4 py-3 text-[15px] font-bold text-anuna-slate hover:bg-anuna-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate">
+                      <app-icon name="arrow-left" class="h-4 w-4" /> Editar mi app
+                    </button>
+                    <button type="submit" [disabled]="sending()"
+                      class="shine inline-flex items-center justify-center gap-2 rounded-full bg-anuna-orange px-7 py-4 text-base font-bold text-anuna-ink shadow-anuna-sm transition duration-200 hover:-translate-y-0.5 hover:bg-anuna-orange-hover hover:shadow-anuna-cta active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2 disabled:cursor-wait">
+                      @if (sending()) {
+                        Enviando
+                        <span class="flex gap-1" aria-hidden="true"><span class="busy h-1.5 w-1.5 rounded-full bg-anuna-ink"></span><span class="busy h-1.5 w-1.5 rounded-full bg-anuna-ink"></span><span class="busy h-1.5 w-1.5 rounded-full bg-anuna-ink"></span></span>
+                      } @else {
+                        Recibir mi propuesta <app-icon name="arrow-right" class="h-5 w-5" />
+                      }
+                    </button>
+                  </div>
+                </form>
+              </div>
+            }
+
+            @case ('success') {
+              <div id="adb-success" tabindex="-1" class="success stage-in flex flex-col items-center py-8 text-center outline-none">
+                <svg viewBox="0 0 200 150" class="h-32 w-auto" aria-hidden="true">
+                  <g fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path class="trace-ok" pathLength="1" stroke="#4A6670" d="M0 90 H40 L55 75 H72" />
+                    <path class="trace-ok" pathLength="1" stroke="#FF6B35" d="M200 60 H160 L145 75 H128" />
+                  </g>
+                  <g class="ok-arch">
+                    <path d="M72 132 V58 A28 28 0 0 1 128 58 V132 Z" fill="#4A6670" />
+                    <path class="ok-check" pathLength="1" d="M86 92 L96 102 L115 80" fill="none" stroke="#FFD97D" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+                  </g>
+                </svg>
+                <h3 class="mt-5 text-2xl font-bold text-anuna-slate">¡Tu idea ya está con nosotros!</h3>
+                <p class="mt-3 max-w-sm text-base leading-relaxed text-anuna-gray">Te escribiremos en menos de 12 horas para platicar de tu app y enviarte la propuesta.</p>
+                <button type="button" (click)="restart()" class="link-grow mt-6 text-[15px] font-bold text-anuna-orange-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2">
+                  Armar otra app
+                </button>
+              </div>
+            }
+          }
+        </div>
+      </div>
+
+      <!-- ===== Vista previa en el teléfono ===== -->
+      <div appReveal class="reveal order-1 lg:order-2" style="--d:200ms">
+        <div class="lg:sticky lg:top-28">
+          <div class="preview relative mx-auto h-[440px] w-[230px] rounded-[40px] border-[9px] border-anuna-slate-950 bg-anuna-slate-950 shadow-anuna-lg sm:h-[520px] sm:w-[262px]"
+            [class.done]="stage() === 'success'" aria-hidden="true">
+            <div class="relative flex h-full w-full flex-col overflow-hidden rounded-[31px] bg-anuna-cream">
+              <span class="absolute left-1/2 top-2 z-10 h-5 w-20 -translate-x-1/2 rounded-full bg-anuna-slate-950"></span>
+
+              <!-- Barra de la app -->
+              <div class="bg-anuna-slate px-4 pb-4 pt-10 text-anuna-cream">
+                <p class="text-[10px] font-medium text-anuna-cream/70">Vista previa</p>
+                <p class="text-lg font-bold">Tu app</p>
+                <div class="mt-2 flex min-h-[22px] flex-wrap gap-1.5">
+                  @for (l of platformLabels(); track l) {
+                    <span class="badge rounded-full bg-anuna-yellow px-2 py-0.5 text-[10px] font-bold text-anuna-slate-900">{{ l }}</span>
+                  }
+                </div>
+              </div>
+
+              <!-- Funciones elegidas -->
+              <div class="flex-1 overflow-hidden p-3">
+                @if (tiles().length) {
+                  <div class="grid grid-cols-2 gap-2">
+                    @for (t of tiles(); track t.value; let k = $index) {
+                      <div class="tile flex flex-col gap-2 rounded-xl bg-white p-2.5 shadow-anuna-sm" [style.--k]="k">
+                        <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-anuna-orange text-anuna-ink"><app-icon [name]="t.icon" class="h-4 w-4" /></span>
+                        <span class="text-[10.5px] font-bold leading-tight text-anuna-slate">{{ t.label }}</span>
+                      </div>
+                    }
+                  </div>
+                } @else {
+                  <div class="empty flex h-full flex-col items-center justify-center rounded-2xl border-2 border-dashed border-anuna-line p-4 text-center">
+                    <app-icon name="sparkles" class="h-7 w-7 text-anuna-orange-700" />
+                    <p class="mt-3 text-xs font-bold text-anuna-slate">Elige funciones para ver tu app</p>
+                  </div>
+                }
+              </div>
+
+              <!-- Progreso -->
+              <div class="border-t border-anuna-line bg-white px-4 py-3">
+                <div class="flex items-center justify-between text-[10px] font-bold text-anuna-slate">
+                  <span>{{ stage() === 'success' ? '¡Lista para empezar!' : 'Tu app va tomando forma' }}</span>
+                  <span>{{ tiles().length }}/{{ options.length }}</span>
+                </div>
+                <span class="mt-1.5 block h-1.5 overflow-hidden rounded-full bg-anuna-slate-100">
+                  <span class="bar block h-full rounded-full bg-anuna-orange" [style.transform]="'scaleX(' + (stage() === 'success' ? 1 : progress()) + ')'"></span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <p class="mt-4 hidden text-center text-sm text-anuna-gray lg:block">La vista previa se actualiza con cada elección.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,70 @@
+:host {
+  display: block;
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+  --ease-io: cubic-bezier(.65, 0, .35, 1);
+}
+
+/* ---------- Pestañas con indicador deslizante ---------- */
+.indicator {
+  width: calc((100% - .75rem) / 4);
+  transform: translateX(calc(var(--active, 0) * 100%));
+  transition: transform .5s var(--ease-io);
+}
+.tab { color: #4A6670; }
+.tab:hover:not(.is-active) { background: rgba(74, 102, 112, .08); }
+.tab.is-active { color: #FDF6EC; }
+
+/* ---------- Panel: entra al cambiar de pestaña ---------- */
+.panel-text { animation: textIn .5s var(--ease-out); }
+@keyframes textIn { from { opacity: 0; transform: translateY(12px); } }
+.perk { animation: perkIn .45s var(--ease-out) both; animation-delay: calc(var(--k) * 70ms + 150ms); }
+@keyframes perkIn { from { opacity: 0; transform: scale(.9); } }
+
+.blob { background: radial-gradient(closest-side, rgba(255, 217, 125, .55), transparent); animation: breathe 6s ease-in-out infinite; }
+@keyframes breathe { 50% { transform: scale(1.08); } }
+
+.dev-a, .dev-b { animation: devIn .6s var(--ease-out) both; }
+.dev-b { animation-delay: .12s; }
+@keyframes devIn { from { opacity: 0; transform: translateY(24px) scale(.94); } }
+
+.float-tag { animation: tagIn .5s cubic-bezier(.3, 1.6, .5, 1) both, float 5s ease-in-out infinite; }
+.tag-1 { animation-delay: .35s, 1s; }
+.tag-2 { animation-delay: .45s, 2s; }
+.tag-3 { animation-delay: .55s, .2s; }
+@keyframes tagIn { from { opacity: 0; transform: scale(.4); } }
+@keyframes float { 50% { transform: translateY(-6px); } }
+
+/* ---------- Mini dispositivos ---------- */
+.mini-phone {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  width: 130px;
+  height: 230px;
+  padding: .9rem .7rem;
+  border: 6px solid #253840;
+  border-radius: 26px;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(46,67,74,.05), 0 24px 48px -20px rgba(46,67,74,.30);
+}
+.mp-top { font-size: .65rem; font-weight: 700; color: #4A6670; }
+.mp-card { display: block; height: 52px; border-radius: 12px; }
+.mp-line { display: block; height: 6px; border-radius: 999px; background: rgba(74, 102, 112, .2); }
+.mp-grid { display: block; flex: 1; border-radius: 12px; background: linear-gradient(90deg, #E3EAEC 48%, transparent 48% 52%, #FFD97D 52%); opacity: .8; }
+.mini-phone.dev-a:has(.gauge) { width: 150px; }
+
+.gauge-fill { stroke-dasharray: 1; stroke-dashoffset: 1; animation: gauge 1.2s var(--ease-io) .3s forwards; }
+@keyframes gauge { to { stroke-dashoffset: .08; } }
+
+.install { animation: installIn .6s cubic-bezier(.3, 1.5, .5, 1) .5s both; }
+@keyframes installIn { from { opacity: 0; transform: translateY(10px) scale(.9); } }
+
+.bar { transform-origin: bottom; animation: barUp .6s var(--ease-out) both; animation-delay: calc(var(--k) * 70ms + .3s); }
+@keyframes barUp { from { transform: scaleY(0); } }
+
+.spin-slow { animation: spin 3s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .blob, .float-tag, .spin-slow { animation: none !important; }
+}
