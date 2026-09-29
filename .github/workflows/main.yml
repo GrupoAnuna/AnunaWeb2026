@@ -33,7 +33,7 @@ jobs:
 
       #install dependencies
     - name: Install deps
-      run: npm i
+      run: npm ci
 
       #Build app bundle
     - name: Build app bundke
