@@ -1,0 +1,84 @@
+/* ============================================================
+   Hero de Consultoría: del caos al orden.
+   1) Se dibujan líneas enredadas  2) se desvanecen
+   3) aparecen trazos limpios hacia la A  4) viajan pulsos.
+   Estados ocultos solo con html.anim.
+   ============================================================ */
+
+:host {
+  display: block;
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+  --ease-io: cubic-bezier(.65, 0, .35, 1);
+}
+
+/* Titular palabra por palabra */
+.word { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .1em; margin-bottom: -.1em; }
+.word > span { display: inline-block; }
+:host-context(html.anim) .word > span {
+  transform: translateY(105%);
+  animation: up .9s var(--ease-out) forwards;
+  animation-delay: calc(var(--i) * 60ms + 150ms);
+}
+@keyframes up { to { transform: none; } }
+
+:host-context(html.anim) .hero-in {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: fadeUp .8s var(--ease-out) forwards;
+  animation-delay: var(--d, 0ms);
+}
+@keyframes fadeUp { to { opacity: 1; transform: none; } }
+
+:host-context(html.anim) .board { opacity: 0; transform: translateY(20px); animation: fadeUp .8s var(--ease-out) .2s forwards; }
+
+/* ---------- Estado final (sin animación): solo el orden ---------- */
+.chaos { opacity: 0; }
+.st-before { opacity: 0; }
+.clean { stroke-dasharray: 1; stroke-dashoffset: 0; }
+.node { border-color: #FF6B35; }
+
+/* ---------- Secuencia animada ---------- */
+/* 1. El caos se dibuja… */
+:host-context(html.anim) .chaos { opacity: 1; animation: chaosOut .6s ease 1.9s forwards; }
+:host-context(html.anim) .scribble {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw 1s var(--ease-io) forwards, wobble 1.6s ease-in-out .9s 1;
+  animation-delay: calc(var(--c) * 120ms + 400ms), calc(var(--c) * 120ms + 900ms);
+}
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes wobble { 50% { transform: translate(3px, -3px); } }
+/* 2. …y se desvanece */
+@keyframes chaosOut { to { opacity: 0; } }
+
+/* Etiqueta de estado */
+:host-context(html.anim) .st-before { opacity: 0; animation: stBefore 2.3s ease .5s forwards; }
+:host-context(html.anim) .st-after { opacity: 0; animation: show .4s ease 2.2s forwards; }
+@keyframes stBefore { 0%, 100% { opacity: 0; } 12%, 80% { opacity: 1; } }
+@keyframes show { to { opacity: 1; } }
+
+/* Nodos: primero grises y temblorosos, luego naranjas y firmes */
+:host-context(html.anim) .node {
+  border-color: #EADFCC;
+  opacity: 0;
+  animation: nodeIn .5s cubic-bezier(.3, 1.5, .5, 1) forwards, nodeOn .4s ease 2.3s forwards;
+  animation-delay: calc(var(--n) * 90ms + 300ms), calc(var(--n) * 120ms + 2.3s);
+}
+/* Solo escala: el centrado lo hace la clase -translate-x/y-1/2 (propiedad "translate" de Tailwind v4) */
+@keyframes nodeIn { from { opacity: 0; transform: scale(.5); } to { opacity: 1; transform: none; } }
+@keyframes nodeOn { to { border-color: #FF6B35; box-shadow: 0 0 0 5px rgba(255, 107, 53, .15); } }
+
+/* 3. Los trazos limpios se dibujan hacia el centro */
+:host-context(html.anim) .clean {
+  stroke-dashoffset: 1;
+  animation: draw .9s var(--ease-io) forwards;
+  animation-delay: calc(var(--k) * 150ms + 2.3s);
+}
+:host-context(html.anim) .hub {
+  opacity: 0;
+  animation: show .5s ease 3s forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flow { display: none; }
+}

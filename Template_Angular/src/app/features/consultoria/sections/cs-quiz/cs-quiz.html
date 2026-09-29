@@ -1,0 +1,204 @@
+<section id="autodiagnostico" class="relative overflow-clip bg-white py-20 lg:py-28" aria-labelledby="csq-section-title">
+  <div class="glow pointer-events-none absolute -right-40 top-10 h-[520px] w-[520px]" aria-hidden="true"></div>
+
+  <div class="relative mx-auto grid max-w-content gap-12 px-5 sm:px-8 lg:grid-cols-[.9fr_1.1fr] lg:gap-16">
+
+    <!-- Mensaje -->
+    <div class="lg:pt-6">
+      <p appReveal class="reveal mb-5 inline-flex items-center gap-2 rounded-full border border-anuna-line bg-anuna-cream px-3.5 py-1.5 text-sm font-medium text-anuna-slate">
+        <span class="relative flex h-2 w-2" aria-hidden="true">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-anuna-orange opacity-60 motion-reduce:hidden"></span>
+          <span class="relative inline-flex h-2 w-2 rounded-full bg-anuna-orange"></span>
+        </span>
+        Autodiagnóstico gratuito
+      </p>
+      <h2 id="csq-section-title" appReveal style="--d:80ms"
+        class="reveal text-3xl font-bold leading-tight tracking-[-0.015em] text-anuna-slate sm:text-4xl lg:text-[2.75rem]">
+        ¿Qué tan digital es tu negocio?
+      </h2>
+      <p appReveal style="--d:160ms" class="reveal mt-5 max-w-md text-lg leading-relaxed text-anuna-gray">
+        Responde 5 preguntas rápidas (menos de un minuto) y descubre por dónde te conviene empezar.
+      </p>
+      <ul appReveal style="--d:240ms" class="reveal mt-8 space-y-3 text-[15px]">
+        @for (b of perks; track b) {
+          <li class="flex items-center gap-3 text-anuna-slate">
+            <span class="flex h-6 w-6 items-center justify-center rounded-full bg-anuna-yellow text-anuna-slate-900"><app-icon name="check" class="h-3.5 w-3.5" /></span>
+            {{ b }}
+          </li>
+        }
+      </ul>
+    </div>
+
+    <!-- Tarjeta del test -->
+    <div appReveal class="reveal" style="--d:150ms">
+      <div class="card relative overflow-clip rounded-[28px] border border-anuna-line bg-anuna-cream p-6 shadow-anuna-md sm:p-9">
+
+        <!-- Progreso -->
+        @if (step() < 5) {
+          <div class="mb-7 flex items-center gap-3" aria-hidden="true">
+            <div class="flex flex-1 gap-1.5">
+              @for (q of quiz; track q.question; let i = $index) {
+                <span class="seg h-1.5 flex-1 rounded-full" [class.done]="i < step()" [class.current]="i === step()"></span>
+              }
+            </div>
+            <span class="text-xs font-bold text-anuna-slate">{{ step() + 1 }}/{{ total }}</span>
+          </div>
+        }
+
+        @switch (step()) {
+          <!-- ===== Resultado ===== -->
+          @case (5) {
+            <div class="step-view text-center" [class.back]="direction() === 'back'">
+              <h3 id="csq-title" tabindex="-1" class="text-sm font-bold text-anuna-orange-700 outline-none">Tu resultado</h3>
+              <div class="gauge relative mx-auto mt-2 w-full max-w-[280px]" aria-hidden="true">
+                <svg viewBox="0 0 200 116" class="w-full">
+                  <path d="M20 100 A80 80 0 0 1 180 100" fill="none" stroke="#E3EAEC" stroke-width="16" stroke-linecap="round" />
+                  <path class="gauge-fill" pathLength="1" d="M20 100 A80 80 0 0 1 180 100" fill="none" stroke="#FF6B35" stroke-width="16" stroke-linecap="round"
+                    [style.--g]="1 - score() / maxScore" />
+                </svg>
+                <p class="absolute inset-x-0 bottom-1 text-4xl font-bold text-anuna-slate">{{ shownScore() }}<span class="text-lg text-anuna-gray">/{{ maxScore }}</span></p>
+              </div>
+              <p class="mt-4 text-2xl font-bold text-anuna-slate">{{ level().title }}</p>
+              <p class="mx-auto mt-2 max-w-md text-[15px] leading-relaxed text-anuna-gray">{{ level().text }}</p>
+              <p class="sr-only">Obtuviste {{ score() }} de {{ maxScore }} puntos.</p>
+
+              @if (recommendations().length) {
+                <div class="mt-6 rounded-2xl bg-white p-5 text-left">
+                  <p class="text-sm font-bold text-anuna-slate">Te recomendamos empezar por:</p>
+                  <ol class="mt-3 space-y-2.5">
+                    @for (r of recommendations(); track r; let k = $index) {
+                      <li class="rec flex items-start gap-3 text-[15px] text-anuna-slate" [style.--k]="k">
+                        <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-anuna-orange text-xs font-bold text-anuna-ink">{{ k + 1 }}</span>
+                        {{ r }}
+                      </li>
+                    }
+                  </ol>
+                </div>
+              }
+
+              <div class="mt-7 flex flex-col-reverse gap-3 sm:flex-row sm:justify-center">
+                <button type="button" (click)="restart()" class="inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-[15px] font-bold text-anuna-slate hover:bg-anuna-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate">
+                  <app-icon name="refresh" class="h-4 w-4" /> Repetir
+                </button>
+                <button type="button" (click)="toBooking()"
+                  class="shine inline-flex items-center justify-center gap-2 rounded-full bg-anuna-orange px-7 py-4 text-base font-bold text-anuna-ink shadow-anuna-sm transition duration-200 hover:-translate-y-0.5 hover:bg-anuna-orange-hover hover:shadow-anuna-cta active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2">
+                  Agendar mi sesión sin costo <app-icon name="arrow-right" class="h-5 w-5" />
+                </button>
+              </div>
+              <p class="mt-5 text-xs text-anuna-gray">Es una orientación rápida, no un diagnóstico formal. En la sesión lo vemos a detalle.</p>
+            </div>
+          }
+
+          <!-- ===== Agenda ===== -->
+          @case (6) {
+            <div class="step-view" [class.back]="direction() === 'back'">
+              <h3 id="csq-title" tabindex="-1" class="text-2xl font-bold text-anuna-slate outline-none">Agenda tu sesión de diagnóstico</h3>
+              <p class="mt-2 text-[15px] text-anuna-gray">Sin costo y sin compromiso. Llevaremos tu resultado a la llamada para aprovechar el tiempo.</p>
+              <p class="mt-4 inline-flex items-center gap-2 rounded-full bg-anuna-slate px-3.5 py-1.5 text-xs font-bold text-anuna-cream">
+                <app-icon name="target" class="h-3.5 w-3.5 text-anuna-yellow" /> {{ level().title }} · {{ score() }}/{{ maxScore }}
+              </p>
+
+              <form [formGroup]="form" (ngSubmit)="submit()" novalidate class="mt-6 grid gap-4 sm:grid-cols-2">
+                <div class="field sm:col-span-2">
+                  <label for="csq-nombre" class="mb-1.5 block text-[15px] font-bold text-anuna-slate">Nombre <span class="text-anuna-orange-700" aria-hidden="true">*</span></label>
+                  <input id="csq-nombre" formControlName="nombre" autocomplete="name" [attr.aria-invalid]="showError('nombre')" [class.invalid]="showError('nombre')"
+                    class="w-full rounded-xl border border-anuna-line bg-white/80 px-4 py-3 text-base text-anuna-ink" />
+                  @if (showError('nombre')) { <p class="err mt-1.5 text-sm font-medium text-anuna-error">Escribe tu nombre.</p> }
+                </div>
+                <div class="field">
+                  <label for="csq-email" class="mb-1.5 block text-[15px] font-bold text-anuna-slate">Email <span class="text-anuna-orange-700" aria-hidden="true">*</span></label>
+                  <input id="csq-email" type="email" formControlName="email" autocomplete="email" [attr.aria-invalid]="showError('email')" [class.invalid]="showError('email')"
+                    class="w-full rounded-xl border border-anuna-line bg-white/80 px-4 py-3 text-base text-anuna-ink" />
+                  @if (showError('email')) { <p class="err mt-1.5 text-sm font-medium text-anuna-error">Revisa el correo.</p> }
+                </div>
+                <div class="field">
+                  <label for="csq-telefono" class="mb-1.5 block text-[15px] font-bold text-anuna-slate">WhatsApp <span class="font-normal text-anuna-gray">(opcional)</span></label>
+                  <input id="csq-telefono" type="tel" formControlName="telefono" autocomplete="tel"
+                    class="w-full rounded-xl border border-anuna-line bg-white/80 px-4 py-3 text-base text-anuna-ink" />
+                </div>
+                <div class="sm:col-span-2">
+                  <label class="flex cursor-pointer items-start gap-3 text-sm leading-relaxed text-anuna-gray">
+                    <input id="csq-privacidad" type="checkbox" formControlName="privacidad" class="mt-0.5 h-5 w-5 shrink-0 accent-anuna-slate" [attr.aria-invalid]="showError('privacidad')" />
+                    <span>Acepto la <a href="https://grupoanuna.com/assets/Pol%C3%ADticas/Aviso%20de%20Privacidad%20%E2%80%93%20Formulario%20de%20Agenda.pdf" target="_blank" rel="noopener" class="font-bold text-anuna-orange-700 underline underline-offset-2">política de privacidad</a> y el tratamiento de mis datos.</span>
+                  </label>
+                  @if (showError('privacidad')) { <p class="err mt-1.5 pl-8 text-sm font-medium text-anuna-error">Necesitamos tu autorización para responderte.</p> }
+                </div>
+
+                @if (error()) {
+                  <p class="rounded-xl border border-anuna-error/30 bg-white px-4 py-3 text-sm font-medium text-anuna-error sm:col-span-2">No pudimos enviar tu solicitud. Inténtalo de nuevo o escríbenos por WhatsApp.</p>
+                }
+
+                <div class="mt-2 flex flex-col-reverse gap-3 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
+                  <button type="button" (click)="back()" class="inline-flex items-center justify-center gap-2 rounded-full px-4 py-3 text-[15px] font-bold text-anuna-slate hover:bg-anuna-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate">
+                    <app-icon name="arrow-left" class="h-4 w-4" /> Ver mi resultado
+                  </button>
+                  <button type="submit" [disabled]="sending()"
+                    class="shine inline-flex items-center justify-center gap-2 rounded-full bg-anuna-orange px-7 py-4 text-base font-bold text-anuna-ink shadow-anuna-sm transition duration-200 hover:-translate-y-0.5 hover:bg-anuna-orange-hover hover:shadow-anuna-cta active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2 disabled:cursor-wait">
+                    @if (sending()) {
+                      Enviando
+                      <span class="flex gap-1" aria-hidden="true"><span class="busy h-1.5 w-1.5 rounded-full bg-anuna-ink"></span><span class="busy h-1.5 w-1.5 rounded-full bg-anuna-ink"></span><span class="busy h-1.5 w-1.5 rounded-full bg-anuna-ink"></span></span>
+                    } @else {
+                      Agendar sesión <app-icon name="arrow-right" class="h-5 w-5" />
+                    }
+                  </button>
+                </div>
+              </form>
+            </div>
+          }
+
+          <!-- ===== Enviado ===== -->
+          @case (7) {
+            <div class="step-view success flex flex-col items-center py-6 text-center">
+              <svg viewBox="0 0 200 150" class="h-32 w-auto" aria-hidden="true">
+                <g fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path class="trace-ok" pathLength="1" stroke="#4A6670" d="M0 90 H40 L55 75 H72" />
+                  <path class="trace-ok" pathLength="1" stroke="#FF6B35" d="M200 60 H160 L145 75 H128" />
+                </g>
+                <g class="ok-arch">
+                  <path d="M72 132 V58 A28 28 0 0 1 128 58 V132 Z" fill="#4A6670" />
+                  <path class="ok-check" pathLength="1" d="M86 92 L96 102 L115 80" fill="none" stroke="#FFD97D" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+                </g>
+              </svg>
+              <h3 id="csq-title" tabindex="-1" class="mt-5 text-2xl font-bold text-anuna-slate outline-none">¡Listo, nos vemos pronto!</h3>
+              <p class="mt-3 max-w-sm text-base leading-relaxed text-anuna-gray">Te escribiremos en menos de 12 horas para acordar el día y la hora de tu sesión.</p>
+              <button type="button" (click)="restart()" class="link-grow mt-6 text-[15px] font-bold text-anuna-orange-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2">
+                Hacer el test de nuevo
+              </button>
+            </div>
+          }
+
+          <!-- ===== Preguntas: un bloque por pregunta, así cada una entra con su animación ===== -->
+          @default {
+            @for (q of quiz; track q.question; let qi = $index) {
+              @if (step() === qi) {
+                <div class="step-view" [class.back]="direction() === 'back'">
+                  <h3 id="csq-title" tabindex="-1" class="text-2xl font-bold leading-snug text-anuna-slate outline-none">{{ q.question }}</h3>
+                  <div class="mt-6 grid gap-3" role="group" [attr.aria-label]="q.question">
+                    @for (o of q.options; track $index; let k = $index) {
+                      <button type="button" (click)="answer(qi, k)" [attr.aria-pressed]="isAnswer(qi, k)"
+                        class="opt flex items-center gap-4 rounded-2xl border-2 bg-white px-5 py-4 text-left text-[15px] font-bold text-anuna-slate transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2"
+                        [class.selected]="isAnswer(qi, k)" [style.--k]="k">
+                        <span class="meter flex h-8 w-8 shrink-0 items-end justify-center gap-[3px] rounded-lg bg-anuna-cream pb-1.5" aria-hidden="true">
+                          @for (b of bars; track b) {
+                            <span class="w-[5px] rounded-sm" [style.height.px]="b * 5 + 4" [class]="b <= k + 1 ? 'bg-anuna-orange' : 'bg-anuna-slate/20'"></span>
+                          }
+                        </span>
+                        <span class="flex-1">{{ o }}</span>
+                        <span class="opt-check flex h-6 w-6 items-center justify-center rounded-full border-2"><app-icon name="check" class="h-3.5 w-3.5" /></span>
+                      </button>
+                    }
+                  </div>
+                  @if (qi > 0) {
+                    <button type="button" (click)="back()" class="mt-6 inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-[15px] font-bold text-anuna-slate hover:bg-anuna-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate">
+                      <app-icon name="arrow-left" class="h-4 w-4" /> Atrás
+                    </button>
+                  }
+                </div>
+              }
+            }
+          }
+        }
+      </div>
+    </div>
+  </div>
+</section>

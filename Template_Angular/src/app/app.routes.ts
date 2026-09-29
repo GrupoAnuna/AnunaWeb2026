@@ -21,4 +21,10 @@ export const routes: Routes = [
       import('./features/desarrollo-apps/app-development').then((m) => m.AppDevelopment),
     title: 'Desarrollo de apps | Grupo Anuna',
   },
+
+  {
+  path: 'consultoria',
+  loadComponent: () => import('./features/consultoria/consulting').then((m) => m.Consulting),
+  title: 'Consultoría tecnológica | Grupo Anuna',
+},
 ];

@@ -4,7 +4,8 @@ export type AnunaIcon =
   | 'code' | 'layout' | 'grid' | 'refresh' | 'globe' | 'app' | 'layers' | 'route'
   | 'check' | 'arrow-right' | 'arrow-left' | 'clock' | 'users' | 'pin'
   | 'phone' | 'bell' | 'card' | 'chat' | 'lock' | 'upload' | 'chart' | 'calendar'
-  | 'bag' | 'bolt' | 'briefcase' | 'sparkles' | 'server';
+  | 'bag' | 'bolt' | 'briefcase' | 'sparkles' | 'server'
+  | 'file' | 'target' | 'plug' | 'help' | 'sheet' | 'coins' | 'search';
 
 /**
  * Iconos de trazo de la marca (24×24, heredan el color del texto).
@@ -43,6 +44,13 @@ export type AnunaIcon =
         @case ('bolt') { <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z" /> }
         @case ('briefcase') { <rect x="3" y="7" width="18" height="13" rx="2.5" /><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18" /> }
         @case ('sparkles') { <path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6" /> }
+        @case ('file') { <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z" /><path d="M14 3v5h5M9 13h6M9 17h4" /> }
+        @case ('target') { <circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="5" /><circle cx="12" cy="12" r="1" /> }
+        @case ('plug') { <path d="M9 2v5M15 2v5M6 7h12v4a6 6 0 0 1-12 0Z" /><path d="M12 17v5" /> }
+        @case ('help') { <circle cx="12" cy="12" r="9" /><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.6V14M12 17.5h.01" /> }
+        @case ('sheet') { <rect x="3" y="3" width="18" height="18" rx="2.5" /><path d="M3 9h18M3 15h18M9 3v18" /> }
+        @case ('coins') { <ellipse cx="9" cy="7" rx="6" ry="3" /><path d="M3 7v5c0 1.7 2.7 3 6 3s6-1.3 6-3V7" /><path d="M9 15v2c0 1.7 2.7 3 6 3s6-1.3 6-3v-5c0-1.7-2.7-3-6-3" /> }
+        @case ('search') { <circle cx="11" cy="11" r="7" /><path d="m20 20-4-4" /> }
         @case ('server') { <rect x="3" y="4" width="18" height="7" rx="2" /><rect x="3" y="13" width="18" height="7" rx="2" /><path d="M7 7.5h.01M7 16.5h.01" /> }
       }
     </svg>

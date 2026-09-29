@@ -1,0 +1,43 @@
+:host {
+  display: block;
+  --ease-io: cubic-bezier(.65, 0, .35, 1);
+}
+
+/* ---------- Tarjeta que se voltea ---------- */
+.flip { perspective: 1200px; }
+.flip-inner {
+  transform-style: preserve-3d;
+  transition: transform .7s var(--ease-io);
+}
+.face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.back { transform: rotateY(180deg); }
+
+/* Se voltea al tocar/clic… */
+.flip.is-flipped .flip-inner { transform: rotateY(180deg); }
+/* …y en escritorio también al pasar el cursor */
+@media (hover: hover) and (pointer: fine) {
+  .flip:hover .flip-inner { transform: rotateY(180deg); }
+  .flip.is-flipped:hover .flip-inner { transform: rotateY(180deg); }
+}
+
+.front { transition: box-shadow .3s; }
+.flip:hover .front { box-shadow: 0 12px 28px -14px rgba(46, 67, 74, .3); }
+
+/* El icono de "voltear" gira cuando la tarjeta tiene foco o hover */
+.hint-icon { transition: transform .5s var(--ease-io); }
+.flip:hover .hint-icon, .flip:focus-visible .hint-icon { transform: rotate(180deg); }
+
+/* Trazo del reverso: se dibuja al voltear */
+.back-trace { transform-origin: 0 50%; transform: scaleX(0); transition: transform .6s var(--ease-io) .35s; }
+.flip:hover .back-trace, .flip.is-flipped .back-trace { transform: scaleX(1); }
+
+.focus-ring { box-shadow: 0 0 0 0 transparent; transition: box-shadow .2s; }
+.flip:focus-visible .focus-ring { box-shadow: 0 0 0 3px #FF6B35; }
+
+/* Movimiento reducido: en lugar de girar, cambia de cara al instante */
+@media (prefers-reduced-motion: reduce) {
+  .flip-inner, .back-trace { transition: none; }
+}
