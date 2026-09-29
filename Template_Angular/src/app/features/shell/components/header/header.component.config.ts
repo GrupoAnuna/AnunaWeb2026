@@ -17,7 +17,7 @@ export interface HeaderConfig {
 
 export const HEADER_CONFIG: HeaderConfig = {
   nav: [
-    { label: 'Desarrollo web', route: '/', fragment: 'desarrollo-web' },
+    { label: 'Desarrollo web', route: '/desarrollo-web', fragment: 'desarrollo-web' },
     { label: 'Desarrollo apps', route: '/', fragment: 'desarrollo-apps' },
     { label: 'Consultoría', route: '/', fragment: 'consultoria' },
     { label: 'Cloud', route: '/', fragment: 'cloud' },

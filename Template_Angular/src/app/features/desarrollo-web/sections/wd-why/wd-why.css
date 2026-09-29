@@ -1,0 +1,61 @@
+:host {
+  display: block;
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+}
+
+.dots {
+  background-image: radial-gradient(rgba(253, 246, 236, .08) 1px, transparent 1px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(ellipse at 75% 40%, #000, transparent 70%);
+  mask-image: radial-gradient(ellipse at 75% 40%, #000, transparent 70%);
+}
+
+.adv-num { transition: transform .35s var(--ease-out); }
+.adv:hover .adv-num { transform: translateY(-3px) rotate(-4deg); }
+
+/* ---------- Código ---------- */
+.code { white-space: pre; }
+.line { display: inline-block; }
+.c-k { color: #FF804F; }
+.c-s { color: #A8D5BA; }
+.c-c { color: rgba(253, 246, 236, .45); font-style: italic; }
+
+:host-context(html.anim) .line { clip-path: inset(0 100% 0 0); }
+:host-context(html.anim) .panel-wrap.in .line {
+  animation: type .5s steps(26, end) forwards;
+  animation-delay: calc(var(--l) * 330ms + 500ms);
+}
+@keyframes type { to { clip-path: inset(0 0 0 0); } }
+
+/* Estado del "build": compilando → listo */
+.status-dot { background: #A8D5BA; }
+.st-busy { opacity: 0; }
+:host-context(html.anim) .status-dot { background: #FFD97D; }
+:host-context(html.anim) .st-busy { opacity: 1; }
+:host-context(html.anim) .st-ready { opacity: 0; }
+:host-context(html.anim) .panel-wrap.in .status-dot { animation: pulse 1s ease-in-out 3, ready .3s ease 3.2s forwards; }
+:host-context(html.anim) .panel-wrap.in .st-busy { animation: hide .3s ease 3.2s forwards; }
+:host-context(html.anim) .panel-wrap.in .st-ready { animation: show .3s ease 3.2s forwards; }
+@keyframes pulse { 50% { opacity: .3; } }
+@keyframes ready { to { background: #A8D5BA; opacity: 1; } }
+@keyframes hide { to { opacity: 0; } }
+@keyframes show { to { opacity: 1; } }
+
+/* Pruebas que pasan una tras otra */
+:host-context(html.anim) .test { opacity: 0; transform: translateX(-8px); }
+:host-context(html.anim) .panel-wrap.in .test {
+  animation: testIn .45s var(--ease-out) forwards;
+  animation-delay: calc(3.2s + var(--k) * 220ms);
+}
+@keyframes testIn { to { opacity: 1; transform: none; } }
+:host-context(html.anim) .panel-wrap.in .test-icon {
+  animation: popIcon .5s cubic-bezier(.3, 1.6, .5, 1) both;
+  animation-delay: calc(3.3s + var(--k) * 220ms);
+}
+@keyframes popIcon { from { transform: scale(0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .status-dot { animation: none !important; background: #A8D5BA !important; }
+  .st-busy { opacity: 0 !important; }
+  .st-ready { opacity: 1 !important; }
+}

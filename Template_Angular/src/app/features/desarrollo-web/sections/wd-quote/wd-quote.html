@@ -1,0 +1,185 @@
+<section id="cotizador" class="relative overflow-clip bg-white py-20 lg:py-28" aria-labelledby="wd-quote-title">
+  <div class="glow pointer-events-none absolute -right-40 top-10 h-[520px] w-[520px]" aria-hidden="true"></div>
+
+  <div class="relative mx-auto grid max-w-content gap-12 px-5 sm:px-8 lg:grid-cols-[.9fr_1.1fr] lg:gap-16">
+
+    <!-- Mensaje -->
+    <div class="lg:pt-6">
+      <p appReveal class="reveal mb-5 inline-flex items-center gap-2 rounded-full border border-anuna-line bg-anuna-cream px-3.5 py-1.5 text-sm font-medium text-anuna-slate">
+        <span class="relative flex h-2 w-2" aria-hidden="true">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-anuna-orange opacity-60 motion-reduce:hidden"></span>
+          <span class="relative inline-flex h-2 w-2 rounded-full bg-anuna-orange"></span>
+        </span>
+        Cotizador ágil
+      </p>
+      <h2 id="wd-quote-title" appReveal style="--d:80ms"
+        class="reveal text-3xl font-bold leading-tight tracking-[-0.015em] text-anuna-slate sm:text-4xl lg:text-[2.75rem]">
+        Cotiza tu proyecto en menos de un minuto
+      </h2>
+      <p appReveal style="--d:160ms" class="reveal mt-5 max-w-md text-lg leading-relaxed text-anuna-gray">
+        Responde tres preguntas rápidas y te enviamos una propuesta clara, con alcance y costos visibles.
+      </p>
+      <ul appReveal style="--d:240ms" class="reveal mt-8 space-y-3 text-[15px]">
+        @for (b of ['Sin compromiso y sin costo', 'Te respondemos en menos de 12 h', 'Hablas directo con el equipo técnico']; track b) {
+          <li class="flex items-center gap-3 text-anuna-slate">
+            <span class="flex h-6 w-6 items-center justify-center rounded-full bg-anuna-yellow text-anuna-slate-900"><app-icon name="check" class="h-3.5 w-3.5" /></span>
+            {{ b }}
+          </li>
+        }
+      </ul>
+      <p appReveal style="--d:320ms" class="reveal mt-8 text-[15px] text-anuna-gray">
+        ¿Prefieres hablar ahora?
+        <a href="https://wa.me/525539022537" target="_blank" rel="noopener" class="link-grow font-bold text-anuna-orange-700">Escríbenos por WhatsApp</a>
+      </p>
+    </div>
+
+    <!-- Cotizador -->
+    <div appReveal class="reveal" style="--d:150ms">
+      <div class="card relative overflow-clip rounded-[28px] border border-anuna-line bg-anuna-cream p-6 shadow-anuna-md sm:p-9">
+
+        <!-- Progreso -->
+        <div class="mb-8" aria-hidden="true">
+          <div class="relative mx-[10px]">
+            <div class="absolute inset-x-0 top-[9px] flex h-[2px]">
+              @for (l of [0, 1, 2]; track l) {
+                <div class="relative flex-1 bg-anuna-line">
+                  <div class="seg-fill absolute inset-0 bg-anuna-slate" [class.on]="isDone(l)"></div>
+                </div>
+              }
+            </div>
+          </div>
+          <ol class="relative flex justify-between">
+            @for (label of labels; track label; let i = $index) {
+              <li class="flex w-5 flex-col items-center">
+                <span class="node flex h-5 w-5 items-center justify-center rounded-full border-2 border-anuna-slate/30 bg-white"
+                  [class.on]="isDone(i)" [class.current]="step() === i && status() !== 'success'">
+                  <app-icon name="check" class="h-3 w-3 text-white" />
+                </span>
+                <span class="mt-2 hidden whitespace-nowrap text-xs sm:block" [class.font-bold]="step() === i" [class.text-anuna-slate]="step() === i">{{ label }}</span>
+              </li>
+            }
+          </ol>
+        </div>
+
+        @if (status() === 'success') {
+          <!-- Éxito -->
+          <div id="wdq-success" tabindex="-1" class="success flex flex-col items-center py-6 text-center outline-none">
+            <svg viewBox="0 0 200 150" class="h-32 w-auto" aria-hidden="true">
+              <g fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path class="trace-ok" pathLength="1" stroke="#4A6670" d="M0 90 H40 L55 75 H72" />
+                <path class="trace-ok" pathLength="1" stroke="#FF6B35" d="M200 60 H160 L145 75 H128" />
+              </g>
+              <g class="ok-arch">
+                <path d="M72 132 V58 A28 28 0 0 1 128 58 V132 Z" fill="#4A6670" />
+                <path class="ok-check" pathLength="1" d="M86 92 L96 102 L115 80" fill="none" stroke="#FFD97D" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+              </g>
+            </svg>
+            <h3 class="mt-5 text-2xl font-bold text-anuna-slate">¡Recibimos tu solicitud!</h3>
+            <p class="mt-3 max-w-sm text-base leading-relaxed text-anuna-gray">Te escribiremos en menos de 12 horas con los siguientes pasos para tu propuesta.</p>
+            <button type="button" (click)="restart()" class="link-grow mt-6 text-[15px] font-bold text-anuna-orange-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2">
+              Cotizar otro proyecto
+            </button>
+          </div>
+        } @else {
+          @switch (step()) {
+            <!-- Preguntas 1 a 3 -->
+            @case (3) {
+              <div class="q-step" [class.back]="direction() === 'back'">
+                <h3 id="wdq-step-title" tabindex="-1" class="text-2xl font-bold text-anuna-slate outline-none">¿A dónde te enviamos la propuesta?</h3>
+                <ul class="mt-4 flex flex-wrap gap-2" aria-label="Resumen de tu proyecto">
+                  @for (s of summary(); track s) {
+                    <li class="rounded-full bg-anuna-slate px-3 py-1 text-xs font-bold text-anuna-cream">{{ s }}</li>
+                  }
+                </ul>
+
+                <form [formGroup]="form" (ngSubmit)="submit()" novalidate class="mt-6 grid gap-4 sm:grid-cols-2">
+                  <div class="field sm:col-span-2">
+                    <label for="wdq-nombre" class="mb-1.5 block text-[15px] font-bold text-anuna-slate">Nombre <span class="text-anuna-orange-700" aria-hidden="true">*</span></label>
+                    <input id="wdq-nombre" formControlName="nombre" autocomplete="name" [attr.aria-invalid]="showError('nombre')"
+                      class="w-full rounded-xl border border-anuna-line bg-white/80 px-4 py-3 text-base text-anuna-ink" [class.invalid]="showError('nombre')" />
+                    @if (showError('nombre')) { <p class="err mt-1.5 text-sm font-medium text-anuna-error">Escribe tu nombre.</p> }
+                  </div>
+                  <div class="field">
+                    <label for="wdq-email" class="mb-1.5 block text-[15px] font-bold text-anuna-slate">Email <span class="text-anuna-orange-700" aria-hidden="true">*</span></label>
+                    <input id="wdq-email" type="email" formControlName="email" autocomplete="email" [attr.aria-invalid]="showError('email')"
+                      class="w-full rounded-xl border border-anuna-line bg-white/80 px-4 py-3 text-base text-anuna-ink" [class.invalid]="showError('email')" />
+                    @if (showError('email')) { <p class="err mt-1.5 text-sm font-medium text-anuna-error">Revisa el correo.</p> }
+                  </div>
+                  <div class="field">
+                    <label for="wdq-telefono" class="mb-1.5 block text-[15px] font-bold text-anuna-slate">WhatsApp <span class="font-normal text-anuna-gray">(opcional)</span></label>
+                    <input id="wdq-telefono" type="tel" formControlName="telefono" autocomplete="tel"
+                      class="w-full rounded-xl border border-anuna-line bg-white/80 px-4 py-3 text-base text-anuna-ink" />
+                  </div>
+                  <div class="field sm:col-span-2">
+                    <label for="wdq-mensaje" class="mb-1.5 block text-[15px] font-bold text-anuna-slate">Cuéntanos más <span class="font-normal text-anuna-gray">(opcional)</span></label>
+                    <textarea id="wdq-mensaje" rows="3" formControlName="mensaje"
+                      class="w-full resize-y rounded-xl border border-anuna-line bg-white/80 px-4 py-3 text-base text-anuna-ink"
+                      placeholder="Ej. Quiero vender mis productos en línea y conectar el inventario."></textarea>
+                  </div>
+                  <div class="sm:col-span-2">
+                    <label class="flex cursor-pointer items-start gap-3 text-sm leading-relaxed text-anuna-gray">
+                      <input id="wdq-privacidad" type="checkbox" formControlName="privacidad" class="mt-0.5 h-5 w-5 shrink-0 accent-anuna-slate" [attr.aria-invalid]="showError('privacidad')" />
+                      <span>Acepto la <a href="https://grupoanuna.com/assets/Pol%C3%ADticas/Aviso%20de%20Privacidad%20%E2%80%93%20Formulario%20de%20Agenda.pdf" target="_blank" rel="noopener" class="font-bold text-anuna-orange-700 underline underline-offset-2">política de privacidad</a> y el tratamiento de mis datos.</span>
+                    </label>
+                    @if (showError('privacidad')) { <p class="err mt-1.5 pl-8 text-sm font-medium text-anuna-error">Necesitamos tu autorización para responderte.</p> }
+                  </div>
+
+                  @if (status() === 'error') {
+                    <p class="sm:col-span-2 rounded-xl border border-anuna-error/30 bg-white px-4 py-3 text-sm font-medium text-anuna-error">No pudimos enviar tu solicitud. Inténtalo de nuevo o escríbenos por WhatsApp.</p>
+                  }
+
+                  <div class="mt-2 flex flex-col-reverse gap-3 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
+                    <button type="button" (click)="back()" class="back-btn inline-flex items-center justify-center gap-2 rounded-full px-4 py-3 text-[15px] font-bold text-anuna-slate hover:bg-anuna-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate">
+                      <app-icon name="arrow-left" class="h-4 w-4" /> Atrás
+                    </button>
+                    <button type="submit" [disabled]="status() === 'sending'"
+                      class="shine inline-flex items-center justify-center gap-2 rounded-full bg-anuna-orange px-7 py-4 text-base font-bold text-anuna-ink shadow-anuna-sm transition duration-200 hover:-translate-y-0.5 hover:bg-anuna-orange-hover hover:shadow-anuna-cta active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2 disabled:cursor-wait">
+                      @if (status() === 'sending') {
+                        Enviando
+                        <span class="flex gap-1" aria-hidden="true"><span class="busy h-1.5 w-1.5 rounded-full bg-anuna-ink"></span><span class="busy h-1.5 w-1.5 rounded-full bg-anuna-ink"></span><span class="busy h-1.5 w-1.5 rounded-full bg-anuna-ink"></span></span>
+                      } @else {
+                        Recibir mi propuesta <app-icon name="arrow-right" class="h-5 w-5" />
+                      }
+                    </button>
+                  </div>
+                </form>
+              </div>
+            }
+            @default {
+              @let q = questions[step()];
+              <div class="q-step" [class.back]="direction() === 'back'">
+                <p class="text-sm font-bold text-anuna-orange-700">Paso {{ step() + 1 }} de {{ isRescue() && step() > 0 ? 2 : 3 }}</p>
+                <h3 id="wdq-step-title" tabindex="-1" class="mt-1 text-2xl font-bold text-anuna-slate outline-none">{{ q.title }}</h3>
+
+                <div class="mt-6 grid gap-3" [class]="q.options.length === 3 ? '' : 'sm:grid-cols-2'" role="group" [attr.aria-label]="q.title">
+                  @for (o of q.options; track o.value; let k = $index) {
+                    <button type="button" (click)="choose(q.key, o.value)" [attr.aria-pressed]="isSelected(q.key, o.value)"
+                      class="opt group flex items-center gap-4 rounded-2xl border-2 bg-white p-4 text-left transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2"
+                      [class.selected]="isSelected(q.key, o.value)" [style.--k]="k">
+                      <span class="opt-icon flex h-12 w-11 shrink-0 items-end justify-center rounded-arch pb-2.5">
+                        <app-icon [name]="o.icon" class="relative h-5 w-5" />
+                      </span>
+                      <span class="flex-1">
+                        <span class="block text-base font-bold text-anuna-slate">{{ o.label }}</span>
+                        <span class="block text-sm text-anuna-gray">{{ o.hint }}</span>
+                      </span>
+                      <span class="opt-check flex h-6 w-6 items-center justify-center rounded-full border-2">
+                        <app-icon name="check" class="h-3.5 w-3.5" />
+                      </span>
+                    </button>
+                  }
+                </div>
+
+                @if (step() > 0) {
+                  <button type="button" (click)="back()" class="mt-6 inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-[15px] font-bold text-anuna-slate hover:bg-anuna-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate">
+                    <app-icon name="arrow-left" class="h-4 w-4" /> Atrás
+                  </button>
+                }
+              </div>
+            }
+          }
+        }
+      </div>
+    </div>
+  </div>
+</section>

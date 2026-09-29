@@ -1,0 +1,110 @@
+/* ============================================================
+   Hero de Desarrollo Web: el código se escribe y la web se arma.
+   Estados ocultos solo con html.anim.
+   ============================================================ */
+
+:host {
+  display: block;
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+  --ease-io: cubic-bezier(.65, 0, .35, 1);
+}
+
+/* Titular palabra por palabra */
+.word { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .1em; margin-bottom: -.1em; }
+.word > span { display: inline-block; }
+:host-context(html.anim) .word > span {
+  transform: translateY(105%);
+  animation: up .9s var(--ease-out) forwards;
+  animation-delay: calc(var(--i) * 45ms + 150ms);
+}
+@keyframes up { to { transform: none; } }
+
+:host-context(html.anim) .hero-in {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: fadeUp .8s var(--ease-out) forwards;
+  animation-delay: var(--d, 0ms);
+}
+@keyframes fadeUp { to { opacity: 1; transform: none; } }
+
+/* ---------- Editor: cada línea se "teclea" ---------- */
+.code { white-space: pre; overflow: hidden; }
+.line { display: inline-block; }
+.c-k { color: #FF804F; }
+.c-f { color: #FFD97D; }
+.c-s { color: #A8D5BA; }
+.c-c { color: rgba(253, 246, 236, .45); font-style: italic; }
+
+:host-context(html.anim) .editor { opacity: 0; transform: translateY(18px) rotate(-1deg); animation: fadeUp .8s var(--ease-out) .3s forwards; }
+:host-context(html.anim) .line {
+  clip-path: inset(0 100% 0 0);
+  animation: type .45s steps(22, end) forwards;
+  animation-delay: calc(var(--l) * 320ms + 700ms);
+}
+@keyframes type { to { clip-path: inset(0 0 0 0); } }
+
+/* Cursor: sin animaciones solo se ve el de la última línea */
+.caret {
+  display: inline-block;
+  width: 7px;
+  height: 1.1em;
+  margin-left: 3px;
+  vertical-align: -2px;
+  background: #FF6B35;
+  opacity: 0;
+}
+.is-last .caret { opacity: 1; animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* Con animaciones: cada cursor se ve mientras su línea se escribe y luego se apaga */
+:host-context(html.anim) .line:not(.is-last) .caret {
+  animation: caretLife .5s steps(1) forwards;
+  animation-delay: calc(var(--l) * 320ms + 700ms);
+}
+@keyframes caretLife { 0% { opacity: 1; } 99% { opacity: 1; } 100% { opacity: 0; } }
+:host-context(html.anim) .is-last .caret { animation: blink 1s steps(1) calc(5 * 320ms + 700ms) infinite; }
+
+/* ---------- Navegador: los bloques aparecen al terminar el código ---------- */
+:host-context(html.anim) .browser { opacity: 0; transform: translateY(24px) scale(.96); animation: fadeUp .7s var(--ease-out) 2.6s forwards; }
+:host-context(html.anim) .block-in {
+  opacity: 0;
+  transform: scale(.85);
+  animation: pop .45s cubic-bezier(.3, 1.4, .5, 1) forwards;
+  animation-delay: calc(var(--b) * 110ms + 2.9s);
+}
+@keyframes pop { to { opacity: 1; transform: none; } }
+
+/* Circuito que une editor y navegador */
+.link-trace { stroke-dasharray: 1; stroke-dashoffset: 0; }
+:host-context(html.anim) .link-trace { stroke-dashoffset: 1; opacity: 0; animation: drawIn .8s var(--ease-io) 2.4s forwards; }
+@keyframes drawIn { from { stroke-dashoffset: 1; opacity: 1; } to { stroke-dashoffset: 0; opacity: 1; } }
+
+/* ---------- Etiquetas flotantes ---------- */
+.chip { animation: float 5s ease-in-out infinite; }
+.chip-b { animation-delay: -1.6s; }
+.chip-c { animation-delay: -3.2s; }
+@keyframes float { 50% { transform: translateY(-7px); } }
+:host-context(html.anim) .chip { opacity: 0; animation: chipIn .5s cubic-bezier(.3, 1.6, .5, 1) forwards, float 5s ease-in-out 4s infinite; }
+:host-context(html.anim) .chip-a { animation-delay: 3.4s, 4s; }
+:host-context(html.anim) .chip-b { animation-delay: 3.55s, 2.4s; }
+:host-context(html.anim) .chip-c { animation-delay: 3.7s, .8s; }
+@keyframes chipIn { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: none; } }
+
+/* ---------- Alcance ---------- */
+:host-context(html.anim) .scope-body { opacity: 0; transform: translateY(12px); animation: fadeUp .7s var(--ease-out) forwards; animation-delay: var(--d); }
+.scope-icon { position: relative; overflow: hidden; isolation: isolate; }
+.scope-icon::before {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 0;
+  background: #FFD97D;
+  z-index: -1;
+  transition: height .45s var(--ease-out);
+}
+.scope-item:hover .scope-icon::before { height: 100%; }
+
+@media (prefers-reduced-motion: reduce) {
+  .chip, .caret { animation: none !important; }
+  .flow { display: none; }
+}

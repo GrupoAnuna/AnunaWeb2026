@@ -1,0 +1,48 @@
+:host {
+  display: block;
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+  --ease-io: cubic-bezier(.65, 0, .35, 1);
+}
+
+/* Línea del circuito */
+.flow-line { transform-origin: 0 0; }
+:host-context(html.anim) .flow-line { transform: scaleY(0); transition: transform 2s var(--ease-io) .2s; }
+@media (min-width: 1024px) {
+  :host-context(html.anim) .flow-line { transform: scaleX(0); }
+}
+:host-context(html.anim) .flow-steps.in .flow-line { transform: none; }
+
+/* Nodos que se encienden en orden */
+.step-node { background: #FF6B35; border-color: #FF6B35; color: #1E2B30; }
+:host-context(html.anim) .step-node {
+  background: #FDF6EC;
+  border-color: #4A6670;
+  color: #4A6670;
+  transition: background-color .4s, border-color .4s, color .4s, box-shadow .4s, transform .5s cubic-bezier(.3, 1.6, .5, 1);
+}
+:host-context(html.anim) .flow-steps.in .step-node {
+  background: #FF6B35;
+  border-color: #FF6B35;
+  color: #1E2B30;
+  box-shadow: 0 0 0 7px rgba(255, 107, 53, .18);
+  transform: scale(1.06);
+  transition-delay: var(--d);
+}
+
+:host-context(html.anim) .step-body { opacity: 0; transform: translateY(14px); transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); }
+:host-context(html.anim) .flow-steps.in .step-body { opacity: 1; transform: none; transition-delay: calc(var(--d) + 80ms); }
+
+.step:hover .step-node { transform: scale(1.12); }
+
+/* Pulso que recorre el proceso */
+.flow-pulse { opacity: 0; box-shadow: 0 0 12px 3px rgba(255, 107, 53, .5); }
+:host-context(html.anim) .flow-steps.in .flow-pulse { animation: pulseY 3.4s var(--ease-io) 2.6s infinite; }
+@keyframes pulseY { 0% { top: 0; opacity: 0; } 10%, 90% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
+@media (min-width: 1024px) {
+  :host-context(html.anim) .flow-steps.in .flow-pulse { animation-name: pulseX; }
+}
+@keyframes pulseX { 0% { left: 0; opacity: 0; } 10%, 90% { opacity: 1; } 100% { left: 100%; opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .flow-pulse { display: none; }
+}

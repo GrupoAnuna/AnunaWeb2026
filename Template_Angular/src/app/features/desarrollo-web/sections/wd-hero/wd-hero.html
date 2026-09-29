@@ -1,0 +1,109 @@
+<!-- ===================== HERO ===================== -->
+<section class="relative overflow-clip" aria-labelledby="wd-title">
+  <div class="mx-auto grid max-w-content items-center gap-14 px-5 pb-16 pt-12 sm:px-8 md:pt-16 lg:grid-cols-[1.05fr_1fr] lg:gap-10 lg:pb-24 lg:pt-20">
+
+    <!-- Texto -->
+    <div class="max-w-xl">
+      <h1 id="wd-title" [attr.aria-label]="headline"
+        class="text-[2.35rem] font-bold leading-[1.1] tracking-[-0.02em] text-anuna-slate sm:text-5xl lg:text-[3.25rem]">
+        @for (w of words; track $index) {
+          <span class="word" aria-hidden="true"><span [style.--i]="$index">{{ w }}</span></span>{{ ' ' }}
+        }
+      </h1>
+
+      <p class="hero-in mt-6 max-w-[34rem] text-lg leading-relaxed text-anuna-gray" style="--d:800ms">
+        Páginas web, tiendas online y aplicaciones a la medida. Con WordPress, un CMS o código 100% personalizado: elegimos lo que conviene a tu proyecto.
+      </p>
+
+      <div class="hero-in mt-9 flex flex-col gap-3 sm:flex-row sm:items-center" style="--d:950ms">
+        <a [routerLink]="[]" fragment="cotizador" appRipple
+          class="ripple-host shine inline-flex items-center justify-center gap-2 rounded-full bg-anuna-orange px-7 py-4 text-base font-bold text-anuna-ink shadow-anuna-sm transition duration-200 hover:-translate-y-0.5 hover:bg-anuna-orange-hover hover:shadow-anuna-cta active:translate-y-0 active:bg-anuna-orange-active focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2 focus-visible:ring-offset-anuna-cream">
+          Cotizar mi proyecto
+          <app-icon name="arrow-right" class="h-5 w-5" />
+        </a>
+        <a [routerLink]="[]" fragment="servicios-web"
+          class="inline-flex items-center justify-center rounded-full border-2 border-anuna-slate/25 px-7 py-[14px] text-base font-bold text-anuna-slate transition-colors duration-200 hover:border-anuna-slate hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2 focus-visible:ring-offset-anuna-cream">
+          Ver servicios
+        </a>
+      </div>
+    </div>
+
+    <!-- Ilustración: el código se escribe y la web se construye -->
+    <div class="relative mx-auto w-full max-w-[540px] pb-6 pr-2 sm:pb-10" aria-hidden="true">
+
+      <!-- Editor de código -->
+      <div class="editor relative z-10 w-[88%] overflow-hidden rounded-2xl bg-anuna-slate-950 shadow-anuna-lg">
+        <div class="flex items-center gap-2 border-b border-white/10 px-4 py-3">
+          <span class="h-2.5 w-2.5 rounded-full bg-anuna-orange"></span>
+          <span class="h-2.5 w-2.5 rounded-full bg-anuna-yellow"></span>
+          <span class="h-2.5 w-2.5 rounded-full bg-anuna-cream/30"></span>
+          <span class="ml-3 text-xs text-anuna-cream/60">tu-proyecto.ts</span>
+        </div>
+        <pre class="code px-5 py-4 font-mono text-[12.5px] leading-[1.9] text-anuna-cream/85 sm:text-[13px]"><span class="line" style="--l:0"><span class="c-k">const</span> web = <span class="c-f">crear</span>(&#123;<span class="caret"></span></span>
+<span class="line" style="--l:1">  tipo: <span class="c-s">'e-commerce'</span>,<span class="caret"></span></span>
+<span class="line" style="--l:2">  base: <span class="c-s">'desde cero'</span>,<span class="caret"></span></span>
+<span class="line" style="--l:3">  cms: <span class="c-s">'WordPress'</span>,<span class="caret"></span></span>
+<span class="line" style="--l:4">&#125;);<span class="caret"></span></span>
+<span class="line is-last" style="--l:5"><span class="c-f">lanzar</span>(web); <span class="c-c">// lista para vender</span><span class="caret"></span></span></pre>
+      </div>
+
+      <!-- Navegador que se va armando -->
+      <div class="browser absolute -bottom-2 right-0 z-20 w-[62%] overflow-hidden rounded-2xl border border-anuna-line bg-white shadow-anuna-lg sm:bottom-0">
+        <div class="flex items-center gap-2 border-b border-anuna-line px-3 py-2.5">
+          <span class="h-2 w-2 rounded-full bg-anuna-orange"></span>
+          <span class="h-2 w-2 rounded-full bg-anuna-yellow"></span>
+          <span class="ml-1 h-4 flex-1 rounded-full bg-anuna-cream"></span>
+        </div>
+        <div class="space-y-2.5 p-3.5">
+          <div class="block-in flex items-center justify-between" style="--b:0">
+            <span class="h-2.5 w-12 rounded-full bg-anuna-slate"></span>
+            <span class="flex gap-1.5"><span class="h-2 w-6 rounded-full bg-anuna-slate-100"></span><span class="h-2 w-6 rounded-full bg-anuna-slate-100"></span><span class="h-2 w-6 rounded-full bg-anuna-slate-100"></span></span>
+          </div>
+          <div class="block-in rounded-xl bg-anuna-cream p-3" style="--b:1">
+            <span class="block h-3 w-3/4 rounded-full bg-anuna-slate/80"></span>
+            <span class="mt-2 block h-2 w-1/2 rounded-full bg-anuna-slate/30"></span>
+            <span class="mt-3 block h-5 w-16 rounded-full bg-anuna-orange"></span>
+          </div>
+          <div class="grid grid-cols-3 gap-2">
+            <span class="block-in h-12 rounded-lg bg-anuna-slate-100" style="--b:2"></span>
+            <span class="block-in h-12 rounded-lg bg-anuna-yellow/60" style="--b:3"></span>
+            <span class="block-in h-12 rounded-lg bg-anuna-slate-100" style="--b:4"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Circuito que conecta editor y navegador -->
+      <svg class="pointer-events-none absolute left-[18%] top-[62%] z-0 h-[40%] w-[30%] overflow-visible" viewBox="0 0 100 100" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path id="wd-link" class="link-trace" pathLength="1" d="M0 0 V60 L20 80 H100" stroke="#FF6B35" stroke-width="2.5" vector-effect="non-scaling-stroke" />
+        <circle class="flow" r="4" fill="#FFD97D" opacity="0">
+          <animateMotion dur="2.2s" begin="3.2s" repeatCount="indefinite"><mpath href="#wd-link" /></animateMotion>
+          <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.2s" begin="3.2s" repeatCount="indefinite" />
+        </circle>
+      </svg>
+
+      <!-- Etiquetas flotantes -->
+      <span class="chip chip-a absolute -top-4 right-2 z-30 rounded-full bg-anuna-yellow px-3.5 py-1.5 text-xs font-bold text-anuna-slate-900 shadow-anuna-md">WordPress</span>
+      <span class="chip chip-b absolute right-[-4px] top-[40%] z-30 rounded-full bg-anuna-slate px-3.5 py-1.5 text-xs font-bold text-anuna-cream shadow-anuna-md">CMS</span>
+      <span class="chip chip-c absolute -bottom-4 left-[10%] z-30 rounded-full bg-white px-3.5 py-1.5 text-xs font-bold text-anuna-orange-700 shadow-anuna-md">Código a la medida</span>
+    </div>
+  </div>
+
+  <!-- ===================== ALCANCE ===================== -->
+  <div class="border-y border-anuna-line bg-white">
+    <ul class="mx-auto grid max-w-content gap-px bg-anuna-line sm:grid-cols-2 lg:grid-cols-4" aria-label="Lo que desarrollamos">
+      @for (s of scope; track s.title; let i = $index) {
+        <li class="scope-item group bg-white px-5 py-7 sm:px-8">
+          <div class="scope-body flex gap-4" [style.--d]="1100 + i * 120 + 'ms'">
+          <span class="scope-icon flex h-12 w-11 shrink-0 items-end justify-center rounded-arch bg-anuna-slate-100 pb-2.5 text-anuna-slate">
+            <app-icon [name]="s.icon" class="relative h-5 w-5" />
+          </span>
+          <div>
+            <h2 class="text-[15px] font-bold text-anuna-slate">{{ s.title }}</h2>
+            <p class="mt-1 text-sm leading-relaxed text-anuna-gray">{{ s.text }}</p>
+          </div>
+          </div>
+        </li>
+      }
+    </ul>
+  </div>
+</section>

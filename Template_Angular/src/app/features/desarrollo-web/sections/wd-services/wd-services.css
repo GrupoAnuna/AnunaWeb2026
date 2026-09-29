@@ -1,0 +1,59 @@
+:host {
+  display: block;
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+  --ease-io: cubic-bezier(.65, 0, .35, 1);
+}
+
+/* ---------- Selector segmentado ---------- */
+.seg-btn { color: #4A6670; }
+.seg-btn:hover { background: rgba(74, 102, 112, .08); }
+.seg-btn.is-active { background: #4A6670; color: #FDF6EC; box-shadow: 0 6px 16px -8px rgba(46, 67, 74, .6); }
+
+.path-msg { animation: msgIn .45s var(--ease-out); }
+@keyframes msgIn { from { opacity: 0; transform: translateY(6px); } }
+
+/* ---------- Tarjeta clara ---------- */
+.svc {
+  background: rgb(253 246 236 / .6);
+  border-color: #EADFCC;
+  color: #5C5C5C;
+}
+.svc:hover { background: #fff; border-color: rgba(74, 102, 112, .3); box-shadow: 0 2px 4px rgba(46,67,74,.05), 0 12px 28px -12px rgba(46,67,74,.22); transform: translateY(-4px); }
+.svc-title { color: #4A6670; }
+.svc-icon { background: #E3EAEC; color: #4A6670; }
+.svc-check { background: #E3EAEC; color: #4A6670; }
+.svc-link { color: #B8431A; }
+
+/* ---------- Tarjeta oscura destacada ---------- */
+.svc-dark { background: #2E434A; border-color: #2E434A; color: rgb(253 246 236 / .85); }
+.svc-dark:hover { background: #2E434A; border-color: #2E434A; }
+.svc-dark .svc-title { color: #fff; }
+.svc-dark .svc-icon { background: #FFD97D; color: #2E434A; }
+.svc-dark .svc-check { background: rgba(255, 217, 125, .2); color: #FFD97D; }
+.svc-dark .svc-link { color: #FFD97D; }
+
+/* Icono en arco: se llena desde abajo */
+.svc-icon { position: relative; overflow: hidden; isolation: isolate; }
+.svc-icon::before {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 0;
+  background: #FFD97D;
+  z-index: -1;
+  transition: height .45s var(--ease-out);
+}
+.svc:hover .svc-icon::before { height: 100%; }
+.svc-dark .svc-icon::before { background: #FF804F; }
+
+/* Trazo inferior al hacer hover */
+.card-trace { transform-origin: 0 50%; transform: scaleX(0); transition: transform .6s var(--ease-io); }
+.svc:hover .card-trace, .svc.is-match .card-trace { transform: scaleX(1); }
+
+/* ---------- Estados del selector ---------- */
+.svc.is-dim { opacity: .4; transform: scale(.98); filter: saturate(.6); }
+.svc.is-match { box-shadow: 0 0 0 2px #FF6B35, 0 18px 40px -20px rgba(255, 107, 53, .55); }
+
+@media (prefers-reduced-motion: reduce) {
+  .svc:hover { transform: none; }
+}
