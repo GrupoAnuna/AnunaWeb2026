@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --base-href /AnunaWeb2026/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:Template_Angular": "node dist/Template_Angular/server/server.mjs"
