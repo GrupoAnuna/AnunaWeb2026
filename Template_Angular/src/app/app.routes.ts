@@ -6,7 +6,10 @@ export const routes: Routes = [
     title: 'Grupo Anuna | Tecnología que une esfuerzos',
   },
   { path: 'contacto', loadComponent: () => import('./features/contact/contact').then(m => m.Contact) },
-  { path: 'nosotros', loadComponent: () => import('./features/about/about').then(m => m.About) }
+  { path: 'nosotros', loadComponent: () => import('./features/about/about').then(m => m.About) },
+  { path: 'casos', loadComponent: () => import('./features/cases/cases').then(m => m.Cases) },
+  // { path: 'desarrollo-web', loadComponent: () => import('./features/desarrollo-web/features/web-development/web-development').then(m => m.WebDevelopment) },
+
 
 
 ];

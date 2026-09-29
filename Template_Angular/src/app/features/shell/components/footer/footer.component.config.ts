@@ -48,7 +48,7 @@ export const FOOTER_CONFIG: FooterConfig = {
   // Ajusta los fragments a los ids reales de las secciones de tu home
   nav: [
     { label: 'Servicios', route: '/', fragment: 'soluciones' },
-    { label: 'Casos de éxito', route: '/', fragment: 'casos' },
+    { label: 'Casos de éxito', route: '/casos', fragment: 'casos' },
     { label: 'Sobre nosotros', route: '/nosotros', fragment: 'nosotros' },
     { label: 'Contacto', route: '/contacto', fragment: 'contacto' },
   ],

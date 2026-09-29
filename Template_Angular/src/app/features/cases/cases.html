@@ -1,0 +1,104 @@
+<app-header></app-header>
+
+<section id="casos" class="relative overflow-hidden bg-anuna-slate-900 py-16 text-anuna-cream lg:py-16" aria-labelledby="casos-title">
+
+  <!-- Halo cálido de fondo -->
+  <div class="halo pointer-events-none absolute left-1/2 top-0 h-[520px] w-[900px] -translate-x-1/2 -translate-y-1/3" aria-hidden="true"></div>
+
+  <div class="relative mx-auto max-w-content px-5 sm:px-8">
+
+    <!-- Encabezado -->
+    <div class="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end">
+      <div>
+        <p appReveal class="reveal mb-5 text-[15px] font-bold text-anuna-yellow">Casos de éxito</p>
+        <h2 id="casos-title" appReveal style="--d:80ms"
+          class="reveal text-3xl font-bold leading-tight tracking-[-0.015em] text-white sm:text-4xl lg:text-[2.75rem]">
+          Confían en nosotros
+        </h2>
+      </div>
+      <p appReveal style="--d:160ms" class="reveal max-w-md text-lg leading-relaxed text-anuna-cream/80 lg:justify-self-end">
+        Proyectos reales que generan resultados medibles.
+      </p>
+    </div>
+
+    <!-- Proyectos -->
+    <ul class="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-6">
+      @for (c of cases; track c.url; let i = $index) {
+        <li appReveal class="reveal case" [class]="spanClass(i)" [style.--d]="(i % 3) * 140 + 'ms'">
+          <article appTilt [tiltMax]="i < 2 ? 4 : 6" class="case-card group relative h-full rounded-[24px] p-px">
+
+            <!-- Borde de energía que gira al pasar el cursor -->
+            <span class="case-glow" aria-hidden="true"></span>
+
+            <div class="case-inner relative flex h-full flex-col overflow-hidden rounded-[23px] border border-anuna-cream/10 bg-anuna-slate-950">
+
+              <!-- Navegador simulado -->
+              <div class="relative flex items-center gap-3 border-b border-anuna-cream/10 px-4 py-3" aria-hidden="true">
+                <span class="flex gap-1.5">
+                  <span class="dot h-2.5 w-2.5 rounded-full bg-anuna-orange"></span>
+                  <span class="dot h-2.5 w-2.5 rounded-full bg-anuna-yellow"></span>
+                  <span class="dot h-2.5 w-2.5 rounded-full bg-anuna-cream/30"></span>
+                </span>
+                <span class="flex min-w-0 flex-1 items-center gap-2 rounded-full bg-anuna-slate-900 px-3 py-1 text-xs text-anuna-cream/70">
+                  <svg class="h-3 w-3 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                  <span class="truncate">{{ domain(c.url) }}</span>
+                </span>
+                <!-- Barra de carga: simula que la página se abre -->
+                <span class="load-bar absolute inset-x-0 -bottom-px h-[2px] bg-anuna-orange"></span>
+              </div>
+
+              <!-- Captura del sitio -->
+              <div class="shot-frame relative aspect-[16/10] overflow-hidden bg-anuna-slate-900">
+                <!-- Esqueleto de carga (queda debajo de la imagen) -->
+                <div class="skeleton absolute inset-0 flex flex-col gap-3 p-6" aria-hidden="true">
+                  <span class="h-3 w-1/3 rounded-full bg-anuna-cream/10"></span>
+                  <span class="h-8 w-2/3 rounded-lg bg-anuna-cream/10"></span>
+                  <span class="h-3 w-1/2 rounded-full bg-anuna-cream/10"></span>
+                  <span class="mt-auto h-9 w-28 rounded-full bg-anuna-cream/10"></span>
+                </div>
+                <img class="shot absolute inset-0 h-full w-full object-cover object-top"
+                  [ngSrc]="c.image" width="788" height="492"
+                  [alt]="'Captura del sitio web de ' + c.name" />
+                <!-- Brillo que sigue al cursor -->
+                <span class="glare pointer-events-none absolute inset-0" aria-hidden="true"></span>
+                <!-- Invitación al pasar el cursor -->
+                <span class="visit pointer-events-none absolute bottom-4 left-1/2 inline-flex -translate-x-1/2 items-center gap-2 rounded-full bg-anuna-cream px-4 py-2 text-sm font-bold text-anuna-slate-900 shadow-anuna-lg" aria-hidden="true">
+                  Visitar sitio
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg>
+                </span>
+              </div>
+
+              <!-- Contenido -->
+              <div class="flex flex-1 flex-col p-6 sm:p-7">
+                <span class="w-fit rounded-full bg-anuna-orange px-3 py-1 text-xs font-bold text-anuna-ink">{{ c.category }}</span>
+                <h3 class="mt-4 text-xl font-bold text-white sm:text-2xl">
+                  <!-- El enlace cubre toda la tarjeta -->
+                  <a [href]="c.url" target="_blank" rel="noopener"
+                    class="case-link after:absolute after:inset-0 after:z-20 after:rounded-[23px] focus:outline-none">
+                    {{ c.name }}<span class="sr-only"> (abre el sitio en una pestaña nueva)</span>
+                  </a>
+                </h3>
+                <p class="mt-3 text-[15px] leading-relaxed text-anuna-cream/80">{{ c.description }}</p>
+                <ul class="mt-auto flex flex-wrap gap-2 pt-6" aria-label="Tecnologías y enfoque">
+                  @for (t of c.tags; track t; let k = $index) {
+                    <li class="tag rounded-md bg-anuna-cream/[.07] px-2.5 py-1 text-xs font-medium text-anuna-cream/80" [style.--k]="k">#{{ t }}</li>
+                  }
+                </ul>
+              </div>
+            </div>
+          </article>
+        </li>
+      }
+    </ul>
+
+    <!-- Llamado final -->
+    <div appReveal class="reveal mt-12 flex flex-col items-start justify-between gap-5 rounded-[24px] border border-anuna-cream/10 bg-anuna-slate-950/60 px-7 py-6 sm:flex-row sm:items-center">
+      <p class="text-lg text-anuna-cream/90"><span class="font-bold text-white">¿Tu negocio es el siguiente?</span> Hagamos juntos un proyecto del que puedas presumir.</p>
+      <a routerLink="/" fragment="contacto" appRipple
+        class="ripple-host shine inline-flex shrink-0 items-center justify-center rounded-full bg-anuna-orange px-6 py-3.5 text-[15px] font-bold text-anuna-ink transition duration-200 hover:-translate-y-0.5 hover:bg-anuna-orange-hover hover:shadow-anuna-cta focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-anuna-slate-900">
+        Empezar mi proyecto
+      </a>
+    </div>
+  </div>
+</section>
+<app-footer></app-footer>
