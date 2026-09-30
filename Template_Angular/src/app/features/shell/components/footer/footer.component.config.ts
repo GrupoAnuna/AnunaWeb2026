@@ -57,7 +57,7 @@ export const FOOTER_CONFIG: FooterConfig = {
   phones: [
     { country: 'México', display: '+52 55 3902 2537', tel: '+525539022537' },
     { country: 'Argentina', display: '+54 9 351 395 2644', tel: '+5493513952644' },
-    { country: 'España', display: '+34 673 561 620', tel: '+34673561620' },
+    { country: 'España', display: '+34 657 23 30 08', tel: '+34657233008' },
   ],
 
   socials: [

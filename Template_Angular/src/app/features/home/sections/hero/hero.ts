@@ -21,8 +21,8 @@ export class Hero implements OnDestroy {
 
   /** Cifras del hero (reemplazar por datos reales) */
   readonly stats: Stat[] = [
-    { label: 'Proyectos', value: 120, prefix: '+' },
-    { label: 'Clientes activos', value: 45 },
+    { label: 'Proyectos', value: 20, prefix: '+' },
+    { label: 'Clientes activos', value: 10 },
     { label: 'Respuesta', value: 12, prefix: '< ', suffix: ' h' },
   ];
   /** Valor que se muestra de cada cifra (el servidor renderiza el valor final) */
