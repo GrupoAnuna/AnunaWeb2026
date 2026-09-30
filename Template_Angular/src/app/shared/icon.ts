@@ -6,7 +6,8 @@ export type AnunaIcon =
   | 'phone' | 'bell' | 'card' | 'chat' | 'lock' | 'upload' | 'chart' | 'calendar'
   | 'bag' | 'bolt' | 'briefcase' | 'sparkles' | 'server'
   | 'file' | 'target' | 'plug' | 'help' | 'sheet' | 'coins' | 'search'
-  | 'shield' | 'key' | 'mail' | 'eye' | 'wifi' | 'database' | 'alert' | 'school' | 'link' | 'paperclip';
+  | 'shield' | 'key' | 'mail' | 'eye' | 'wifi' | 'database' | 'alert' | 'school' | 'link' | 'paperclip'
+  | 'cloud' | 'box' | 'building' | 'trend';
 
 /**
  * Iconos de trazo de la marca (24×24, heredan el color del texto).
@@ -62,6 +63,10 @@ export type AnunaIcon =
         @case ('school') { <path d="m2 9 10-5 10 5-10 5Z" /><path d="M6 11v5c3 2.5 9 2.5 12 0v-5M22 9v6" /> }
         @case ('link') { <path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1" /><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1" /> }
         @case ('paperclip') { <path d="m20 11.5-8.3 8.3a5 5 0 0 1-7.1-7.1l8.8-8.8a3.3 3.3 0 0 1 4.7 4.7l-8.8 8.8a1.7 1.7 0 0 1-2.4-2.4l8-8" /> }
+        @case ('cloud') { <path d="M7 18a4.5 4.5 0 0 1-.6-8.96A6 6 0 0 1 18 9.5a4 4 0 0 1-.5 8.5z" /> }
+        @case ('box') { <path d="m12 3 8 4.5v9L12 21l-8-4.5v-9Z" /><path d="m4 7.5 8 4.5 8-4.5M12 12v9" /> }
+        @case ('building') { <rect x="4" y="3" width="16" height="18" rx="2" /><path d="M9 21v-4h6v4M8 7h2M14 7h2M8 11h2M14 11h2" /> }
+        @case ('trend') { <path d="m3 17 6-6 4 4 8-8" /><path d="M15 7h6v6" /> }
         @case ('server') { <rect x="3" y="4" width="18" height="7" rx="2" /><rect x="3" y="13" width="18" height="7" rx="2" /><path d="M7 7.5h.01M7 16.5h.01" /> }
       }
     </svg>

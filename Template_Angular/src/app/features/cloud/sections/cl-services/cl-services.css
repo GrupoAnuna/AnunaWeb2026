@@ -1,0 +1,36 @@
+:host {
+  display: block;
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+  --ease-io: cubic-bezier(.65, 0, .35, 1);
+}
+
+/* ---------- Tarjeta clara ---------- */
+.svc { background: #fff; border-color: #EADFCC; color: #5C5C5C; }
+.svc:hover { border-color: rgba(74, 102, 112, .3); transform: translateY(-4px); box-shadow: 0 2px 4px rgba(46,67,74,.05), 0 16px 32px -16px rgba(46,67,74,.28); }
+.svc-title { color: #4A6670; }
+.svc-label { color: #B8431A; }
+.svc-item { color: #4A6670; }
+.svc-check { background: #FFD97D; color: #2E434A; }
+.svc-icon { position: relative; overflow: hidden; isolation: isolate; background: #E3EAEC; color: #4A6670; }
+.svc-icon::before { content: ""; position: absolute; inset: auto 0 0 0; height: 0; background: #FFD97D; z-index: -1; transition: height .45s var(--ease-out); }
+.svc:hover .svc-icon::before { height: 100%; }
+.icon { transition: transform .45s var(--ease-out); }
+.svc:hover .icon { transform: translateY(-3px); }
+
+/* ---------- Tarjeta destacada (Migración) ---------- */
+.svc-featured { background: #2E434A; border-color: #2E434A; color: rgb(253 246 236 / .85); }
+.svc-featured:hover { border-color: #2E434A; }
+.svc-featured .svc-title { color: #fff; }
+.svc-featured .svc-label { color: #FFD97D; }
+.svc-featured .svc-item { color: #FDF6EC; }
+.svc-featured .svc-check { background: #FF6B35; color: #1E2B30; }
+.svc-featured .svc-icon { background: #FFD97D; color: #2E434A; }
+.svc-featured .svc-icon::before { background: #FF804F; }
+
+/* Trazo inferior al pasar el cursor */
+.svc-trace { transform-origin: 0 50%; transform: scaleX(0); transition: transform .6s var(--ease-io); }
+.svc:hover .svc-trace { transform: scaleX(1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .svc:hover { transform: none; }
+}

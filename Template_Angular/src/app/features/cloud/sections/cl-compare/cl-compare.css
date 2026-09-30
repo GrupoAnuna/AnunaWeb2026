@@ -1,0 +1,29 @@
+:host {
+  display: block;
+  --ease-io: cubic-bezier(.65, 0, .35, 1);
+}
+
+/* ---------- Paneles ---------- */
+.panel { padding: 2.25rem 2.5rem; }
+.panel-title { display: flex; align-items: center; gap: .5rem; font-size: .9rem; font-weight: 700; margin-bottom: 1.25rem; }
+.row { display: flex; align-items: center; gap: 1rem; min-height: 4.25rem; border-top: 1px solid rgba(74, 102, 112, .12); }
+.panel-with .row { border-color: rgba(253, 246, 236, .1); }
+.text { max-width: 26rem; font-size: 1.05rem; font-weight: 500; line-height: 1.4; }
+.ic { display: flex; height: 2.25rem; width: 2.25rem; flex-shrink: 0; align-items: center; justify-content: center; border-radius: 999px; }
+
+/* El panel "sin nube" solo se ve a la izquierda del divisor */
+.panel-without { clip-path: inset(0 calc(100% - var(--pos, 50%)) 0 0); }
+.divider { left: var(--pos, 50%); width: 0; }
+
+/* Movimiento suave cuando el divisor se mueve solo (pista inicial) */
+.compare:not(:active) .panel-without { transition: clip-path .7s var(--ease-io); }
+.compare:not(:active) .divider { transition: left .7s var(--ease-io); }
+
+.knob { transition: transform .2s; }
+.compare:hover .knob { transform: scale(1.08); } /* el centrado lo hacen las clases -translate de Tailwind */
+.range:focus-visible ~ .divider .knob { box-shadow: 0 0 0 4px #fff, 0 0 0 7px #FF6B35; }
+.compare:has(.range:focus-visible) .knob { box-shadow: 0 0 0 4px #fff, 0 0 0 7px #FF6B35; }
+
+@media (prefers-reduced-motion: reduce) {
+  .panel-without, .divider { transition: none !important; }
+}

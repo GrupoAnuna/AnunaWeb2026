@@ -33,4 +33,10 @@ export const routes: Routes = [
     loadComponent: () => import('./features/ciberseguridad/cybersecurity').then((m) => m.Cybersecurity),
     title: 'Ciberseguridad para tu negocio | Grupo Anuna',
   },
+
+  {
+  path: 'cloud',
+  loadComponent: () => import('./features/cloud/cloud-page').then((m) => m.CloudPage),
+  title: 'Servicios cloud | Grupo Anuna',
+},
 ];

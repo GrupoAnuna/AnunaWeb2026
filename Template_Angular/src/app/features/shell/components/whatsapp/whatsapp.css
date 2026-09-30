@@ -1,0 +1,68 @@
+/* ============================================================
+   Botón flotante de WhatsApp + modal "Elige tu zona".
+   ============================================================ */
+
+:host {
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+}
+
+/* ---------- Botón flotante ---------- */
+.wa-fab {
+  /* Respeta la zona segura de los iPhone con barra inferior */
+  right: max(1.25rem, env(safe-area-inset-right, 0px));
+  bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
+  transition: transform .3s var(--ease-out), box-shadow .3s;
+}
+.wa-fab:hover { transform: scale(1.08); }
+.wa-fab:active { transform: scale(.95); }
+
+/* Onda que llama la atención cada pocos segundos */
+.wa-ring { animation: waRing 3s ease-out 2s infinite; }
+@keyframes waRing {
+  0% { transform: scale(1); opacity: .45; }
+  60%, 100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* Entrada del botón al cargar la página */
+:host-context(html.anim) .wa-fab { animation: fabIn .6s cubic-bezier(.3, 1.5, .5, 1) .8s both; }
+@keyframes fabIn { from { opacity: 0; transform: scale(.4) translateY(20px); } }
+
+/* ---------- Modal (hoja inferior) ---------- */
+.wa-sheet {
+  /* Pegado abajo y a todo lo ancho, como en tu sitio anterior */
+  margin: auto 0 0;
+  width: 100%;
+  max-width: 100%;
+  max-height: 90vh;
+  padding: 0 0 env(safe-area-inset-bottom, 0px);
+  border: 0;
+  border-radius: 28px 28px 0 0;
+  background: #fff;
+  box-shadow: 0 -20px 50px -20px rgba(30, 43, 48, .45);
+}
+.wa-sheet::backdrop {
+  background: rgba(30, 43, 48, .55);
+  backdrop-filter: blur(2px);
+}
+
+/* Animaciones de apertura y cierre */
+:host-context(html.anim) .wa-sheet[open] { animation: sheetUp .38s var(--ease-out); }
+:host-context(html.anim) .wa-sheet[open]::backdrop { animation: fade .3s ease; }
+:host-context(html.anim) .wa-sheet.closing { animation: sheetDown .22s ease-in forwards; }
+:host-context(html.anim) .wa-sheet.closing::backdrop { animation: fadeOut .22s ease-in forwards; }
+@keyframes sheetUp { from { transform: translateY(100%); } }
+@keyframes sheetDown { to { transform: translateY(100%); } }
+@keyframes fade { from { opacity: 0; } }
+@keyframes fadeOut { to { opacity: 0; } }
+
+/* Las tarjetas entran una tras otra */
+:host-context(html.anim) .wa-sheet[open] .zone-item { animation: itemIn .45s var(--ease-out) both; animation-delay: calc(var(--k) * 80ms + 120ms); }
+@keyframes itemIn { from { opacity: 0; transform: translateY(14px); } }
+
+.go { transition: transform .3s var(--ease-out); }
+.zone:hover .go { transform: translateX(4px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-ring { animation: none; display: none; }
+  .wa-fab:hover, .wa-fab:active { transform: none; }
+}

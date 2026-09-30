@@ -1,0 +1,51 @@
+/* ============================================================
+   Hero de Cloud: de la oficina a la nube.
+   Estados ocultos solo con html.anim.
+   ============================================================ */
+
+:host {
+  display: block;
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+}
+
+.word { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .1em; margin-bottom: -.1em; }
+.word > span { display: inline-block; }
+:host-context(html.anim) .word > span {
+  transform: translateY(105%);
+  animation: up .9s var(--ease-out) forwards;
+  animation-delay: calc(var(--i) * 60ms + 150ms);
+}
+@keyframes up { to { transform: none; } }
+
+:host-context(html.anim) .hero-in {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: fadeUp .8s var(--ease-out) forwards;
+  animation-delay: var(--d, 0ms);
+}
+@keyframes fadeUp { to { opacity: 1; transform: none; } }
+
+:host-context(html.anim) .stage { opacity: 0; animation: fadeUp .9s var(--ease-out) .2s forwards; }
+
+/* Ruta punteada que "avanza" */
+.route { animation: dash 1.2s linear infinite; }
+@keyframes dash { to { stroke-dashoffset: -.05; } }
+
+/* Luces del servidor */
+.led { animation: led 1.6s steps(1) infinite; animation-delay: calc(var(--u) * -.4s); }
+@keyframes led { 50% { opacity: .25; } }
+
+/* La nube flota suavemente */
+.cloud { animation: float 6s ease-in-out infinite; }
+@keyframes float { 50% { transform: translateY(-6px); } }
+
+/* ---------- Tarjeta de migración ---------- */
+.card { transition: box-shadow .4s; }
+.card.done { box-shadow: 0 0 0 3px rgba(255, 107, 53, .25), 0 24px 48px -20px rgba(46, 67, 74, .35); }
+:host-context(html.anim) .chip { opacity: 0; transform: scale(.6); transition: opacity .3s, transform .45s cubic-bezier(.3, 1.6, .5, 1); }
+:host-context(html.anim) .card.done .chip { opacity: 1; transform: none; transition-delay: calc(var(--c) * 120ms + 150ms); }
+
+@media (prefers-reduced-motion: reduce) {
+  .route, .led, .cloud { animation: none !important; }
+  .flow { display: none; }
+}

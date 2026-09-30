@@ -1,0 +1,75 @@
+/* ============================================================
+   Proceso de migración: un paquete viaja por la vía y enciende
+   cada paso al pasar. Móvil: vía vertical. Escritorio: horizontal.
+   ============================================================ */
+
+:host {
+  display: block;
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+  --travel: 4s;   /* lo que tarda el paquete en recorrer toda la vía */
+  --start: .4s;
+}
+
+.dots {
+  background-image: radial-gradient(rgba(253, 246, 236, .08) 1px, transparent 1px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 30%, #000, transparent 70%);
+  mask-image: radial-gradient(ellipse at 50% 30%, #000, transparent 70%);
+}
+
+/* ---------- Vía: vertical en móvil ---------- */
+.track { left: 22px; top: 12px; bottom: 90px; width: 4px; }
+.packet { left: 50%; top: 100%; transform: translate(-50%, -50%); }
+.rail-fill { transform-origin: top; }
+
+/* ---------- Vía: horizontal en escritorio ---------- */
+@media (min-width: 1024px) {
+  .track { left: 28px; right: 28px; top: 26px; bottom: auto; width: auto; height: 4px; }
+  .packet { top: 50%; left: 100%; }
+  .rail-fill { transform-origin: left; }
+  .endpoint { top: 0; }
+  .end-start { left: 0; }
+  .end-finish { right: 0; }
+}
+
+/* ---------- Estado final (sin animación) ---------- */
+.node { background: #FF6B35; border-color: #FF6B35; color: #1E2B30; }
+
+/* ---------- Secuencia animada ---------- */
+:host-context(html.anim) .rail-fill { transform: scaleY(0); }
+:host-context(html.anim) .packet { top: 0; }
+:host-context(html.anim) .node { background: #2E434A; border-color: rgba(253, 246, 236, .25); color: rgba(253, 246, 236, .6); }
+:host-context(html.anim) .step > :not(.node) { opacity: .35; transition: opacity .5s ease; }
+:host-context(html.anim) .arrived { opacity: 0; transform: translateY(10px) scale(.95); }
+:host-context(html.anim) .end-finish { transform: scale(.9); opacity: .6; }
+
+:host-context(html.anim) .journey.in .rail-fill { animation: fillY var(--travel) linear var(--start) forwards; }
+:host-context(html.anim) .journey.in .packet { animation: travelY var(--travel) linear var(--start) forwards; }
+@keyframes fillY { to { transform: scaleY(1); } }
+@keyframes travelY { to { top: 100%; } }
+
+@media (min-width: 1024px) {
+  :host-context(html.anim) .rail-fill { transform: scaleX(0); }
+  :host-context(html.anim) .packet { top: 50%; left: 0; }
+  :host-context(html.anim) .journey.in .rail-fill { animation-name: fillX; }
+  :host-context(html.anim) .journey.in .packet { animation-name: travelX; }
+  @keyframes fillX { to { transform: scaleX(1); } }
+  @keyframes travelX { to { left: 100%; } }
+}
+
+/* Cada paso se enciende cuando el paquete pasa por él (--t) */
+:host-context(html.anim) .journey.in .node {
+  animation: nodeOn .45s cubic-bezier(.3, 1.6, .5, 1) forwards;
+  animation-delay: var(--t);
+}
+@keyframes nodeOn { to { background: #FF6B35; border-color: #FF6B35; color: #1E2B30; box-shadow: 0 0 0 7px rgba(255, 107, 53, .2); } }
+:host-context(html.anim) .journey.in .step > :not(.node) { opacity: 1; transition-delay: var(--t); }
+
+/* Llegada a la nube */
+:host-context(html.anim) .journey.in .end-finish { animation: arrive .5s cubic-bezier(.3, 1.6, .5, 1) calc(var(--start) + var(--travel)) forwards; }
+@keyframes arrive { to { transform: scale(1.12); opacity: 1; box-shadow: 0 0 0 8px rgba(255, 217, 125, .35); } }
+:host-context(html.anim) .journey.in .arrived { transition: opacity .5s, transform .5s cubic-bezier(.3, 1.4, .5, 1); transition-delay: calc(var(--start) + var(--travel) + .2s); opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .packet { display: none; }
+}
