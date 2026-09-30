@@ -1,0 +1,61 @@
+:host {
+  display: block;
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+  --ease-io: cubic-bezier(.65, 0, .35, 1);
+}
+
+.house { box-shadow: inset 0 0 0 1px #EADFCC; overflow: clip; }
+.cloud { animation: drift 14s ease-in-out infinite; }
+@keyframes drift { 50% { transform: translateX(-24px); } }
+
+/* ---------- Partes de la casa: se animan al elegirlas ---------- */
+.part { transition: filter .4s ease; }
+.part.hl { filter: drop-shadow(0 0 10px rgba(255, 107, 53, .55)); }
+
+/* Puerta: se entreabre */
+.door { transform-box: fill-box; transform-origin: left center; transition: transform .7s var(--ease-io); }
+.part.hl .door { transform: perspective(300px) rotateY(-38deg); }
+
+/* Buzón: se levanta la bandera y asoma una carta */
+.flag { transform-box: fill-box; transform-origin: 0% 100%; transform: rotate(80deg); transition: transform .5s cubic-bezier(.3, 1.6, .5, 1); }
+.part.hl .flag { transform: none; }
+.letter { transform: translateY(0); transition: transform .5s var(--ease-out); }
+.part.hl .letter { transform: translateY(-14px); }
+
+/* Ventana: se ilumina y aparece el Wi-Fi */
+.window { transition: fill .4s ease; }
+.part.hl .window { fill: #FFD97D; }
+.wifi { opacity: 0; transition: opacity .4s ease; }
+.part.hl .wifi { opacity: 1; animation: wifi 1.4s ease-in-out infinite; }
+@keyframes wifi { 50% { opacity: .35; } }
+
+/* Caja fuerte: la perilla gira */
+.dial { transform-box: fill-box; transform-origin: center; transition: transform .8s var(--ease-io); }
+.part.hl .dial { transform: rotate(270deg); }
+
+/* Cámara: el haz barre de lado a lado */
+.cone { transform-box: fill-box; transform-origin: 0% 0%; animation: scan 4s ease-in-out infinite; }
+.part.hl .cone { opacity: .75; }
+.led { animation: led 1.2s steps(1) infinite; }
+@keyframes scan { 50% { transform: rotate(-16deg); } }
+@keyframes led { 50% { opacity: .2; } }
+
+/* ---------- Puntos ---------- */
+.spot { background: #fff; color: #4A6670; box-shadow: 0 6px 16px -6px rgba(46, 67, 74, .45); transition: background-color .3s, color .3s, transform .3s; cursor: pointer; }
+.spot:hover { transform: scale(1.12); }
+.spot.on { background: #FF6B35; color: #1E2B30; }
+.spot-ring { border: 2px solid #FF6B35; animation: ping 2s ease-out infinite; }
+.spot.on .spot-ring { animation-duration: 1.2s; }
+@keyframes ping { 0% { transform: scale(1); opacity: .8; } 80%, 100% { transform: scale(1.9); opacity: 0; } }
+
+/* ---------- Explicación y chips ---------- */
+.explain { animation: explain .45s var(--ease-out); }
+@keyframes explain { from { opacity: 0; transform: translateY(10px); } }
+
+.chip { border-color: #EADFCC; background: #fff; color: #4A6670; }
+.chip:hover { border-color: rgba(74, 102, 112, .4); }
+.chip.on { border-color: #FF6B35; background: #FF6B35; color: #1E2B30; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cloud, .cone, .led, .spot-ring, .part.hl .wifi { animation: none !important; }
+}

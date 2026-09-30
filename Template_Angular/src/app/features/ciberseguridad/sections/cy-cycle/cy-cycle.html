@@ -1,0 +1,73 @@
+<section class="bg-white py-20 lg:py-28" aria-labelledby="cy-cycle-title">
+  <div class="mx-auto grid max-w-content items-center gap-12 px-5 sm:px-8 lg:grid-cols-[1fr_1fr] lg:gap-16">
+
+    <div>
+      <p appReveal class="reveal mb-5 text-[15px] font-bold text-anuna-orange-700">Cómo trabajamos</p>
+      <h2 id="cy-cycle-title" appReveal style="--d:80ms"
+        class="reveal text-3xl font-bold leading-tight tracking-[-0.015em] text-anuna-slate sm:text-4xl lg:text-[2.75rem]">
+        La seguridad no es un producto, es un hábito
+      </h2>
+      <p appReveal style="--d:160ms" class="reveal mt-5 max-w-md text-lg leading-relaxed text-anuna-gray">
+        Las amenazas cambian todos los días. Por eso trabajamos en un ciclo continuo que nunca se detiene.
+      </p>
+
+      <!-- Etapa activa -->
+      <div appReveal style="--d:240ms" class="reveal mt-8 min-h-[170px] rounded-[24px] bg-anuna-slate p-7 text-anuna-cream shadow-anuna-md" aria-live="polite">
+        @for (s of steps; track s.title; let i = $index) {
+          @if (active() === i) {
+            <div class="detail">
+              <p class="text-xs font-bold uppercase tracking-[.1em] text-anuna-yellow">Etapa {{ i + 1 }} de {{ steps.length }}</p>
+              <p class="mt-2 flex items-center gap-3 text-2xl font-bold text-white">
+                <app-icon [name]="s.icon" class="h-6 w-6 text-anuna-yellow" /> {{ s.title }}
+              </p>
+              <p class="mt-3 text-[15px] leading-relaxed text-anuna-cream/85">{{ s.text }}</p>
+            </div>
+          }
+        }
+      </div>
+    </div>
+
+    <!-- Ciclo -->
+    <div appReveal class="reveal" style="--d:180ms">
+      <div class="cycle relative mx-auto aspect-square w-[80%] max-w-[440px] sm:w-full"
+        (mouseenter)="paused.set(true)" (mouseleave)="paused.set(false)"
+        (focusin)="paused.set(true)" (focusout)="paused.set(false)"
+        [style.--rot]="rotation() + 'deg'">
+
+        <!-- Círculo base y arco que avanza -->
+        <svg viewBox="0 0 400 400" class="absolute inset-0 h-full w-full" aria-hidden="true">
+          <circle cx="200" cy="200" r="176" fill="none" stroke="#EADFCC" stroke-width="3" stroke-dasharray="4 10" stroke-linecap="round" />
+          <g class="arc-rot">
+            <circle cx="200" cy="200" r="176" fill="none" stroke="#FF6B35" stroke-width="6" stroke-linecap="round"
+              pathLength="100" stroke-dasharray="25 75" transform="rotate(-90 200 200)" />
+          </g>
+          <!-- Flechas de sentido -->
+          <g fill="#4A6670" opacity=".35">
+            <path d="M332 72 l12 2 -4 11 Z" /><path d="M328 328 l-2 12 -11 -4 Z" /><path d="M68 328 l-12 -2 4 -11 Z" /><path d="M72 72 l2 -12 11 4 Z" />
+          </g>
+        </svg>
+
+        <!-- Centro -->
+        <div class="absolute inset-[26%] flex flex-col items-center justify-center rounded-full bg-anuna-cream text-center">
+          <svg viewBox="0 0 100 130" class="core-a h-12 w-auto" aria-hidden="true"><path d="M14 130 V50 A36 36 0 0 1 86 50 V130" fill="none" stroke="#4A6670" stroke-width="28" /><path d="M28 68 C58 70 84 94 100 130 H73 C63 104 47 90 28 91 Z" fill="#FF6B35" /></svg>
+          <p class="mt-3 px-4 text-sm font-bold leading-snug text-anuna-slate">Protección continua,<br />siempre en ciclo</p>
+        </div>
+
+        <!-- Etapas -->
+        <div role="group" aria-label="Etapas del ciclo">
+          @for (s of steps; track s.title; let i = $index) {
+            <button type="button" (click)="select(i)" [attr.aria-pressed]="active() === i"
+              class="node absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-2 focus:outline-none"
+              [class.on]="active() === i" [style.left.%]="positions[i].x" [style.top.%]="positions[i].y">
+              <span class="node-dot flex h-14 w-14 items-center justify-center rounded-full border-[3px]">
+                <app-icon [name]="s.icon" class="h-6 w-6" />
+              </span>
+              <span class="node-label rounded-full px-3 py-1 text-xs font-bold">{{ s.title }}</span>
+            </button>
+          }
+        </div>
+      </div>
+      <p class="mt-12 text-center text-sm text-anuna-gray">Toca una etapa para verla en detalle.</p>
+    </div>
+  </div>
+</section>

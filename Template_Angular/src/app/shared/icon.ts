@@ -5,7 +5,8 @@ export type AnunaIcon =
   | 'check' | 'arrow-right' | 'arrow-left' | 'clock' | 'users' | 'pin'
   | 'phone' | 'bell' | 'card' | 'chat' | 'lock' | 'upload' | 'chart' | 'calendar'
   | 'bag' | 'bolt' | 'briefcase' | 'sparkles' | 'server'
-  | 'file' | 'target' | 'plug' | 'help' | 'sheet' | 'coins' | 'search';
+  | 'file' | 'target' | 'plug' | 'help' | 'sheet' | 'coins' | 'search'
+  | 'shield' | 'key' | 'mail' | 'eye' | 'wifi' | 'database' | 'alert' | 'school' | 'link' | 'paperclip';
 
 /**
  * Iconos de trazo de la marca (24×24, heredan el color del texto).
@@ -51,6 +52,16 @@ export type AnunaIcon =
         @case ('sheet') { <rect x="3" y="3" width="18" height="18" rx="2.5" /><path d="M3 9h18M3 15h18M9 3v18" /> }
         @case ('coins') { <ellipse cx="9" cy="7" rx="6" ry="3" /><path d="M3 7v5c0 1.7 2.7 3 6 3s6-1.3 6-3V7" /><path d="M9 15v2c0 1.7 2.7 3 6 3s6-1.3 6-3v-5c0-1.7-2.7-3-6-3" /> }
         @case ('search') { <circle cx="11" cy="11" r="7" /><path d="m20 20-4-4" /> }
+        @case ('shield') { <path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6z" /><path d="m9 12 2 2 4-4" /> }
+        @case ('key') { <circle cx="8" cy="15" r="4" /><path d="m11 12 9-9M17 6l3 3M14 9l2 2" /> }
+        @case ('mail') { <rect x="3" y="5" width="18" height="14" rx="2.5" /><path d="m3.5 7 8.5 6 8.5-6" /> }
+        @case ('eye') { <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" /><circle cx="12" cy="12" r="3" /> }
+        @case ('wifi') { <path d="M2 9a15 15 0 0 1 20 0M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0" /><path d="M12 19.5h.01" /> }
+        @case ('database') { <ellipse cx="12" cy="5.5" rx="8" ry="3" /><path d="M4 5.5v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6M4 11.5v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6" /> }
+        @case ('alert') { <path d="M10.3 3.9 2.4 17.5A2 2 0 0 0 4.1 20.5h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z" /><path d="M12 9v4M12 17h.01" /> }
+        @case ('school') { <path d="m2 9 10-5 10 5-10 5Z" /><path d="M6 11v5c3 2.5 9 2.5 12 0v-5M22 9v6" /> }
+        @case ('link') { <path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1" /><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1" /> }
+        @case ('paperclip') { <path d="m20 11.5-8.3 8.3a5 5 0 0 1-7.1-7.1l8.8-8.8a3.3 3.3 0 0 1 4.7 4.7l-8.8 8.8a1.7 1.7 0 0 1-2.4-2.4l8-8" /> }
         @case ('server') { <rect x="3" y="4" width="18" height="7" rx="2" /><rect x="3" y="13" width="18" height="7" rx="2" /><path d="M7 7.5h.01M7 16.5h.01" /> }
       }
     </svg>

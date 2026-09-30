@@ -1,0 +1,117 @@
+/* ============================================================
+   Hero de Ciberseguridad: escudo con radar. Las amenazas se
+   acercan, chocan contra el escudo y se desvanecen.
+   Estados ocultos solo con html.anim.
+   ============================================================ */
+
+:host {
+  display: block;
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+}
+
+/* Titular palabra por palabra */
+.word { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .1em; margin-bottom: -.1em; }
+.word > span { display: inline-block; }
+:host-context(html.anim) .word > span {
+  transform: translateY(105%);
+  animation: up .9s var(--ease-out) forwards;
+  animation-delay: calc(var(--i) * 70ms + 150ms);
+}
+@keyframes up { to { transform: none; } }
+
+:host-context(html.anim) .hero-in {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: fadeUp .8s var(--ease-out) forwards;
+  animation-delay: var(--d, 0ms);
+}
+@keyframes fadeUp { to { opacity: 1; transform: none; } }
+
+/* Emergencia */
+.sos-ring { animation: sos 2s ease-out infinite; }
+@keyframes sos { 0% { transform: scale(1); opacity: .5; } 80%, 100% { transform: scale(1.7); opacity: 0; } }
+.sos-arrow { transition: transform .3s var(--ease-out); }
+.sos:hover .sos-arrow { transform: translateX(4px); }
+
+/* ---------- Escenario ---------- */
+@media (max-width: 480px) { .stage { max-width: 340px; } }
+
+:host-context(html.anim) .stage { opacity: 0; animation: stageIn .9s var(--ease-out) .2s forwards; }
+@keyframes stageIn { from { opacity: 0; transform: scale(.92); } to { opacity: 1; transform: none; } }
+
+/* Barrido giratorio del radar */
+.sweep {
+  background: conic-gradient(from 0deg, transparent 0 75%, rgba(255, 107, 53, .05) 85%, rgba(255, 107, 53, .28) 100%);
+  animation: spin 5s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Escudo: "respira" y su borde brilla */
+.shield svg { animation: breathe 4s ease-in-out infinite; }
+@keyframes breathe { 50% { transform: scale(1.03); } }
+.shield-glow { opacity: .4; animation: glow 2.5s ease-in-out infinite; }
+@keyframes glow { 50% { opacity: 1; } }
+
+/* ---------- Amenazas ---------- */
+.threat { transform: rotate(var(--a)); }
+.threat-dot {
+  background: #4A6670;
+  box-shadow: 0 0 0 4px rgba(74, 102, 112, .15);
+  opacity: 0;
+  animation: approach 4.4s ease-in infinite;
+  animation-delay: var(--delay);
+}
+/* Viaja desde el borde hasta el escudo (≈32% del radio) y desaparece al chocar */
+@keyframes approach {
+  0%   { transform: translateY(-230px) scale(.8); opacity: 0; background: #4A6670; }
+  12%  { opacity: 1; }
+  55%  { transform: translateY(-122px) scale(1); opacity: 1; background: #FF6B35; }
+  60%  { transform: translateY(-132px) scale(1.4); opacity: 0; }
+  100% { transform: translateY(-132px); opacity: 0; }
+}
+.hit {
+  opacity: 0;
+  transform: translateY(-124px) scale(.4);
+  animation: hit 4.4s ease-out infinite;
+  animation-delay: var(--delay);
+}
+@keyframes hit {
+  0%, 54% { opacity: 0; transform: translateY(-124px) scale(.4); }
+  56%     { opacity: .9; }
+  70%     { opacity: 0; transform: translateY(-124px) scale(1.8); }
+  100%    { opacity: 0; }
+}
+@media (max-width: 480px) {
+  @keyframes approach {
+    0%   { transform: translateY(-155px) scale(.8); opacity: 0; background: #4A6670; }
+    12%  { opacity: 1; }
+    55%  { transform: translateY(-84px) scale(1); opacity: 1; background: #FF6B35; }
+    60%  { transform: translateY(-92px) scale(1.4); opacity: 0; }
+    100% { transform: translateY(-92px); opacity: 0; }
+  }
+  @keyframes hit {
+    0%, 54% { opacity: 0; transform: translateY(-86px) scale(.4); }
+    56%     { opacity: .9; }
+    70%     { opacity: 0; transform: translateY(-86px) scale(1.8); }
+    100%    { opacity: 0; }
+  }
+}
+
+/* Estado y aviso */
+.status-dot { animation: blink 1.6s ease-in-out infinite; }
+@keyframes blink { 50% { opacity: .35; } }
+.toast { opacity: 1; }
+:host-context(html.anim) .toast { opacity: 0; animation: toast 7s var(--ease-out) 2.5s infinite; }
+/* Solo eje Y: el centrado horizontal lo hace -translate-x-1/2 (propiedad "translate") */
+@keyframes toast {
+  0%   { opacity: 0; transform: translateY(12px) scale(.94); }
+  6%   { opacity: 1; transform: none; }
+  40%  { opacity: 1; transform: none; }
+  48%  { opacity: 0; transform: translateY(-6px); }
+  100% { opacity: 0; transform: translateY(-6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sweep, .shield svg, .shield-glow, .status-dot, .sos-ring { animation: none !important; }
+  .threat { display: none; }
+}

@@ -1,0 +1,64 @@
+:host {
+  display: block;
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+  --ease-io: cubic-bezier(.65, 0, .35, 1);
+}
+
+:host-context(html.anim) .stage-in { animation: stageIn .45s var(--ease-out); }
+@keyframes stageIn { from { opacity: 0; transform: translateX(24px); } }
+
+/* ---------- Interruptores ---------- */
+.practice { border-color: #EADFCC; background: #fff; }
+.practice:hover { border-color: rgba(74, 102, 112, .35); }
+:host-context(html.anim) .practice { animation: rowIn .45s var(--ease-out) both; animation-delay: calc(var(--k) * 60ms + 100ms); }
+@keyframes rowIn { from { opacity: 0; transform: translateY(8px); } }
+.practice.on { border-color: #FF6B35; background: rgb(255 107 53 / .06); }
+
+.switch { background: #E3EAEC; transition: background-color .3s; }
+.knob { box-shadow: 0 2px 6px rgba(46, 67, 74, .3); transition: transform .35s cubic-bezier(.3, 1.4, .5, 1); }
+.tick { color: transparent; transition: color .2s; }
+.practice.on .switch { background: #FF6B35; }
+.practice.on .knob { transform: translateX(20px); }
+.practice.on .tick { color: #FF6B35; }
+
+/* ---------- Escudo que se llena ---------- */
+.liquid {
+  /* --p va de 0 a 1: sube de 190 (vacío) a 20 (lleno) */
+  transform: translateY(calc(190px - var(--p, 0) * 170px));
+  transition: transform .8s var(--ease-io);
+}
+.wave { fill: #FF6B35; opacity: .9; animation: wave 3s linear infinite; }
+@keyframes wave { to { transform: translateX(80px); } }
+.meter.full .wave { fill: #4A6670; }
+.pct { color: #4A6670; transition: color .4s; }
+.meter:not(.full) .pct { text-shadow: 0 1px 0 #fff; }
+.meter.full { animation: celebrate .6s cubic-bezier(.3, 1.6, .5, 1); }
+.meter.full .pct { color: #FFD97D; }
+@keyframes celebrate { 40% { transform: scale(1.06); } }
+
+.lvl { animation: lvl .4s var(--ease-out); }
+@keyframes lvl { from { opacity: 0; transform: translateY(8px); } }
+.gap-item { animation: lvl .35s var(--ease-out); }
+
+/* ---------- Formulario ---------- */
+.field input { transition: border-color .2s, box-shadow .2s, background-color .2s; }
+.field input:focus { outline: none; border-color: #4A6670; background: #fff; box-shadow: 0 0 0 4px rgba(74, 102, 112, .14); }
+.field .invalid { border-color: #B42318; box-shadow: 0 0 0 4px rgba(180, 35, 24, .10); }
+.err { animation: errIn .25s var(--ease-out); }
+@keyframes errIn { from { opacity: 0; transform: translateY(-4px); } }
+.busy { animation: busy 1s ease-in-out infinite; }
+.busy:nth-child(2) { animation-delay: .15s; }
+.busy:nth-child(3) { animation-delay: .3s; }
+@keyframes busy { 50% { transform: translateY(-4px); opacity: 1; } 0%, 100% { opacity: .5; } }
+
+/* ---------- Éxito ---------- */
+.trace-ok, .ok-check { stroke-dasharray: 1; stroke-dashoffset: 0; }
+:host-context(html.anim) .success .trace-ok { stroke-dashoffset: 1; animation: draw 1.1s var(--ease-io) forwards; }
+:host-context(html.anim) .success .ok-arch { opacity: 0; transform: translateY(10px); transform-box: fill-box; animation: rise .6s var(--ease-out) .7s forwards; }
+:host-context(html.anim) .success .ok-check { stroke-dashoffset: 1; animation: draw .5s var(--ease-out) 1.2s forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes rise { to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .wave { animation: none; }
+}

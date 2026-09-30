@@ -1,0 +1,50 @@
+:host {
+  display: block;
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+  --ease-io: cubic-bezier(.65, 0, .35, 1);
+}
+
+/* ---------- Anillos ---------- */
+.ring {
+  stroke: rgba(74, 102, 112, .14);
+  cursor: pointer;
+  transition: stroke .4s ease, filter .4s ease, stroke-width .4s var(--ease-out);
+}
+.ring:hover { stroke: rgba(74, 102, 112, .28); }
+.ring.on { stroke: #FF6B35; stroke-width: 22; filter: drop-shadow(0 0 10px rgba(255, 107, 53, .45)); }
+
+/* Al aparecer, los anillos se dibujan del centro hacia afuera */
+/* Guion un 5% más largo que el círculo: se solapa y no deja "costura" visible */
+:host-context(html.anim) .ring { stroke-dasharray: 1.05 1; stroke-dashoffset: 1.05; transform-origin: 200px 200px; transform: rotate(-90deg); }
+:host-context(html.anim) .rings-wrap.in .ring {
+  animation: drawRing 1s var(--ease-io) forwards;
+  animation-delay: calc(var(--k) * 150ms + 200ms);
+}
+@keyframes drawRing { to { stroke-dashoffset: 0; } }
+
+.badge { cursor: pointer; }
+.badge circle { fill: #fff; stroke: #EADFCC; stroke-width: 2; transition: fill .3s, stroke .3s; }
+.badge text { fill: #4A6670; transition: fill .3s; }
+.badge.on circle { fill: #2E434A; stroke: #2E434A; }
+.badge.on text { fill: #FFD97D; }
+
+/* Amenaza que se acerca y rebota */
+.attacker { animation: attack 2.6s ease-in infinite; opacity: 0; }
+@keyframes attack {
+  0%   { transform: translate(0, 0); opacity: 0; }
+  15%  { opacity: 1; }
+  55%  { transform: translate(38px, -38px); opacity: 1; }   /* toca el anillo exterior */
+  70%  { transform: translate(24px, -24px); opacity: .6; }  /* rebota */
+  100% { transform: translate(14px, -14px); opacity: 0; }
+}
+
+/* ---------- Lista ---------- */
+.layer { border-color: #EADFCC; background: rgba(255, 255, 255, .5); }
+.layer:hover { border-color: rgba(74, 102, 112, .3); background: #fff; }
+.layer .num { background: #E3EAEC; color: #4A6670; transition: background-color .3s, color .3s; }
+.layer.on { border-color: #FF6B35; background: #fff; box-shadow: 0 16px 32px -20px rgba(46, 67, 74, .45); }
+.layer.on .num { background: #FF6B35; color: #1E2B30; }
+
+@media (prefers-reduced-motion: reduce) {
+  .attacker { display: none; }
+}

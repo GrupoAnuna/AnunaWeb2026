@@ -23,8 +23,14 @@ export const routes: Routes = [
   },
 
   {
-  path: 'consultoria',
-  loadComponent: () => import('./features/consultoria/consulting').then((m) => m.Consulting),
-  title: 'Consultoría tecnológica | Grupo Anuna',
-},
+    path: 'consultoria',
+    loadComponent: () => import('./features/consultoria/consulting').then((m) => m.Consulting),
+    title: 'Consultoría tecnológica | Grupo Anuna',
+  },
+
+  {
+    path: 'ciberseguridad',
+    loadComponent: () => import('./features/ciberseguridad/cybersecurity').then((m) => m.Cybersecurity),
+    title: 'Ciberseguridad para tu negocio | Grupo Anuna',
+  },
 ];

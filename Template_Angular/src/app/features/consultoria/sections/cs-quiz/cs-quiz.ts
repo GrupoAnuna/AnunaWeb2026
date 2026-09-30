@@ -67,7 +67,8 @@ export class CsQuiz {
   constructor() {
     inject(DestroyRef).onDestroy(() => {
       clearTimeout(this.timer);
-      cancelAnimationFrame(this.raf);
+      // requestAnimationFrame solo existe en el navegador: en el servidor (SSR) raf siempre es 0
+      if (this.raf) cancelAnimationFrame(this.raf);
     });
   }
 

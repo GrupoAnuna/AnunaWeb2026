@@ -1,0 +1,106 @@
+<section class="relative overflow-clip" aria-labelledby="cy-title">
+  <div class="mx-auto grid max-w-content items-center gap-14 px-5 pb-20 pt-12 sm:px-8 md:pt-16 lg:grid-cols-[1fr_1fr] lg:gap-10 lg:pb-28 lg:pt-20">
+
+    <!-- Texto -->
+    <div class="max-w-xl">
+      <p class="hero-in mb-6 inline-flex items-center gap-2 rounded-full border border-anuna-line bg-white/70 px-3.5 py-1.5 text-sm font-medium text-anuna-slate" style="--d:0ms">
+        <app-icon name="shield" class="h-4 w-4 text-anuna-orange-700" />
+        Ciberseguridad
+      </p>
+
+      <h1 id="cy-title" [attr.aria-label]="headline"
+        class="text-[2.5rem] font-bold leading-[1.08] tracking-[-0.02em] text-anuna-slate sm:text-5xl lg:text-[3.5rem]">
+        @for (w of words; track $index) {
+          <span class="word" aria-hidden="true"><span [style.--i]="$index">{{ w }}</span></span>{{ ' ' }}
+        }
+      </h1>
+
+      <p class="hero-in mt-6 max-w-[34rem] text-lg leading-relaxed text-anuna-gray" style="--d:550ms">
+        Cuidamos tu información, tus equipos y la confianza de tus clientes. Te explicamos todo en palabras simples y actuamos antes de que haya un problema.
+      </p>
+
+      <div class="hero-in mt-9 flex flex-col gap-3 sm:flex-row sm:items-center" style="--d:700ms">
+        <a [routerLink]="[]" fragment="chequeo" appRipple
+          class="ripple-host shine inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-anuna-orange px-7 py-4 text-base font-bold text-anuna-ink shadow-anuna-sm transition duration-200 hover:-translate-y-0.5 hover:bg-anuna-orange-hover hover:shadow-anuna-cta active:translate-y-0 active:bg-anuna-orange-active focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2 focus-visible:ring-offset-anuna-cream">
+          Haz el chequeo gratis
+          <app-icon name="arrow-right" class="h-5 w-5" />
+        </a>
+        <a [routerLink]="[]" fragment="como-una-casa"
+          class="inline-flex items-center justify-center whitespace-nowrap rounded-full border-2 border-anuna-slate/25 px-7 py-[14px] text-base font-bold text-anuna-slate transition-colors duration-200 hover:border-anuna-slate hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2 focus-visible:ring-offset-anuna-cream">
+          Explícamelo fácil
+        </a>
+      </div>
+
+      <ul class="hero-in mt-9 flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-anuna-slate" style="--d:850ms">
+        @for (t of perks; track t) {
+          <li class="flex items-center gap-2">
+            <span class="flex h-5 w-5 items-center justify-center rounded-full bg-anuna-yellow text-anuna-slate-900"><app-icon name="check" class="h-3 w-3" /></span>
+            {{ t }}
+          </li>
+        }
+      </ul>
+
+      <!-- Acceso de emergencia -->
+      <a [href]="emergency" target="_blank" rel="noopener"
+        class="hero-in sos group mt-9 flex items-center gap-4 rounded-2xl border border-anuna-orange/40 bg-white px-5 py-4 transition duration-200 hover:border-anuna-orange hover:shadow-anuna-md focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-orange"
+        style="--d:1000ms">
+        <span class="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-anuna-orange text-anuna-ink">
+          <span class="sos-ring absolute inset-0 rounded-full bg-anuna-orange" aria-hidden="true"></span>
+          <app-icon name="alert" class="relative h-5 w-5" />
+        </span>
+        <span class="flex-1">
+          <span class="block text-[15px] font-bold text-anuna-slate">¿Crees que te hackearon?</span>
+          <span class="block text-sm text-anuna-gray">Escríbenos ahora por WhatsApp y te orientamos.</span>
+        </span>
+        <app-icon name="arrow-right" class="sos-arrow h-5 w-5 text-anuna-orange-700" />
+        <span class="sr-only">(abre WhatsApp en una pestaña nueva)</span>
+      </a>
+    </div>
+
+    <!-- Ilustración: escudo con radar -->
+    <div class="stage relative mx-auto aspect-square w-full max-w-[500px]" aria-hidden="true">
+      <!-- Anillos del radar -->
+      <span class="ring absolute inset-[4%] rounded-full border-2 border-dashed border-anuna-slate/15"></span>
+      <span class="ring absolute inset-[18%] rounded-full border-2 border-anuna-slate/10"></span>
+      <span class="ring absolute inset-[31%] rounded-full border-2 border-anuna-orange/20"></span>
+
+      <!-- Barrido del radar -->
+      <span class="sweep absolute inset-[4%] rounded-full"></span>
+
+      <!-- Amenazas que se acercan y rebotan -->
+      @for (t of threats; track $index) {
+        <span class="threat absolute left-1/2 top-1/2 h-0 w-0" [style.--a]="t.a + 'deg'" [style.--delay]="t.d + 's'">
+          <span class="threat-dot absolute -left-[7px] -top-[7px] h-3.5 w-3.5 rounded-full"></span>
+          <span class="hit absolute -left-[14px] -top-[14px] h-7 w-7 rounded-full border-2 border-anuna-orange"></span>
+        </span>
+      }
+
+      <!-- Escudo -->
+      <div class="shield absolute left-1/2 top-1/2 flex h-[44%] w-[36%] -translate-x-1/2 -translate-y-1/2 items-center justify-center">
+        <svg viewBox="0 0 160 190" class="h-full w-full drop-shadow-xl">
+          <path d="M10 180 V80 A70 70 0 0 1 150 80 V180 Z" fill="#2E434A" />
+          <path d="M28 168 V82 A52 52 0 0 1 132 82 V168 Z" fill="#4A6670" />
+          <path class="shield-glow" d="M28 168 V82 A52 52 0 0 1 132 82 V168 Z" fill="none" stroke="#FFD97D" stroke-width="3" />
+          <!-- Candado -->
+          <g transform="translate(52 72)">
+            <path d="M14 38 V26 a14 14 0 0 1 28 0 V38" fill="none" stroke="#FDF6EC" stroke-width="7" stroke-linecap="round" />
+            <rect x="4" y="36" width="48" height="40" rx="9" fill="#FF6B35" />
+            <circle cx="28" cy="52" r="5" fill="#1E2B30" />
+            <rect x="25.5" y="54" width="5" height="11" rx="2.5" fill="#1E2B30" />
+          </g>
+        </svg>
+      </div>
+
+      <!-- Estado -->
+      <span class="status absolute left-1/2 top-[3%] inline-flex -translate-x-1/2 items-center gap-2 rounded-full bg-anuna-slate px-3.5 py-1.5 text-xs font-bold text-anuna-cream shadow-anuna-md">
+        <span class="status-dot h-2 w-2 rounded-full bg-[#A8D5BA]"></span> Monitoreo activo
+      </span>
+
+      <!-- Aviso que aparece cada cierto tiempo -->
+      <div class="toast absolute bottom-[6%] left-1/2 flex w-60 -translate-x-1/2 items-center gap-3 rounded-2xl bg-white p-3 shadow-anuna-lg">
+        <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-anuna-yellow text-anuna-slate-900"><app-icon name="shield" class="h-4 w-4" /></span>
+        <span><span class="block text-xs font-bold text-anuna-slate">Amenaza bloqueada</span><span class="block text-[11px] text-anuna-gray">Correo sospechoso detenido</span></span>
+      </div>
+    </div>
+  </div>
+</section>
