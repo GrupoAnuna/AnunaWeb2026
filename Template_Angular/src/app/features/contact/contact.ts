@@ -12,13 +12,14 @@ import { Reveal } from '../../shared/reveal';
 import { ContactService } from './contact.service';
 import { HeaderComponent } from '@features/shell/components/header/header.component';
 import { Footer } from '@features/shell/components/footer/footer.component';
+import { Whatsapp } from '@features/shell/components/whatsapp/whatsapp';
 
 type Status = 'idle' | 'sending' | 'success' | 'error';
 type Field = 'nombre' | 'email' | 'mensaje' | 'privacidad';
 
 @Component({
   selector: 'app-contact',
-  imports: [ReactiveFormsModule, Reveal,HeaderComponent,Footer],
+  imports: [ReactiveFormsModule, Reveal,HeaderComponent,Footer, Whatsapp],
   templateUrl: './contact.html',
   styleUrl: './contact.css',
 })

@@ -7,11 +7,11 @@ import { WdProcess } from './sections/wd-process/wd-process';
 import { WdQuote } from './sections/wd-quote/wd-quote';
 import { Footer } from '@features/shell/components/footer/footer.component';
 import { HeaderComponent } from '@features/shell/components/header/header.component';
-
+import { Whatsapp } from '@features/shell/components/whatsapp/whatsapp';
 
 @Component({
   selector: 'app-web-development',
-  imports: [WdHero, WdServices, WdWhy, WdProcess, WdQuote, Footer, HeaderComponent],
+  imports: [WdHero, WdServices, WdWhy, WdProcess, WdQuote, Footer, HeaderComponent,Whatsapp],
   templateUrl: './web-development.html',
 })
 export class WebDevelopment {

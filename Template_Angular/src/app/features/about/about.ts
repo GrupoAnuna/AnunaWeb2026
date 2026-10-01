@@ -4,11 +4,11 @@ import { Reveal } from '../../shared/reveal';
 import { PILLARS, TEAMS } from './about.data';
 import { Footer } from '@features/shell/components/footer/footer.component';
 import { HeaderComponent } from '@features/shell/components/header/header.component';
-
+import { Whatsapp } from '@features/shell/components/whatsapp/whatsapp';
 
 @Component({
   selector: 'app-about',
-  imports: [NgOptimizedImage, Reveal,HeaderComponent,Footer],
+  imports: [NgOptimizedImage, Reveal,HeaderComponent,Footer, Whatsapp],
   templateUrl: './about.html',
   styleUrl: './about.css',
 })

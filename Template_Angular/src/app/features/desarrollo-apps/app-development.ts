@@ -7,10 +7,10 @@ import { AdProcess } from './sections/ad-process/ad-process';
 import { AdBuilder } from './sections/ad-builder/ad-builder';
 import { Footer } from '@features/shell/components/footer/footer.component';
 import { HeaderComponent } from '@features/shell/components/header/header.component';
-
+import { Whatsapp } from '@features/shell/components/whatsapp/whatsapp';
 @Component({
   selector: 'app-app-development',
-  imports: [AdHero, AdTypes, AdFeatures, AdProcess, AdBuilder, Footer, HeaderComponent],
+  imports: [AdHero, AdTypes, AdFeatures, AdProcess, AdBuilder, Footer, HeaderComponent, Whatsapp],
   templateUrl: './app-development.html',
 })
 export class AppDevelopment {

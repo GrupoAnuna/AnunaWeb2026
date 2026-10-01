@@ -8,10 +8,11 @@ import { CyCycle } from './sections/cy-cycle/cy-cycle';
 import { CyCheckup } from './sections/cy-checkup/cy-checkup';
 import { Footer } from '@features/shell/components/footer/footer.component';
 import { HeaderComponent } from '@features/shell/components/header/header.component';
+import { Whatsapp } from '@features/shell/components/whatsapp/whatsapp';
 
 @Component({
   selector: 'app-cybersecurity',
-  imports: [CyHero, CyHouse, CyPhishing, CyLayers, CyCycle, CyCheckup, Footer, HeaderComponent],
+  imports: [CyHero, CyHouse, CyPhishing, CyLayers, CyCycle, CyCheckup, Footer, HeaderComponent, Whatsapp],
   templateUrl: './cybersecurity.html',
 })
 export class Cybersecurity {

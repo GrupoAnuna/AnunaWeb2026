@@ -7,11 +7,11 @@ import { CsFormats } from './sections/cs-formats/cs-formats';
 import { CsQuiz } from './sections/cs-quiz/cs-quiz';
 import { Footer } from '@features/shell/components/footer/footer.component';
 import { HeaderComponent } from '@features/shell/components/header/header.component';
-
+import { Whatsapp } from '@features/shell/components/whatsapp/whatsapp';
 
 @Component({
   selector: 'app-consulting',
-  imports: [CsHero, CsPains, CsAreas, CsFormats, CsQuiz, Footer, HeaderComponent],
+  imports: [CsHero, CsPains, CsAreas, CsFormats, CsQuiz, Footer, HeaderComponent, Whatsapp],
   templateUrl: './consulting.html',
 })
 export class Consulting {

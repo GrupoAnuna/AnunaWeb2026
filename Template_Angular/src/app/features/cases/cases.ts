@@ -7,11 +7,11 @@ import { Tilt } from  '../../shared/tilt';
 import { CASES } from './cases.data';
 import { Footer } from '@features/shell/components/footer/footer.component';
 import { HeaderComponent } from '@features/shell/components/header/header.component';
-
+import { Whatsapp } from '@features/shell/components/whatsapp/whatsapp';
 
 @Component({
   selector: 'app-cases',
-  imports: [NgOptimizedImage, RouterLink, Reveal, Ripple, Tilt, Footer, HeaderComponent],
+  imports: [NgOptimizedImage, RouterLink, Reveal, Ripple, Tilt, Footer, HeaderComponent, Whatsapp],
   templateUrl: './cases.html',
   styleUrl: './cases.css',
 })
