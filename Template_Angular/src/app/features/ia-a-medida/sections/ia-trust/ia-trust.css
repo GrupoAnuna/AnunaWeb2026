@@ -1,0 +1,22 @@
+:host {
+  display: block;
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+}
+
+/* Los principios aparecen en orden y su check "salta" al final */
+:host-context(html.anim) .principle { opacity: 0; transform: translateY(16px); transition: opacity .6s var(--ease-out), transform .6s var(--ease-out); }
+:host-context(html.anim) .trust.in .principle { opacity: 1; transform: none; transition-delay: calc(var(--k) * 160ms + 300ms); }
+:host-context(html.anim) .badge-check { transform: scale(0); transition: transform .45s cubic-bezier(.3, 1.6, .5, 1); }
+:host-context(html.anim) .trust.in .badge-check { transform: none; transition-delay: calc(var(--k) * 160ms + 800ms); }
+
+.principle { transition: background-color .3s, border-color .3s; }
+.principle:hover { background: rgba(255, 255, 255, .09); border-color: rgba(255, 217, 125, .35); }
+.badge { transition: transform .4s cubic-bezier(.3, 1.4, .5, 1); }
+.principle:hover .badge { transform: rotate(-6deg) scale(1.06); }
+
+.wm { animation: float 8s ease-in-out infinite; }
+@keyframes float { 50% { transform: translateY(-10px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .wm { animation: none; }
+}

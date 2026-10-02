@@ -35,8 +35,14 @@ export const routes: Routes = [
   },
 
   {
-  path: 'cloud',
-  loadComponent: () => import('./features/cloud/cloud-page').then((m) => m.CloudPage),
-  title: 'Servicios cloud | Grupo Anuna',
-},
+    path: 'cloud',
+    loadComponent: () => import('./features/cloud/cloud-page').then((m) => m.CloudPage),
+    title: 'Servicios cloud | Grupo Anuna',
+  },
+  {
+    path: 'ia-medida',
+    loadComponent: () => import('./features/ia-a-medida/ai-page').then((m) => m.AiPage),
+    title: 'IA a medida para tu negocio | Grupo Anuna',
+  },
+
 ];

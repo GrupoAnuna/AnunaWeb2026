@@ -1,0 +1,91 @@
+<section class="bg-white py-20 lg:py-20s" aria-labelledby="ia-flow-title">
+  <div class="mx-auto max-w-content px-5 sm:px-8">
+
+    <div class="mx-auto max-w-2xl text-center">
+      <p appReveal class="reveal mb-5 text-[15px] font-bold text-anuna-orange-700">A medida, no genérica</p>
+      <h2 id="ia-flow-title" appReveal style="--d:80ms"
+        class="reveal text-3xl font-bold leading-tight tracking-[-0.015em] text-anuna-slate sm:text-4xl lg:text-[2.75rem]">
+        Una IA que conoce tu negocio
+      </h2>
+      <p appReveal style="--d:160ms" class="reveal mt-5 text-lg leading-relaxed text-anuna-gray">
+        Un chat genérico no sabe tus precios, tu inventario ni tus políticas. La tuya sí: la conectamos a tu información y la ponemos donde están tus clientes y tu equipo.
+      </p>
+    </div>
+
+    <!-- ===== Escritorio: diagrama ===== -->
+    <div appReveal class="reveal flow relative mx-auto mt-14 hidden aspect-[900/400] w-full max-w-5xl md:block" style="--d:120ms" aria-hidden="true">
+      <svg class="absolute inset-0 h-full w-full" viewBox="0 0 900 400" fill="none" stroke-linecap="round">
+        @for (y of srcY; track y; let i = $index) {
+          <path [id]="'ia-in-' + i" class="wire" pathLength="1" [attr.d]="inPath(y)" stroke="#4A6670" stroke-opacity=".3" stroke-width="2.5" [style.--k]="i" />
+        }
+        @for (y of outY; track y; let i = $index) {
+          <path [id]="'ia-out-' + i" class="wire" pathLength="1" [attr.d]="outPath(y)" stroke="#FF6B35" stroke-opacity=".55" stroke-width="2.5" [style.--k]="i + 4" />
+        }
+
+        <!-- Pulsos: datos que entran y respuestas que salen -->
+        <g class="pulses">
+          @for (y of srcY; track y; let i = $index) {
+            <circle r="5" fill="#4A6670" opacity="0">
+              <animateMotion dur="2.4s" [attr.begin]="(1.8 + i * .45) + 's'" repeatCount="indefinite"><mpath [attr.href]="'#ia-in-' + i" /></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.4s" [attr.begin]="(1.8 + i * .45) + 's'" repeatCount="indefinite" />
+            </circle>
+          }
+          @for (y of outY; track y; let i = $index) {
+            <circle r="5" fill="#FF6B35" opacity="0">
+              <animateMotion dur="2.2s" [attr.begin]="(2.6 + i * .55) + 's'" repeatCount="indefinite"><mpath [attr.href]="'#ia-out-' + i" /></animateMotion>
+              <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.2s" [attr.begin]="(2.6 + i * .55) + 's'" repeatCount="indefinite" />
+            </circle>
+          }
+        </g>
+
+        <!-- Núcleo: tu IA -->
+        <circle class="halo" cx="450" cy="200" r="70" fill="#FFD97D" opacity=".35" />
+        <circle cx="450" cy="200" r="52" fill="#2E434A" />
+        <g transform="translate(428 172) scale(.44)">
+          <path d="M14 130 V50 A36 36 0 0 1 86 50 V130" fill="none" stroke="#FDF6EC" stroke-width="28" />
+          <path d="M28 68 C58 70 84 94 100 130 H73 C63 104 47 90 28 91 Z" fill="#FF6B35" />
+        </g>
+      </svg>
+
+      <!-- Etiquetas -->
+      <p class="col-title absolute top-0 -translate-y-8 text-xs font-bold uppercase tracking-[.1em] text-anuna-gray" style="right: 80.3%">Tu información</p>
+      @for (s of sources; track s.label; let i = $index) {
+        <span class="tag tag-in absolute flex -translate-y-1/2 items-center gap-2.5 rounded-2xl border border-anuna-line bg-white px-3.5 py-2.5 text-sm font-bold text-anuna-slate shadow-anuna-sm"
+          style="right: 80.3%" [style.top.%]="srcY[i] / 4" [style.--k]="i">
+          <span class="flex h-8 w-8 items-center justify-center rounded-xl bg-anuna-slate-100"><app-icon [name]="s.icon" class="h-4 w-4" /></span>
+          {{ s.label }}
+        </span>
+      }
+      <p class="absolute left-1/2 top-[70%] -translate-x-1/2 rounded-full bg-anuna-slate px-3.5 py-1.5 text-sm font-bold text-anuna-cream shadow-anuna-md">Tu IA</p>
+      <p class="col-title absolute top-0 -translate-y-8 text-xs font-bold uppercase tracking-[.1em] text-anuna-gray" style="left: 80%">Donde la usas</p>
+      @for (o of outputs; track o.label; let i = $index) {
+        <span class="tag tag-out absolute flex -translate-y-1/2 items-center gap-2.5 rounded-2xl bg-anuna-orange px-3.5 py-2.5 text-sm font-bold text-anuna-ink shadow-anuna-md"
+          style="left: 80%" [style.top.%]="outY[i] / 4" [style.--k]="i + 4">
+          <span class="flex h-8 w-8 items-center justify-center rounded-xl bg-white/40"><app-icon [name]="o.icon" class="h-4 w-4" /></span>
+          {{ o.label }}
+        </span>
+      }
+    </div>
+
+    <!-- ===== Móvil: versión apilada ===== -->
+    <div class="mt-12 md:hidden">
+      <p class="text-center text-xs font-bold uppercase tracking-[.1em] text-anuna-gray">Tu información</p>
+      <div class="mt-3 flex flex-wrap justify-center gap-2">
+        @for (s of sources; track s.label) {
+          <span class="inline-flex items-center gap-2 rounded-full border border-anuna-line bg-white px-3 py-2 text-sm font-bold text-anuna-slate"><app-icon [name]="s.icon" class="h-4 w-4" />{{ s.label }}</span>
+        }
+      </div>
+      <div class="mobile-arrow mx-auto my-4 h-10 w-[3px] rounded-full bg-anuna-slate/20" aria-hidden="true"></div>
+      <div class="mx-auto flex w-fit items-center gap-3 rounded-full bg-anuna-slate-900 px-5 py-3 text-anuna-cream">
+        <app-icon name="brain" class="h-5 w-5 text-anuna-yellow" /> <span class="font-bold">Tu IA</span>
+      </div>
+      <div class="mobile-arrow out mx-auto my-4 h-10 w-[3px] rounded-full bg-anuna-orange/40" aria-hidden="true"></div>
+      <p class="text-center text-xs font-bold uppercase tracking-[.1em] text-anuna-gray">Donde la usas</p>
+      <div class="mt-3 flex flex-wrap justify-center gap-2">
+        @for (o of outputs; track o.label) {
+          <span class="inline-flex items-center gap-2 rounded-full bg-anuna-orange px-3 py-2 text-sm font-bold text-anuna-ink"><app-icon [name]="o.icon" class="h-4 w-4" />{{ o.label }}</span>
+        }
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,111 @@
+<section class="relative overflow-clip" aria-labelledby="ia-title">
+  <div class="mx-auto grid max-w-content items-center gap-14 px-5 pb-20 pt-12 sm:px-8 md:pt-16 lg:grid-cols-[1fr_1fr] lg:gap-10 lg:pb-28 lg:pt-20">
+
+    <!-- Texto -->
+    <div class="max-w-xl">
+      <h1 id="ia-title" [attr.aria-label]="headline"
+        class="text-[2.5rem] font-bold leading-[1.08] tracking-[-0.02em] text-anuna-slate sm:text-5xl lg:text-[3.5rem]">
+        @for (w of words; track $index) {
+          <span class="word" aria-hidden="true"><span [style.--i]="$index">{{ w }}</span></span>{{ ' ' }}
+        }
+      </h1>
+
+      <p class="hero-in mt-6 max-w-[34rem] text-lg leading-relaxed text-anuna-gray" style="--d:650ms">
+        Creamos asistentes y automatizaciones con IA que conocen tu negocio: responden a tus clientes, leen tus documentos y le ahorran horas a tu equipo.
+      </p>
+
+      <div class="hero-in mt-9 flex flex-col gap-3 sm:flex-row sm:items-center" style="--d:800ms">
+        <a [routerLink]="[]" fragment="ideas" appRipple
+          class="ripple-host shine inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-anuna-orange px-7 py-4 text-base font-bold text-anuna-ink shadow-anuna-sm transition duration-200 hover:-translate-y-0.5 hover:bg-anuna-orange-hover hover:shadow-anuna-cta active:translate-y-0 active:bg-anuna-orange-active focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2 focus-visible:ring-offset-anuna-cream">
+          Descubre qué puede hacer por ti
+          <app-icon name="wand" class="h-5 w-5" />
+        </a>
+        <a [routerLink]="[]" fragment="demos"
+          class="inline-flex items-center justify-center whitespace-nowrap rounded-full border-2 border-anuna-slate/25 px-7 py-[14px] text-base font-bold text-anuna-slate transition-colors duration-200 hover:border-anuna-slate hover:bg-white focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2 focus-visible:ring-offset-anuna-cream">
+          Verla en acción
+        </a>
+      </div>
+
+      <ul class="hero-in mt-9 flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-anuna-slate" style="--d:950ms">
+        @for (t of perks; track t) {
+          <li class="flex items-center gap-2">
+            <span class="flex h-5 w-5 items-center justify-center rounded-full bg-anuna-yellow text-anuna-slate-900"><app-icon name="check" class="h-3 w-3" /></span>
+            {{ t }}
+          </li>
+        }
+      </ul>
+    </div>
+
+    <!-- Ilustración: chat en vivo con un asistente de IA -->
+    <div class="stage relative mx-auto w-full max-w-[500px] pb-24" aria-hidden="true">
+      <div class="chat relative overflow-hidden rounded-[28px] border border-anuna-line bg-white shadow-anuna-lg">
+
+        <!-- Encabezado del chat -->
+        <div class="flex items-center gap-3 bg-anuna-slate px-5 py-4 text-anuna-cream">
+          <span class="relative flex h-10 w-10 items-center justify-center rounded-full bg-anuna-yellow text-anuna-slate-900">
+            <app-icon name="bot" class="h-5 w-5" />
+            <span class="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-anuna-slate bg-[#A8D5BA]"></span>
+          </span>
+          <span class="flex-1">
+            <span class="block text-[15px] font-bold text-white">Asistente de Tu Tienda</span>
+            <span class="block text-xs text-anuna-cream/70">{{ typing() ? 'Escribiendo…' : 'En línea' }}</span>
+          </span>
+          <span class="rounded-full bg-white/10 px-2.5 py-1 text-[10px] font-bold">Ejemplo</span>
+        </div>
+
+        <!-- Mensajes -->
+        <div class="messages flex h-[340px] flex-col justify-end gap-3 bg-anuna-cream/60 p-5">
+          @for (m of chat; track $index; let i = $index) {
+            @if (i < count()) {
+              <div class="msg flex" [class.justify-end]="m.from === 'user'">
+                <div class="max-w-[82%]">
+                  <p class="bubble rounded-2xl px-4 py-2.5 text-[14px] leading-snug"
+                    [class]="m.from === 'user' ? 'rounded-br-md bg-anuna-slate text-white' : 'rounded-bl-md bg-white text-anuna-ink shadow-anuna-sm'">
+                    {{ m.text }}
+                  </p>
+                  @if (m.chips) {
+                    <div class="mt-2 flex flex-wrap gap-1.5">
+                      @for (c of m.chips; track c) {
+                        <span class="chip rounded-full border border-anuna-orange/50 bg-white px-3 py-1 text-xs font-bold text-anuna-orange-700">{{ c }}</span>
+                      }
+                    </div>
+                  }
+                </div>
+              </div>
+            }
+          }
+          @if (typing()) {
+            <div class="msg flex">
+              <span class="flex items-center gap-1 rounded-2xl rounded-bl-md bg-white px-4 py-3.5 shadow-anuna-sm">
+                <span class="dot h-2 w-2 rounded-full bg-anuna-slate/50"></span>
+                <span class="dot h-2 w-2 rounded-full bg-anuna-slate/50"></span>
+                <span class="dot h-2 w-2 rounded-full bg-anuna-slate/50"></span>
+              </span>
+            </div>
+          }
+        </div>
+
+        <!-- Caja de texto -->
+        <div class="flex items-center gap-3 border-t border-anuna-line px-4 py-3">
+          <span class="h-9 flex-1 rounded-full bg-anuna-cream"></span>
+          <span class="flex h-9 w-9 items-center justify-center rounded-full bg-anuna-orange text-anuna-ink"><app-icon name="send" class="h-4 w-4" /></span>
+        </div>
+      </div>
+
+      <!-- Panel: lo que la IA consulta para responder -->
+      <div class="sources absolute bottom-0 -left-2 w-56 rounded-2xl bg-anuna-slate-900 p-4 text-anuna-cream shadow-anuna-lg sm:-left-8">
+        <p class="flex items-center gap-2 text-xs font-bold text-anuna-yellow"><app-icon name="brain" class="h-4 w-4" /> Consultando tu información</p>
+        <ul class="mt-3 space-y-2">
+          @for (s of sources; track s) {
+            <li class="src flex items-center gap-2.5 text-[13px]" [class.searching]="searching() === s" [class.done]="isDone(s)">
+              <span class="src-dot flex h-5 w-5 items-center justify-center rounded-full">
+                <app-icon name="check" class="tick h-3 w-3" />
+              </span>
+              {{ s }}
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

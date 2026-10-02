@@ -7,7 +7,8 @@ export type AnunaIcon =
   | 'bag' | 'bolt' | 'briefcase' | 'sparkles' | 'server'
   | 'file' | 'target' | 'plug' | 'help' | 'sheet' | 'coins' | 'search'
   | 'shield' | 'key' | 'mail' | 'eye' | 'wifi' | 'database' | 'alert' | 'school' | 'link' | 'paperclip'
-  | 'cloud' | 'box' | 'building' | 'trend';
+  | 'cloud' | 'box' | 'building' | 'trend'
+  | 'bot' | 'brain' | 'hand' | 'send' | 'wand';
 
 /**
  * Iconos de trazo de la marca (24×24, heredan el color del texto).
@@ -67,6 +68,11 @@ export type AnunaIcon =
         @case ('box') { <path d="m12 3 8 4.5v9L12 21l-8-4.5v-9Z" /><path d="m4 7.5 8 4.5 8-4.5M12 12v9" /> }
         @case ('building') { <rect x="4" y="3" width="16" height="18" rx="2" /><path d="M9 21v-4h6v4M8 7h2M14 7h2M8 11h2M14 11h2" /> }
         @case ('trend') { <path d="m3 17 6-6 4 4 8-8" /><path d="M15 7h6v6" /> }
+        @case ('bot') { <rect x="4" y="8" width="16" height="12" rx="4" /><path d="M12 4v4M9 14h.01M15 14h.01" /><path d="M2 13v3M22 13v3" /> }
+        @case ('brain') { <path d="M9 4a3 3 0 0 0-3 3 3 3 0 0 0-2 5 3 3 0 0 0 2 5 3 3 0 0 0 3 3h0a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3Z" /><path d="M15 4a3 3 0 0 1 3 3 3 3 0 0 1 2 5 3 3 0 0 1-2 5 3 3 0 0 1-3 3h0a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3Z" /> }
+        @case ('hand') { <path d="M8 11V5.5a1.5 1.5 0 0 1 3 0V10M11 9.5V4a1.5 1.5 0 0 1 3 0v6M14 9.5V6a1.5 1.5 0 0 1 3 0v7a7 7 0 0 1-7 7h-.5A6.5 6.5 0 0 1 4 15l-1-3a1.5 1.5 0 0 1 2.7-1.2L8 13" /> }
+        @case ('send') { <path d="M21 3 10 14" /><path d="m21 3-7 18-4-7-7-4Z" /> }
+        @case ('wand') { <path d="m15 4 5 5L9 20l-5-5Z" /><path d="M13 6l5 5M5 3v3M3.5 4.5h3M19 15v3M17.5 16.5h3" /> }
         @case ('server') { <rect x="3" y="4" width="18" height="7" rx="2" /><rect x="3" y="13" width="18" height="7" rx="2" /><path d="M7 7.5h.01M7 16.5h.01" /> }
       }
     </svg>

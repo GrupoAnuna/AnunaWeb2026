@@ -1,0 +1,32 @@
+:host {
+  display: block;
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+  --ease-io: cubic-bezier(.65, 0, .35, 1);
+}
+
+/* Cables: se dibujan al aparecer */
+.wire { stroke-dasharray: 1; stroke-dashoffset: 0; }
+:host-context(html.anim) .wire { stroke-dashoffset: 1; }
+:host-context(html.anim) .flow.in .wire { animation: draw 1s var(--ease-io) forwards; animation-delay: calc(var(--k) * 110ms + 300ms); }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+
+/* Núcleo que "respira" */
+.halo { transform-origin: 450px 200px; animation: breathe 3s ease-in-out infinite; }
+@keyframes breathe { 50% { transform: scale(1.15); opacity: .55; } }
+
+/* Etiquetas que aparecen en orden */
+:host-context(html.anim) .tag { opacity: 0; transition: opacity .5s ease, transform .5s var(--ease-out); transform: scale(.9); }
+:host-context(html.anim) .flow.in .tag { opacity: 1; transform: none; transition-delay: calc(var(--k) * 110ms + 200ms); }
+.tag { transition: box-shadow .3s; }
+.tag:hover { box-shadow: 0 12px 24px -12px rgba(46, 67, 74, .4); }
+
+/* Móvil: flechas con pulso */
+.mobile-arrow { position: relative; overflow: hidden; }
+.mobile-arrow::after { content: ""; position: absolute; left: 0; right: 0; height: 12px; border-radius: 99px; background: #4A6670; animation: drop 1.6s ease-in infinite; }
+.mobile-arrow.out::after { background: #FF6B35; animation-delay: .8s; }
+@keyframes drop { from { top: -12px; } to { top: 100%; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .halo, .mobile-arrow::after { animation: none; }
+  .pulses { display: none; }
+}

@@ -1,0 +1,30 @@
+:host {
+  display: block;
+  --ease-out: cubic-bezier(.2, .8, .2, 1);
+}
+
+.sol { background: #fff; border-color: #EADFCC; color: #5C5C5C; }
+.sol:hover { border-color: rgba(74, 102, 112, .3); transform: translateY(-4px); box-shadow: 0 16px 32px -16px rgba(46, 67, 74, .28); }
+.sol-title { color: #4A6670; }
+.sol-ideal { background: #FDF6EC; color: #4A6670; }
+.sol-icon { position: relative; overflow: hidden; isolation: isolate; background: #E3EAEC; color: #4A6670; }
+.sol-icon::before { content: ""; position: absolute; inset: auto 0 0 0; height: 0; background: #FFD97D; z-index: -1; transition: height .45s var(--ease-out); }
+.sol:hover .sol-icon::before { height: 100%; }
+.icon { transition: transform .5s var(--ease-out); }
+.sol:hover .icon { transform: rotate(-8deg) scale(1.1); }
+
+/* Tarjeta destacada */
+.sol-featured { background: #2E434A; border-color: #2E434A; color: rgb(253 246 236 / .85); }
+.sol-featured:hover { border-color: #2E434A; }
+.sol-featured .sol-title { color: #fff; }
+.sol-featured .sol-ideal { background: rgba(255, 255, 255, .08); color: #FDF6EC; }
+.sol-featured .sol-icon { background: #FFD97D; color: #2E434A; }
+.sol-featured .sol-icon::before { background: #FF804F; }
+
+/* Destello "mágico" al pasar el cursor */
+.sheen { background: linear-gradient(115deg, transparent 35%, rgba(255, 217, 125, .25) 50%, transparent 65%); transform: translateX(-100%); transition: transform .9s var(--ease-out); }
+.sol:hover .sheen { transform: translateX(100%); }
+
+@media (prefers-reduced-motion: reduce) {
+  .sol:hover { transform: none; }
+}
