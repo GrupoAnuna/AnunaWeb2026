@@ -49,4 +49,10 @@ export const routes: Routes = [
     title: 'IA a medida para tu negocio | Grupo Anuna',
   },
 
+  // CORRECCIÓN: Cambiado de loadComponent a redirectTo para limpiar la URL
+  {
+    path: '**', 
+    redirectTo: '', 
+    pathMatch: 'full'
+  },
 ];
