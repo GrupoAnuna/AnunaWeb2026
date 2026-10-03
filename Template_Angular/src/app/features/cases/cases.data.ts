@@ -14,13 +14,13 @@ export interface CaseStudy {
 
 export const CASES: CaseStudy[] = [
   {
-    name: 'New Car Las Heras',
+    name: 'MC Manus',
     category: 'Plataforma a medida',
     description:
-      'Desarrollo de catálogo digital de vehículos con panel de administración propio. El cliente gestiona stock, fotos y precios en tiempo real sin depender de técnicos.',
-    tags: ['Panel Admin', 'Catálogo Digital', 'Angular'],
-    url: 'https://www.newcarlasheras.com/',
-    image: '/cases/new-car-las-heras.webp',
+      'Plataforma personal y profesional centrada en la asesoría financiera y patrimonial, operada por la Wealth Engineer Erica McManu',
+    tags: ['Informativa', 'Finanzas', 'Estilo de vida'],
+    url: 'https://www.mcmanus.mx/',
+    image: '/cases/mcmanus.webp',
   },
   {
     name: 'El Mundo Exterior',
@@ -30,6 +30,15 @@ export const CASES: CaseStudy[] = [
     tags: ['Shopify Expert', 'Ventas 24/7', 'UX/UI'],
     url: 'https://elmundoexterior.com/',
     image: '/cases/el-mundo-exterior.webp',
+  },
+  {
+    name: 'Las Corzuelas horse',
+    category: 'Plataforma a medida',
+    description:
+      'Sitio web para empresa especializada en el transporte aéreo internacional de caballos de alto rendimiento (para polo, salto, adiestramiento y carreras).',
+    tags: ['Informativa', 'Finanzas', 'Estilo de vida'],
+    url: 'https://lascorzuelashorsetransport.com/',
+    image: '/cases/corzuelas.webp',
   },
   {
     name: 'Resha',
@@ -57,5 +66,48 @@ export const CASES: CaseStudy[] = [
     tags: ['Innovación', 'Landing Page', 'Diseño Moderno'],
     url: 'https://fabjardin.com/',
     image: '/cases/fab-jardin.webp',
+  },
+];
+
+// ============================================================
+// Apps móviles. Para agregar una, copia un bloque y guarda su
+// captura vertical en /public/apps/ (ej. 1080 × 2340 px).
+// Si una app no tiene captura todavía, deja "image" vacío y se
+// mostrará una pantalla ilustrada con el color de la app.
+// Si la lista queda vacía, la pestaña "Apps móviles" se oculta.
+// ============================================================
+
+export interface AppCase {
+  name: string;
+  category: string;
+  description: string;
+  tags: string[];
+  platforms: ('iOS' | 'Android')[];
+  color: string;        // color principal de la app (para la pantalla ilustrada)
+  image?: '/cases/app/Flat-Flowapp.webp';       // captura vertical dentro de /public (opcional)
+  appStore?: string;    // enlace a la App Store (opcional)
+  googlePlay?: string;  // enlace a Google Play (opcional)
+}
+
+export const APP_CASES: AppCase[] = [
+  // ⚠️ PLANTILLA: reemplaza con una app real antes de publicar
+  {
+    name: 'Flat Flow',
+    category: 'App móvil',
+    description: 'App para organizar eventos, tareas, gastos y chat con tus roommies/padres, hijos etc',
+    tags: ['Estilo de vida', 'Organización', 'Productividad'],
+    platforms: ['iOS', 'Android'],
+    color: '#4A6670',
+    image: '/cases/app/Flat-Flowapp.webp'
+  },
+  // ⚠️ PLANTILLA: reemplaza con una app real antes de publicar
+  {
+    name: 'Otra app de ejemplo',
+    category: 'App empresarial',
+    description: 'Reemplaza este texto. Puedes añadir los enlaces de App Store y Google Play para que aparezcan los botones de descarga.',
+    tags: ['Plantilla', 'Reemplazar'],
+    platforms: ['Android'],
+    color: '#FF6B35',
+    // image: '/cases/app/Flat-login.webp'
   },
 ];

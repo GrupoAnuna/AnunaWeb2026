@@ -1,105 +1,307 @@
 <app-header></app-header>
 
-<section id="casos" class="relative overflow-hidden bg-anuna-slate-900 py-16 text-anuna-cream lg:py-16" aria-labelledby="casos-title">
-
-  <!-- Halo cálido de fondo -->
-  <div class="halo pointer-events-none absolute left-1/2 top-0 h-[520px] w-[900px] -translate-x-1/2 -translate-y-1/3" aria-hidden="true"></div>
-
-  <div class="relative mx-auto max-w-content px-5 sm:px-8">
+<section id="casos" class="bg-white py-20 lg:py-12" aria-labelledby="casos-title">
+  <div class="mx-auto max-w-content px-5 sm:px-8">
 
     <!-- Encabezado -->
-    <div class="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end">
+    <div class="max-w-full lg:grid-cols-[1fr_1fr] lg:items-end">
       <div>
-        <p appReveal class="reveal mb-5 text-[15px] font-bold text-anuna-yellow">Casos de éxito</p>
+        <p appReveal class="reveal mb-5 text-[15px] font-bold text-anuna-orange-700">Casos de éxito</p>
         <h2 id="casos-title" appReveal style="--d:80ms"
-          class="reveal text-3xl font-bold leading-tight tracking-[-0.015em] text-white sm:text-4xl lg:text-[2.75rem]">
+          class="reveal text-3xl font-bold leading-tight tracking-[-0.015em] text-anuna-slate sm:text-4xl lg:text-[2.75rem]">
           Confían en nosotros
         </h2>
+        <p appReveal style="--d:160ms"
+          class="reveal mb-5 text-lg leading-relaxed text-anuna-gray ">
+          Proyectos reales que generan resultados medibles. Explóralos uno por uno.
+        </p>
       </div>
-      <p appReveal style="--d:160ms" class="reveal max-w-md text-lg leading-relaxed text-anuna-cream/80 lg:justify-self-end">
-        Proyectos reales que generan resultados medibles.
-      </p>
     </div>
 
-    <!-- Proyectos -->
-    <ul class="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-6">
-      @for (c of cases; track c.url; let i = $index) {
-        <li appReveal class="reveal case" [class]="spanClass(i)" [style.--d]="(i % 3) * 140 + 'ms'">
-          <article appTilt [tiltMax]="i < 2 ? 4 : 6" class="case-card group relative h-full rounded-[24px] p-px">
+    <!-- Pestañas: sitios web / apps móviles (se ocultan si no hay apps) -->
+    @if (apps.length) {
+    <div appReveal class="reveal mt-10 flex" style="--d:100ms">
+      <div class="kind-tabs relative inline-grid grid-cols-2 rounded-full bg-anuna-cream p-1.5" role="tablist"
+        aria-label="Tipo de proyecto" [style.--tab]="kind() === 'web' ? 0 : 1">
+        <span class="tab-pill absolute bottom-1.5 left-1.5 top-1.5 rounded-full bg-anuna-slate shadow-anuna-md"
+          aria-hidden="true"></span>
+        <button type="button" role="tab" [attr.aria-selected]="kind() === 'web'" aria-controls="casos-carrusel"
+          (click)="setKind('web')"
+          class="kind-tab relative z-10 inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-orange"
+          [class.on]="kind() === 'web'">
+          <app-icon name="globe" class="h-4 w-4" /> Sitios web
+          <span class="count rounded-full px-2 py-0.5 text-[11px]">{{ webs.length }}</span>
+        </button>
+        <button type="button" role="tab" [attr.aria-selected]="kind() === 'app'" aria-controls="casos-carrusel"
+          (click)="setKind('app')"
+          class="kind-tab relative z-10 inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-orange"
+          [class.on]="kind() === 'app'">
+          <app-icon name="phone" class="h-4 w-4" /> Apps móviles
+          <span class="count rounded-full px-2 py-0.5 text-[11px]">{{ apps.length }}</span>
+        </button>
+      </div>
+    </div>
+    }
 
-            <!-- Borde de energía que gira al pasar el cursor -->
-            <span class="case-glow" aria-hidden="true"></span>
+    <!-- ===== Carrusel ===== -->
+    <div id="casos-carrusel" appReveal
+      class="reveal stage relative overflow-clip rounded-[36px] bg-anuna-cream p-5 sm:p-8 lg:p-10" style="--d:120ms"
+      [class.mt-6]="apps.length" [class.mt-12]="!apps.length" role="region" aria-roledescription="carrusel"
+      [attr.aria-label]="kind() === 'web' ? 'Sitios web desarrollados por Grupo Anuna' : 'Apps móviles desarrolladas por Grupo Anuna'"
+      (mouseenter)="pause(true)" (mouseleave)="pause(false)" (focusin)="pause(true)" (focusout)="pause(false)"
+      (keydown)="onKeydown($event)">
 
-            <div class="case-inner relative flex h-full flex-col overflow-hidden rounded-[23px] border border-anuna-cream/10 bg-anuna-slate-950">
+      <!-- Trazo de circuito decorativo -->
+      <svg class="pointer-events-none absolute -right-6 -top-6 hidden h-48 w-72 lg:block" viewBox="0 0 280 180"
+        fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path class="trace-io" pathLength="1" style="--d:300ms" d="M280 30 H170 L140 60 H60" stroke="#EADFCC"
+          stroke-width="2.5" />
+        <path class="trace-io" pathLength="1" style="--d:420ms" d="M280 42 H176 L146 72 H96" stroke="#EADFCC"
+          stroke-width="2.5" />
+        <circle class="node-io" cx="60" cy="60" r="5" fill="#FF6B35" style="--d:1.2s" />
+      </svg>
 
-              <!-- Navegador simulado -->
-              <div class="relative flex items-center gap-3 border-b border-anuna-cream/10 px-4 py-3" aria-hidden="true">
-                <span class="flex gap-1.5">
-                  <span class="dot h-2.5 w-2.5 rounded-full bg-anuna-orange"></span>
-                  <span class="dot h-2.5 w-2.5 rounded-full bg-anuna-yellow"></span>
-                  <span class="dot h-2.5 w-2.5 rounded-full bg-anuna-cream/30"></span>
-                </span>
-                <span class="flex min-w-0 flex-1 items-center gap-2 rounded-full bg-anuna-slate-900 px-3 py-1 text-xs text-anuna-cream/70">
-                  <svg class="h-3 w-3 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-                  <span class="truncate">{{ domain(c.url) }}</span>
-                </span>
-                <!-- Barra de carga: simula que la página se abre -->
-                <span class="load-bar absolute inset-x-0 -bottom-px h-[2px] bg-anuna-orange"></span>
-              </div>
+      <div class="relative grid items-center gap-8 lg:grid-cols-[1.3fr_.7fr] lg:gap-12">
 
-              <!-- Captura del sitio -->
-              <div class="shot-frame relative aspect-[16/10] overflow-hidden bg-anuna-slate-900">
-                <!-- Esqueleto de carga (queda debajo de la imagen) -->
-                <div class="skeleton absolute inset-0 flex flex-col gap-3 p-6" aria-hidden="true">
-                  <span class="h-3 w-1/3 rounded-full bg-anuna-cream/10"></span>
-                  <span class="h-8 w-2/3 rounded-lg bg-anuna-cream/10"></span>
-                  <span class="h-3 w-1/2 rounded-full bg-anuna-cream/10"></span>
-                  <span class="mt-auto h-9 w-28 rounded-full bg-anuna-cream/10"></span>
-                </div>
-                <img class="shot absolute inset-0 h-full w-full object-cover object-top"
-                  [ngSrc]="c.image" width="788" height="492"
-                  [alt]="'Captura del sitio web de ' + c.name" />
-                <!-- Brillo que sigue al cursor -->
-                <span class="glare pointer-events-none absolute inset-0" aria-hidden="true"></span>
-                <!-- Invitación al pasar el cursor -->
-                <span class="visit pointer-events-none absolute bottom-4 left-1/2 inline-flex -translate-x-1/2 items-center gap-2 rounded-full bg-anuna-cream px-4 py-2 text-sm font-bold text-anuna-slate-900 shadow-anuna-lg" aria-hidden="true">
-                  Visitar sitio
-                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg>
-                </span>
-              </div>
+        <!-- ===== Visor ===== -->
+        <div class="viewer relative" (pointerdown)="onPointerDown($event)" (pointerup)="onPointerUp($event)">
 
-              <!-- Contenido -->
-              <div class="flex flex-1 flex-col p-6 sm:p-7">
-                <span class="w-fit rounded-full bg-anuna-orange px-3 py-1 text-xs font-bold text-anuna-ink">{{ c.category }}</span>
-                <h3 class="mt-4 text-xl font-bold text-white sm:text-2xl">
-                  <!-- El enlace cubre toda la tarjeta -->
-                  <a [href]="c.url" target="_blank" rel="noopener"
-                    class="case-link after:absolute after:inset-0 after:z-20 after:rounded-[23px] focus:outline-none">
-                    {{ c.name }}<span class="sr-only"> (abre el sitio en una pestaña nueva)</span>
-                  </a>
-                </h3>
-                <p class="mt-3 text-[15px] leading-relaxed text-anuna-cream/80">{{ c.description }}</p>
-                <ul class="mt-auto flex flex-wrap gap-2 pt-6" aria-label="Tecnologías y enfoque">
-                  @for (t of c.tags; track t; let k = $index) {
-                    <li class="tag rounded-md bg-anuna-cream/[.07] px-2.5 py-1 text-xs font-medium text-anuna-cream/80" [style.--k]="k">#{{ t }}</li>
+          @if (kind() === 'web') {
+          <!-- Sitio web: ventana de navegador -->
+          <div class="frame kind-in overflow-hidden rounded-[24px] border border-anuna-line bg-white shadow-anuna-lg">
+            <div class="flex items-center gap-2 border-b border-anuna-line px-4 py-3" aria-hidden="true">
+              <span class="h-2.5 w-2.5 rounded-full bg-anuna-orange"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-anuna-yellow"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-anuna-slate/25"></span>
+              <span
+                class="ml-3 flex min-w-0 flex-1 items-center gap-2 rounded-full bg-anuna-cream px-3 py-1 text-xs font-medium text-anuna-slate">
+                <app-icon name="lock" class="h-3 w-3 shrink-0" />
+                <span class="truncate">{{ domain(webs[active()].url) }}</span>
+              </span>
+            </div>
+            <div class="relative aspect-[16/10] bg-anuna-slate-100">
+              @for (c of webs; track c.url; let i = $index) {
+              <img class="slide-img absolute inset-0 h-full w-full object-cover object-top" [class.on]="active() === i"
+                [ngSrc]="c.image" width="788" height="492" [priority]="i === 0"
+                [alt]="active() === i ? 'Captura del sitio web de ' + c.name : ''"
+                [attr.aria-hidden]="active() === i ? null : 'true'" draggable="false" />
+              }
+            </div>
+          </div>
+          } @else {
+          <!-- App: teléfono sobre un fondo con el color de la app -->
+          <div
+            class="kind-in relative flex aspect-[16/10] items-center justify-center overflow-hidden rounded-[24px] border border-anuna-line bg-white shadow-anuna-lg">
+            <span class="app-glow absolute h-[85%] w-[60%] rounded-full blur-3xl"
+              [style.background]="apps[active()].color" aria-hidden="true"></span>
+            <!-- Teléfonos apilados: el activo al frente -->
+            <div
+              class="phone relative z-10 h-[88%] max-h-[440px] rounded-[2rem] border-[7px] border-anuna-slate-950 bg-anuna-slate-950 shadow-anuna-lg"
+              style="aspect-ratio: 9 / 19">
+              <div class="relative h-full w-full overflow-hidden rounded-[1.55rem] bg-white">
+                <span class="absolute left-1/2 top-1.5 z-20 h-3.5 w-14 -translate-x-1/2 rounded-full bg-anuna-slate-950"
+                  aria-hidden="true"></span>
+                @for (a of apps; track a.name; let i = $index) {
+                <div class="slide-img absolute inset-0" [class.on]="active() === i"
+                  [attr.aria-hidden]="active() === i ? null : 'true'">
+                  @if (a.image) {
+                  <img class="h-full w-full object-cover object-top" [ngSrc]="a.image" width="1080" height="2340"
+                    [alt]="active() === i ? 'Captura de la app ' + a.name : ''" draggable="false" />
+                  } @else {
+                  <!-- Pantalla ilustrada (cuando aún no hay captura) -->
+                  <div class="flex h-full flex-col" aria-hidden="true">
+                    <div class="px-3 pb-4 pt-7 text-white" [style.background]="a.color">
+                      <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-white/25 text-xs font-bold">{{
+                        initials(a.name) }}</span>
+                      <span class="mt-2 block truncate text-[11px] font-bold">{{ a.name }}</span>
+                    </div>
+                    <div class="flex-1 space-y-2 bg-anuna-cream p-3">
+                      <span class="block h-14 rounded-xl bg-white"></span>
+                      <span class="grid grid-cols-2 gap-2"><span class="h-12 rounded-xl bg-white"></span><span
+                          class="h-12 rounded-xl bg-white"></span></span>
+                      <span class="block h-2 w-3/4 rounded-full bg-anuna-slate/15"></span>
+                      <span class="block h-2 w-1/2 rounded-full bg-anuna-slate/15"></span>
+                      <span class="block h-10 rounded-xl" [style.background]="a.color" style="opacity: .85"></span>
+                    </div>
+                  </div>
                   }
-                </ul>
+                </div>
+                }
               </div>
             </div>
-          </article>
-        </li>
+            <!-- Plataformas -->
+            <div class="absolute bottom-4 left-4 z-10 flex gap-1.5">
+              @for (p of apps[active()].platforms; track p) {
+              <span
+                class="rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-bold text-anuna-slate shadow-anuna-sm">{{ p
+                }}</span>
+              }
+            </div>
+          </div>
+          }
+
+          <!-- Flechas -->
+          @if (total() > 1) {
+          <div
+            class="pointer-events-none absolute inset-y-0 -left-3 -right-3 flex items-center justify-between sm:-left-5 sm:-right-5">
+            <button type="button" (click)="prev()" aria-label="Proyecto anterior"
+              class="nav-btn pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full bg-white text-anuna-slate shadow-anuna-md focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-orange">
+              <app-icon name="arrow-left" class="h-5 w-5" />
+            </button>
+            <button type="button" (click)="next()" aria-label="Proyecto siguiente"
+              class="nav-btn pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full bg-white text-anuna-slate shadow-anuna-md focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-orange">
+              <app-icon name="arrow-right" class="h-5 w-5" />
+            </button>
+          </div>
+          }
+        </div>
+
+        <!-- ===== Información ===== -->
+        <div class="min-h-[320px]" aria-live="polite">
+          @if (kind() === 'web') {
+          @for (c of webs; track c.url; let i = $index) {
+          @if (active() === i) {
+          <div class="info" [class.prev]="direction() === 'prev'" aria-roledescription="diapositiva"
+            [attr.aria-label]="(i + 1) + ' de ' + webs.length">
+            <p class="flex items-center gap-3 text-sm font-bold">
+              <span class="text-2xl tabular-nums text-anuna-orange-700">{{ pad(i + 1) }}</span>
+              <span class="h-px w-8 bg-anuna-line" aria-hidden="true"></span>
+              <span class="tabular-nums text-anuna-gray">{{ pad(webs.length) }}</span>
+            </p>
+            <span
+              class="mt-5 inline-block rounded-full bg-anuna-yellow px-3 py-1 text-xs font-bold text-anuna-slate-900">{{
+              c.category }}</span>
+            <h3 class="mt-4 text-2xl font-bold leading-snug text-anuna-slate sm:text-3xl">{{ c.name }}</h3>
+            <p class="mt-3 text-[15px] leading-relaxed text-anuna-gray">{{ c.description }}</p>
+            <ul class="mt-5 flex flex-wrap gap-2" aria-label="Enfoque del proyecto">
+              @for (t of c.tags; track t) {
+              <li class="rounded-full border border-anuna-line bg-white px-3 py-1 text-xs font-medium text-anuna-slate">
+                #{{ t }}</li>
+              }
+            </ul>
+            <a [href]="c.url" target="_blank" rel="noopener"
+              class="visit mt-7 inline-flex items-center gap-2 text-[15px] font-bold text-anuna-orange-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2">
+              <span class="link-grow">Visitar sitio</span>
+              <app-icon name="arrow-right" class="arrow h-4 w-4" />
+              <span class="sr-only">(abre {{ c.name }} en una pestaña nueva)</span>
+            </a>
+          </div>
+          }
+          }
+          } @else {
+          @for (a of apps; track a.name; let i = $index) {
+          @if (active() === i) {
+          <div class="info" [class.prev]="direction() === 'prev'" aria-roledescription="diapositiva"
+            [attr.aria-label]="(i + 1) + ' de ' + apps.length">
+            <p class="flex items-center gap-3 text-sm font-bold">
+              <span class="text-2xl tabular-nums text-anuna-orange-700">{{ pad(i + 1) }}</span>
+              <span class="h-px w-8 bg-anuna-line" aria-hidden="true"></span>
+              <span class="tabular-nums text-anuna-gray">{{ pad(apps.length) }}</span>
+            </p>
+            <span
+              class="mt-5 inline-block rounded-full bg-anuna-yellow px-3 py-1 text-xs font-bold text-anuna-slate-900">{{
+              a.category }}</span>
+            <h3 class="mt-4 text-2xl font-bold leading-snug text-anuna-slate sm:text-3xl">{{ a.name }}</h3>
+            <p class="mt-3 text-[15px] leading-relaxed text-anuna-gray">{{ a.description }}</p>
+            <ul class="mt-5 flex flex-wrap gap-2" aria-label="Enfoque del proyecto">
+              @for (t of a.tags; track t) {
+              <li class="rounded-full border border-anuna-line bg-white px-3 py-1 text-xs font-medium text-anuna-slate">
+                #{{ t }}</li>
+              }
+            </ul>
+            @if (a.appStore || a.googlePlay) {
+            <div class="mt-7 flex flex-wrap gap-3">
+              @if (a.appStore) {
+              <a [href]="a.appStore" target="_blank" rel="noopener"
+                class="store inline-flex items-center gap-2 rounded-full bg-anuna-slate px-4 py-2.5 text-sm font-bold text-anuna-cream focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-orange focus-visible:ring-offset-2">
+                <app-icon name="upload" class="h-4 w-4 rotate-180" /> App Store <span class="sr-only">(abre en una
+                  pestaña nueva)</span>
+              </a>
+              }
+              @if (a.googlePlay) {
+              <a [href]="a.googlePlay" target="_blank" rel="noopener"
+                class="store inline-flex items-center gap-2 rounded-full bg-anuna-slate px-4 py-2.5 text-sm font-bold text-anuna-cream focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-orange focus-visible:ring-offset-2">
+                <app-icon name="upload" class="h-4 w-4 rotate-180" /> Google Play <span class="sr-only">(abre en una
+                  pestaña nueva)</span>
+              </a>
+              }
+            </div>
+            }
+          </div>
+          }
+          }
+          }
+        </div>
+      </div>
+
+      <!-- ===== Miniaturas ===== -->
+      @if (total() > 1) {
+      <div class="relative mt-8 overflow-x-auto pb-1">
+        <ol class="thumbs flex min-w-max gap-3 lg:grid lg:min-w-0"
+          [style.grid-template-columns]="'repeat(' + total() + ', minmax(0, 1fr))'" role="tablist"
+          aria-label="Elegir proyecto">
+          @if (kind() === 'web') {
+          @for (c of webs; track c.url; let i = $index) {
+          <li role="presentation">
+            <button type="button" role="tab" (click)="go(i)" [attr.aria-selected]="active() === i"
+              [attr.aria-label]="'Ver ' + c.name"
+              class="thumb group w-40 rounded-2xl border-2 bg-white p-2 text-left transition duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-orange focus-visible:ring-offset-2 focus-visible:ring-offset-anuna-cream lg:w-full"
+              [class.on]="active() === i">
+              <span class="block overflow-hidden rounded-xl">
+                <img class="thumb-img aspect-[16/10] w-full object-cover object-top" [ngSrc]="c.image" width="788"
+                  height="492" alt="" />
+              </span>
+              <span class="mt-2 block truncate px-1 text-[13px] font-bold text-anuna-slate">{{ c.name }}</span>
+              <span class="mx-1 mt-1.5 block h-1 overflow-hidden rounded-full bg-anuna-slate-100" aria-hidden="true">
+                <span class="bar block h-full rounded-full bg-anuna-orange"
+                  [class.run]="active() === i && playing() && !paused()"
+                  [class.full]="active() === i && (!playing() || paused())"
+                  [style.animation-duration.ms]="autoplayMs"></span>
+              </span>
+            </button>
+          </li>
+          }
+          } @else {
+          @for (a of apps; track a.name; let i = $index) {
+          <li role="presentation">
+            <button type="button" role="tab" (click)="go(i)" [attr.aria-selected]="active() === i"
+              [attr.aria-label]="'Ver ' + a.name"
+              class="thumb group flex w-48 items-center gap-3 rounded-2xl border-2 bg-white p-2.5 text-left transition duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-orange focus-visible:ring-offset-2 focus-visible:ring-offset-anuna-cream lg:w-full"
+              [class.on]="active() === i">
+              <span
+                class="app-icon flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-sm font-bold text-white"
+                [style.background]="a.color">{{ initials(a.name) }}</span>
+              <span class="min-w-0 flex-1">
+                <span class="block truncate text-[13px] font-bold text-anuna-slate">{{ a.name }}</span>
+                <span class="block truncate text-[11px] text-anuna-gray">{{ a.platforms.join(' · ') }}</span>
+                <span class="mt-1.5 block h-1 overflow-hidden rounded-full bg-anuna-slate-100" aria-hidden="true">
+                  <span class="bar block h-full rounded-full bg-anuna-orange"
+                    [class.run]="active() === i && playing() && !paused()"
+                    [class.full]="active() === i && (!playing() || paused())"
+                    [style.animation-duration.ms]="autoplayMs"></span>
+                </span>
+              </span>
+            </button>
+          </li>
+          }
+          }
+        </ol>
+      </div>
       }
-    </ul>
+    </div>
 
     <!-- Llamado final -->
-    <div appReveal class="reveal mt-12 flex flex-col items-start justify-between gap-5 rounded-[24px] border border-anuna-cream/10 bg-anuna-slate-950/60 px-7 py-6 sm:flex-row sm:items-center">
-      <p class="text-lg text-anuna-cream/90"><span class="font-bold text-white">¿Tu negocio es el siguiente?</span> Hagamos juntos un proyecto del que puedas presumir.</p>
+    <div appReveal
+      class="reveal mt-8 flex flex-col items-start justify-between gap-4 rounded-[22px] border border-anuna-line bg-white px-7 py-6 sm:flex-row sm:items-center">
+      <p class="text-base text-anuna-slate"><span class="font-bold">¿Tu negocio es el siguiente?</span> Hagamos juntos
+        un proyecto del que puedas presumir.</p>
       <a routerLink="/" fragment="contacto" appRipple
-        class="ripple-host shine inline-flex shrink-0 items-center justify-center rounded-full bg-anuna-orange px-6 py-3.5 text-[15px] font-bold text-anuna-ink transition duration-200 hover:-translate-y-0.5 hover:bg-anuna-orange-hover hover:shadow-anuna-cta focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-yellow focus-visible:ring-offset-2 focus-visible:ring-offset-anuna-slate-900">
-        Empezar mi proyecto
+        class="ripple-host shine inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-anuna-orange px-6 py-3.5 text-[15px] font-bold text-anuna-ink transition duration-200 hover:-translate-y-0.5 hover:bg-anuna-orange-hover hover:shadow-anuna-cta focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2">
+        Empezar mi proyecto <app-icon name="arrow-right" class="h-4 w-4" />
       </a>
     </div>
   </div>
 </section>
+
 <app-footer></app-footer>
-<app-whatsapp />
+<app-whatsapp></app-whatsapp>
