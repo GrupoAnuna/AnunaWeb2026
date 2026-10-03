@@ -5,6 +5,10 @@ export const routes: Routes = [
     path: '', loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent),
     title: 'Grupo Anuna | Tecnología que une esfuerzos',
   },
+  {
+    path: 'home', loadComponent: () => import('./features/home/home.component').then(m => m.HomeComponent),
+    title: 'Grupo Anuna | Tecnología que une esfuerzos',
+  },
   { path: 'contacto', loadComponent: () => import('./features/contact/contact').then(m => m.Contact) },
   { path: 'nosotros', loadComponent: () => import('./features/about/about').then(m => m.About) },
   { path: 'casos', loadComponent: () => import('./features/cases/cases').then(m => m.Cases) },
