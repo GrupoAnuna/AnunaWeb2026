@@ -3,23 +3,27 @@ import {
   ElementRef,
   OnDestroy,
   afterNextRender,
+  computed,
   inject,
   input,
   signal,
   viewChild,
 } from '@angular/core';
 import { ViewportScroller } from '@angular/common';
-import { NavigationEnd, Router, RouterLink } from '@angular/router';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { filter } from 'rxjs';
-import { HEADER_CONFIG, HeaderConfig } from './header.component.config';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
+import { filter, map } from 'rxjs';
+import { Icon } from '@shared/icon';
+import { HEADER_CONFIGS, HEADER_TEXT, HEADER_CONFIG, HeaderConfig } from './header.component.config';
+import { ThemeService } from '@core/theme.service';
+import { LanguageService } from '@core/language.service';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink],
+  imports: [RouterLink, RouterLinkActive, Icon],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
-    host: {
+  host: {
     // "sticky" va en el host: si fuera en el <header> interno, el
     // elemento <app-header> lo limitaría y dejaría de quedarse fijo.
     class: 'sticky top-0 z-40 block',
@@ -28,20 +32,36 @@ import { HEADER_CONFIG, HeaderConfig } from './header.component.config';
 })
 
 export class HeaderComponent implements OnDestroy {
-  /** Enlaces y botones. Por defecto usa header.config.ts */
-  readonly config = input<HeaderConfig>(HEADER_CONFIG);
+  readonly themeService = inject(ThemeService);
+  readonly i18n = inject(LanguageService);
+  readonly text = this.i18n.pick(HEADER_TEXT);
+
+  /** Enlaces y botones personalizados (opcional). Por defecto usa header.config.ts en el idioma activo */
+  readonly customConfig = input<HeaderConfig | null>(null);
+  readonly config = computed(() => this.customConfig() ?? HEADER_CONFIGS[this.i18n.lang()]);
 
   readonly menuOpen = signal(false);
   readonly scrolled = signal(false);
 
+  private readonly router = inject(Router);
+  /** Ruta actual, para resaltar "Servicios" dentro de una página de servicio */
+  private readonly url = toSignal(
+    this.router.events.pipe(
+      filter((e) => e instanceof NavigationEnd),
+      map((e) => (e as NavigationEnd).urlAfterRedirects),
+    ),
+    { initialValue: this.router.url },
+  );
+
   private readonly headerEl = viewChild.required<ElementRef<HTMLElement>>('headerEl');
+  private readonly servicesEl = viewChild<ElementRef<HTMLElement>>('servicesEl');
   private readonly progressEl = viewChild.required<ElementRef<HTMLElement>>('progress');
   private readonly scroller = inject(ViewportScroller);
   private readonly cleanups: Array<() => void> = [];
 
   constructor() {
     // Cierra el menú móvil al navegar
-    inject(Router)
+    this.router
       .events.pipe(
         filter((e) => e instanceof NavigationEnd),
         takeUntilDestroyed(),
@@ -63,6 +83,7 @@ export class HeaderComponent implements OnDestroy {
   closeMenu(): void {
     this.menuOpen.set(false);
   }
+
 
   /** Enlace "Saltar al contenido": lleva el foco al <main> */
   skipToContent(event: Event): void {
@@ -95,7 +116,7 @@ export class HeaderComponent implements OnDestroy {
     onScroll();
 
     // Si la pantalla se agranda hasta escritorio, cierra el menú móvil
-    const desktop = window.matchMedia('(min-width: 1280px)');
+    const desktop = window.matchMedia('(min-width: 1024px)');
     const onDesktop = (e: MediaQueryListEvent) => e.matches && this.closeMenu();
     desktop.addEventListener('change', onDesktop);
 

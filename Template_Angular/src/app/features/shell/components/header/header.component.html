@@ -1,8 +1,9 @@
 <!-- Accesibilidad: salta directo al contenido con el teclado -->
-<a href="" (click)="skipToContent($event)"
+<a href="#contenido" (click)="skipToContent($event)"
   class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-anuna-slate focus:px-4 focus:py-2 focus:text-anuna-cream">
-  Saltar al contenido
+  {{ text().skip }}
 </a>
+
 
 <header #headerEl class="header relative border-b border-anuna-line/70 bg-anuna-cream/90 backdrop-blur"
   [class.is-scrolled]="scrolled()">
@@ -32,20 +33,52 @@
       }
     </ul>
 
-    <div class="flex items-center gap-3">
-      <a [routerLink]="config().cta.route" [fragment]="config().cta.fragment"
-        class="nav-in hidden rounded-full border-2 border-anuna-slate px-5 py-2 text-[15px] font-bold text-anuna-slate transition-colors hover:bg-anuna-slate hover:text-anuna-cream focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2 focus-visible:ring-offset-anuna-cream sm:inline-flex"
-        [style.--i]="config().nav.length + 1">
-        {{ config().cta.label }}
-      </a>
+
+
+    <div class="flex items-center gap-2 sm:gap-3">
+      <!-- Idioma: ES | EN -->
+      <button type="button" (click)="i18n.toggle()"
+        [attr.aria-label]="text().language + ': ' + (i18n.lang() === 'es' ? 'Español' : 'English') + '. ' + text().switchTo"
+        class="lang nav-in relative grid h-9 grid-cols-2 items-center rounded-full border border-anuna-line bg-card/60 p-0.5 text-[11px] font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-heading"
+        [style.--i]="config().nav.length + 1" [class.is-en]="i18n.lang() === 'en'">
+        <span class="lang-pill absolute bottom-0.5 left-0.5 top-0.5 rounded-full bg-anuna-slate"
+          aria-hidden="true"></span>
+        <span class="lang-opt relative z-10 px-2.5" [class.on]="i18n.lang() === 'es'" aria-hidden="true">ES</span>
+        <span class="lang-opt relative z-10 px-2.5" [class.on]="i18n.lang() === 'en'" aria-hidden="true">EN</span>
+      </button>
+
+      <!-- Modo claro / oscuro: el sol se convierte en luna -->
+      <button type="button" (click)="themeService.toggle()"
+        [attr.aria-label]="themeService.theme() === 'dark' ? text().toLight : text().toDark"
+        [attr.aria-pressed]="themeService.theme() === 'dark'"
+        class="theme-btn nav-in inline-flex h-9 w-9 items-center justify-center rounded-full border border-anuna-line bg-card/60 text-heading transition-colors hover:bg-anuna-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-heading"
+        [style.--i]="config().nav.length + 1" [class.is-dark]="themeService.theme() === 'dark'">
+        <svg class="h-[18px] w-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" aria-hidden="true">
+          <!-- Máscara: un círculo que "muerde" el sol y lo convierte en luna -->
+          <mask id="theme-moon">
+            <rect x="0" y="0" width="24" height="24" fill="#fff" />
+            <circle class="moon-bite" cx="24" cy="4" r="7" fill="#000" />
+          </mask>
+          <circle class="sun-core" cx="12" cy="12" r="5" fill="currentColor" stroke="none" mask="url(#theme-moon)" />
+          <g class="sun-rays">
+            <path
+              d="M12 1.5v2.2M12 20.3v2.2M1.5 12h2.2M20.3 12h2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6" />
+          </g>
+        </svg>
+      </button>
+
 
       <!-- Botón hamburguesa: las líneas se transforman en una X -->
       <button type="button" (click)="toggleMenu()" [class.is-open]="menuOpen()" [attr.aria-expanded]="menuOpen()"
-        [attr.aria-label]="menuOpen() ? 'Cerrar menú' : 'Abrir menú'" aria-controls="menu-movil"
-        class="inline-flex h-11 w-11 items-center justify-center rounded-full text-anuna-slate transition-colors hover:bg-anuna-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate xl:hidden">
+        [attr.aria-label]="menuOpen() ? text().closeMenu : text().openMenu" aria-controls="menu-movil"
+        class="inline-flex h-11 w-11 items-center justify-center rounded-full text-heading transition-colors hover:bg-anuna-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-heading lg:hidden">
         <span class="burger" aria-hidden="true"><span></span><span></span><span></span></span>
       </button>
     </div>
+
+
+
   </nav>
 
   <!-- Menú móvil: se despliega con altura animada y entrada escalonada -->

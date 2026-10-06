@@ -1,5 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
-/* * ============================================================
+/* ============================================================
    ESTILOS GLOBALES — Grupo Anuna
    1. Tailwind v4
    2. Tokens de marca (@theme): generan clases como bg-anuna-slate
@@ -30,11 +29,19 @@
   --color-anuna-line: #EADFCC;
   --color-anuna-error: #B42318;
 
+  /* Colores semánticos: cambian con el modo claro/oscuro.
+     Úsalos en lugar de crema/blanco/pizarra cuando el color
+     cumpla la función de fondo de página, tarjeta o título. */
+  --color-page: #FDF6EC;     /* fondo de la página   → bg-page */
+  --color-card: #FFFFFF;     /* fondo de tarjetas    → bg-card */
+  --color-heading: #4A6670;  /* títulos y destacados → text-heading */
+  --color-strong: #1E2B30;   /* texto de alto contraste (campos, contenido) → text-strong */
+
   /* Sombras tintadas con el color principal */
-  --shadow-anuna-sm: 0 1px 2px rgba(46, 67, 74, .06), 0 2px 6px -2px rgba(46, 67, 74, .08);
-  --shadow-anuna-md: 0 2px 4px rgba(46, 67, 74, .05), 0 12px 28px -12px rgba(46, 67, 74, .22);
-  --shadow-anuna-lg: 0 4px 8px rgba(46, 67, 74, .05), 0 24px 48px -20px rgba(46, 67, 74, .30);
-  --shadow-anuna-cta: 0 6px 18px -6px rgba(255, 107, 53, .55);
+  --shadow-anuna-sm: 0 1px 2px rgba(46,67,74,.06), 0 2px 6px -2px rgba(46,67,74,.08);
+  --shadow-anuna-md: 0 2px 4px rgba(46,67,74,.05), 0 12px 28px -12px rgba(46,67,74,.22);
+  --shadow-anuna-lg: 0 4px 8px rgba(46,67,74,.05), 0 24px 48px -20px rgba(46,67,74,.30);
+  --shadow-anuna-cta: 0 6px 18px -6px rgba(255,107,53,.55);
 
   /* Forma de arco del isotipo → clase rounded-arch */
   --radius-arch: 999px 999px 14px 14px;
@@ -47,19 +54,43 @@
   --ease-anuna-io: cubic-bezier(.65, 0, .35, 1);
 }
 
-html {
-  scroll-behavior: smooth;
+/* ---------- Modo oscuro ----------
+   Se activa con la clase "dark" en <html> (la pone el botón del
+   header o, la primera vez, la preferencia del sistema).
+   Solo se redefinen variables: todas las páginas cambian a la vez. */
+html.dark {
+  color-scheme: dark;
+  --color-page: #121C21;
+  --color-card: #1A272D;
+  --color-heading: #DCE8EB;
+  --color-strong: #F1F6F7;
+  --color-anuna-gray: #A9B8BD;
+  --color-anuna-line: #2B3A41;
+  --color-anuna-slate-100: #24343B;
+  --color-anuna-orange-700: #FF8A5C;
+  --color-anuna-slate-900: #0C1519;
+  --color-anuna-error: #FF8A80;      /* rojo más claro: legible sobre fondo oscuro */
+  /* Sombras más profundas sobre fondo oscuro */
+  --shadow-anuna-sm: 0 1px 2px rgba(0,0,0,.3), 0 2px 6px -2px rgba(0,0,0,.35);
+  --shadow-anuna-md: 0 2px 4px rgba(0,0,0,.25), 0 12px 28px -12px rgba(0,0,0,.55);
+  --shadow-anuna-lg: 0 4px 8px rgba(0,0,0,.25), 0 24px 48px -20px rgba(0,0,0,.65);
+}
+/* Transición suave al cambiar de modo (solo durante el cambio) */
+html.theme-switching, html.theme-switching *, html.theme-switching *::before, html.theme-switching *::after {
+  transition: background-color .35s ease, color .35s ease, border-color .35s ease, fill .35s ease, stroke .35s ease !important;
 }
 
-body {
-  -webkit-font-smoothing: antialiased;
+html {
+  scroll-behavior: smooth;
+  /* Espacio para el header fijo al saltar a una sección */
+  scroll-padding-top: 5.5rem;
 }
+body { -webkit-font-smoothing: antialiased; }
 
 /* ---------- 3. Utilidades de animación compartidas ----------
    Los estados ocultos solo aplican con html.anim, que se añade
    en index.html si el usuario no pidió "reducir movimiento".   */
 @layer components {
-
   /* Aparición al hacer scroll (usar con la directiva appReveal) */
   html.anim .reveal {
     opacity: 0;
@@ -67,11 +98,7 @@ body {
     transition: opacity .8s var(--ease-anuna-out), transform .8s var(--ease-anuna-out);
     transition-delay: var(--d, 0ms);
   }
-
-  html.anim .reveal.in {
-    opacity: 1;
-    transform: none;
-  }
+  html.anim .reveal.in { opacity: 1; transform: none; }
 
   /* Trazos SVG que se dibujan (añadir pathLength="1" al <path>) */
   html.anim .trace-io {
@@ -80,20 +107,10 @@ body {
     transition: stroke-dashoffset 1.6s var(--ease-anuna-io);
     transition-delay: var(--d, 200ms);
   }
+  html.anim .in .trace-io { stroke-dashoffset: 0; }
 
-  html.anim .in .trace-io {
-    stroke-dashoffset: 0;
-  }
-
-  html.anim .node-io {
-    opacity: 0;
-    transition: opacity .5s ease;
-    transition-delay: var(--d, 1s);
-  }
-
-  html.anim .in .node-io {
-    opacity: 1;
-  }
+  html.anim .node-io { opacity: 0; transition: opacity .5s ease; transition-delay: var(--d, 1s); }
+  html.anim .in .node-io { opacity: 1; }
 
   /* Subrayado que crece */
   .link-grow {
@@ -101,43 +118,27 @@ body {
     padding-bottom: 2px;
     transition: background-size .35s var(--ease-anuna-out), color .2s;
   }
-
-  .link-grow:hover,
-  .link-grow:focus-visible {
-    background-size: 100% 1.5px;
-  }
+  .link-grow:hover, .link-grow:focus-visible { background-size: 100% 1.5px; }
 
   /* Destello en botones CTA */
-  .shine {
-    position: relative;
-    overflow: hidden;
-    isolation: isolate;
-  }
-
+  .shine { position: relative; overflow: hidden; isolation: isolate; }
   .shine::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, .45) 50%, transparent 70%);
+    background: linear-gradient(110deg, transparent 30%, rgba(255,255,255,.45) 50%, transparent 70%);
     transform: translateX(-120%);
     transition: transform .8s var(--ease-anuna-out);
     z-index: -1;
   }
+  .shine:hover::after { transform: translateX(120%); }
 
-  .shine:hover::after {
-    transform: translateX(120%);
-  }
-
-  .ripple-host {
-    position: relative;
-    overflow: hidden;
-    isolation: isolate;
-  }
-
+  /* Onda al hacer clic (usar con la directiva appRipple) */
+  .ripple-host { position: relative; overflow: hidden; isolation: isolate; }
   .ripple {
     position: absolute;
     border-radius: 999px;
-    background: rgba(255, 255, 255, .55);
+    background: rgba(255,255,255,.55);
     transform: scale(0);
     animation: anuna-ripple .65s ease-out forwards;
     pointer-events: none;
@@ -145,17 +146,9 @@ body {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  *,
-  *::before,
-  *::after {
-    animation: none !important;
-    transition: none !important;
-  }
-}
-
 @keyframes anuna-ripple { to { transform: scale(1); opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

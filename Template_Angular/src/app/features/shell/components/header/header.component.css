@@ -16,7 +16,7 @@
 
 /* Al hacer scroll: sombra suave y fondo más sólido */
 .header.is-scrolled {
-  background-color: rgb(253 246 236 / .97);
+  background-color: color-mix(in srgb, var(--color-page) 97%, transparent);
   box-shadow: 0 1px 2px rgba(46, 67, 74, .06), 0 8px 24px -16px rgba(46, 67, 74, .25);
 }
 
@@ -116,4 +116,50 @@
 @media (prefers-reduced-motion: reduce) {
   .nav-in { opacity: 1 !important; transform: none !important; animation: none !important; }
   .mobile-menu, .m-item, .burger span, .logo-band { transition: none !important; }
+}
+
+/* ---------- Menú desplegable de Servicios ---------- */
+.services-btn.is-current { color: var(--color-anuna-orange-700); }
+.chev { transition: transform .3s cubic-bezier(.65, 0, .35, 1); }
+.chev.up { transform: rotate(180deg); }
+
+/* Cerrado: invisible y sin recibir clics; abierto: baja y aparece */
+.dropdown { visibility: hidden; opacity: 0; transition: opacity .2s ease, visibility .2s; }
+.dropdown.open { visibility: visible; opacity: 1; }
+.dropdown-panel { transform: translateY(-8px) scale(.98); transform-origin: top center; transition: transform .3s var(--ease-out); }
+.dropdown.open .dropdown-panel { transform: none; }
+.dd-item { opacity: 0; transform: translateY(6px); transition: opacity .3s ease, transform .3s var(--ease-out); }
+.dropdown.open .dd-item { opacity: 1; transform: none; transition-delay: calc(var(--k) * 35ms + 60ms); }
+
+/* Icono en arco: se llena al pasar el cursor o si es la página actual */
+.svc-icon { position: relative; overflow: hidden; isolation: isolate; background: var(--color-anuna-slate-100); color: var(--color-heading); }
+.svc-icon::before { content: ""; position: absolute; inset: auto 0 0 0; height: 0; background: #FFD97D; z-index: -1; transition: height .35s var(--ease-out); }
+.svc-link:hover .svc-icon::before, .m-svc:hover .svc-icon::before { height: 100%; }
+.is-current .svc-icon { color: #1E2B30; }
+.is-current .svc-icon::before { height: 100%; background: #FF6B35; }
+.svc-link.is-current, .m-svc.is-current { background: var(--color-page); }
+
+@media (prefers-reduced-motion: reduce) {
+  .dropdown, .dropdown-panel, .dd-item, .chev { transition: none !important; }
+}
+
+/* ---------- Selector de idioma ES | EN ---------- */
+.lang-pill { width: calc(50% - .125rem); transition: transform .35s cubic-bezier(.65, 0, .35, 1); }
+.lang.is-en .lang-pill { transform: translateX(100%); }
+.lang-opt { color: var(--color-heading); transition: color .3s; }
+.lang-opt.on { color: #FDF6EC; }
+
+/* ---------- Botón sol / luna ---------- */
+.theme-btn svg { transition: transform .5s cubic-bezier(.65, 0, .35, 1); }
+.sun-core { transform-origin: 12px 12px; transition: transform .5s cubic-bezier(.65, 0, .35, 1); }
+.moon-bite { transition: cx .5s cubic-bezier(.65, 0, .35, 1), cy .5s cubic-bezier(.65, 0, .35, 1); }
+.sun-rays { transform-origin: 12px 12px; transition: opacity .3s, transform .5s cubic-bezier(.65, 0, .35, 1); }
+.theme-btn:hover svg { transform: rotate(-15deg); }
+/* Modo oscuro: el sol crece, la "mordida" entra y los rayos desaparecen → luna */
+.theme-btn.is-dark .sun-core { transform: scale(1.75); }
+.theme-btn.is-dark .moon-bite { cx: 17; cy: 7; }
+.theme-btn.is-dark .sun-rays { opacity: 0; transform: rotate(-90deg) scale(.5); }
+
+@media (prefers-reduced-motion: reduce) {
+  .lang-pill, .sun-core, .moon-bite, .sun-rays, .theme-btn svg { transition: none !important; }
 }
