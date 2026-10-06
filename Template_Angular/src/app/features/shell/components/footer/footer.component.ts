@@ -4,12 +4,14 @@ import {
   OnDestroy,
   afterNextRender,
   computed,
+  effect,
   inject,
   input,
   signal,
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { FOOTER_CONFIG, FooterConfig } from './footer.component.config';
+import { FOOTER_CONFIGS, FOOTER_TEXT, FooterConfig } from './footer.component.config';
+import { LanguageService } from '@core/language.service';
 
 interface ClockView {
   hh: string;
@@ -27,9 +29,12 @@ const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   host: { class: 'block' },
 })
 export class Footer implements OnDestroy {
-  /** Datos del footer. Por defecto usa footer.config.ts */
-  readonly config = input<FooterConfig>(FOOTER_CONFIG);
-  /** Muestra u oculta la banda animada superior (útil en páginas legales) */
+  readonly i18n = inject(LanguageService);
+  readonly text = this.i18n.pick(FOOTER_TEXT);
+
+  /** Datos personalizados (opcional). Por defecto usa footer.config.ts en el idioma activo */
+  readonly customConfig = input<FooterConfig | null>(null);
+  readonly config = computed(() => this.customConfig() ?? FOOTER_CONFIGS[this.i18n.lang()]);  /** Muestra u oculta la banda animada superior (útil en páginas legales) */
   readonly showBand = input(true);
   /** Muestra u oculta los relojes en vivo */
   readonly showClocks = input(true);
@@ -188,4 +193,22 @@ export class Footer implements OnDestroy {
 
     this.clocks.set(next);
   }
+
+  private readonly el = inject(ElementRef);
+
+  private readonly languageAnimation = effect(() => {
+    const lang = this.i18n.lang();
+
+    queueMicrotask(() => {
+      const elements = this.el.nativeElement.querySelectorAll('.footer-i18n');
+
+      elements.forEach((element: HTMLElement) => {
+        element.classList.remove('footer-text-in');
+
+        void element.offsetWidth;
+
+        element.classList.add('footer-text-in');
+      });
+    });
+  });
 }

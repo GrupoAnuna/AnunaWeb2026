@@ -152,3 +152,25 @@ body { -webkit-font-smoothing: antialiased; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+:host-context(html.anim) .ft-in {
+  opacity: 0;
+  transform: translateY(-6px);
+  animation: ftIn .6s var(--ease-out) forwards;
+  animation-delay: calc(var(--i, 0) * 45ms + 100ms);
+}
+
+@keyframes ftIn {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ft-in {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}
