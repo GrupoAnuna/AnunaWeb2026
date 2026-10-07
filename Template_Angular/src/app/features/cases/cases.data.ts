@@ -71,7 +71,7 @@ export const CASES: CaseStudy[] = [
 
 // ============================================================
 // Apps móviles. Para agregar una, copia un bloque y guarda su
-// captura vertical en /public/apps/ (ej. 1080 × 2340 px).
+// captura vertical en /public/cases/app/ (ej. 1080 × 2340 px).
 // Si una app no tiene captura todavía, deja "image" vacío y se
 // mostrará una pantalla ilustrada con el color de la app.
 // Si la lista queda vacía, la pestaña "Apps móviles" se oculta.
@@ -84,13 +84,12 @@ export interface AppCase {
   tags: string[];
   platforms: ('iOS' | 'Android')[];
   color: string;        // color principal de la app (para la pantalla ilustrada)
-  image?: '/cases/app/Flat-Flowapp.webp';       // captura vertical dentro de /public (opcional)
+  image?: string;       // captura vertical dentro de /public (opcional)
   appStore?: string;    // enlace a la App Store (opcional)
   googlePlay?: string;  // enlace a Google Play (opcional)
 }
 
 export const APP_CASES: AppCase[] = [
-  // ⚠️ PLANTILLA: reemplaza con una app real antes de publicar
   {
     name: 'Flat Flow',
     category: 'App móvil',
@@ -98,9 +97,8 @@ export const APP_CASES: AppCase[] = [
     tags: ['Estilo de vida', 'Organización', 'Productividad'],
     platforms: ['iOS', 'Android'],
     color: '#4A6670',
-    image: '/cases/app/Flat-Flowapp.webp'
+    image: '/cases/app/Flat-Flowapp.webp',
   },
-  // ⚠️ PLANTILLA: reemplaza con una app real antes de publicar
   {
     name: 'Otra app de ejemplo',
     category: 'App empresarial',
@@ -108,6 +106,72 @@ export const APP_CASES: AppCase[] = [
     tags: ['Plantilla', 'Reemplazar'],
     platforms: ['Android'],
     color: '#FF6B35',
-    // image: '/cases/app/Flat-login.webp'
   },
 ];
+
+// ============================================================
+// Versión en inglés. Solo cambian categoría, descripción y
+// etiquetas; nombre, enlace e imagen se toman de la versión en español.
+// ============================================================
+
+const CASES_EN_TEXT: Pick<CaseStudy, 'category' | 'description' | 'tags'>[] = [
+  {
+    category: 'Custom platform',
+    description:
+      'Personal and professional platform focused on financial and wealth advisory, operated by Wealth Engineer Erica McManu.',
+    tags: ['Informational', 'Finance', 'Lifestyle'],
+  },
+  {
+    category: 'Retail e-commerce',
+    description:
+      'An online store specialized in collectibles and entertainment, with full integration of a large inventory and secure payment gateways.',
+    tags: ['Shopify Expert', '24/7 Sales', 'UX/UI'],
+  },
+  {
+    category: 'Custom platform',
+    description:
+      'Website for a company specialized in international air transport for high-performance horses (polo, jumping, dressage, and racing).',
+    tags: ['Informational', 'Finance', 'Lifestyle'],
+  },
+  {
+    category: 'Retail e-commerce',
+    description:
+      'A smooth shopping experience for gourmet products, designed to convey freshness and trust and to increase the conversion rate.',
+    tags: ['Shopify', 'Branding', 'Conversion'],
+  },
+  {
+    category: 'E-commerce',
+    description:
+      'An online store specialized in musical instruments and accessories. Immersive design with smooth navigation and calls to action optimized for conversion.',
+    tags: ['E-commerce', 'Conversion', 'UX/UI'],
+  },
+  {
+    category: 'Landing page',
+    description:
+      'A digital platform for a fabrication laboratory (FabLab). A modern visual architecture designed to showcase its machinery ecosystem, prototyping services, and attract new makers.',
+    tags: ['Innovation', 'Landing Page', 'Modern Design'],
+  },
+];
+
+/** Proyectos web en inglés (mismo orden que CASES) */
+export const CASES_EN: CaseStudy[] = CASES.map((c, i) => ({ ...c, ...(CASES_EN_TEXT[i] ?? {}) }));
+
+/**
+ * Apps en inglés. Traduce categoría, descripción y etiquetas
+ * (mismo orden que APP_CASES).
+ */
+const APP_CASES_EN_TEXT: Pick<AppCase, 'category' | 'description' | 'tags'>[] = [
+  {
+    category: 'Mobile app',
+    description: 'An app to organize events, tasks, expenses, and chat with roommates, parents, kids, etc.',
+    tags: ['Lifestyle', 'Organization', 'Productivity'],
+  },
+  {
+    category: 'Business app',
+    description: 'Replace this text. You can add App Store and Google Play links so the download buttons appear.',
+    tags: ['Template', 'Replace'],
+  },
+];
+
+/** Apps móviles en inglés (mismo orden que APP_CASES) */
+export const APP_CASES_EN: AppCase[] = APP_CASES.map((a, i) => ({ ...a, ...(APP_CASES_EN_TEXT[i] ?? {}) }));

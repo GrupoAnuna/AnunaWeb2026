@@ -39,7 +39,7 @@
 
 /* ---------- Miniaturas ---------- */
 .thumb { border-color: transparent; }
-.thumb:hover { border-color: #EADFCC; transform: translateY(-2px); }
+.thumb:hover { border-color: var(--color-anuna-line); transform: translateY(-2px); }
 .thumb-img { filter: grayscale(.6); opacity: .75; transition: filter .4s, opacity .4s, transform .6s var(--ease-out); }
 .thumb:hover .thumb-img { filter: none; opacity: 1; transform: scale(1.04); }
 .thumb.on { border-color: #FF6B35; box-shadow: 0 0 0 4px rgba(255, 107, 53, .12), 0 12px 24px -16px rgba(46, 67, 74, .4); }
@@ -63,7 +63,7 @@
   transform: translateX(calc(var(--tab, 0) * 100%));
   transition: transform .45s var(--ease-io);
 }
-.kind-tab { color: #4A6670; transition: color .3s; }
+.kind-tab { color: var(--color-heading); transition: color .3s; }
 .kind-tab.on { color: #FDF6EC; }
 .count { background: rgba(74, 102, 112, .12); transition: background-color .3s, color .3s; }
 .kind-tab.on .count { background: #FFD97D; color: #2E434A; }

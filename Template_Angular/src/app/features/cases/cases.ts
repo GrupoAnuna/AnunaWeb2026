@@ -1,10 +1,12 @@
-import { Component, DestroyRef, ElementRef, afterNextRender, computed, inject, signal } from '@angular/core';
+import { Component, DestroyRef, afterNextRender, computed, inject, signal } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Icon } from '../../shared/icon';
 import { Reveal } from '../../shared/reveal';
 import { Ripple } from '../../shared/ripple';
-import { APP_CASES, CASES } from './cases.data';
+import { APP_CASES, APP_CASES_EN, CASES, CASES_EN } from './cases.data';
+import { CASES_TEXT } from './cases.i18n';
+import { LanguageService } from '../../core/language.service';
 import { Footer } from '@features/shell/components/footer/footer.component';
 import { HeaderComponent } from '@features/shell/components/header/header.component';
 import { Whatsapp } from '@features/shell/components/whatsapp/whatsapp';
@@ -20,13 +22,15 @@ type Kind = 'web' | 'app';
 })
 
 export class Cases {
-  readonly webs = CASES;
-  readonly apps = APP_CASES;
+  private readonly i18n = inject(LanguageService);
+  readonly t = this.i18n.pick(CASES_TEXT);
+  readonly webs = computed(() => (this.i18n.lang() === 'en' ? CASES_EN : CASES));
+  readonly apps = computed(() => (this.i18n.lang() === 'en' ? APP_CASES_EN : APP_CASES));
   readonly autoplayMs = AUTOPLAY_MS;
 
   /** Pestaña activa: sitios web o apps móviles */
   readonly kind = signal<Kind>('web');
-  readonly total = computed(() => (this.kind() === 'web' ? this.webs.length : this.apps.length));
+  readonly total = computed(() => (this.kind() === 'web' ? this.webs().length : this.apps().length));
   readonly active = signal(0);
   /** Dirección del último cambio, para animar la entrada del texto */
   readonly direction = signal<'next' | 'prev'>('next');
