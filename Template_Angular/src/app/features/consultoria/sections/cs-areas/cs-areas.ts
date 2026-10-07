@@ -2,10 +2,12 @@ import { Component, signal } from '@angular/core';
 import { Icon } from '../../../../shared/icon';
 import { Reveal } from '../../../../shared/reveal';
 import { AREAS } from '../../consulting.data';
+import { I18nAnimation } from '@shared/i18n-animation';
 
+import { TrPipe } from '../../../../shared/tr.pipe';
 @Component({
   selector: 'app-cs-areas',
-  imports: [Icon, Reveal],
+  imports: [TrPipe, Icon, Reveal, I18nAnimation],
   templateUrl: './cs-areas.html',
   styleUrl: './cs-areas.css',
 })

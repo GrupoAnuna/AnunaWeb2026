@@ -1,17 +1,23 @@
-import { Component, ElementRef, afterNextRender, inject } from '@angular/core';
+import { afterNextRender, Component, computed, ElementRef, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Icon } from '../../../../shared/icon';
 import { Ripple } from '../../../../shared/ripple';
+import { I18nAnimation } from '@shared/i18n-animation';
+
+import { TrPipe } from '../../../../shared/tr.pipe';
+import { injectTranslate } from '../../../../core/translations';
 
 @Component({
   selector: 'app-cs-hero',
-  imports: [RouterLink, Icon, Ripple],
+  imports: [TrPipe, RouterLink, Icon, Ripple, I18nAnimation],
   templateUrl: './cs-hero.html',
   styleUrl: './cs-hero.css',
 })
 export class CsHero {
   readonly headline = 'Antes de invertir en tecnología, pongamos orden.';
-  readonly words = this.headline.split(' ');
+  private readonly translate = injectTranslate();
+  /** Se traduce la frase completa y luego se separa en palabras para la animación */
+  readonly words = computed(() => String(this.translate(this.headline)).split(' '));
   readonly nodes = [
     { label: 'Ventas', x: 13, y: 16 },
     { label: 'Clientes', x: 87, y: 16 },

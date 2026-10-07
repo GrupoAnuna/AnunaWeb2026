@@ -1,14 +1,21 @@
-<section class="bg-white py-20 lg:py-28" aria-labelledby="cs-pains-title">
+<section class="bg-card py-20 lg:py-28" aria-labelledby="cs-pains-title">
   <div class="mx-auto max-w-content px-5 sm:px-8">
 
-    <div class="max-w-full">
-      <h2 id="ad-features-title" appReveal style="--d:80ms"
-        class="reveal text-3xl font-bold leading-tight tracking-[-0.015em] text-anuna-slate sm:text-4xl lg:text-[2.75rem]">
-        Los dolores de cabeza más comunes (y cómo se resuelven)
-      </h2>
-      <p appReveal style="--d:160ms" class="reveal mt-5 text-lg leading-relaxed text-anuna-gray">
-        Si te identificas con alguno, no estás solo: son los retos de casi cualquier negocio que crece. Voltea cada
-        tarjeta para ver la salida. </p>
+    <div i18nAnimation class="max-w-full  lg:grid-cols-[1fr_1fr] lg:items-end">
+      <div>
+        <p appReveal class="reveal mb-5 text-[15px] font-bold text-anuna-orange-700">{{ '¿Te suena familiar?' | tr }}
+        </p>
+        <h2 id="cs-pains-title" appReveal style="--d:80ms"
+          class="reveal max-w-full text-3xl font-bold leading-tight tracking-[-0.015em] text-heading sm:text-4xl lg:text-[2.75rem]">
+          {{ 'Los dolores de cabeza más comunes (y cómo se resuelven)' | tr }}
+        </h2>
+      </div>
+      <br>
+      <p appReveal style="--d:160ms"
+        class="reveal max-w-full text-lg leading-relaxed text-anuna-gray ">
+        {{ 'Si te identificas con alguno, no estás solo: son los retos de casi cualquier negocio que crece. Voltea cada
+        tarjeta para ver la salida.' | tr }}
+      </p>
     </div>
 
     <ul class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -20,16 +27,14 @@
           <span class="flip-inner relative block h-full w-full">
 
             <!-- Frente: el problema -->
-            <span
-              class="face front absolute inset-0 flex flex-col rounded-[24px] border border-anuna-line bg-anuna-cream p-7">
-              <span
-                class="flex h-14 w-12 items-end justify-center rounded-arch bg-anuna-slate-100 pb-2.5 text-anuna-slate">
+            <span class="face front absolute inset-0 flex flex-col rounded-[24px] border border-anuna-line bg-page p-7">
+              <span class="flex h-14 w-12 items-end justify-center rounded-arch bg-anuna-slate-100 pb-2.5 text-heading">
                 <app-icon [name]="p.icon" class="h-6 w-6" />
               </span>
-              <span class="mt-6 block text-xl font-bold leading-snug text-anuna-slate">{{ p.problem }}</span>
+              <span class="mt-6 block text-xl font-bold leading-snug text-heading">{{ (p.problem) | tr }}</span>
               <span class="hint mt-auto inline-flex items-center gap-2 text-sm font-bold text-anuna-orange-700">
                 <app-icon name="refresh" class="hint-icon h-4 w-4" />
-                Ver cómo lo resolvemos
+                {{ 'Ver cómo lo resolvemos' | tr }}
               </span>
             </span>
 
@@ -37,9 +42,9 @@
             <span class="face back absolute inset-0 flex flex-col rounded-[24px] bg-anuna-slate p-7 text-anuna-cream">
               <span
                 class="inline-flex w-fit items-center gap-2 rounded-full bg-anuna-yellow px-3 py-1 text-xs font-bold text-anuna-slate-900">
-                <app-icon name="check" class="h-3.5 w-3.5" /> Así te ayudamos
+                <app-icon name="check" class="h-3.5 w-3.5" /> {{ 'Así te ayudamos' | tr }}
               </span>
-              <span class="mt-4 block text-[17px] font-medium leading-relaxed text-white">{{ p.solution }}</span>
+              <span class="mt-4 block text-[17px] font-medium leading-relaxed text-white">{{ (p.solution) | tr }}</span>
               <span class="back-trace mt-auto flex h-[3px] items-center rounded-full bg-anuna-orange"
                 aria-hidden="true">
                 <span class="ml-auto h-2 w-2 rounded-full bg-anuna-orange"></span>

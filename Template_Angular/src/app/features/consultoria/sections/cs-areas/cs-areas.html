@@ -1,14 +1,14 @@
-<section id="areas" class="bg-anuna-cream py-20 lg:py-28" aria-labelledby="cs-areas-title">
-  <div class="mx-auto max-w-content px-5 sm:px-8">
+<section id="areas" class="bg-page py-20 lg:py-28" aria-labelledby="cs-areas-title">
+  <div i18nAnimation class="mx-auto max-w-content px-5 sm:px-8">
 
     <div class="max-w-full">
-      <p appReveal class="reveal mb-5 text-[15px] font-bold text-anuna-orange-700">Cómo te ayudamos</p>
-      <h2 id="ad-features-title" appReveal style="--d:80ms"
-        class="reveal text-3xl font-bold leading-tight tracking-[-0.015em] text-anuna-slate sm:text-4xl lg:text-[2.75rem]">
-        Cinco formas de poner la tecnología a trabajar para ti
+      <p appReveal class="reveal mb-5 text-[15px] font-bold text-anuna-orange-700">{{ 'Cómo te ayudamos' | tr }}</p>
+      <h2 id="cs-areas-title" appReveal style="--d:80ms"
+        class="reveal text-3xl font-bold leading-tight tracking-[-0.015em] text-heading sm:text-4xl lg:text-[2.75rem]">
+        {{ 'Cinco formas de poner la tecnología a trabajar para ti' | tr }}
       </h2>
       <p appReveal style="--d:160ms" class="reveal mt-5 text-lg leading-relaxed text-anuna-gray">
-        Cada área termina con un entregable concreto: algo que puedes leer, compartir con tu equipo y usar para decidir.
+        {{ 'Cada área termina con un entregable concreto: algo que puedes leer, compartir con tu equipo y usar para decidir.' | tr }}
       </p>
     </div>
 
@@ -17,144 +17,120 @@
       <!-- Acordeón -->
       <ul appReveal class="reveal space-y-3" style="--d:120ms">
         @for (a of areas; track a.title; let i = $index) {
-        <li class="item overflow-clip rounded-[22px] border bg-white transition duration-300"
-          [class.is-open]="open() === i">
-          <h3>
-            <button type="button" (click)="toggle(i)" [attr.aria-expanded]="open() === i"
-              [attr.aria-controls]="'cs-area-' + i"
-              class="flex w-full items-center gap-4 px-5 py-5 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-anuna-orange sm:px-6">
-              <span class="item-icon flex h-12 w-11 shrink-0 items-end justify-center rounded-arch pb-2.5">
-                <app-icon [name]="a.icon" class="relative h-5 w-5" />
-              </span>
-              <span class="flex-1 text-lg font-bold text-anuna-slate">{{ a.title }}</span>
-              <span
-                class="chev flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 text-anuna-slate">
-                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
-                  stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M12 5v14M5 12h14" class="plus-v" />
-                  <path d="M5 12h14" />
-                </svg>
-              </span>
-            </button>
-          </h3>
-          <div [id]="'cs-area-' + i" class="panel" role="region" [attr.aria-label]="a.title"
-            [attr.inert]="open() === i ? null : ''">
-            <div class="panel-inner">
-              <div class="px-5 pb-6 sm:px-6 sm:pl-[5.25rem]">
-                <p class="text-[15px] leading-relaxed text-anuna-gray">{{ a.text }}</p>
-                <ul class="mt-4 space-y-2">
-                  @for (pt of a.points; track pt; let k = $index) {
-                  <li class="point flex items-center gap-2.5 text-[15px] text-anuna-slate" [style.--k]="k">
-                    <span
-                      class="flex h-5 w-5 items-center justify-center rounded-full bg-anuna-yellow text-anuna-slate-900"><app-icon
-                        name="check" class="h-3 w-3" /></span>
-                    {{ pt }}
-                  </li>
-                  }
-                </ul>
-                <p
-                  class="mt-5 inline-flex items-center gap-2 rounded-full bg-anuna-slate px-3.5 py-1.5 text-xs font-bold text-anuna-cream">
-                  <app-icon name="file" class="h-3.5 w-3.5 text-anuna-yellow" />
-                  Entregable: {{ a.deliverable }}
-                </p>
+          <li class="item overflow-clip rounded-[22px] border bg-card transition duration-300" [class.is-open]="open() === i">
+            <h3>
+              <button type="button" (click)="toggle(i)" [attr.aria-expanded]="open() === i" [attr.aria-controls]="'cs-area-' + i"
+                class="flex w-full items-center gap-4 px-5 py-5 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-anuna-orange sm:px-6">
+                <span class="item-icon flex h-12 w-11 shrink-0 items-end justify-center rounded-arch pb-2.5">
+                  <app-icon [name]="a.icon" class="relative h-5 w-5" />
+                </span>
+                <span class="flex-1 text-lg font-bold text-heading">{{ (a.title) | tr }}</span>
+                <span class="chev flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 text-heading">
+                  <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" class="plus-v" /><path d="M5 12h14" /></svg>
+                </span>
+              </button>
+            </h3>
+            <div [id]="'cs-area-' + i" class="panel" role="region" [attr.aria-label]="(a.title) | tr" [attr.inert]="open() === i ? null : ''">
+              <div class="panel-inner">
+                <div class="px-5 pb-6 sm:px-6 sm:pl-[5.25rem]">
+                  <p class="text-[15px] leading-relaxed text-anuna-gray">{{ (a.text) | tr }}</p>
+                  <ul class="mt-4 space-y-2">
+                    @for (pt of a.points; track pt; let k = $index) {
+                      <li class="point flex items-center gap-2.5 text-[15px] text-heading" [style.--k]="k">
+                        <span class="flex h-5 w-5 items-center justify-center rounded-full bg-anuna-yellow text-anuna-slate-900"><app-icon name="check" class="h-3 w-3" /></span>
+                        {{ (pt) | tr }}
+                      </li>
+                    }
+                  </ul>
+                  <p class="mt-5 inline-flex items-center gap-2 rounded-full bg-anuna-slate px-3.5 py-1.5 text-xs font-bold text-anuna-cream">
+                    <app-icon name="file" class="h-3.5 w-3.5 text-anuna-yellow" />
+                    {{ 'Entregable:' | tr }} {{ (a.deliverable) | tr }}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        </li>
+          </li>
         }
       </ul>
 
       <!-- Pila de documentos: muestra el entregable del área abierta -->
       <div appReveal class="reveal" style="--d:220ms" aria-hidden="true">
         <div class="stack relative mx-auto h-[420px] w-full max-w-[360px] lg:sticky lg:top-28">
-          <span class="paper paper-3 absolute inset-x-6 top-10 h-[360px] rounded-[20px] bg-white"></span>
-          <span class="paper paper-2 absolute inset-x-3 top-5 h-[360px] rounded-[20px] bg-white"></span>
+          <span class="paper paper-3 absolute inset-x-6 top-10 h-[360px] rounded-[20px] bg-card"></span>
+          <span class="paper paper-2 absolute inset-x-3 top-5 h-[360px] rounded-[20px] bg-card"></span>
 
           @for (a of areas; track a.title; let i = $index) {
-          @if (open() === i) {
-          <div class="doc absolute inset-x-0 top-0 flex h-[370px] flex-col rounded-[20px] bg-white p-6 shadow-anuna-lg">
-            <div class="flex items-center justify-between">
-              <svg viewBox="0 0 100 130" class="h-7 w-auto">
-                <path d="M14 130 V50 A36 36 0 0 1 86 50 V130" fill="none" stroke="#4A6670" stroke-width="28" />
-                <path d="M28 68 C58 70 84 94 100 130 H73 C63 104 47 90 28 91 Z" fill="#FF6B35" />
-              </svg>
-              <span
-                class="rounded-full bg-anuna-cream px-2.5 py-1 text-[10px] font-bold text-anuna-slate">Entregable</span>
-            </div>
-            <p class="mt-5 text-xl font-bold leading-snug text-anuna-slate">{{ a.deliverable }}</p>
-            <span class="mt-2 block h-1 w-12 rounded-full bg-anuna-orange"></span>
+            @if (open() === i) {
+              <div class="doc absolute inset-x-0 top-0 flex h-[370px] flex-col rounded-[20px] bg-card p-6 shadow-anuna-lg">
+                <div class="flex items-center justify-between">
+                  <svg viewBox="0 0 100 130" class="h-7 w-auto"><path d="M14 130 V50 A36 36 0 0 1 86 50 V130" fill="none" stroke="#4A6670" stroke-width="28" /><path d="M28 68 C58 70 84 94 100 130 H73 C63 104 47 90 28 91 Z" fill="#FF6B35" /></svg>
+                  <span class="rounded-full bg-page px-2.5 py-1 text-[10px] font-bold text-heading">{{ 'Entregable' | tr }}</span>
+                </div>
+                <p class="mt-5 text-xl font-bold leading-snug text-heading">{{ (a.deliverable) | tr }}</p>
+                <span class="mt-2 block h-1 w-12 rounded-full bg-anuna-orange"></span>
 
-            <div class="mt-6 flex-1">
-              @switch (a.preview) {
-              @case ('bars') {
-              <div class="space-y-3">
-                @for (b of previewBars; track b.l; let k = $index) {
-                <div class="text-[11px] font-bold text-anuna-slate">
-                  {{ b.l }}
-                  <span class="mt-1 block h-2 rounded-full bg-anuna-slate-100"><span
-                      class="grow block h-full rounded-full bg-anuna-slate" [style.width.%]="b.w"
-                      [style.--k]="k"></span></span>
-                </div>
-                }
-              </div>
-              }
-              @case ('roadmap') {
-              <div class="relative space-y-4 pl-6">
-                <span class="absolute bottom-2 left-[7px] top-2 w-[2px] bg-anuna-line"></span>
-                @for (s of previewRoadmap; track s; let k = $index) {
-                <div class="step-in relative text-[12px] font-bold text-anuna-slate" [style.--k]="k">
-                  <span
-                    class="absolute -left-6 top-0.5 h-4 w-4 rounded-full border-[3px] border-anuna-orange bg-white"></span>
-                  {{ s }}
-                  <span class="mt-1.5 block h-1.5 w-3/4 rounded-full bg-anuna-slate/15"></span>
-                </div>
-                }
-              </div>
-              }
-              @case ('flow') {
-              <div class="flex flex-col items-center gap-2">
-                @for (s of previewFlow; track s; let k = $index) {
-                <span class="step-in w-40 rounded-xl border-2 px-3 py-2 text-center text-[12px] font-bold"
-                  [class]="k === 1 ? 'border-anuna-orange bg-anuna-orange/10 text-anuna-orange-700' : 'border-anuna-line text-anuna-slate'"
-                  [style.--k]="k">
-                  {{ s }}{{ k === 1 ? ' · automatizable' : '' }}
-                </span>
-                @if (k < 2) { <span class="h-4 w-[2px] bg-anuna-line"></span> }
+                <div class="mt-6 flex-1">
+                  @switch (a.preview) {
+                    @case ('bars') {
+                      <div class="space-y-3">
+                        @for (b of previewBars; track b.l; let k = $index) {
+                          <div class="text-[11px] font-bold text-heading">
+                            {{ (b.l) | tr }}
+                            <span class="mt-1 block h-2 rounded-full bg-anuna-slate-100"><span class="grow block h-full rounded-full bg-anuna-slate" [style.width.%]="b.w" [style.--k]="k"></span></span>
+                          </div>
+                        }
+                      </div>
+                    }
+                    @case ('roadmap') {
+                      <div class="relative space-y-4 pl-6">
+                        <span class="absolute bottom-2 left-[7px] top-2 w-[2px] bg-anuna-line"></span>
+                        @for (s of previewRoadmap; track s; let k = $index) {
+                          <div class="step-in relative text-[12px] font-bold text-heading" [style.--k]="k">
+                            <span class="absolute -left-6 top-0.5 h-4 w-4 rounded-full border-[3px] border-anuna-orange bg-card"></span>
+                            {{ (s) | tr }}
+                            <span class="mt-1.5 block h-1.5 w-3/4 rounded-full bg-anuna-slate/15"></span>
+                          </div>
+                        }
+                      </div>
+                    }
+                    @case ('flow') {
+                      <div class="flex flex-col items-center gap-2">
+                        @for (s of previewFlow; track s; let k = $index) {
+                          <span class="step-in w-40 rounded-xl border-2 px-3 py-2 text-center text-[12px] font-bold"
+                            [class]="k === 1 ? 'border-anuna-orange bg-anuna-orange/10 text-anuna-orange-700' : 'border-anuna-line text-heading'" [style.--k]="k">
+                            {{ (s) | tr }}{{ (k === 1 ? (' · automatizable' | tr) : '') | tr }}
+                          </span>
+                          @if (k < 2) { <span class="h-4 w-[2px] bg-anuna-line"></span> }
+                        }
+                      </div>
+                    }
+                    @case ('ideas') {
+                      <div class="grid grid-cols-2 gap-2">
+                        @for (s of previewIdeas; track s; let k = $index) {
+                          <span class="step-in flex flex-col gap-2 rounded-xl bg-page p-3 text-[11px] font-bold text-heading" [style.--k]="k">
+                            <app-icon name="sparkles" class="h-4 w-4 text-anuna-orange-700" />{{ (s) | tr }}
+                          </span>
+                        }
+                      </div>
+                    }
+                    @case ('compare') {
+                      <div class="overflow-hidden rounded-xl border border-anuna-line text-[11px]">
+                        @for (r of previewCompare; track r.o; let k = $index) {
+                          <div class="step-in flex items-center justify-between border-b border-anuna-line px-3 py-2.5 last:border-0" [class.bg-anuna-yellow]="r.s === 3" [style.--k]="k">
+                            <span class="font-bold text-heading">{{ (r.o) | tr }}{{ (r.s === 3 ? (' · recomendada' | tr) : '') | tr }}</span>
+                            <span class="flex gap-1">
+                              @for (d of dots; track d) { <span class="h-2 w-2 rounded-full" [class]="d <= r.s ? 'bg-anuna-slate' : 'bg-anuna-slate/20'"></span> }
+                            </span>
+                          </div>
+                        }
+                      </div>
+                    }
                   }
-              </div>
-              }
-              @case ('ideas') {
-              <div class="grid grid-cols-2 gap-2">
-                @for (s of previewIdeas; track s; let k = $index) {
-                <span
-                  class="step-in flex flex-col gap-2 rounded-xl bg-anuna-cream p-3 text-[11px] font-bold text-anuna-slate"
-                  [style.--k]="k">
-                  <app-icon name="sparkles" class="h-4 w-4 text-anuna-orange-700" />{{ s }}
-                </span>
-                }
-              </div>
-              }
-              @case ('compare') {
-              <div class="overflow-hidden rounded-xl border border-anuna-line text-[11px]">
-                @for (r of previewCompare; track r.o; let k = $index) {
-                <div
-                  class="step-in flex items-center justify-between border-b border-anuna-line px-3 py-2.5 last:border-0"
-                  [class.bg-anuna-yellow]="r.s === 3" [style.--k]="k">
-                  <span class="font-bold text-anuna-slate">{{ r.o }}{{ r.s === 3 ? ' · recomendada' : '' }}</span>
-                  <span class="flex gap-1">
-                    @for (d of dots; track d) { <span class="h-2 w-2 rounded-full"
-                      [class]="d <= r.s ? 'bg-anuna-slate' : 'bg-anuna-slate/20'"></span> }
-                  </span>
                 </div>
-                }
+                <span class="mt-4 block h-1.5 w-2/3 rounded-full bg-anuna-slate/10"></span>
+                <span class="mt-2 block h-1.5 w-1/2 rounded-full bg-anuna-slate/10"></span>
               </div>
-              }
-              }
-            </div>
-            <span class="mt-4 block h-1.5 w-2/3 rounded-full bg-anuna-slate/10"></span>
-            <span class="mt-2 block h-1.5 w-1/2 rounded-full bg-anuna-slate/10"></span>
-          </div>
-          }
+            }
           }
         </div>
       </div>
