@@ -4,13 +4,15 @@ import { Icon } from '../../../../shared/icon';
 import { Reveal } from '../../../../shared/reveal';
 import { ContactService } from '../../../contact/contact.service';
 import { BUILDER_FEATURES, PLATFORMS } from '../../app-development.data';
+import { I18nAnimation } from '@shared/i18n-animation';
 
+import { TrPipe } from '../../../../shared/tr.pipe';
 type Stage = 'build' | 'contact' | 'success';
 type Field = 'nombre' | 'email' | 'privacidad';
 
 @Component({
   selector: 'app-ad-builder',
-  imports: [ReactiveFormsModule, Icon, Reveal],
+  imports: [TrPipe, ReactiveFormsModule, Icon, Reveal, I18nAnimation],
   templateUrl: './ad-builder.html',
   styleUrl: './ad-builder.css',
 })

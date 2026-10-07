@@ -2,15 +2,18 @@
   aria-labelledby="ad-features-title">
   <div class="dots pointer-events-none absolute inset-0" aria-hidden="true"></div>
 
-  <div class="relative mx-auto max-w-content px-5 sm:px-8">
-    <div class="max-w-full">
-      <p appReveal class="reveal mb-5 text-[15px] font-bold text-anuna-yellow">Qué incluye</p>
-      <h2 id="ad-features-title" appReveal style="--d:80ms"
-        class="reveal text-3xl font-bold leading-tight tracking-[-0.015em] text-white sm:text-4xl lg:text-[2.75rem]">
-        Todo lo que tu app necesita, en un solo equipo
-      </h2>
-      <p appReveal style="--d:160ms" class="reveal mt-5 text-lg leading-relaxed text-anuna-cream/80">
-        Empieza por lo que más urge hoy. Cuando crezcas, el mismo equipo integra lo siguiente sin volver a empezar.
+  <div i18nAnimation class="relative mx-auto max-w-content px-5 sm:px-8">
+    <div class="max-w-full lg:grid-cols-[1fr_1fr] lg:items-end">
+      <div>
+        <p appReveal class="reveal mb-5 text-[15px] font-bold text-anuna-yellow">{{ 'Qué incluye' | tr }}</p>
+        <h2 id="ad-features-title" appReveal style="--d:80ms"
+          class="reveal text-3xl font-bold leading-tight tracking-[-0.015em] text-white sm:text-4xl lg:text-[2.75rem]">
+          {{ 'Todo lo que tu app necesita, en un solo equipo' | tr }}
+        </h2>
+      </div>
+      <p appReveal style="--d:160ms"
+        class="reveal max-w-full text-lg leading-relaxed text-anuna-cream/80 ">
+        {{ 'Del diseño a la publicación, y después también. No tienes que coordinar a varios proveedores.' | tr }}
       </p>
     </div>
 
@@ -25,8 +28,8 @@
             class="feat-icon flex h-14 w-12 items-end justify-center rounded-arch bg-anuna-orange pb-2.5 text-anuna-ink">
             <app-icon [name]="f.icon" class="icon h-6 w-6" />
           </span>
-          <h3 class="mt-6 text-xl font-bold text-white">{{ f.title }}</h3>
-          <p class="mt-2 text-[15px] leading-relaxed text-anuna-cream/75">{{ f.text }}</p>
+          <h3 class="mt-6 text-xl font-bold text-white">{{ (f.title) | tr }}</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-anuna-cream/75">{{ (f.text) | tr }}</p>
 
           @if (f.anim === 'bars') {
           <!-- Mini maqueta de interfaz que se reacomoda en hover -->
@@ -39,11 +42,11 @@
           @if (f.anim === 'spin') {
           <!-- Versiones que se actualizan -->
           <div class="versions mt-6 flex items-center gap-2 text-xs font-bold" aria-hidden="true">
-            <span class="v rounded-full bg-white/10 px-3 py-1.5 text-anuna-cream/70">v1.0</span>
+            <span class="v rounded-full bg-white/10 px-3 py-1.5 text-anuna-cream/70">{{ 'v1.0' | tr }}</span>
             <span class="h-px w-6 bg-white/20"></span>
-            <span class="v rounded-full bg-white/10 px-3 py-1.5 text-anuna-cream/70">v1.1</span>
+            <span class="v rounded-full bg-white/10 px-3 py-1.5 text-anuna-cream/70">{{ 'v1.1' | tr }}</span>
             <span class="h-px w-6 bg-white/20"></span>
-            <span class="v v-new rounded-full bg-anuna-yellow px-3 py-1.5 text-anuna-slate-900">v2.0</span>
+            <span class="v v-new rounded-full bg-anuna-yellow px-3 py-1.5 text-anuna-slate-900">{{ 'v2.0' | tr }}</span>
           </div>
           }
         </article>
@@ -54,13 +57,13 @@
 
   <!-- Cinta de casos de uso -->
   <div class="relative mt-16" aria-labelledby="ad-usecases-title">
-    <h3 id="ad-usecases-title" class="mx-auto mb-6 max-w-content px-5 text-sm font-bold text-anuna-cream/70 sm:px-8">
-      Apps que podemos construir para ti</h3>
+    <h3 id="ad-usecases-title" class="mx-auto mb-6 max-w-content px-5 text-sm font-bold text-anuna-cream/70 sm:px-8">{{
+      'Apps que podemos construir para ti' | tr }}</h3>
     <div class="marquee" aria-hidden="true">
       <div class="track">
         @for (rep of [0, 1]; track rep) {
         @for (u of rowA; track u) {
-        <span class="pill">{{ u }}</span>
+        <span class="pill">{{ (u) | tr }}</span>
         }
         }
       </div>
@@ -69,14 +72,14 @@
       <div class="track reverse">
         @for (rep of [0, 1]; track rep) {
         @for (u of rowB; track u) {
-        <span class="pill pill-alt">{{ u }}</span>
+        <span class="pill pill-alt">{{ (u) | tr }}</span>
         }
         }
       </div>
     </div>
     <!-- Versión accesible de la lista -->
     <ul class="sr-only">
-      @for (u of rowA.concat(rowB); track u) { <li>{{ u }}</li> }
+      @for (u of rowA.concat(rowB); track u) { <li>{{ (u) | tr }}</li> }
     </ul>
   </div>
 </section>

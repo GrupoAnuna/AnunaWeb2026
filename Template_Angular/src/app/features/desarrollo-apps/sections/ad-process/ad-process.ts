@@ -1,10 +1,12 @@
 import { Component, ElementRef, OnDestroy, afterNextRender, inject, signal } from '@angular/core';
 import { Reveal } from '../../../../shared/reveal';
 import { APP_PROCESS } from '../../app-development.data';
+import { I18nAnimation } from '@shared/i18n-animation';
 
+import { TrPipe } from '../../../../shared/tr.pipe';
 @Component({
   selector: 'app-ad-process',
-  imports: [Reveal],
+  imports: [TrPipe, Reveal, I18nAnimation],
   templateUrl: './ad-process.html',
   styleUrl: './ad-process.css',
 })
