@@ -10,7 +10,29 @@ export interface WhatsappZone {
   display: string; // cómo se muestra en pantalla
 }
 
+import type { Lang }  from "@core/language.service";
 export const WHATSAPP_MESSAGE = 'Hola, me gustaría más información sobre sus servicios.';
+export const WHATSAPP_MESSAGES: Record<Lang, string> = {
+  es: WHATSAPP_MESSAGE,
+  en: "Hi, I'd like more information about your services.",
+};
+
+/** Nombre de cada zona en inglés (los números no cambian) */
+export const ZONE_LABELS_EN: Record<string, string> = { es: 'Spain', latam: 'Latin America' };
+
+/** Textos de la interfaz del botón y el modal */
+export const WHATSAPP_TEXT = {
+  es: {
+    fab: 'Escríbenos por WhatsApp', title: 'Elige tu zona',
+    desc: 'Selecciona dónde quieres que te atendamos por WhatsApp.',
+    close: 'Cerrar', newTab: '(abre WhatsApp en una pestaña nueva)',
+  },
+  en: {
+    fab: 'Message us on WhatsApp', title: 'Choose your region',
+    desc: 'Select where you would like us to help you on WhatsApp.',
+    close: 'Close', newTab: '(opens WhatsApp in a new tab)',
+  },
+};
 
 export const WHATSAPP_ZONES: WhatsappZone[] = [
   { id: 'es', label: 'España', phone: '34673561620', display: '+34 673 561 620' },

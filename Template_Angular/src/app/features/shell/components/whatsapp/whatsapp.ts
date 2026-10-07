@@ -1,5 +1,6 @@
-import { Component, ElementRef, OnDestroy, viewChild } from '@angular/core';
-import { WHATSAPP_ZONES, whatsappUrl } from './whatsapp.config';
+import { Component, ElementRef, OnDestroy, computed, inject, viewChild } from '@angular/core';
+import { WHATSAPP_MESSAGES, WHATSAPP_TEXT, WHATSAPP_ZONES, ZONE_LABELS_EN, whatsappUrl } from './whatsapp.config';
+import { LanguageService } from '@core/language.service';
 
 @Component({
   selector: 'app-whatsapp',
@@ -8,7 +9,18 @@ import { WHATSAPP_ZONES, whatsappUrl } from './whatsapp.config';
   host: { class: 'contents' },
 })
 export class Whatsapp implements OnDestroy {
-  readonly zones = WHATSAPP_ZONES.map((z) => ({ ...z, url: whatsappUrl(z.phone) }));
+  private readonly i18n = inject(LanguageService);
+  readonly text = this.i18n.pick(WHATSAPP_TEXT);
+
+  /** Zonas con su enlace; el nombre y el mensaje cambian con el idioma */
+  readonly zones = computed(() => {
+    const lang = this.i18n.lang();
+    return WHATSAPP_ZONES.map((z) => ({
+      ...z,
+      label: lang === 'en' ? (ZONE_LABELS_EN[z.id] ?? z.label) : z.label,
+      url: whatsappUrl(z.phone, WHATSAPP_MESSAGES[lang]),
+    }));
+  });
 
   private readonly dialog = viewChild.required<ElementRef<HTMLDialogElement>>('dialog');
   private closeTimer?: ReturnType<typeof setTimeout>;
