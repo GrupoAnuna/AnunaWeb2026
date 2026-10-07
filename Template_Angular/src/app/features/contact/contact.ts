@@ -9,21 +9,27 @@ import {
 } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Reveal } from '../../shared/reveal';
+import { LanguageService } from '../../core/language.service';
+import { CONTACT_TEXT } from './contact.i18n';
 import { ContactService } from './contact.service';
 import { HeaderComponent } from '@features/shell/components/header/header.component';
 import { Footer } from '@features/shell/components/footer/footer.component';
 import { Whatsapp } from '@features/shell/components/whatsapp/whatsapp';
+import { I18nAnimation } from '../../shared/i18n-animation';
 
 type Status = 'idle' | 'sending' | 'success' | 'error';
 type Field = 'nombre' | 'email' | 'mensaje' | 'privacidad';
 
 @Component({
   selector: 'app-contact',
-  imports: [ReactiveFormsModule, Reveal,HeaderComponent,Footer, Whatsapp],
+  imports: [ReactiveFormsModule, Reveal, HeaderComponent,Footer,Whatsapp,I18nAnimation],
   templateUrl: './contact.html',
   styleUrl: './contact.css',
 })
 export class Contact {
+  private readonly i18n = inject(LanguageService);
+  readonly t = this.i18n.pick(CONTACT_TEXT);
+
   /** WhatsApp por zona (mismas opciones que el sitio actual) */
   readonly zones = [
     { name: 'España', flag: '🇪🇸', phone: '+34 673 561 620', wa: 'https://wa.me/34673561620' },
@@ -79,25 +85,25 @@ export class Contact {
 
     if (this.form.invalid) {
       this.form.markAllAsTouched();
-      this.announcement.set('Revisa los campos marcados.');
+      this.announcement.set(this.t().srCheck);
       this.focusFirstInvalid();
       this.shake();
       return;
     }
 
     this.status.set('sending');
-    this.announcement.set('Enviando tu mensaje…');
+    this.announcement.set(this.t().srSending);
 
     try {
       await this.contact.send({ ...this.form.getRawValue(), intereses: this.interests() });
       this.status.set('success');
-      this.announcement.set('Mensaje enviado. Te responderemos en menos de 12 horas.');
+      this.announcement.set(this.t().srSent);
       // El formulario es más alto que el mensaje de éxito: centra la tarjeta
       // en pantalla y lleva el foco al mensaje cuando ya esté renderizado
       afterNextRender(() => this.revealSuccess(), { injector: this.injector });
     } catch {
       this.status.set('error');
-      this.announcement.set('No pudimos enviar tu mensaje. Inténtalo de nuevo o escríbenos por WhatsApp.');
+      this.announcement.set(this.t().sendError);
     }
   }
 

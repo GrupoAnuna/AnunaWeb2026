@@ -34,12 +34,12 @@
 .field textarea:focus {
   outline: none;
   border-color: #4A6670;
-  background: #fff;
+  background: var(--color-card);
   box-shadow: 0 0 0 4px rgba(74, 102, 112, .14);
 }
 .field.invalid input,
 .field.invalid textarea {
-  border-color: #B42318;
+  border-color: var(--color-anuna-error);
   box-shadow: 0 0 0 4px rgba(180, 35, 24, .10);
 }
 
@@ -58,7 +58,7 @@
 .check input:checked + .box { background: #4A6670; border-color: #4A6670; }
 .check input:checked + .box svg { opacity: 1; transform: none; }
 .check input:focus-visible + .box { box-shadow: 0 0 0 3px #FDF6EC, 0 0 0 5px #4A6670; }
-.field.invalid .check .box { border-color: #B42318; }
+.field.invalid .check .box { border-color: var(--color-anuna-error); }
 
 /* Mensajes de error: entran suavemente */
 .err { animation: errIn .25s var(--ease-out); }
