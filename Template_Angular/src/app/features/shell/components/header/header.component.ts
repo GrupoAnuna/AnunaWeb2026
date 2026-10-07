@@ -20,7 +20,7 @@ import { LanguageService } from '@core/language.service';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, RouterLinkActive, Icon],
+  imports: [RouterLink,],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
   host: {

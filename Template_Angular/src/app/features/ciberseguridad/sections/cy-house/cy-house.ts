@@ -2,10 +2,12 @@ import { Component, computed, signal } from '@angular/core';
 import { Icon } from '../../../../shared/icon';
 import { Reveal } from '../../../../shared/reveal';
 import { HOUSE_SPOTS, HouseSpot } from '../../cyber.data';
+import { I18nAnimation } from '@shared/i18n-animation';
 
+import { TrPipe } from '../../../../shared/tr.pipe';
 @Component({
   selector: 'app-cy-house',
-  imports: [Icon, Reveal],
+  imports: [TrPipe, Icon, Reveal, I18nAnimation],
   templateUrl: './cy-house.html',
   styleUrl: './cy-house.css',
 })

@@ -4,13 +4,15 @@ import { Icon } from '../../../../shared/icon';
 import { Reveal } from '../../../../shared/reveal';
 import { ContactService } from '../../../contact/contact.service';
 import { PRACTICES, PROTECTION_LEVELS } from '../../cyber.data';
+import { I18nAnimation } from '@shared/i18n-animation';
 
+import { TrPipe } from '../../../../shared/tr.pipe';
 type Stage = 'check' | 'contact' | 'success';
 type Field = 'nombre' | 'email' | 'privacidad';
 
 @Component({
   selector: 'app-cy-checkup',
-  imports: [ReactiveFormsModule, Icon, Reveal],
+  imports: [TrPipe, ReactiveFormsModule, Icon, Reveal, I18nAnimation],
   templateUrl: './cy-checkup.html',
   styleUrl: './cy-checkup.css',
 })

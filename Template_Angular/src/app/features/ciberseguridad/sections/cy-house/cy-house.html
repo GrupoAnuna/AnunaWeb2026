@@ -1,14 +1,14 @@
-<section id="como-una-casa" class="bg-white py-20 lg:py-28" aria-labelledby="cy-house-title">
-  <div class="mx-auto max-w-content px-5 sm:px-8">
+<section id="como-una-casa" class="bg-card py-20 lg:py-28" aria-labelledby="cy-house-title">
+  <div i18nAnimation class="mx-auto max-w-content px-5 sm:px-8">
 
     <div class="mx-auto max-w-2xl text-center">
-      <p appReveal class="reveal mb-5 text-[15px] font-bold text-anuna-orange-700">Explicado fácil</p>
+      <p appReveal class="reveal mb-5 text-[15px] font-bold text-anuna-orange-700">{{ 'Explicado fácil' | tr }}</p>
       <h2 id="cy-house-title" appReveal style="--d:80ms"
-        class="reveal text-3xl font-bold leading-tight tracking-[-0.015em] text-anuna-slate sm:text-4xl lg:text-[2.75rem]">
-        Tu empresa es como una casa
+        class="reveal text-3xl font-bold leading-tight tracking-[-0.015em] text-heading sm:text-4xl lg:text-[2.75rem]">
+        {{ 'Tu empresa es como una casa' | tr }}
       </h2>
       <p appReveal style="--d:160ms" class="reveal mt-5 text-lg leading-relaxed text-anuna-gray">
-        Tiene puertas, ventanas y cosas valiosas que cuidar. Toca cada punto para ver qué protegemos y cómo.
+        {{ 'Tiene puertas, ventanas y cosas valiosas que cuidar. Toca cada punto para ver qué protegemos y cómo.' | tr }}
       </p>
     </div>
 
@@ -16,7 +16,7 @@
 
       <!-- Ilustración con puntos -->
       <div appReveal class="reveal" style="--d:120ms">
-        <div class="house relative mx-auto aspect-[480/360] w-full max-w-[620px] rounded-[32px] bg-anuna-cream">
+        <div class="house relative mx-auto aspect-[480/360] w-full max-w-[620px] rounded-[32px] bg-page">
           <svg class="absolute inset-0 h-full w-full" viewBox="0 0 480 360" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <!-- Sol y nubes -->
             <circle cx="70" cy="70" r="26" fill="#FFD97D" opacity=".7" />
@@ -94,23 +94,23 @@
             @if (is(s.id)) {
               <div class="explain">
                 <div class="flex flex-wrap items-center gap-2 text-sm font-bold">
-                  <span class="rounded-full bg-white/10 px-3 py-1.5 text-anuna-cream">{{ s.place }}</span>
+                  <span class="rounded-full bg-white/10 px-3 py-1.5 text-anuna-cream">{{ (s.place) | tr }}</span>
                   <app-icon name="arrow-right" class="h-4 w-4 text-anuna-yellow" />
-                  <span class="rounded-full bg-anuna-yellow px-3 py-1.5 text-anuna-slate-900">{{ s.topic }}</span>
+                  <span class="rounded-full bg-anuna-yellow px-3 py-1.5 text-anuna-slate-900">{{ (s.topic) | tr }}</span>
                 </div>
-                <p class="mt-5 text-lg leading-relaxed text-white">{{ s.text }}</p>
+                <p class="mt-5 text-lg leading-relaxed text-white">{{ (s.text) | tr }}</p>
               </div>
             }
           }
         </div>
 
-        <div class="mt-5 flex flex-wrap gap-2" role="group" aria-label="Partes de la casa">
+        <div class="mt-5 flex flex-wrap gap-2" role="group" [attr.aria-label]="'Partes de la casa' | tr">
           @for (s of spots; track s.id) {
             <button type="button" (click)="select(s.id)" [attr.aria-pressed]="is(s.id)"
               class="chip inline-flex items-center gap-2 rounded-full border-2 px-4 py-2.5 text-sm font-bold transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-orange focus-visible:ring-offset-2"
               [class.on]="is(s.id)">
               <app-icon [name]="s.icon" class="h-4 w-4" />
-              {{ s.topic }}
+              {{ (s.topic) | tr }}
             </button>
           }
         </div>

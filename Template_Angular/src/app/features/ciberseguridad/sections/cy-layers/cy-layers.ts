@@ -2,10 +2,12 @@ import { Component, DestroyRef, afterNextRender, inject, signal } from '@angular
 import { Icon } from '../../../../shared/icon';
 import { Reveal } from '../../../../shared/reveal';
 import { LAYERS } from '../../cyber.data';
+import { I18nAnimation } from '@shared/i18n-animation';
 
+import { TrPipe } from '../../../../shared/tr.pipe';
 @Component({
   selector: 'app-cy-layers',
-  imports: [Icon, Reveal],
+  imports: [TrPipe, Icon, Reveal, I18nAnimation],
   templateUrl: './cy-layers.html',
   styleUrl: './cy-layers.css',
 })

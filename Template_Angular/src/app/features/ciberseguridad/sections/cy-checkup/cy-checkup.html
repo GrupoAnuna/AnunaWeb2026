@@ -1,13 +1,13 @@
-<section id="chequeo" class="relative overflow-clip bg-anuna-cream py-20 lg:py-28" aria-labelledby="cyc-section-title">
-  <div class="mx-auto max-w-content px-5 sm:px-8">
+<section id="chequeo" class="relative overflow-clip bg-page py-20 lg:py-28" aria-labelledby="cyc-section-title">
+  <div i18nAnimation class="mx-auto max-w-content px-5 sm:px-8">
 
-    <div class="max-w-full">
+    <div class="max-w-2xl">
       <h2 id="cyc-section-title" appReveal style="--d:80ms"
-        class="reveal text-3xl font-bold leading-tight tracking-[-0.015em] text-anuna-slate sm:text-4xl lg:text-[2.75rem]">
-        ¿Qué tan protegido está tu negocio?
+        class="reveal text-3xl font-bold leading-tight tracking-[-0.015em] text-heading sm:text-4xl lg:text-[2.75rem]">
+        {{ '¿Qué tan protegido está tu negocio?' | tr }}
       </h2>
       <p appReveal style="--d:160ms" class="reveal mt-5 text-lg leading-relaxed text-anuna-gray">
-        Marca lo que ya haces. Sin respuestas correctas ni incorrectas: es solo para saber por dónde empezar.
+        {{ 'Marca lo que ya haces. Sin respuestas correctas ni incorrectas: es solo para saber por dónde empezar.' | tr }}
       </p>
     </div>
 
@@ -15,20 +15,20 @@
 
       <!-- ===== Lista / formulario ===== -->
       <div appReveal class="reveal order-2 lg:order-1" style="--d:120ms">
-        <div class="rounded-[28px] border border-anuna-line bg-white p-6 shadow-anuna-md sm:p-9">
+        <div class="rounded-[28px] border border-anuna-line bg-card p-6 shadow-anuna-md sm:p-9">
           @switch (stage()) {
             @case ('check') {
               <div class="stage-in">
-                <h3 id="cyc-title" tabindex="-1" class="text-xl font-bold text-anuna-slate outline-none">En mi negocio…</h3>
+                <h3 id="cyc-title" tabindex="-1" class="text-xl font-bold text-heading outline-none">{{ 'En mi negocio…' | tr }}</h3>
                 <ul class="mt-5 space-y-3">
                   @for (p of practices; track p.text; let i = $index) {
                     <li>
                       <button type="button" role="switch" [attr.aria-checked]="checked()[i]" (click)="toggle(i)"
                         class="practice flex w-full items-center gap-4 rounded-2xl border-2 px-4 py-4 text-left transition duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-orange focus-visible:ring-offset-2"
                         [class.on]="checked()[i]" [style.--k]="i">
-                        <span class="flex-1 text-[15px] font-medium leading-snug text-anuna-slate">{{ p.text }}</span>
+                        <span class="flex-1 text-[15px] font-medium leading-snug text-heading">{{ (p.text) | tr }}</span>
                         <span class="switch relative h-7 w-12 shrink-0 rounded-full" aria-hidden="true">
-                          <span class="knob absolute left-1 top-1 flex h-5 w-5 items-center justify-center rounded-full bg-white">
+                          <span class="knob absolute left-1 top-1 flex h-5 w-5 items-center justify-center rounded-full bg-card">
                             <app-icon name="check" class="tick h-3 w-3" />
                           </span>
                         </span>
@@ -37,10 +37,10 @@
                   }
                 </ul>
                 <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                  <p class="text-sm text-anuna-gray" aria-live="polite"><span class="font-bold text-anuna-slate">{{ count() }} de {{ practices.length }}</span> buenas prácticas</p>
+                  <p class="text-sm text-anuna-gray" aria-live="polite"><span class="font-bold text-heading">{{ (count()) | tr }} {{ 'de' | tr }} {{ (practices.length) | tr }}</span> {{ 'buenas prácticas' | tr }}</p>
                   <button type="button" (click)="goToContact()"
-                    class="shine inline-flex items-center justify-center gap-2 rounded-full bg-anuna-orange px-7 py-4 text-base font-bold text-anuna-ink shadow-anuna-sm transition duration-200 hover:-translate-y-0.5 hover:bg-anuna-orange-hover hover:shadow-anuna-cta active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2">
-                    Quiero una evaluación gratis <app-icon name="arrow-right" class="h-5 w-5" />
+                    class="shine inline-flex items-center justify-center gap-2 rounded-full bg-anuna-orange px-7 py-4 text-base font-bold text-anuna-ink shadow-anuna-sm transition duration-200 hover:-translate-y-0.5 hover:bg-anuna-orange-hover hover:shadow-anuna-cta active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-heading focus-visible:ring-offset-2">
+                    {{ 'Quiero una evaluación gratis' | tr }} <app-icon name="arrow-right" class="h-5 w-5" />
                   </button>
                 </div>
               </div>
@@ -48,53 +48,53 @@
 
             @case ('contact') {
               <div class="stage-in">
-                <h3 id="cyc-title" tabindex="-1" class="text-2xl font-bold text-anuna-slate outline-none">Agenda tu evaluación de seguridad</h3>
-                <p class="mt-2 text-[15px] text-anuna-gray">Sin costo. Revisaremos contigo los pendientes y te diremos, en palabras simples, qué conviene hacer primero.</p>
+                <h3 id="cyc-title" tabindex="-1" class="text-2xl font-bold text-heading outline-none">{{ 'Agenda tu evaluación de seguridad' | tr }}</h3>
+                <p class="mt-2 text-[15px] text-anuna-gray">{{ 'Sin costo. Revisaremos contigo los pendientes y te diremos, en palabras simples, qué conviene hacer primero.' | tr }}</p>
                 <p class="mt-4 inline-flex items-center gap-2 rounded-full bg-anuna-slate px-3.5 py-1.5 text-xs font-bold text-anuna-cream">
-                  <app-icon name="shield" class="h-3.5 w-3.5 text-anuna-yellow" /> {{ level().title }} · {{ count() }}/{{ practices.length }}
+                  <app-icon name="shield" class="h-3.5 w-3.5 text-anuna-yellow" /> {{ (level().title) | tr }} · {{ (count()) | tr }}/{{ (practices.length) | tr }}
                 </p>
 
                 <form [formGroup]="form" (ngSubmit)="submit()" novalidate class="mt-6 grid gap-4 sm:grid-cols-2">
                   <div class="field sm:col-span-2">
-                    <label for="cyc-nombre" class="mb-1.5 block text-[15px] font-bold text-anuna-slate">Nombre <span class="text-anuna-orange-700" aria-hidden="true">*</span></label>
+                    <label for="cyc-nombre" class="mb-1.5 block text-[15px] font-bold text-heading">{{ 'Nombre' | tr }} <span class="text-anuna-orange-700" aria-hidden="true">*</span></label>
                     <input id="cyc-nombre" formControlName="nombre" autocomplete="name" [attr.aria-invalid]="showError('nombre')" [class.invalid]="showError('nombre')"
-                      class="w-full rounded-xl border border-anuna-line bg-anuna-cream/40 px-4 py-3 text-base text-anuna-ink" />
-                    @if (showError('nombre')) { <p class="err mt-1.5 text-sm font-medium text-anuna-error">Escribe tu nombre.</p> }
+                      class="w-full rounded-xl border border-anuna-line bg-page/40 px-4 py-3 text-base text-strong" />
+                    @if (showError('nombre')) { <p class="err mt-1.5 text-sm font-medium text-anuna-error">{{ 'Escribe tu nombre.' | tr }}</p> }
                   </div>
                   <div class="field">
-                    <label for="cyc-email" class="mb-1.5 block text-[15px] font-bold text-anuna-slate">Email <span class="text-anuna-orange-700" aria-hidden="true">*</span></label>
+                    <label for="cyc-email" class="mb-1.5 block text-[15px] font-bold text-heading">{{ 'Email' | tr }} <span class="text-anuna-orange-700" aria-hidden="true">*</span></label>
                     <input id="cyc-email" type="email" formControlName="email" autocomplete="email" [attr.aria-invalid]="showError('email')" [class.invalid]="showError('email')"
-                      class="w-full rounded-xl border border-anuna-line bg-anuna-cream/40 px-4 py-3 text-base text-anuna-ink" />
-                    @if (showError('email')) { <p class="err mt-1.5 text-sm font-medium text-anuna-error">Revisa el correo.</p> }
+                      class="w-full rounded-xl border border-anuna-line bg-page/40 px-4 py-3 text-base text-strong" />
+                    @if (showError('email')) { <p class="err mt-1.5 text-sm font-medium text-anuna-error">{{ 'Revisa el correo.' | tr }}</p> }
                   </div>
                   <div class="field">
-                    <label for="cyc-telefono" class="mb-1.5 block text-[15px] font-bold text-anuna-slate">WhatsApp <span class="font-normal text-anuna-gray">(opcional)</span></label>
+                    <label for="cyc-telefono" class="mb-1.5 block text-[15px] font-bold text-heading">{{ 'WhatsApp' | tr }} <span class="font-normal text-anuna-gray">{{ '(opcional)' | tr }}</span></label>
                     <input id="cyc-telefono" type="tel" formControlName="telefono" autocomplete="tel"
-                      class="w-full rounded-xl border border-anuna-line bg-anuna-cream/40 px-4 py-3 text-base text-anuna-ink" />
+                      class="w-full rounded-xl border border-anuna-line bg-page/40 px-4 py-3 text-base text-strong" />
                   </div>
                   <div class="sm:col-span-2">
                     <label class="flex cursor-pointer items-start gap-3 text-sm leading-relaxed text-anuna-gray">
                       <input id="cyc-privacidad" type="checkbox" formControlName="privacidad" class="mt-0.5 h-5 w-5 shrink-0 accent-anuna-slate" [attr.aria-invalid]="showError('privacidad')" />
-                      <span>Acepto la <a href="https://grupoanuna.com/assets/Pol%C3%ADticas/Aviso%20de%20Privacidad%20%E2%80%93%20Formulario%20de%20Agenda.pdf" target="_blank" rel="noopener" class="font-bold text-anuna-orange-700 underline underline-offset-2">política de privacidad</a> y el tratamiento de mis datos.</span>
+                      <span>{{ 'Acepto la' | tr }} <a href="https://grupoanuna.com/assets/Pol%C3%ADticas/Aviso%20de%20Privacidad%20%E2%80%93%20Formulario%20de%20Agenda.pdf" target="_blank" rel="noopener" class="font-bold text-anuna-orange-700 underline underline-offset-2">{{ 'política de privacidad' | tr }}</a> {{ 'y el tratamiento de mis datos.' | tr }}</span>
                     </label>
-                    @if (showError('privacidad')) { <p class="err mt-1.5 pl-8 text-sm font-medium text-anuna-error">Necesitamos tu autorización para responderte.</p> }
+                    @if (showError('privacidad')) { <p class="err mt-1.5 pl-8 text-sm font-medium text-anuna-error">{{ 'Necesitamos tu autorización para responderte.' | tr }}</p> }
                   </div>
 
                   @if (error()) {
-                    <p class="rounded-xl border border-anuna-error/30 bg-white px-4 py-3 text-sm font-medium text-anuna-error sm:col-span-2">No pudimos enviar tu solicitud. Inténtalo de nuevo o escríbenos por WhatsApp.</p>
+                    <p class="rounded-xl border border-anuna-error/30 bg-card px-4 py-3 text-sm font-medium text-anuna-error sm:col-span-2">{{ 'No pudimos enviar tu solicitud. Inténtalo de nuevo o escríbenos por WhatsApp.' | tr }}</p>
                   }
 
                   <div class="mt-2 flex flex-col-reverse gap-3 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
-                    <button type="button" (click)="backToCheck()" class="inline-flex items-center justify-center gap-2 rounded-full px-4 py-3 text-[15px] font-bold text-anuna-slate hover:bg-anuna-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate">
-                      <app-icon name="arrow-left" class="h-4 w-4" /> Editar respuestas
+                    <button type="button" (click)="backToCheck()" class="inline-flex items-center justify-center gap-2 rounded-full px-4 py-3 text-[15px] font-bold text-heading hover:bg-anuna-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-heading">
+                      <app-icon name="arrow-left" class="h-4 w-4" /> {{ 'Editar respuestas' | tr }}
                     </button>
                     <button type="submit" [disabled]="sending()"
-                      class="shine inline-flex items-center justify-center gap-2 rounded-full bg-anuna-orange px-7 py-4 text-base font-bold text-anuna-ink shadow-anuna-sm transition duration-200 hover:-translate-y-0.5 hover:bg-anuna-orange-hover hover:shadow-anuna-cta active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2 disabled:cursor-wait">
+                      class="shine inline-flex items-center justify-center gap-2 rounded-full bg-anuna-orange px-7 py-4 text-base font-bold text-anuna-ink shadow-anuna-sm transition duration-200 hover:-translate-y-0.5 hover:bg-anuna-orange-hover hover:shadow-anuna-cta active:translate-y-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-heading focus-visible:ring-offset-2 disabled:cursor-wait">
                       @if (sending()) {
-                        Enviando
+                        {{ 'Enviando' | tr }}
                         <span class="flex gap-1" aria-hidden="true"><span class="busy h-1.5 w-1.5 rounded-full bg-anuna-ink"></span><span class="busy h-1.5 w-1.5 rounded-full bg-anuna-ink"></span><span class="busy h-1.5 w-1.5 rounded-full bg-anuna-ink"></span></span>
                       } @else {
-                        Agendar evaluación <app-icon name="arrow-right" class="h-5 w-5" />
+                        {{ 'Agendar evaluación' | tr }} <app-icon name="arrow-right" class="h-5 w-5" />
                       }
                     </button>
                   </div>
@@ -114,10 +114,10 @@
                     <path class="ok-check" pathLength="1" d="M86 92 L96 102 L115 80" fill="none" stroke="#FFD97D" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
                   </g>
                 </svg>
-                <h3 id="cyc-title" tabindex="-1" class="mt-5 text-2xl font-bold text-anuna-slate outline-none">¡Gran paso para tu tranquilidad!</h3>
-                <p class="mt-3 max-w-sm text-base leading-relaxed text-anuna-gray">Te escribiremos en menos de 12 horas para agendar tu evaluación de seguridad.</p>
-                <button type="button" (click)="restart()" class="link-grow mt-6 text-[15px] font-bold text-anuna-orange-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2">
-                  Hacer el chequeo de nuevo
+                <h3 id="cyc-title" tabindex="-1" class="mt-5 text-2xl font-bold text-heading outline-none">{{ '¡Gran paso para tu tranquilidad!' | tr }}</h3>
+                <p class="mt-3 max-w-sm text-base leading-relaxed text-anuna-gray">{{ 'Te escribiremos en menos de 12 horas para agendar tu evaluación de seguridad.' | tr }}</p>
+                <button type="button" (click)="restart()" class="link-grow mt-6 text-[15px] font-bold text-anuna-orange-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-heading focus-visible:ring-offset-2">
+                  {{ 'Hacer el chequeo de nuevo' | tr }}
                 </button>
               </div>
             }
@@ -143,7 +143,7 @@
               <path d="M10 180 V80 A70 70 0 0 1 150 80 V180 Z" fill="none" stroke="#4A6670" stroke-width="4" />
             </svg>
             <div class="absolute inset-x-0 top-[38%] text-center">
-              <p class="pct text-5xl font-bold">{{ count() }}<span class="text-2xl">/{{ practices.length }}</span></p>
+              <p class="pct text-5xl font-bold">{{ (count()) | tr }}<span class="text-2xl">/{{ (practices.length) | tr }}</span></p>
             </div>
           </div>
 
@@ -151,19 +151,19 @@
             @for (l of levels; track l.title) {
               @if (level().title === l.title) {
                 <div class="lvl">
-                  <p class="text-xl font-bold text-white">{{ l.title }}</p>
-                  <p class="mt-2 text-[15px] leading-relaxed text-anuna-cream/85">{{ l.text }}</p>
+                  <p class="text-xl font-bold text-white">{{ (l.title) | tr }}</p>
+                  <p class="mt-2 text-[15px] leading-relaxed text-anuna-cream/85">{{ (l.text) | tr }}</p>
                 </div>
               }
             }
             @if (gaps().length && stage() === 'check') {
-              <p class="mt-5 text-sm font-bold text-anuna-yellow">Te podemos ayudar con:</p>
+              <p class="mt-5 text-sm font-bold text-anuna-yellow">{{ 'Te podemos ayudar con:' | tr }}</p>
               <ul class="mt-2 space-y-1.5 text-sm text-anuna-cream/90">
                 @for (g of gaps().slice(0, 3); track g) {
-                  <li class="gap-item flex items-start gap-2"><span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-anuna-orange"></span>{{ g }}</li>
+                  <li class="gap-item flex items-start gap-2"><span class="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-anuna-orange"></span>{{ (g) | tr }}</li>
                 }
               </ul>
-              @if (gaps().length > 3) { <p class="mt-2 text-xs text-anuna-cream/60">y {{ gaps().length - 3 }} más…</p> }
+              @if (gaps().length > 3) { <p class="mt-2 text-xs text-anuna-cream/60">{{ 'y' | tr }} {{ (gaps().length - 3) | tr }} {{ 'más…' | tr }}</p> }
             }
           </div>
         </div>
