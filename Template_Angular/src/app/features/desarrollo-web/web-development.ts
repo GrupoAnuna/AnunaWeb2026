@@ -9,13 +9,12 @@ import { WdQuote } from './sections/wd-quote/wd-quote';
 import { Footer } from '@features/shell/components/footer/footer.component';
 import { HeaderComponent } from '@features/shell/components/header/header.component';
 import { Whatsapp } from '@features/shell/components/whatsapp/whatsapp';
-import { I18nAnimation } from '@shared/i18n-animation';
 
 import { WEB_DEV_EN } from './web-development.i18n';
 @Component({
   providers:[provideTranslations(WEB_DEV_EN)],
   selector: 'app-web-development',
-  imports: [WdHero, WdServices, WdWhy, WdProcess, WdQuote, Footer, HeaderComponent, Whatsapp, I18nAnimation],
+  imports: [WdHero, WdServices, WdWhy, WdProcess, WdQuote, Footer, HeaderComponent, Whatsapp],
   templateUrl: './web-development.html',
 })
 export class WebDevelopment {

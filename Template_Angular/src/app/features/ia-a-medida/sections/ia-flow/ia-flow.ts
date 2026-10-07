@@ -2,10 +2,12 @@ import { Component, ElementRef, afterNextRender, inject } from '@angular/core';
 import { Icon } from '../../../../shared/icon';
 import { Reveal } from '../../../../shared/reveal';
 import { FLOW_OUTPUTS, FLOW_SOURCES } from '../../ai.data';
+import { I18nAnimation } from '@shared/i18n-animation';
 
+import { TrPipe } from '../../../../shared/tr.pipe';
 @Component({
   selector: 'app-ia-flow',
-  imports: [Icon, Reveal],
+  imports: [TrPipe, Icon, Reveal, I18nAnimation],
   templateUrl: './ia-flow.html',
   styleUrl: './ia-flow.css',
 })

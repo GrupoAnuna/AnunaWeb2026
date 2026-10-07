@@ -1,17 +1,18 @@
-<section class="bg-anuna-cream py-20 lg:py-16" aria-labelledby="ia-sol-title">
+<section class="bg-page py-20 lg:py-28" aria-labelledby="ia-sol-title">
   <div class="mx-auto max-w-content px-5 sm:px-8">
 
-    <div class="max-w-full">
+    <div class="mx-w-full lg:grid-cols-[1fr_1fr] lg:items-end">
       <div>
-        <p appReveal class="reveal mb-5 text-[15px] font-bold text-anuna-orange-700">Qué construimos</p>
-        <h2 id="ia-sol-title" appReveal style="--d:80ms"
-          class="reveal max-w-lg text-3xl font-bold leading-tight tracking-[-0.015em] text-anuna-slate sm:text-4xl lg:text-[2.75rem]">
-          Soluciones de IA hechas para tu operación
+        <p i18nAnimation appReveal class="reveal mb-5 text-[15px] font-bold text-anuna-orange-700">{{ 'Qué construimos' | tr }}</p>
+        <h2 i18nAnimation id="ia-sol-title" appReveal style="--d:80ms"
+          class="reveal max-w-full text-3xl font-bold leading-tight tracking-[-0.015em] text-heading sm:text-4xl lg:text-[2.75rem]">
+          {{ 'Soluciones de IA hechas para tu operación' | tr }}
         </h2>
-        <p appReveal style="--d:160ms" class="reveal mt-5 text-lg leading-relaxed text-anuna-gray">
-          Empezamos por un caso concreto que te ahorre tiempo desde el primer mes. Cuando funciona, lo llevamos a más áreas.
-        </p>
       </div>
+      <br>
+      <p i18nAnimation appReveal style="--d:160ms" class="reveal max-w-full text-lg leading-relaxed text-anuna-gray">
+        {{ 'Empezamos por un caso concreto que te ahorre tiempo desde el primer mes. Cuando funciona, lo llevamos a más áreas.' | tr }}
+      </p>
     </div>
 
     <ul class="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -19,16 +20,16 @@
         <li appReveal class="reveal" [style.--d]="(i % 3) * 110 + 'ms'">
           <article class="sol group relative flex h-full flex-col overflow-hidden rounded-[24px] border p-7 transition duration-300" [class.sol-featured]="s.featured">
             @if (s.featured) {
-              <span class="absolute right-6 top-6 rounded-full bg-anuna-yellow px-3 py-1 text-xs font-bold text-anuna-slate-900">Ideal para empezar</span>
+              <span i18nAnimation class="absolute right-6 top-6 rounded-full bg-anuna-yellow px-3 py-1 text-xs font-bold text-anuna-slate-900">{{ 'Ideal para empezar' | tr }}</span>
             }
             <span class="sol-icon flex h-14 w-12 items-end justify-center rounded-arch pb-2.5">
               <app-icon [name]="s.icon" class="icon relative h-6 w-6" />
             </span>
-            <h3 class="sol-title mt-6 text-xl font-bold">{{ s.title }}</h3>
-            <p class="sol-text mt-2 text-[15px] leading-relaxed">{{ s.text }}</p>
+            <h3 i18nAnimation class="sol-title mt-6 text-xl font-bold">{{ (s.title) | tr }}</h3>
+            <p i18nAnimation class="sol-text mt-2 text-[15px] leading-relaxed">{{ (s.text) | tr }}</p>
             <div class="mt-auto pt-6">
-              <p class="sol-ideal rounded-2xl px-4 py-3 text-sm leading-relaxed">
-                <span class="font-bold">Ideal para</span> {{ s.idealFor }}
+              <p i18nAnimation class="sol-ideal rounded-2xl px-4 py-3 text-sm leading-relaxed">
+                <span class="font-bold">{{ 'Ideal para' | tr }}</span> {{ (s.idealFor) | tr }}
               </p>
             </div>
             <!-- Destello que recorre la tarjeta en hover -->

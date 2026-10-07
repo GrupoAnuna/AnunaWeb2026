@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { provideTranslations } from '../../core/translations';
 import { Meta } from '@angular/platform-browser';
 import { IaHero } from './sections/ia-hero/ia-hero';
 import { IaDemos } from './sections/ia-demos/ia-demos';
@@ -10,7 +11,9 @@ import { Footer } from '@features/shell/components/footer/footer.component';
 import { HeaderComponent } from '@features/shell/components/header/header.component';
 import { Whatsapp } from '@features/shell/components/whatsapp/whatsapp';
 
+import { AI_EN } from './ai-page.i18n';
 @Component({
+  providers: [provideTranslations(AI_EN)],
   selector: 'app-ai-page',
   imports: [IaHero, IaDemos, IaFlow, IaSolutions, IaTrust, IaIdeas, Footer, HeaderComponent, Whatsapp],
   templateUrl: './ai-page.html',

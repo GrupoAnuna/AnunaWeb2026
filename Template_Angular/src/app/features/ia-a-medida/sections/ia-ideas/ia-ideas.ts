@@ -4,12 +4,14 @@ import { Icon } from '../../../../shared/icon';
 import { Reveal } from '../../../../shared/reveal';
 import { ContactService } from '../../../contact/contact.service';
 import { IDEA_AREAS } from '../../ai.data';
+import { I18nAnimation } from '@shared/i18n-animation';
 
+import { TrPipe } from '../../../../shared/tr.pipe';
 type Field = 'nombre' | 'email' | 'privacidad';
 
 @Component({
   selector: 'app-ia-ideas',
-  imports: [ReactiveFormsModule, Icon, Reveal],
+  imports: [TrPipe, ReactiveFormsModule, Icon, Reveal, I18nAnimation],
   templateUrl: './ia-ideas.html',
   styleUrl: './ia-ideas.css',
 })
