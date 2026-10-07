@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { provideTranslations } from '../../core/translations';
 import { Meta } from '@angular/platform-browser';
 import { ClHero } from './sections/cl-hero/cl-hero';
 import { ClCompare } from './sections/cl-compare/cl-compare';
@@ -10,7 +11,9 @@ import { Footer } from '@features/shell/components/footer/footer.component';
 import { HeaderComponent } from '@features/shell/components/header/header.component';
 import { Whatsapp } from '@features/shell/components/whatsapp/whatsapp';
 
+import { CLOUD_EN } from './cloud-page.i18n';
 @Component({
+  providers: [provideTranslations(CLOUD_EN)],
   selector: 'app-cloud-page',
   imports: [ClHero, ClCompare, ClServices, ClProcess, ClFaq, ClContact, Footer, HeaderComponent, Whatsapp],
   templateUrl: './cloud-page.html',

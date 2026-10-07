@@ -4,12 +4,14 @@ import { Icon } from '../../../../shared/icon';
 import { Reveal } from '../../../../shared/reveal';
 import { ContactService } from '../../../contact/contact.service';
 import { SITUATIONS } from '../../cloud.data';
+import { I18nAnimation } from '@shared/i18n-animation';
 
+import { TrPipe } from '../../../../shared/tr.pipe';
 type Field = 'nombre' | 'email' | 'privacidad';
 
 @Component({
   selector: 'app-cl-contact',
-  imports: [ReactiveFormsModule, Icon, Reveal],
+  imports: [TrPipe, ReactiveFormsModule, Icon, Reveal, I18nAnimation],
   templateUrl: './cl-contact.html',
   styleUrl: './cl-contact.css',
 })

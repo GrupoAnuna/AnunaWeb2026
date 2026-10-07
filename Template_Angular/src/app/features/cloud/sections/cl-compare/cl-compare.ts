@@ -2,10 +2,12 @@ import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { Icon } from '../../../../shared/icon';
 import { Reveal } from '../../../../shared/reveal';
 import { COMPARE } from '../../cloud.data';
+import { I18nAnimation } from '@shared/i18n-animation';
 
+import { TrPipe } from '../../../../shared/tr.pipe';
 @Component({
   selector: 'app-cl-compare',
-  imports: [Icon, Reveal],
+  imports: [TrPipe, Icon, Reveal, I18nAnimation],
   templateUrl: './cl-compare.html',
   styleUrl: './cl-compare.css',
 })

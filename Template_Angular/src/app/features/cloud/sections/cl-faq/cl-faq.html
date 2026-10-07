@@ -1,14 +1,14 @@
-<section class="bg-white py-20 lg:py-28" aria-labelledby="cl-faq-title">
+<section class="bg-card py-20 lg:py-28" aria-labelledby="cl-faq-title">
   <div class="mx-auto grid max-w-content gap-12 px-5 sm:px-8 lg:grid-cols-[.8fr_1.2fr] lg:gap-16">
 
-    <div class="lg:sticky lg:top-28 lg:self-start">
-      <p appReveal class="reveal mb-5 text-[15px] font-bold text-anuna-orange-700">Preguntas frecuentes</p>
+    <div i18nAnimation class="lg:sticky lg:top-28 lg:self-start">
+      <p appReveal class="reveal mb-5 text-[15px] font-bold text-anuna-orange-700">{{ 'Preguntas frecuentes' | tr }}</p>
       <h2 id="cl-faq-title" appReveal style="--d:80ms"
-        class="reveal text-3xl font-bold leading-tight tracking-[-0.015em] text-anuna-slate sm:text-4xl lg:text-[2.75rem]">
-        Lo que todos preguntan antes de dar el salto
+        class="reveal text-3xl font-bold leading-tight tracking-[-0.015em] text-heading sm:text-4xl lg:text-[2.75rem]">
+        {{ 'Lo que todos preguntan antes de dar el salto' | tr }}
       </h2>
       <p appReveal style="--d:160ms" class="reveal mt-5 text-lg leading-relaxed text-anuna-gray">
-        ¿Tienes otra duda? Escríbenos: te respondemos en menos de 12 horas.
+        {{ '¿Tienes otra duda? Escríbenos: te respondemos en menos de 12 horas.' | tr }}
       </p>
     </div>
 
@@ -19,15 +19,15 @@
             <button type="button" (click)="toggle(i)" [attr.aria-expanded]="open() === i" [attr.aria-controls]="'cl-faq-' + i"
               class="flex w-full items-center gap-4 px-6 py-5 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-anuna-orange">
               <span class="q-icon flex h-9 w-9 shrink-0 items-center justify-center rounded-full"><app-icon name="help" class="h-4 w-4" /></span>
-              <span class="flex-1 text-[17px] font-bold text-anuna-slate">{{ f.q }}</span>
-              <span class="chev flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 text-anuna-slate">
+              <span class="flex-1 text-[17px] font-bold text-heading">{{ (f.q) | tr }}</span>
+              <span class="chev flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 text-heading">
                 <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" viewBox="0 0 24 24" aria-hidden="true"><path class="plus-v" d="M12 5v14" /><path d="M5 12h14" /></svg>
               </span>
             </button>
           </h3>
-          <div [id]="'cl-faq-' + i" class="panel" role="region" [attr.aria-label]="f.q" [attr.inert]="open() === i ? null : ''">
+          <div [id]="'cl-faq-' + i" class="panel" role="region" [attr.aria-label]="(f.q) | tr" [attr.inert]="open() === i ? null : ''">
             <div class="panel-inner">
-              <p class="px-6 pb-6 pl-[4.75rem] text-[15px] leading-relaxed text-anuna-gray">{{ f.a }}</p>
+              <p class="px-6 pb-6 pl-[4.75rem] text-[15px] leading-relaxed text-anuna-gray">{{ (f.a) | tr }}</p>
             </div>
           </div>
         </li>

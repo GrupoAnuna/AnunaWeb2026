@@ -1,63 +1,57 @@
-<section id="que-ofrecemos" class="bg-anuna-cream py-20 lg:py-28" aria-labelledby="cl-services-title">
-  <div class="mx-auto max-w-content px-5 sm:px-8">
+<section id="que-ofrecemos" class="bg-page py-20 lg:py-28" aria-labelledby="cl-services-title">
+  <div  class="mx-auto max-w-content px-5 sm:px-8">
 
 
-    <div class="max-w-full">
-      <div>
-        <p appReveal class="reveal mb-5 text-[15px] font-bold text-anuna-orange-700">Qué ofrecemos</p>
+
+    <div i18nAnimation class="max-w-full">
+    
+      <div class="max-w-full">
+        <p appReveal class="reveal mb-5 text-[15px] font-bold text-anuna-orange-700">{{ 'Qué ofrecemos' | tr }}</p>
         <h2 id="cl-services-title" appReveal style="--d:80ms"
-          class="reveal max-w-lg text-3xl font-bold leading-tight tracking-[-0.015em] text-anuna-slate sm:text-4xl lg:text-[2.75rem]">
-          Seis servicios para que tu nube funcione sola
+          class="reveal  text-3xl font-bold leading-tight tracking-[-0.015em] text-heading sm:text-4xl lg:text-[2.75rem]">
+          {{ 'Seis servicios para que tu nube funcione sola' | tr }}
         </h2>
-        <p appReveal style="--d:160ms" class="reveal mt-5  text-lg leading-relaxed text-anuna-gray">
-          Puedes contratar uno o combinarlos. En cada uno te decimos exactamente qué incluye, para que no haya
-          sorpresas.
-        </p>
       </div>
+      <br>
+      <p appReveal style="--d:160ms" class="reveal max-w-full text-lg leading-relaxed text-anuna-gray ">
+        {{ 'Puedes contratar uno o combinarlos. En cada uno te decimos exactamente qué incluye, para que no haya sorpresas.' | tr }}
+      </p>
     </div>
 
-    <ul class="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+    <ul i18nAnimation class="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
       @for (s of services; track s.title; let i = $index) {
-      <li appReveal class="reveal" [style.--d]="(i % 3) * 110 + 'ms'">
-        <article
-          class="svc group relative flex h-full flex-col overflow-hidden rounded-[24px] border p-7 transition duration-300"
-          [class.svc-featured]="s.featured">
-          @if (s.featured) {
-          <span
-            class="absolute right-6 top-6 rounded-full bg-anuna-yellow px-3 py-1 text-xs font-bold text-anuna-slate-900">El
-            primer paso</span>
-          }
-          <span class="svc-icon flex h-14 w-12 items-end justify-center rounded-arch pb-2.5">
-            <app-icon [name]="s.icon" class="icon relative h-6 w-6" />
-          </span>
-          <h3 class="svc-title mt-6 text-xl font-bold">{{ s.title }}</h3>
-          <p class="svc-text mt-2 text-[15px] leading-relaxed">{{ s.text }}</p>
-
-          <p class="svc-label mt-6 text-xs font-bold uppercase tracking-[.08em]">Incluye</p>
-          <ul class="mt-3 space-y-2.5 text-[15px]">
-            @for (x of s.includes; track x) {
-            <li class="svc-item flex items-start gap-2.5">
-              <span class="svc-check mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full"><app-icon
-                  name="check" class="h-3 w-3" /></span>
-              {{ x }}
-            </li>
+        <li appReveal class="reveal" [style.--d]="(i % 3) * 110 + 'ms'">
+          <article class="svc group relative flex h-full flex-col overflow-hidden rounded-[24px] border p-7 transition duration-300" [class.svc-featured]="s.featured">
+            @if (s.featured) {
+              <span class="absolute right-6 top-6 rounded-full bg-anuna-yellow px-3 py-1 text-xs font-bold text-anuna-slate-900">{{ 'El primer paso' | tr }}</span>
             }
-          </ul>
-          <span class="svc-trace absolute inset-x-7 bottom-0 flex h-[3px] items-center rounded-full bg-anuna-orange"
-            aria-hidden="true"><span class="ml-auto h-2 w-2 rounded-full bg-anuna-orange"></span></span>
-        </article>
-      </li>
+            <span class="svc-icon flex h-14 w-12 items-end justify-center rounded-arch pb-2.5">
+              <app-icon [name]="s.icon" class="icon relative h-6 w-6" />
+            </span>
+            <h3 class="svc-title mt-6 text-xl font-bold">{{ (s.title) | tr }}</h3>
+            <p class="svc-text mt-2 text-[15px] leading-relaxed">{{ (s.text) | tr }}</p>
+
+            <p class="svc-label mt-6 text-xs font-bold uppercase tracking-[.08em]">{{ 'Incluye' | tr }}</p>
+            <ul class="mt-3 space-y-2.5 text-[15px]">
+              @for (x of s.includes; track x) {
+                <li class="svc-item flex items-start gap-2.5">
+                  <span class="svc-check mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full"><app-icon name="check" class="h-3 w-3" /></span>
+                  {{ (x) | tr }}
+                </li>
+              }
+            </ul>
+            <span class="svc-trace absolute inset-x-7 bottom-0 flex h-[3px] items-center rounded-full bg-anuna-orange" aria-hidden="true"><span class="ml-auto h-2 w-2 rounded-full bg-anuna-orange"></span></span>
+          </article>
+        </li>
       }
     </ul>
 
     <!-- Aclaración útil -->
-    <div appReveal
-      class="reveal mt-10 flex flex-col items-start justify-between gap-4 rounded-[22px] bg-white px-7 py-6 shadow-anuna-sm sm:flex-row sm:items-center">
-      <p class="text-base text-anuna-slate"><span class="font-bold">¿No sabes cuál necesitas?</span> Cuéntanos cómo
-        trabajas hoy y te recomendamos la combinación ideal.</p>
+    <div appReveal class="reveal mt-10 flex flex-col items-start justify-between gap-4 rounded-[22px] bg-card px-7 py-6 shadow-anuna-sm sm:flex-row sm:items-center">
+      <p class="text-base text-heading"><span class="font-bold">{{ '¿No sabes cuál necesitas?' | tr }}</span> {{ 'Cuéntanos cómo trabajas hoy y te recomendamos la combinación ideal.' | tr }}</p>
       <a [routerLink]="[]" fragment="hablemos"
-        class="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-anuna-slate px-6 py-3 text-[15px] font-bold text-anuna-cream transition-colors hover:bg-anuna-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2">
-        Pedir recomendación <app-icon name="arrow-right" class="h-4 w-4" />
+        class="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-anuna-slate px-6 py-3 text-[15px] font-bold text-anuna-cream transition-colors hover:bg-anuna-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-heading focus-visible:ring-offset-2">
+        {{ 'Pedir recomendación' | tr }} <app-icon name="arrow-right" class="h-4 w-4" />
       </a>
     </div>
   </div>

@@ -1,15 +1,15 @@
-<section class="bg-white py-20 lg:py-28" aria-labelledby="cl-compare-title">
-  <div class="mx-auto max-w-content px-5 sm:px-8">
+<section class="bg-card py-20 lg:py-28" aria-labelledby="cl-compare-title">
+  <div i18nAnimation class="mx-auto max-w-content px-5 sm:px-8">
 
     <div class="mx-auto max-w-2xl text-center">
-      <p appReveal class="reveal mb-5 text-[15px] font-bold text-anuna-orange-700">La nube en 30 segundos</p>
+      <p appReveal class="reveal mb-5 text-[15px] font-bold text-anuna-orange-700">{{ 'La nube en 30 segundos' | tr }}</p>
       <h2 id="cl-compare-title" appReveal style="--d:80ms"
-        class="reveal text-3xl font-bold leading-tight tracking-[-0.015em] text-anuna-slate sm:text-4xl lg:text-[2.75rem]">
-        ¿Qué cambia cuando tu negocio está en la nube?
+        class="reveal text-3xl font-bold leading-tight tracking-[-0.015em] text-heading sm:text-4xl lg:text-[2.75rem]">
+        {{ '¿Qué cambia cuando tu negocio está en la nube?' | tr }}
       </h2>
       <p appReveal style="--d:160ms" class="reveal mt-5 text-lg leading-relaxed text-anuna-gray">
-        "La nube" significa que tus sistemas y archivos viven en servidores profesionales en internet, no en una máquina de tu oficina.
-        <span class="hidden md:inline">Arrastra el control para comparar.</span>
+        {{ '"La nube" significa que tus sistemas y archivos viven en servidores profesionales en internet, no en una máquina de tu oficina.' | tr }}
+        <span class="hidden md:inline">{{ 'Arrastra el control para comparar.' | tr }}</span>
       </p>
     </div>
 
@@ -19,22 +19,22 @@
 
       <!-- Con nube (fondo) -->
       <div class="panel panel-with bg-anuna-slate-900 text-anuna-cream" aria-hidden="true">
-        <p class="panel-title justify-end text-anuna-yellow"><app-icon name="cloud" class="h-5 w-5" /> Con la nube</p>
+        <p class="panel-title justify-end text-anuna-yellow"><app-icon name="cloud" class="h-5 w-5" /> {{ 'Con la nube' | tr }}</p>
         @for (r of rows; track r.icon) {
           <div class="row justify-end text-right">
-            <span class="text">{{ r.with }}</span>
+            <span class="text">{{ (r.with) | tr }}</span>
             <span class="ic bg-anuna-orange text-anuna-ink"><app-icon name="check" class="h-4 w-4" /></span>
           </div>
         }
       </div>
 
       <!-- Sin nube (encima, recortado según el divisor) -->
-      <div class="panel panel-without absolute inset-0 bg-anuna-cream text-anuna-slate" aria-hidden="true">
-        <p class="panel-title text-anuna-gray"><app-icon name="building" class="h-5 w-5" /> Sin la nube</p>
+      <div class="panel panel-without absolute inset-0 bg-page text-heading" aria-hidden="true">
+        <p class="panel-title text-anuna-gray"><app-icon name="building" class="h-5 w-5" /> {{ 'Sin la nube' | tr }}</p>
         @for (r of rows; track r.icon) {
           <div class="row">
-            <span class="ic bg-anuna-slate-100 text-anuna-slate"><app-icon [name]="r.icon" class="h-4 w-4" /></span>
-            <span class="text">{{ r.without }}</span>
+            <span class="ic bg-anuna-slate-100 text-heading"><app-icon [name]="r.icon" class="h-4 w-4" /></span>
+            <span class="text">{{ (r.without) | tr }}</span>
           </div>
         }
       </div>
@@ -48,9 +48,9 @@
       </div>
 
       <!-- Control accesible (teclado y lectores de pantalla) -->
-      <label for="cl-range" class="sr-only">Comparar sin nube y con nube</label>
+      <label for="cl-range" class="sr-only">{{ 'Comparar sin nube y con nube' | tr }}</label>
       <input id="cl-range" type="range" min="0" max="100" step="1" [value]="pos()" (input)="onInput($event)"
-        [attr.aria-valuetext]="pos() + '% del panel muestra la vida sin nube'"
+        [attr.aria-valuetext]="(pos() + ('% del panel muestra la vida sin nube' | tr)) | tr"
         class="range absolute inset-0 h-full w-full cursor-ew-resize opacity-0" />
     </div>
 
@@ -58,29 +58,29 @@
     <!-- Las tablas ignoran el ancho de 1 px de sr-only: por eso se oculta el contenedor -->
     <div class="sr-only">
     <table>
-      <caption>Comparación: sin la nube y con la nube</caption>
-      <thead><tr><th scope="col">Sin la nube</th><th scope="col">Con la nube</th></tr></thead>
+      <caption>{{ 'Comparación: sin la nube y con la nube' | tr }}</caption>
+      <thead><tr><th scope="col">{{ 'Sin la nube' | tr }}</th><th scope="col">{{ 'Con la nube' | tr }}</th></tr></thead>
       <tbody>
-        @for (r of rows; track r.icon) { <tr><td>{{ r.without }}</td><td>{{ r.with }}</td></tr> }
+        @for (r of rows; track r.icon) { <tr><td>{{ (r.without) | tr }}</td><td>{{ (r.with) | tr }}</td></tr> }
       </tbody>
     </table>
     </div>
 
     <!-- ===== Móvil: dos listas ===== -->
     <div class="mt-10 grid gap-4 md:hidden" aria-hidden="true">
-      <div appReveal class="reveal rounded-[24px] bg-anuna-cream p-6">
-        <p class="flex items-center gap-2 text-sm font-bold text-anuna-gray"><app-icon name="building" class="h-5 w-5" /> Sin la nube</p>
+      <div appReveal class="reveal rounded-[24px] bg-page p-6">
+        <p class="flex items-center gap-2 text-sm font-bold text-anuna-gray"><app-icon name="building" class="h-5 w-5" /> {{ 'Sin la nube' | tr }}</p>
         <ul class="mt-4 space-y-3">
           @for (r of rows; track r.icon) {
-            <li class="flex items-start gap-3 text-[15px] text-anuna-slate"><span class="mt-1 h-2 w-2 shrink-0 rounded-full bg-anuna-slate/30"></span>{{ r.without }}</li>
+            <li class="flex items-start gap-3 text-[15px] text-heading"><span class="mt-1 h-2 w-2 shrink-0 rounded-full bg-anuna-slate/30"></span>{{ (r.without) | tr }}</li>
           }
         </ul>
       </div>
       <div appReveal class="reveal rounded-[24px] bg-anuna-slate-900 p-6 text-anuna-cream" style="--d:120ms">
-        <p class="flex items-center gap-2 text-sm font-bold text-anuna-yellow"><app-icon name="cloud" class="h-5 w-5" /> Con la nube</p>
+        <p class="flex items-center gap-2 text-sm font-bold text-anuna-yellow"><app-icon name="cloud" class="h-5 w-5" /> {{ 'Con la nube' | tr }}</p>
         <ul class="mt-4 space-y-3">
           @for (r of rows; track r.icon) {
-            <li class="flex items-start gap-3 text-[15px]"><span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-anuna-orange text-anuna-ink"><app-icon name="check" class="h-3 w-3" /></span>{{ r.with }}</li>
+            <li class="flex items-start gap-3 text-[15px]"><span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-anuna-orange text-anuna-ink"><app-icon name="check" class="h-3 w-3" /></span>{{ (r.with) | tr }}</li>
           }
         </ul>
       </div>

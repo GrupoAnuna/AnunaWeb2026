@@ -1,17 +1,23 @@
-import { Component, DestroyRef, ElementRef, afterNextRender, inject, signal } from '@angular/core';
+import { afterNextRender, Component, computed, DestroyRef, ElementRef, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Icon } from '../../../../shared/icon';
 import { Ripple } from '../../../../shared/ripple';
 
+import { TrPipe } from '../../../../shared/tr.pipe';
+import { injectTranslate } from '../../../../core/translations';
+import { I18nAnimation } from '@shared/i18n-animation';
+
 @Component({
   selector: 'app-cl-hero',
-  imports: [RouterLink, Icon, Ripple],
+  imports: [TrPipe, RouterLink, Icon, Ripple, I18nAnimation],
   templateUrl: './cl-hero.html',
   styleUrl: './cl-hero.css',
 })
 export class ClHero {
   readonly headline = 'Tu negocio en la nube, sin complicaciones.';
-  readonly words = this.headline.split(' ');
+  private readonly translate = injectTranslate();
+  /** Se traduce la frase completa y luego se separa en palabras para la animación */
+  readonly words = computed(() => String(this.translate(this.headline)).split(' '));
   readonly perks = ['Sin detener tu operación', 'Respaldos automáticos', 'Pagas solo lo que usas'];
   readonly units = [0, 1, 2];
   readonly packets = [0, 1, 2, 3];
