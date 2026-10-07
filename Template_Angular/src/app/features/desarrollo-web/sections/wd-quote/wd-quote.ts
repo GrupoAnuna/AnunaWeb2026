@@ -13,7 +13,9 @@ import { Icon } from '../../../../shared/icon';
 import { Reveal } from '../../../../shared/reveal';
 import { ContactService } from '../../../contact/contact.service';
 import { QUOTE_PLATFORMS, QUOTE_STARTS, QUOTE_TYPES, QuoteOption } from '../../web-development.data';
+import { I18nAnimation } from '@shared/i18n-animation';
 
+import { TrPipe } from '../../../../shared/tr.pipe';
 type Key = 'tipo' | 'plataforma' | 'inicio';
 type Field = 'nombre' | 'email' | 'privacidad';
 
@@ -25,7 +27,7 @@ interface Question {
 
 @Component({
   selector: 'app-wd-quote',
-  imports: [ReactiveFormsModule, Icon, Reveal],
+  imports: [TrPipe, ReactiveFormsModule, Icon, Reveal, I18nAnimation],
   templateUrl: './wd-quote.html',
   styleUrl: './wd-quote.css',
 })

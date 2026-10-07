@@ -1,80 +1,79 @@
-<section id="servicios-web" class="bg-white py-120 lg:py-20" aria-labelledby="wd-services-title">
+<section id="servicios-web" class="bg-card py-20 lg:py-28" aria-labelledby="wd-services-title">
   <div class="mx-auto max-w-content px-5 sm:px-8">
 
-
-    <div class="max-w-full">
-      <h2 id="cs-areas-title" appReveal style="--d:80ms"
-        class="reveal text-3xl font-bold leading-tight tracking-[-0.015em] text-anuna-slate sm:text-4xl lg:text-[2.75rem]">
-        Tecnología a la medida de cada proyecto </h2>
-      <p appReveal style="--d:160ms" class="reveal mt-5 text-lg leading-relaxed text-anuna-gray">
-         Da igual si partes de una idea o de un sistema a medio construir: tenemos la solución y el equipo para llevarlo
-        a producción.
+    <div class="max-w-full lg:grid-cols-[1fr_1fr] lg:items-end">
+      <div>
+        <p appReveal class="reveal mb-5 text-[15px] font-bold text-anuna-orange-700">{{ 'Servicios clave' | tr }}</p>
+        <h2  i18nAnimation id="wd-services-title" appReveal style="--d:80ms"
+          class="reveal max-w-full text-3xl font-bold leading-tight tracking-[-0.015em] text-heading sm:text-4xl lg:text-[2.75rem]">
+          {{ 'Tecnología a la medida de cada proyecto' | tr }}
+        </h2>
+      </div>
+      <br>
+      <p  i18nAnimation  appReveal style="--d:160ms" class="reveal max-w-full text-lg leading-relaxed text-anuna-gray ">
+        {{ 'Da igual si partes de una idea o de un sistema a medio construir: tenemos la solución y el equipo para llevarlo a producción.' | tr }}
       </p>
     </div>
 
     <!-- Selector de camino -->
     <div appReveal style="--d:220ms" class="reveal mt-12 flex flex-col gap-4 sm:flex-row sm:items-center">
-      <p id="wd-path-label" class="text-[15px] font-bold text-anuna-slate">¿Cuál es tu punto de partida?</p>
-      <div class="segmented relative inline-flex rounded-full bg-anuna-cream p-1" role="group"
-        aria-labelledby="wd-path-label">
+      <p id="wd-path-label" class="text-[15px] font-bold text-heading">{{ '¿Cuál es tu punto de partida?' | tr }}</p>
+      <div class="segmented relative inline-flex rounded-full bg-page p-1" role="group" aria-labelledby="wd-path-label">
         @for (p of paths; track p.value) {
-        <button type="button" (click)="select(p.value)" [attr.aria-pressed]="path() === p.value"
-          class="seg-btn relative rounded-full px-5 py-2.5 text-sm font-bold transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate"
-          [class.is-active]="path() === p.value">
-          {{ p.label }}
-        </button>
+          <button  i18nAnimation type="button" (click)="select(p.value)" [attr.aria-pressed]="path() === p.value"
+            class="seg-btn relative rounded-full px-5 py-2.5 text-sm font-bold transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-heading"
+            [class.is-active]="path() === p.value">
+            {{ (p.label) | tr }}
+          </button>
         }
       </div>
     </div>
     <p class="mt-4 min-h-[1.75rem] max-w-2xl text-[15px] leading-relaxed text-anuna-gray" aria-live="polite">
       @if (message()) {
-      <span class="path-msg inline-block">{{ message() }}</span>
+        <span class="path-msg inline-block">{{ (message()) | tr }}</span>
       }
     </p>
 
     <!-- Tarjetas -->
     <ul class="mt-8 grid gap-5 md:grid-cols-2">
       @for (s of services; track s.title; let i = $index) {
-      <li appReveal class="reveal" [style.--d]="i * 110 + 'ms'">
-        <article
-          class="svc group relative flex h-full flex-col overflow-hidden rounded-[24px] border p-7 transition duration-500 sm:p-8"
-          [class.svc-dark]="s.highlight" [class.is-dim]="!isMatch(s.paths)"
-          [class.is-match]="path() !== null && isMatch(s.paths)">
+        <li appReveal class="reveal" [style.--d]="i * 110 + 'ms'">
+          <article class="svc group relative flex h-full flex-col overflow-hidden rounded-[24px] border p-7 transition duration-500 sm:p-8"
+            [class.svc-dark]="s.highlight"
+            [class.is-dim]="!isMatch(s.paths)"
+            [class.is-match]="path() !== null && isMatch(s.paths)">
 
-          @if (s.highlight) {
-          <span
-            class="absolute right-6 top-6 rounded-full bg-anuna-yellow px-3 py-1 text-xs font-bold text-anuna-slate-900">Continuamos
-            tu proyecto</span>
-          }
-
-          <span class="svc-icon flex h-14 w-12 items-end justify-center rounded-arch pb-2.5">
-            <app-icon [name]="s.icon" class="relative h-6 w-6" />
-          </span>
-
-          <h3 class="svc-title mt-6 text-xl font-bold sm:text-2xl">{{ s.title }}</h3>
-          <p class="svc-lead mt-3 text-[15px] leading-relaxed">{{ s.lead }}</p>
-
-          <ul class="mt-6 space-y-2.5 text-[15px]">
-            @for (pt of s.points; track pt) {
-            <li class="svc-point flex items-start gap-2.5">
-              <span class="svc-check mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full">
-                <app-icon name="check" class="h-3 w-3" />
-              </span>
-              {{ pt }}
-            </li>
+            @if (s.highlight) {
+              <span class="absolute right-6 top-6 rounded-full bg-anuna-yellow px-3 py-1 text-xs font-bold text-anuna-slate-900">{{ 'Continuamos tu proyecto' | tr }}</span>
             }
-          </ul>
 
-          <a [routerLink]="[]" fragment="cotizador"
-            class="svc-link link-grow mt-auto w-fit pt-7 text-[15px] font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
-            Cotizar este servicio
-          </a>
-          <span class="card-trace absolute inset-x-8 bottom-0 flex h-[3px] items-center rounded-full bg-anuna-orange"
-            aria-hidden="true">
-            <span class="ml-auto h-2 w-2 rounded-full bg-anuna-orange"></span>
-          </span>
-        </article>
-      </li>
+            <span class="svc-icon flex h-14 w-12 items-end justify-center rounded-arch pb-2.5">
+              <app-icon [name]="s.icon" class="relative h-6 w-6" />
+            </span>
+
+            <h3  i18nAnimation class="svc-title mt-6 text-xl font-bold sm:text-2xl">{{ (s.title) | tr }}</h3>
+            <p  i18nAnimation class="svc-lead mt-3 text-[15px] leading-relaxed">{{ (s.lead) | tr }}</p>
+
+            <ul class="mt-6 space-y-2.5 text-[15px]">
+              @for (pt of s.points; track pt) {
+                <li   class="svc-point flex items-start gap-2.5">
+                  <span  class="svc-check mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full">
+                    <app-icon name="check" class="h-3 w-3" />
+                  </span>
+                  {{ (pt) | tr }}
+                </li>
+              }
+            </ul>
+
+            <a [routerLink]="[]" fragment="cotizador"
+              class="svc-link link-grow mt-auto w-fit pt-7 text-[15px] font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2">
+              {{ 'Cotizar este servicio' | tr }}
+            </a>
+            <span class="card-trace absolute inset-x-8 bottom-0 flex h-[3px] items-center rounded-full bg-anuna-orange" aria-hidden="true">
+              <span class="ml-auto h-2 w-2 rounded-full bg-anuna-orange"></span>
+            </span>
+          </article>
+        </li>
       }
     </ul>
   </div>
