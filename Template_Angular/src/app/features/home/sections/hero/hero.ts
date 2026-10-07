@@ -1,6 +1,7 @@
-import { Component, ElementRef, OnDestroy, afterNextRender, inject, signal } from '@angular/core';
+import { afterNextRender, Component, computed, ElementRef, inject, OnDestroy, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Ripple } from '../../../../shared/ripple';
+import { I18nAnimation } from '@shared/i18n-animation';
 
 interface Stat {
   label: string;
@@ -9,15 +10,19 @@ interface Stat {
   suffix?: string;
 }
 
+import { LanguageService } from '../../../../core/language.service';
+import { HERO_TEXT } from './hero.i18n';
+
 @Component({
   selector: 'app-hero',
-  imports: [RouterLink, Ripple],
+  imports: [RouterLink, Ripple, I18nAnimation],
   templateUrl: './hero.html',
   styleUrl: './hero.css',
 })
 export class Hero implements OnDestroy {
-  readonly headline = 'Unimos tecnología y personas para que tu empresa avance más rápido.';
-  readonly words = this.headline.split(' ');
+  private readonly i18n = inject(LanguageService);
+  readonly t = this.i18n.pick(HERO_TEXT);
+  readonly words = computed(() => this.t().headline.split(' '));
 
   /** Cifras del hero (reemplazar por datos reales) */
   readonly stats: Stat[] = [

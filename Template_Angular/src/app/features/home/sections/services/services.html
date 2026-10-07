@@ -1,150 +1,110 @@
-<section id="soluciones" class="bg-white py-20 lg:py-28" aria-labelledby="servicios-title">
-  <div class="mx-auto max-w-content px-5 sm:px-8">
+<section  id="soluciones" class="bg-card py-20 lg:py-28" aria-labelledby="servicios-title">
+  <div i18nAnimation class="mx-auto max-w-content px-5 sm:px-8">
 
-    <div class="max-w-full">
-      <p appReveal class="reveal mb-5 text-[15px] font-bold text-anuna-orange-700">Cómo te ayudamos</p>
-      <h2 id="cs-areas-title" appReveal style="--d:80ms"
-        class="reveal text-3xl font-bold leading-tight tracking-[-0.015em] text-anuna-slate sm:text-4xl lg:text-[2.75rem]">
-        Soluciones para cada etapa de tu operación </h2>
-      <p appReveal style="--d:160ms" class="reveal mt-5 text-lg leading-relaxed text-anuna-gray">
-        Empieza por lo que más urge hoy. Cuando crezcas, el mismo equipo integra lo siguiente sin volver a empezar.
+    <div class="max-w-full lg:grid-cols-[1fr_1fr] lg:items-end">
+      <h2 id="servicios-title" appReveal
+        class="reveal max-w-full text-3xl font-bold leading-tight tracking-[-0.015em] text-heading sm:text-4xl lg:text-[2.75rem]">
+        {{ t().title }}
+      </h2>
+      <br>
+      <p appReveal class="reveal max-w-full text-lg leading-relaxed text-anuna-gray" style="--d:120ms">
+        {{ t().lead }}
       </p>
     </div>
-
-
 
     <div class="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
 
       <!-- Servicio destacado -->
       <!-- El id (ancla del menú) va en un contenedor sin animación para que el scroll calcule bien su posición -->
-      <div [id]="featured.id" class="md:col-span-2 lg:col-span-1 lg:row-span-2">
+      <div [id]="featured().id" class="md:col-span-2 lg:col-span-1 lg:row-span-2">
         <div appReveal class="reveal h-full">
-          <article
-            class="card relative flex h-full flex-col overflow-hidden rounded-[28px] bg-anuna-slate-900 p-8 text-anuna-cream transition-shadow duration-300 hover:shadow-anuna-lg lg:p-10">
+        <article class="card relative flex h-full flex-col overflow-hidden rounded-[28px] bg-anuna-slate-900 p-8 text-anuna-cream transition-shadow duration-300 hover:shadow-anuna-lg lg:p-10">
 
-            <!-- Circuito que se dibuja al aparecer + pulsos que lo recorren -->
-            <svg class="pointer-events-none absolute -right-10 -top-6 h-64 w-64 opacity-25" viewBox="0 0 200 200"
-              fill="none" stroke="#FDF6EC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-              aria-hidden="true">
-              <path id="svc-f1" class="trace-io" pathLength="1" style="--d:200ms" d="M200 40 H140 L120 60 V120" />
-              <path class="trace-io" pathLength="1" style="--d:300ms" d="M200 50 H146 L130 66 V120" />
-              <path class="trace-io" pathLength="1" style="--d:400ms" d="M200 60 H152 L140 72 V120" />
-              <path id="svc-f2" class="trace-io" pathLength="1" style="--d:500ms" d="M80 0 V50 L60 70 V100" />
-              <circle cx="60" cy="104" r="5" />
-              <circle cx="120" cy="126" r="5" fill="#FFD97D" stroke="#FFD97D" />
-              <g class="flow" stroke="none">
-                <circle r="3.5" fill="#FFD97D" opacity="0">
-                  <animateMotion dur="2.6s" begin="1.5s" repeatCount="indefinite">
-                    <mpath href="#svc-f1" />
-                  </animateMotion>
-                  <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.6s" begin="1.5s"
-                    repeatCount="indefinite" />
-                </circle>
-                <circle r="3" fill="#FF6B35" opacity="0">
-                  <animateMotion dur="2.2s" begin="2.4s" repeatCount="indefinite">
-                    <mpath href="#svc-f2" />
-                  </animateMotion>
-                  <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.2s" begin="2.4s"
-                    repeatCount="indefinite" />
-                </circle>
-              </g>
-            </svg>
+          <!-- Circuito que se dibuja al aparecer + pulsos que lo recorren -->
+          <svg class="pointer-events-none absolute -right-10 -top-6 h-64 w-64 opacity-25" viewBox="0 0 200 200" fill="none" stroke="#FDF6EC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path id="svc-f1" class="trace-io" pathLength="1" style="--d:200ms" d="M200 40 H140 L120 60 V120" />
+            <path class="trace-io" pathLength="1" style="--d:300ms" d="M200 50 H146 L130 66 V120" />
+            <path class="trace-io" pathLength="1" style="--d:400ms" d="M200 60 H152 L140 72 V120" />
+            <path id="svc-f2" class="trace-io" pathLength="1" style="--d:500ms" d="M80 0 V50 L60 70 V100" />
+            <circle cx="60" cy="104" r="5" />
+            <circle cx="120" cy="126" r="5" fill="#FFD97D" stroke="#FFD97D" />
+            <g class="flow" stroke="none">
+              <circle r="3.5" fill="#FFD97D" opacity="0">
+                <animateMotion dur="2.6s" begin="1.5s" repeatCount="indefinite"><mpath href="#svc-f1" /></animateMotion>
+                <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.6s" begin="1.5s" repeatCount="indefinite" />
+              </circle>
+              <circle r="3" fill="#FF6B35" opacity="0">
+                <animateMotion dur="2.2s" begin="2.4s" repeatCount="indefinite"><mpath href="#svc-f2" /></animateMotion>
+                <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="2.2s" begin="2.4s" repeatCount="indefinite" />
+              </circle>
+            </g>
+          </svg>
 
-            <span
-              class="arch-icon relative flex h-16 w-14 items-end justify-center rounded-arch bg-anuna-yellow pb-3 text-anuna-slate-900"
-              aria-hidden="true">
-              <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round" viewBox="0 0 24 24">
-                <path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14" />
-              </svg>
-            </span>
+          <span class="arch-icon relative flex h-16 w-14 items-end justify-center rounded-arch bg-anuna-yellow pb-3 text-anuna-slate-900" aria-hidden="true">
+            <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></svg>
+          </span>
 
-            <h3 class="relative mt-8 text-2xl font-bold leading-snug text-white lg:text-[1.75rem]">{{ featured.title }}
-            </h3>
-            <p class="relative mt-4 text-base leading-relaxed text-anuna-cream/85">{{ featured.text }}</p>
+          <h3 class="relative mt-8 text-2xl font-bold leading-snug text-white lg:text-[1.75rem]">{{ featured().title }}</h3>
+          <p class="relative mt-4 text-base leading-relaxed text-anuna-cream/85">{{ featured().text }}</p>
 
-            <ul class="relative mt-7 space-y-3 text-[15px] text-anuna-cream/90">
-              @for (b of featured.bullets; track b; let i = $index) {
+          <ul class="relative mt-7 space-y-3 text-[15px] text-anuna-cream/90">
+            @for (b of featured().bullets; track $index; let i = $index) {
               <li appReveal class="reveal flex gap-3" [style.--d]="350 + i * 100 + 'ms'">
                 <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-anuna-yellow" aria-hidden="true"></span>{{ b }}
               </li>
-              }
-            </ul>
+            }
+          </ul>
 
-            <a routerLink="/desarrollo-web" fragment="cotizador"
-              class="link-grow relative mt-auto w-fit pt-10 text-base font-bold text-anuna-yellow focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-yellow focus-visible:ring-offset-4 focus-visible:ring-offset-anuna-slate-900">
-              {{ featured.link }}
-            </a>
-          </article>
+          <a routerLink="/" fragment="contacto"
+            class="link-grow relative mt-auto w-fit pt-10 text-base font-bold text-anuna-yellow focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-yellow focus-visible:ring-offset-4 focus-visible:ring-offset-anuna-slate-900">
+            {{ featured().link }}
+          </a>
+        </article>
         </div>
       </div>
 
       <!-- Tarjetas estándar: ancla (id) → aparición (reveal) → hover (article) -->
-      @for (s of services; track s.id; let i = $index) {
-      <div [id]="s.id">
-        <div appReveal class="reveal h-full" [style.--d]="(i + 1) * 100 + 'ms'">
-          <article
-            class="card group relative flex h-full flex-col overflow-hidden rounded-[22px] border border-anuna-line bg-anuna-cream/60 p-7 transition duration-300 hover:-translate-y-1 hover:border-anuna-slate/30 hover:bg-white hover:shadow-anuna-md">
-            <span
-              class="arch-icon flex h-14 w-12 items-end justify-center rounded-arch bg-anuna-slate-100 pb-2.5 text-anuna-slate"
-              aria-hidden="true">
+      @for (s of services(); track s.id; let i = $index) {
+        <div [id]="s.id">
+          <div appReveal class="reveal h-full" [style.--d]="(i + 1) * 100 + 'ms'">
+          <article class="card group relative flex h-full flex-col overflow-hidden rounded-[22px] border border-anuna-line bg-page/60 p-7 transition duration-300 hover:-translate-y-1 hover:border-heading/30 hover:bg-card hover:shadow-anuna-md">
+            <span class="arch-icon flex h-14 w-12 items-end justify-center rounded-arch bg-anuna-slate-100 pb-2.5 text-heading" aria-hidden="true">
               @switch (s.icon) {
-              @case ('phone') {
-              <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round" viewBox="0 0 24 24">
-                <rect x="6" y="2.5" width="12" height="19" rx="3" />
-                <path d="M10.5 18.5h3" />
-              </svg>
-              }
-              @case ('compass') {
-              <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round" viewBox="0 0 24 24">
-                <circle cx="6" cy="6" r="2.5" />
-                <circle cx="18" cy="18" r="2.5" />
-                <path d="M8.5 6H13a3 3 0 0 1 3 3v6.5" />
-                <path d="M6 8.5V18h9.5" />
-              </svg>
-              }
-              @case ('cloud') {
-              <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round" viewBox="0 0 24 24">
-                <path d="M7 18a4.5 4.5 0 0 1-.6-8.96A6 6 0 0 1 18 9.5a4 4 0 0 1-.5 8.5z" />
-                <path d="M12 12v5M9.5 14.5 12 12l2.5 2.5" />
-              </svg>
-              }
-              @case ('shield') {
-              <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round" viewBox="0 0 24 24">
-                <path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6z" />
-                <path d="m9 12 2 2 4-4" />
-              </svg>
-              }
+                @case ('phone') {
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M10.5 18.5h3"/></svg>
+                }
+                @case ('compass') {
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.5 6H13a3 3 0 0 1 3 3v6.5"/><path d="M6 8.5V18h9.5"/></svg>
+                }
+                @case ('cloud') {
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M7 18a4.5 4.5 0 0 1-.6-8.96A6 6 0 0 1 18 9.5a4 4 0 0 1-.5 8.5z"/><path d="M12 12v5M9.5 14.5 12 12l2.5 2.5"/></svg>
+                }
+                @case ('shield') {
+                  <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6z"/><path d="m9 12 2 2 4-4"/></svg>
+                }
               }
             </span>
-            <h3 class="mt-6 text-xl font-bold text-anuna-slate">{{ s.title }}</h3>
+            <h3 class="mt-6 text-xl font-bold text-heading">{{ s.title }}</h3>
             <p class="mt-3 text-[15px] leading-relaxed text-anuna-gray">{{ s.text }}</p>
-            <a routerLink="/contacto" fragment="contacto"
-              class="link-grow mt-auto w-fit pt-6 text-[15px] font-bold text-anuna-orange-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2">
+            <a routerLink="/" fragment="contacto"
+              class="link-grow mt-auto w-fit pt-6 text-[15px] font-bold text-anuna-orange-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-heading focus-visible:ring-offset-2">
               {{ s.link }}
             </a>
-            <span class="card-trace absolute inset-x-7 bottom-0 flex h-[3px] items-center rounded-full bg-anuna-orange"
-              aria-hidden="true">
+            <span class="card-trace absolute inset-x-7 bottom-0 flex h-[3px] items-center rounded-full bg-anuna-orange" aria-hidden="true">
               <span class="ml-auto h-2 w-2 rounded-full bg-anuna-orange"></span>
             </span>
           </article>
+          </div>
         </div>
-      </div>
       }
     </div>
 
     <!-- Cierre de sección -->
-    <div appReveal
-      class="reveal mt-10 flex flex-col items-start justify-between gap-4 rounded-[22px] bg-anuna-cream px-7 py-6 sm:flex-row sm:items-center">
-      <p class="text-base text-anuna-slate"><span class="font-bold">¿Tu reto no encaja en ninguna categoría?</span>
-        Cuéntanoslo y armamos la solución contigo.</p>
-      <a routerLink="/contacto" fragment="contacto" appRipple
-        class="ripple-host inline-flex shrink-0 items-center justify-center rounded-full bg-anuna-slate px-6 py-3 text-[15px] font-bold text-anuna-cream transition-colors hover:bg-anuna-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2 focus-visible:ring-offset-anuna-cream">
-        Hablar con un especialista
+    <div appReveal class="reveal mt-10 flex flex-col items-start justify-between gap-4 rounded-[22px] bg-page px-7 py-6 sm:flex-row sm:items-center">
+      <p class="text-base text-heading"><span class="font-bold">{{ t().ctaStrong }}</span> {{ t().ctaText }}</p>
+      <a routerLink="/" fragment="contacto" appRipple
+        class="ripple-host inline-flex shrink-0 items-center justify-center rounded-full bg-anuna-slate px-6 py-3 text-[15px] font-bold text-anuna-cream transition-colors hover:bg-anuna-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-heading focus-visible:ring-offset-2 focus-visible:ring-offset-page">
+        {{ t().ctaButton }}
       </a>
     </div>
   </div>

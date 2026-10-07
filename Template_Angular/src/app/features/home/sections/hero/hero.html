@@ -1,38 +1,37 @@
 <section class="relative overflow-hidden" aria-labelledby="hero-title">
-  <div class="mx-auto grid max-w-content items-center gap-12 px-5 pb-20 pt-12 sm:px-8 md:pt-12 lg:grid-cols-[1.05fr_1fr] lg:gap-8 lg:pb-28 lg:pt-16">
+  <div class="mx-auto grid max-w-content items-center gap-12 px-5 pb-20 pt-12 sm:px-8 md:pt-16 lg:grid-cols-[1.05fr_1fr] lg:gap-8 lg:pb-28 lg:pt-20">
 
     <!-- Texto -->
-    <div class="max-w-xl">
-
+    <div i18nAnimation class="max-w-xl">
       <!-- Titular: cada palabra emerge desde una máscara -->
-      <h1 id="hero-title" [attr.aria-label]="headline"
-        class="text-[2.5rem] font-bold leading-[1.08] tracking-[-0.02em] text-anuna-slate sm:text-5xl lg:text-[3.5rem]">
-        @for (w of words; track $index) {
+      <h1 id="hero-title" [attr.aria-label]="t().headline"
+        class="text-[2.5rem] font-bold leading-[1.08] tracking-[-0.02em] text-heading sm:text-5xl lg:text-[3.5rem]">
+        @for (w of words(); track $index) {
           <span class="word" aria-hidden="true"><span [style.--i]="$index">{{ w }}</span></span>{{ ' ' }}
         }
       </h1>
 
       <p class="hero-in mt-6 max-w-[34rem] text-lg leading-relaxed text-anuna-gray" style="--d:700ms">
-        Diseñamos, implementamos y acompañamos soluciones digitales a la medida de tu operación. Un solo equipo, de la idea al soporte diario.
+        {{ t().lead }}
       </p>
 
       <div class="hero-in mt-9 flex flex-col gap-3 sm:flex-row sm:items-center" style="--d:850ms">
-        <a routerLink="/contacto" fragment="contacto" appRipple
-          class="ripple-host shine inline-flex items-center justify-center gap-2 rounded-full bg-anuna-orange px-7 py-4 text-base font-bold text-anuna-ink shadow-anuna-sm transition duration-200 hover:-translate-y-0.5 hover:bg-anuna-orange-hover hover:shadow-anuna-cta active:translate-y-0 active:bg-anuna-orange-active active:shadow-anuna-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2 focus-visible:ring-offset-anuna-cream">
-          Agenda una asesoría gratuita
+        <a routerLink="/" fragment="contacto" appRipple
+          class="ripple-host shine inline-flex items-center justify-center gap-2 rounded-full bg-anuna-orange px-7 py-4 text-base font-bold text-anuna-ink shadow-anuna-sm transition duration-200 hover:-translate-y-0.5 hover:bg-anuna-orange-hover hover:shadow-anuna-cta active:translate-y-0 active:bg-anuna-orange-active active:shadow-anuna-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-heading focus-visible:ring-offset-2 focus-visible:ring-offset-page">
+          {{ t().primary }}
         </a>
         <a routerLink="/" fragment="soluciones"
-          class="inline-flex items-center justify-center rounded-full border-2 border-anuna-slate/25 px-7 py-[14px] text-base font-bold text-anuna-slate transition-colors duration-200 hover:border-anuna-slate hover:bg-white active:bg-anuna-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-slate focus-visible:ring-offset-2 focus-visible:ring-offset-anuna-cream">
-          Ver soluciones
+          class="inline-flex items-center justify-center rounded-full border-2 border-heading/25 px-7 py-[14px] text-base font-bold text-heading transition-colors duration-200 hover:border-heading hover:bg-card active:bg-anuna-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-heading focus-visible:ring-offset-2 focus-visible:ring-offset-page">
+          {{ t().secondary }}
         </a>
       </div>
 
       <!-- Cifras con contador animado -->
       <dl class="hero-in mt-12 grid max-w-md grid-cols-3 gap-6 border-t border-anuna-line pt-6" style="--d:1000ms">
-        @for (s of stats; track s.label; let i = $index) {
+        @for (s of stats; track $index; let i = $index) {
           <div>
-            <dt class="text-sm text-anuna-gray">{{ s.label }}</dt>
-            <dd class="mt-1 text-2xl font-bold tabular-nums text-anuna-slate">{{ s.prefix ?? '' }}{{ shown()[i] }}{{ s.suffix ?? '' }}</dd>
+            <dt class="text-sm text-anuna-gray">{{ t().stats[i] }}</dt>
+            <dd class="mt-1 text-2xl font-bold tabular-nums text-heading">{{ s.prefix ?? '' }}{{ shown()[i] }}{{ s.suffix ?? '' }}</dd>
           </div>
         }
       </dl>
@@ -41,7 +40,7 @@
     <!-- Ilustración: circuitos que convergen en la A, en capas con parallax -->
     <div class="relative mx-auto w-full max-w-[520px]">
       <svg viewBox="0 0 520 520" class="h-auto w-full overflow-visible" role="img" aria-labelledby="hero-ilus-title">
-        <title id="hero-ilus-title">Líneas de circuito por las que viajan datos desde varios lados hasta unirse en la letra A de Anuna</title>
+        <title id="hero-ilus-title">{{ t().ilusTitle }}</title>
 
         <defs>
           <radialGradient id="hero-halo" cx="50%" cy="52%" r="50%">

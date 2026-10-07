@@ -1,69 +1,24 @@
-import { Component, ElementRef, afterNextRender, inject } from '@angular/core';
+import { Component, ElementRef, afterNextRender, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Reveal } from '../../../../shared/reveal';
 import { Ripple } from '../../../../shared/ripple';
-
-type Icon = 'phone' | 'compass' | 'cloud' | 'shield';
-
-interface Service {
-  id: string;       // ancla para el menú (#desarrollo-apps)
-  icon: Icon;
-  title: string;
-  text: string;
-  link: string;
-}
+import { I18nAnimation } from '@shared/i18n-animation';
+import { LanguageService } from '../../../../core/language.service';
+import { SERVICES_TEXT } from './services.i18n';
 
 @Component({
   selector: 'app-services',
-  imports: [RouterLink, Reveal, Ripple],
+  imports: [RouterLink, Reveal, Ripple, I18nAnimation],
   templateUrl: './services.html',
   styleUrl: './services.css',
 })
 export class Services {
+  private readonly i18n = inject(LanguageService);
+  readonly t = this.i18n.pick(SERVICES_TEXT);
   /** Servicio destacado (tarjeta oscura grande) */
-  readonly featured = {
-    id: 'desarrollo-web',
-    title: 'Desarrollo web',
-    text: 'Sitios rápidos y claros, pensados para convertir visitas en clientes: landing pages, tiendas online y plataformas a la medida.',
-    bullets: [
-      'Descubrimiento y prototipo en 2 semanas',
-      'Entregas funcionales cada sprint',
-      'Optimizado para móviles y buscadores',
-    ],
-    link: 'Cotizar mi proyecto',
-  };
-
+  readonly featured = computed(() => this.t().featured);
   /** Resto de servicios */
-  readonly services: Service[] = [
-    {
-      id: 'desarrollo-apps',
-      icon: 'phone',
-      title: 'Desarrollo de apps',
-      text: 'Aplicaciones móviles y sistemas internos construidos sobre tus procesos reales, no al revés.',
-      link: 'Idear mi app',
-    },
-    {
-      id: 'consultoria',
-      icon: 'compass',
-      title: 'Consultoría',
-      text: 'Diagnosticamos tus procesos y definimos una hoja de ruta con prioridades claras y costos visibles.',
-      link: 'Solicitar diagnóstico',
-    },
-    {
-      id: 'cloud',
-      icon: 'cloud',
-      title: 'Cloud',
-      text: 'Migramos y administramos tus servidores en la nube para que tu operación no se detenga.',
-      link: 'Planear mi migración',
-    },
-    {
-      id: 'ciberseguridad',
-      icon: 'shield',
-      title: 'Ciberseguridad',
-      text: 'Protegemos tu información con monitoreo, respaldos y políticas de acceso adecuadas a tu tamaño.',
-      link: 'Evaluar mi seguridad',
-    },
-  ];
+  readonly services = computed(() => this.t().services);
 
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
 
