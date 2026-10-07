@@ -1,5 +1,4 @@
 <app-header></app-header>
-
 <section id="nosotros" aria-labelledby="nosotros-title">
   <!-- =====================================================
        PARTE 2 · Los seis fundadores, en un mismo círculo
@@ -8,14 +7,13 @@
     <div class="relative mx-auto max-w-content px-5 sm:px-8">
 
       <div class="mx-auto max-w-2xl text-center">
-        <p appReveal class="reveal mb-5 text-[15px] font-bold text-anuna-yellow">Nuestro equipo</p>
-        <h2 appReveal style="--d:80ms"
-          class="reveal text-3xl font-bold leading-tight tracking-[-0.015em] text-white sm:text-4xl lg:text-[2.75rem]">
-          Seis fundadores, una misma voz
+        <p i18nAnimation appReveal class="reveal mb-5 text-[15px] font-bold text-anuna-yellow">{{ t().teamEyebrow }}</p>
+        <h2 i18nAnimation appReveal style="--d:80ms"
+          class="footer-i18n reveal text-3xl font-bold leading-tight tracking-[-0.015em] text-white sm:text-4xl lg:text-[2.75rem]">
+          {{ t().teamTitle }}
         </h2>
-        <p appReveal style="--d:160ms" class="reveal mt-5 text-lg leading-relaxed text-anuna-cream/85">
-          Nadie está por encima de nadie: cada proyecto lo construimos entre los seis, sumando lo que cada uno hace
-          mejor. Eso es <strong class="text-white">aunar</strong>.
+        <p i18nAnimation appReveal style="--d:160ms" class="reveal mt-5 text-lg leading-relaxed text-anuna-cream/85">
+          {{ t().teamLeadA }} <strong class="text-white">aunar</strong>{{ t().teamLeadB }}
         </p>
       </div>
 
@@ -55,8 +53,8 @@
           </svg>
 
           <!-- Fundadores -->
-          <ul class="contents" aria-label="Fundadores de Grupo Anuna">
-            @for (f of founders; track f.name; let i = $index) {
+          <ul class="contents" [attr.aria-label]="t().founders">
+            @for (f of founders(); track f.name; let i = $index) {
             <li class="founder absolute -translate-x-1/2 -translate-y-1/2" [class.on]="active() === i"
               [style.left.%]="spots[i].x" [style.top.%]="spots[i].y" [style.--ox.px]="spots[i].ox"
               [style.--oy.px]="spots[i].oy" [style.--k]="i">
@@ -82,26 +80,26 @@
 
         <!-- Centro: isotipo o tarjeta del fundador en foco (solo en pantallas medianas y grandes) -->
         <div
-          class="center absolute left-1/2 top-1/2 flex h-[44%] w-[44%] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-anuna-cream text-center text-anuna-slate shadow-anuna-lg">
+          class="center absolute left-1/2 top-1/2 flex h-[44%] w-[44%] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-page text-center text-heading shadow-anuna-lg">
           @if (current(); as f) {
-          @for (x of founders; track x.name; let i = $index) {
+          @for (x of founders(); track x.name; let i = $index) {
           @if (active() === i) {
           <div class="card hidden flex-col items-center px-6 sm:flex" aria-live="polite">
-            <p class="text-lg font-bold leading-tight text-anuna-slate">{{ f.name }}</p>
-            <p class="mt-1 text-xs font-bold text-anuna-orange-700">{{ f.role }}</p>
-            <ul class="mt-3 flex flex-wrap justify-center gap-1">
-              @for (s of f.skills; track s; let k = $index) {
-              <li class="skill rounded-full bg-white px-2 py-0.5 text-[10.5px] font-medium text-anuna-slate"
-                [style.--k]="k">{{ s }}</li>
+            <p i18nAnimation class="text-lg font-bold leading-tight text-heading">{{ f.name }}</p>
+            <p i18nAnimation class="mt-1 text-xs font-bold text-anuna-orange-700">{{ f.role }}</p>
+            <ul i18nAnimation class="mt-3 flex flex-wrap justify-center gap-1">
+              @for (s of f.skills; track $index; let k = $index) {
+              <li class="skill rounded-full bg-card px-2 py-0.5 text-[10.5px] font-medium text-heading" [style.--k]="k">
+                {{ s }}</li>
               }
             </ul>
-            <a [href]="f.linkedin" target="_blank" rel="noopener"
+            <a i18nAnimation [href]="f.linkedin" target="_blank" rel="noopener"
               class="mt-3 inline-flex items-center gap-1.5 rounded-full bg-anuna-slate px-3 py-1.5 text-xs font-bold text-anuna-cream transition-colors hover:bg-anuna-orange hover:text-anuna-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-anuna-orange">
               <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="currentColor" aria-hidden="true">
                 <path
                   d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C20.6 8.65 21 11.2 21 14.5V21h-4v-5.8c0-1.4-.03-3.2-1.95-3.2-1.95 0-2.25 1.52-2.25 3.1V21H9z" />
               </svg>
-              LinkedIn <span class="sr-only">de {{ f.name }} (abre en una pestaña nueva)</span>
+              LinkedIn <span class="sr-only">{{ t().linkedinA }}{{ f.name }}{{ t().linkedinB }}</span>
             </a>
           </div>
           <!-- En móvil, el centro muestra solo el nombre de pila -->
@@ -114,7 +112,7 @@
               <path d="M14 130 V50 A36 36 0 0 1 86 50 V130" fill="none" stroke="#4A6670" stroke-width="28" />
               <path d="M28 68 C58 70 84 94 100 130 H73 C63 104 47 90 28 91 Z" fill="#FF6B35" />
             </svg>
-            <p class="mt-2 hidden text-xs font-bold text-anuna-slate sm:block">6 fundadores · 1 propósito</p>
+            <p class="mt-2 hidden text-xs font-bold text-heading sm:block">{{ t().core }}</p>
           </div>
           }
         </div>
@@ -123,49 +121,47 @@
       <!-- Móvil: tarjeta del fundador en foco debajo del círculo -->
       <div class="mx-auto mt-6 max-w-sm sm:hidden" aria-live="polite">
         @if (current(); as f) {
-        @for (x of founders; track x.name; let i = $index) {
+        @for (x of founders(); track x.name; let i = $index) {
         @if (active() === i) {
-        <div class="card rounded-[22px] bg-anuna-cream p-5 text-center text-anuna-slate">
+        <div class="card rounded-[22px] bg-page p-5 text-center text-heading">
           <p class="text-lg font-bold">{{ f.name }}</p>
           <p class="text-sm font-bold text-anuna-orange-700">{{ f.role }}</p>
           <p class="mt-2 text-sm text-anuna-gray">{{ f.skills.join(' · ') }}</p>
           <a [href]="f.linkedin" target="_blank" rel="noopener"
             class="mt-3 inline-flex items-center gap-1.5 rounded-full bg-anuna-slate px-4 py-2 text-sm font-bold text-anuna-cream">
-            LinkedIn <span class="sr-only">de {{ f.name }} (abre en una pestaña nueva)</span>
+            LinkedIn <span class="sr-only">{{ t().linkedinA }}{{ f.name }}{{ t().linkedinB }}</span>
           </a>
         </div>
         }
         }
         } @else {
-        <p class="text-center text-sm text-anuna-cream/70">Toca a cada fundador para conocerlo.</p>
+        <p class="text-center text-sm text-anuna-cream/70">{{ t().tapHint }}</p>
         }
       </div>
 
-      <p class="mt-6 hidden text-center text-sm text-anuna-cream/70 sm:block">Pasa el cursor sobre cada fundador para
-        conocerlo.</p>
+      <p class="mt-6 hidden text-center text-sm text-anuna-cream/70 sm:block">{{ t().hoverHint }}</p>
     </div>
   </div>
+
+
   <!-- =====================================================
        PARTE 1 · Quiénes somos
        ===================================================== -->
-  <div class="bg-anuna-cream py-20 lg:py-28">
+  <div class="bg-page py-20 lg:py-28">
     <div class="mx-auto max-w-content px-5 sm:px-8">
 
       <div class="max-w-full gap-6 lg:grid-cols-[1fr_1fr] lg:items-end">
         <div>
-          <p appReveal class="reveal mb-5 text-[15px] font-bold text-anuna-orange-700">Sobre nosotros</p>
-          <h2 id="nosotros-title" appReveal style="--d:80ms"
+          <p i18nAnimation appReveal class="reveal mb-5 text-[15px] font-bold text-anuna-orange-700">{{ t().eyebrow }}</p>
+          <h2 i18nAnimation id="nosotros-title" appReveal style="--d:80ms"
             class="reveal max-w-full text-3xl font-bold leading-tight tracking-[-0.015em] text-anuna-slate sm:text-4xl lg:text-[2.75rem]">
-            Tecnología accesible para pequeñas empresas
+            {{ t().title }}
           </h2>
-          <br>
-          <p appReveal style="--d:160ms"
-            class="reveal mb-5 text-lg leading-relaxed text-anuna-gray ">
-            Realizamos soluciones a medida: webs rápidas, automatizaciones e IA aplicada a resultados.
-            Nuestro nombre viene del verbo <strong class="text-anuna-slate">aunar</strong>, unir esfuerzos, y así
-            trabajamos: codo a codo con cada pyme.
-          </p>
         </div>
+        <br>
+        <p i18nAnimation appReveal style="--d:160ms" class="reveal mb-5 text-lg leading-relaxed text-anuna-gray">
+          {{ t().leadA }} <strong class="text-heading">aunar</strong>{{ t().leadB }}
+        </p>
       </div>
 
       <!-- Propósito → Misión → Visión como un circuito que se enciende -->
@@ -178,15 +174,15 @@
             class="pillars-pulse absolute left-1/2 top-0 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-anuna-orange lg:left-0 lg:top-1/2"></span>
         </div>
 
-        <ol class="relative grid gap-12 lg:grid-cols-3 lg:gap-10">
-          @for (p of pillars; track p.label; let i = $index) {
+        <ol  i18nAnimation class="relative grid gap-12 lg:grid-cols-3 lg:gap-10">
+          @for (p of pillars(); track $index; let i = $index) {
           <li class="relative pl-12 lg:pl-0 lg:pt-14">
             <span
-              class="pillar-node absolute left-0 top-0 h-[25px] w-[25px] rounded-full border-[3px] border-anuna-slate bg-anuna-cream"
+              class="pillar-node absolute left-0 top-0 h-[25px] w-[25px] rounded-full border-[3px] border-heading bg-page"
               [style.--d]="300 + i * 650 + 'ms'" aria-hidden="true"></span>
             <div class="pillar-body" [style.--d]="350 + i * 650 + 'ms'">
               <h3 class="text-[15px] font-bold text-anuna-orange-700">{{ p.label }}</h3>
-              <p class="mt-3 text-xl font-medium leading-snug text-anuna-slate lg:text-[1.4rem]">{{ p.text }}</p>
+              <p class="mt-3 text-xl font-medium leading-snug text-heading lg:text-[1.4rem]">{{ p.text }}</p>
             </div>
           </li>
           }
@@ -197,5 +193,6 @@
 
 
 </section>
+
 <app-footer></app-footer>
 <app-whatsapp></app-whatsapp>

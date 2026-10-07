@@ -1,0 +1,33 @@
+// Textos de la sección Nosotros en español e inglés.
+export const ABOUT_TEXT = {
+  es: {
+    eyebrow: 'Sobre nosotros',
+    title: 'Tecnología accesible para pequeñas empresas',
+    leadA: 'Realizamos soluciones a medida: webs rápidas, automatizaciones e IA aplicada a resultados. Nuestro nombre viene del verbo',
+    leadB: ', unir esfuerzos, y así trabajamos: codo a codo con cada pyme.',
+    teamEyebrow: 'Nuestro equipo',
+    teamTitle: 'Seis fundadores, una misma voz',
+    teamLeadA: 'Nadie está por encima de nadie: cada proyecto lo construimos entre los seis, sumando lo que cada uno hace mejor. Eso es',
+    teamLeadB: '.',
+    founders: 'Fundadores de Grupo Anuna',
+    core: '6 fundadores · 1 propósito',
+    linkedinA: 'de ', linkedinB: ' (abre en una pestaña nueva)',
+    tapHint: 'Toca a cada fundador para conocerlo.',
+    hoverHint: 'Pasa el cursor sobre cada fundador para conocerlo.',
+  },
+  en: {
+    eyebrow: 'About us',
+    title: 'Accessible technology for small businesses',
+    leadA: 'We build tailored solutions: fast websites, automation and results-driven AI. Our name comes from the Spanish verb',
+    leadB: ', to join forces, and that is how we work: side by side with every small business.',
+    teamEyebrow: 'Our team',
+    teamTitle: 'Six founders, one voice',
+    teamLeadA: 'No one stands above anyone else: we build every project together, the six of us, each bringing what we do best. That is',
+    teamLeadB: '.',
+    founders: 'Founders of Grupo Anuna',
+    core: '6 founders · 1 purpose',
+    linkedinA: 'of ', linkedinB: ' (opens in a new tab)',
+    tapHint: 'Tap each founder to meet them.',
+    hoverHint: 'Hover over each founder to meet them.',
+  },
+};

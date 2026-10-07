@@ -1,7 +1,10 @@
 import { Component, DestroyRef, ElementRef, afterNextRender, computed, inject, signal } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { Reveal } from '../../shared/reveal';
-import { FOUNDERS, PILLARS } from './about.data';
+import { FOUNDERS, FOUNDERS_EN, PILLARS, PILLARS_EN } from './about.data';
+import { ABOUT_TEXT } from './about.i18n';
+import { LanguageService } from '@core/language.service';
+import { I18nAnimation } from '../../shared/i18n-animation'; // animación al cambiar de idioma
 import { Footer } from '@features/shell/components/footer/footer.component';
 import { HeaderComponent } from '@features/shell/components/header/header.component';
 import { Whatsapp } from '@features/shell/components/whatsapp/whatsapp';
@@ -14,13 +17,15 @@ const SPOTLIGHT_MS = 3800;
 
 @Component({
   selector: 'app-about',
-  imports: [NgOptimizedImage, Reveal, Footer, HeaderComponent, Whatsapp],
+  imports: [NgOptimizedImage, Reveal, Footer, HeaderComponent, Whatsapp, I18nAnimation],
   templateUrl: './about.html',
   styleUrl: './about.css',
 })
 export class About {
-  readonly pillars = PILLARS;
-  readonly founders = FOUNDERS;
+  private readonly i18n = inject(LanguageService);
+  readonly t = this.i18n.pick(ABOUT_TEXT);
+  readonly pillars = computed(() => (this.i18n.lang() === 'en' ? PILLARS_EN : PILLARS));
+  readonly founders = computed(() => (this.i18n.lang() === 'en' ? FOUNDERS_EN : FOUNDERS));
 
   /**
    * Posición de cada fundador: repartidos cada 360°/6 = 60°, empezando arriba.
@@ -43,7 +48,7 @@ export class About {
 
   /** Fundador en el foco (null = nadie: el centro muestra el isotipo) */
   readonly active = signal<number | null>(null);
-  readonly current = computed(() => (this.active() === null ? null : this.founders[this.active()!]));
+  readonly current = computed(() => (this.active() === null ? null : this.founders()[this.active()!]));
   /** Mientras alguien interactúa, el círculo se detiene */
   readonly holding = signal(false);
 
@@ -68,7 +73,7 @@ export class About {
     setTimeout(() => {
       if (!this.holding()) this.active.set(0);
       this.timer = setInterval(() => {
-        if (!this.holding()) this.active.update((i) => ((i ?? -1) + 1) % this.founders.length);
+        if (!this.holding()) this.active.update((i) => ((i ?? -1) + 1) % this.founders().length);
       }, SPOTLIGHT_MS);
     }, 2600); // espera a que termine la animación de llegada
   }

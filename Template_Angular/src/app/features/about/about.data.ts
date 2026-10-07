@@ -36,13 +36,7 @@ export const PILLARS: Pillar[] = [
  * se colocan en un círculo, a la misma distancia del centro.
  */
 export const FOUNDERS: Member[] = [
-  {
-    name: 'Juan Barraza',
-    role: 'Business Developer',
-    photo: '/team/juan-barraza.webp',
-    linkedin: 'https://www.linkedin.com/in/juanibarraza/',
-    skills: ['Análisis de procesos', 'Visión de negocio', 'Identificación de oportunidades'],
-  },
+
   {
     name: 'Diego García',
     role: 'Product Owner',
@@ -78,4 +72,35 @@ export const FOUNDERS: Member[] = [
     linkedin: 'https://www.linkedin.com/in/jesus-omar-ruano-5443b6227/',
     skills: ['Diseño UX/UI', 'Integraciones', 'Migración de tecnologías'],
   },
+  {
+    name: 'Juan Barraza',
+    role: 'Business Developer',
+    photo: '/team/juan-barraza.webp',
+    linkedin: 'https://www.linkedin.com/in/juanibarraza/',
+    skills: ['Análisis de procesos', 'Visión de negocio', 'Identificación de oportunidades'],
+  },
 ];
+
+
+// ============================================================
+// Versión en inglés. Los fundadores conservan nombre, foto,
+// rol y LinkedIn; solo se traducen sus habilidades.
+// ============================================================
+
+export const PILLARS_EN: Pillar[] = [
+  { label: 'Purpose', text: 'We grow solutions that serve people through innovation and responsible technology.' },
+  { label: 'Mission', text: 'We co-create the digital path that drives businesses forward and connects people.' },
+  { label: 'Vision', text: 'We accelerate the digital transformation of companies that need to grow and compete in today’s market.' },
+];
+
+const SKILLS_EN: string[][] = [
+  ['Process analysis', 'Business vision', 'Spotting opportunities'],
+  ['Agile management', 'Quality and timeline control', 'Turning ideas into plans'],
+  ['AI for business use', 'Business assessment', 'SEO'],
+  ['Custom development', 'Smart automation', 'Clean, efficient code'],
+  ['Cloud environments', 'Cybersecurity', 'Scalability'],
+  ['UX/UI design', 'Integrations', 'Technology migration'],
+];
+
+/** Fundadores en inglés (mismo orden que FOUNDERS) */
+export const FOUNDERS_EN: Member[] = FOUNDERS.map((f, i) => ({ ...f, skills: SKILLS_EN[i] ?? f.skills }));
