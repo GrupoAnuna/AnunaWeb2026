@@ -49,10 +49,10 @@ export const FOOTER_CONFIG: FooterConfig = {
 
   // Ajusta los fragments a los ids reales de las secciones de tu home
   nav: [
-    { label: 'Servicios', route: '/', fragment: 'soluciones' },
-    { label: 'Casos de éxito', route: '/', fragment: 'casos' },
-    { label: 'Sobre nosotros', route: '/', fragment: 'nosotros' },
-    { label: 'Contacto', route: '/', fragment: 'contacto' },
+    { label: 'Servicios', route: '/soluciones', fragment: 'soluciones' },
+    { label: 'Casos de éxito', route: '/casos'},
+    { label: 'Sobre nosotros', route: '/nosotros'},
+    { label: 'Contacto', route: '/contacto'},
   ],
 
   email: 'info@grupoanuna.com',

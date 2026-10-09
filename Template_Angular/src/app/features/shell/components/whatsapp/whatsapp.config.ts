@@ -4,13 +4,13 @@
 // ============================================================
 
 export interface WhatsappZone {
-  id: 'es' | 'latam';
+  id: 'es' | 'mx' | 'ar';
   label: string;
   phone: string;   // solo dígitos, con código de país (sin + ni espacios)
   display: string; // cómo se muestra en pantalla
 }
 
-import type { Lang }  from "@core/language.service";
+import type { Lang } from "@core/language.service";
 export const WHATSAPP_MESSAGE = 'Hola, me gustaría más información sobre sus servicios.';
 export const WHATSAPP_MESSAGES: Record<Lang, string> = {
   es: WHATSAPP_MESSAGE,
@@ -18,7 +18,7 @@ export const WHATSAPP_MESSAGES: Record<Lang, string> = {
 };
 
 /** Nombre de cada zona en inglés (los números no cambian) */
-export const ZONE_LABELS_EN: Record<string, string> = { es: 'Spain', latam: 'Latin America' };
+export const ZONE_LABELS_EN: Record<string, string> = { es: 'Spain', mx: 'Mexico', ar: 'Argentina' };
 
 /** Textos de la interfaz del botón y el modal */
 export const WHATSAPP_TEXT = {
@@ -36,7 +36,8 @@ export const WHATSAPP_TEXT = {
 
 export const WHATSAPP_ZONES: WhatsappZone[] = [
   { id: 'es', label: 'España', phone: '34673561620', display: '+34 673 561 620' },
-  { id: 'latam', label: 'Latinoamérica', phone: '525539022537', display: '+52 55 3902 2537' },
+  { id: 'mx', label: 'Mexico', phone: '525539022537', display: '+52 55 3902 2537' },
+  { id: 'ar', label: 'Argentina', phone: '5493513952644', display: '+54 9 351 395 2644' },
 ];
 
 /** Arma el enlace oficial de WhatsApp con el mensaje ya escrito */
