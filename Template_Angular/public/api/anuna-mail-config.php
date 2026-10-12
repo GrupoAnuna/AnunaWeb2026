@@ -15,12 +15,7 @@
  * ============================================================
  */
 return [
-    // ---------- SMTP de Hostinger (hPanel → Correos → Configuración) ----------
-    'smtp_host'     => 'smtp.hostinger.com',
-    'smtp_port'     => 465,             // 465 con SSL (recomendado) o 587 con TLS
-    'smtp_secure'   => 'ssl',           // 'ssl' para 465, 'tls' para 587
-    'smtp_user'     => 'no-reply@grupoanuna.com',   // la cuenta que ENVÍA
-    'smtp_pass'     => 'AnUn@&r0uP!*',
+
 
     // ---------- Remitente y destinatarios ----------
     'from_email'    => 'no-reply@grupoanuna.com',   // debe ser la misma cuenta SMTP
