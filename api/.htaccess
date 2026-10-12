@@ -1,0 +1,12 @@
+# ============================================================
+#  Protección de la carpeta /api
+#  Solo contact.php es accesible desde el navegador.
+# ============================================================
+Options -Indexes
+
+<FilesMatch "^(config\.php|config\.sample\.php)$">
+  Require all denied
+</FilesMatch>
+
+# Librerías, plantillas y recursos internos: nunca accesibles directamente
+RedirectMatch 404 ^/api/(lib|templates|assets)/
